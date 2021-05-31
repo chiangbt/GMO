@@ -1,0 +1,58 @@
+## GMO系统介绍
+
+PMS是一款基于SpringBoot、Mybatis Plus、Security和Knife4j等组件打造的一款基于后台服务管理信息系统。
+
+- JDK: 11
+- SpringBoot 2.4.5
+- PostgreSQL 数据库
+- Druid 作为数据源
+- Mybatis Plus 作为ORM系统
+- Knife4j 作为API
+- Security 作为权限系统
+- Redis 使用redis作为token存储
+
+[参考](https://www.cnblogs.com/cao-lei/)
+
+### 1、数据结构
+
+表数据存放在`resources/sql`中
+
+数据结构中包含了6张表：
+- t_sys_auth: 权限表
+- t_sys_role: 角色表
+- t_sys_role_auth: 角色权限关联表
+- t_sys_user: 用户表
+- t_sys_user_role: 用户角色关联表
+
+以上均为系统表，负责"用户-角色-权限"关系的建立。
+
+- t_customer: 客户表
+
+执行`user.sql`中的SQL命令，在数据库中新建表。
+
+### 2、使用`MyBatisX Generator`建构系统的ORM组件
+
+在数据库表中右键，打开`MybatisX Generator`，打开Mybatis生成器，生成对应的*Mapper.xml文件及*Mapper类、Entity类、Service类等。
+
+#### 2.1 在`*mapper.xml`中添加合适方法的SQL语句
+
+生成自定义的方法有两种方式：
+
+- 在`mapper.xml`中撰写sql，然后在`Mapper`类中实现
+- 在Mapper类中使用`@Select`方法实现
+
+#### 2.2 在`test`中初始化用户系统
+
+执行`PmsUserAdminTests.java`中的方法。
+
+### 3.各组件访问
+
+- druid http://127.0.0.1:3000/druid/
+- api   http://127.0.0.1:3000/doc.html
+
+### 4.Vue的设置
+
+使用`vue ui`打开VUE系统，修正pms-ui的编译输出目录到resources/static即可。
+
+### 5、测试代码
+

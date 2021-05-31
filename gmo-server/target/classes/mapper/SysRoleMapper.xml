@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.geoportal.gmo.server.mapper.SysRoleMapper">
+
+    <resultMap id="BaseResultMap" type="cn.geoportal.gmo.server.entity.SysRole">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="namezh" column="namezh" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,name,namezh
+    </sql>
+
+    <!--根据用户id查询角色列表-->
+    <select id="getRoles" resultType="cn.geoportal.gmo.server.entity.SysRole">
+    SELECT
+      r.id,
+      r.name,
+      r.nameZh
+    FROM
+      t_role r
+      LEFT JOIN t_admin_role ar ON r.id = ar.role_id
+    WHERE
+      ar.user_id = #{userId}
+  </select>
+</mapper>

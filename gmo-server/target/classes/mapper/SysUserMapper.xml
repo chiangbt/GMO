@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.geoportal.gmo.server.mapper.SysUserMapper">
+
+    <resultMap id="BaseResultMap" type="cn.geoportal.gmo.server.entity.SysUser">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="username" column="username" jdbcType="VARCHAR"/>
+            <result property="email" column="email" jdbcType="VARCHAR"/>
+            <result property="password" column="password" jdbcType="VARCHAR"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="phone" column="phone" jdbcType="VARCHAR"/>
+            <result property="telephone" column="telephone" jdbcType="VARCHAR"/>
+            <result property="address" column="address" jdbcType="VARCHAR"/>
+            <result property="enabled" column="enabled" jdbcType="BOOLEAN"/>
+            <result property="userface" column="userface" jdbcType="VARCHAR"/>
+            <result property="remark" column="remark" jdbcType="VARCHAR"/>
+            <result property="createdat" column="createdat" jdbcType="TIMESTAMP"/>
+            <result property="updatedat" column="updatedat" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,username,email,
+        password,name,phone,
+        telephone,address,enabled,
+        userface,remark,createdat,
+        updatedat
+    </sql>
+
+</mapper>
