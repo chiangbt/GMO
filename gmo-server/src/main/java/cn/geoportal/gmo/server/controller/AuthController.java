@@ -22,7 +22,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.security.Principal;
 
 /**
  * @ProjectName: gmo
@@ -42,9 +41,16 @@ public class AuthController {
     @Autowired
     private DefaultKaptcha defaultKaptcha;
 
+    /**
+     * 用户登录并返回token
+     * @param userLogin
+     * @param request
+     * @return
+     */
     @ApiOperation(value = "登录返回token")
     @PostMapping(value = "/login", consumes = "application/json", produces = "application/json")
     public RespBean login(@RequestBody UserLogin userLogin, HttpServletRequest request){
+        // token在login函数中生成
         return sysUserService.login(userLogin.getUsername(), userLogin.getPassword(), userLogin.getKaptcha(), request);
     }
 

@@ -14,7 +14,6 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -91,9 +90,13 @@ public class CustomerController {
         QueryWrapper<Customer> wrapper = new QueryWrapper<>();
         wrapper.like("name", name);
         Page<Map> ipage = new Page<>(pageNo, pageSize);
-        IPage<Map> dt = customerService.customerCompactList(ipage, wrapper);
-        PageResult<?> pageResult = new PageResult<Map>(dt.getCurrent(), dt.getSize(), dt.getTotal(), dt.getRecords());
-        return RespBean.success("获取成功", pageResult);
+        try{
+            IPage<Map> dt = customerService.customerCompactList(ipage, wrapper);
+            PageResult<?> pageResult = new PageResult<Map>(dt.getCurrent(), dt.getSize(), dt.getTotal(), dt.getRecords());
+            return RespBean.success("获取成功", pageResult);
+        }catch(Exception e){
+            return RespBean.error("无数据");
+        }
     }
 
     /**
@@ -168,6 +171,9 @@ public class CustomerController {
         try{
             customer.setId(id);
             int result = customerService.updateCustomer(customer);
+            if(0 == result){
+                return RespBean.error("需要更新的数据不存在");
+            }
             return RespBean.success("更新成功", result);
         }catch (Exception exp){
             return RespBean.error("更新不成功");

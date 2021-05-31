@@ -11,24 +11,24 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
+ * CustomerService
  */
 public interface CustomerService extends IService<Customer> {
     /**
-     * 返回User对象数组
+     * 1、返回User对象数组
      * @return
      */
     List<Customer> listCustomer();
 
     /**
-     * selectByName方法，支持基于name的模糊查询
+     * 2、selectByName方法，支持基于name的模糊查询
      * @param name
      * @return
      */
     List<Customer> selectByName(String name);
 
     /**
-     * userCompactList，返回压缩版本的User对象数组
+     * 3、userCompactList，返回压缩版本的User对象数组
      * @param page
      * @param wrapper
      * @return
@@ -36,7 +36,7 @@ public interface CustomerService extends IService<Customer> {
     IPage<Map> customerCompactList(Page<Map> page, QueryWrapper<Customer> wrapper);
 
     /**
-     * 翻页查询
+     * 4、翻页查询
      * @param page
      * @param wrapper
      * @return
@@ -44,14 +44,14 @@ public interface CustomerService extends IService<Customer> {
     IPage<Customer> selectPage(Page page, Wrapper<Customer> wrapper);
 
     /**
-     * 添加Customer
+     * 5、添加Customer
      * @param customer 用户对象
      * @return
      */
     int addCustomer(Customer customer);
 
     /**
-     * 添加Customer
+     * 6、添加Customer
      * @param name 姓名
      * @param age 年龄
      * @param address 地址
@@ -60,21 +60,21 @@ public interface CustomerService extends IService<Customer> {
     int addCustomer(String name, Integer age, String address);
 
     /**
-     * 更新指定id的Customer
+     * 7、更新指定id的Customer
      * @param customer
      * @return
      */
     int updateCustomer(Customer customer);
 
     /**
-     * 获取指定id的Customer
+     * 8、获取指定id的Customer
      * @param id
      * @return
      */
     Customer findCustomerById(Integer id);
 
     /**
-     * 删除指定id的Customer
+     * 9、删除指定id的Customer
      * @param id
      * @return
      */

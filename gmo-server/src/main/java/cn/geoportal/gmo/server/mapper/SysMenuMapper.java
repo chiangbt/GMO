@@ -11,14 +11,14 @@ import java.util.List;
 public interface SysMenuMapper extends BaseMapper<SysMenu> {
 
     /**
-     * 根据用户id获取菜单列表
+     * 1、根据用户id获取菜单列表
      * @param userId
      * @return
      */
     List<SysMenu> getMenusByUserId(Long userId);
 
     /**
-     * 根据角色获取菜单列表
+     * 2、根据角色获取菜单列表
      * @return
      */
     List<SysMenu> getMenusWithRole();

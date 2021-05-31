@@ -10,8 +10,7 @@ import org.springframework.stereotype.Service;
  *
  */
 @Service
-public class SysMenuRoleServiceImpl extends ServiceImpl<SysMenuRoleMapper, SysMenuRole>
-implements SysMenuRoleService{
+public class SysMenuRoleServiceImpl extends ServiceImpl<SysMenuRoleMapper, SysMenuRole> implements SysMenuRoleService{
 
 }
 

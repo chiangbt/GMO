@@ -18,7 +18,7 @@
         address,createdat,updatedat
     </sql>
 
-    <!-- 在Mapper类中有实现 -->
+    <!-- 在Mapper类中实现调用 -->
     <!-- selectByName方法，支持基于name的模糊查询 -->
     <select id="selectByName" resultMap="BaseResultMap">
         select <include refid="Base_Column_List"/> from t_customer where name like '%${name}%' order by id desc

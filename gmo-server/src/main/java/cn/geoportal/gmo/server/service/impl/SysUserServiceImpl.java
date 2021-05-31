@@ -29,8 +29,7 @@ import java.util.Map;
  *
  */
 @Service
-public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser>
-implements SysUserService{
+public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService{
 
     @Autowired
     private SysUserMapper sysUserMapper;
@@ -70,16 +69,16 @@ implements SysUserService{
             return RespBean.error("账号被禁用，请联系管理员！");
         }
         // 更新security登录用户对象
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+        UsernamePasswordAuthenticationToken authenticationToken =
+                new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         // 生成token
         String token = jwtTokenUitl.genegrateToken(userDetails);
         Map<String, String> tokenMap = new HashMap<>();
-        tokenMap.put("token", tokenHead + " " + token);
+        tokenMap.put("token", token);
         tokenMap.put("tokenHead", tokenHead);
         return RespBean.success("登录成功", tokenMap);
     }
-
 
     /**
      * 根据用户名获取用户信息

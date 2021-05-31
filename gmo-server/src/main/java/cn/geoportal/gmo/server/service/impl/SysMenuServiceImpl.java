@@ -27,14 +27,15 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     private SysRoleMapper sysRoleMapper;
     @Autowired
     private RedisTemplate redisTemplate;
+
     /**
      * 根据用户id查询菜单列表
      * @return
      */
     @Override
     public List<SysMenu> getMenusByUserId() {
-        Long userId = ((SysUser) SecurityContextHolder.getContext().getAuthentication()
-                .getPrincipal()).getId();
+        // 获取用户id
+        Long userId = ((SysUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
         ValueOperations<String, Object> valueOperations = redisTemplate.opsForValue();
         // 从redis获取菜单数据
         List<SysMenu> menus = (List<SysMenu>) valueOperations.get("menu_" + userId);

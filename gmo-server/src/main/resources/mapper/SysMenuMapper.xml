@@ -4,19 +4,21 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.geoportal.gmo.server.mapper.SysMenuMapper">
 
+    <!-- 基本返回项 -->
     <resultMap id="BaseResultMap" type="cn.geoportal.gmo.server.entity.SysMenu">
-            <id property="id" column="id" jdbcType="BIGINT"/>
-            <result property="url" column="url" jdbcType="VARCHAR"/>
-            <result property="path" column="path" jdbcType="VARCHAR"/>
-            <result property="component" column="component" jdbcType="VARCHAR"/>
-            <result property="name" column="name" jdbcType="VARCHAR"/>
-            <result property="iconcls" column="iconcls" jdbcType="VARCHAR"/>
-            <result property="keepalive" column="keepalive" jdbcType="BIGINT"/>
-            <result property="requireauth" column="requireauth" jdbcType="BIGINT"/>
-            <result property="parentid" column="parentid" jdbcType="BIGINT"/>
-            <result property="enabled" column="enabled" jdbcType="BIGINT"/>
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="url" column="url" jdbcType="VARCHAR"/>
+        <result property="path" column="path" jdbcType="VARCHAR"/>
+        <result property="component" column="component" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="iconcls" column="iconcls" jdbcType="VARCHAR"/>
+        <result property="keepalive" column="keepalive" jdbcType="BIGINT"/>
+        <result property="requireauth" column="requireauth" jdbcType="BIGINT"/>
+        <result property="parentid" column="parentid" jdbcType="BIGINT"/>
+        <result property="enabled" column="enabled" jdbcType="BIGINT"/>
     </resultMap>
 
+    <!-- 返回Menu集合 -->
     <resultMap id="Menus" type="cn.geoportal.gmo.server.entity.SysMenu" extends="BaseResultMap">
         <collection property="children" ofType="cn.geoportal.gmo.server.entity.SysMenu">
             <id column="id2" property="id"/>
@@ -32,6 +34,7 @@
         </collection>
     </resultMap>
 
+    <!-- 角色相关的菜单列表 -->
     <resultMap id="MenusWithRole" type="cn.geoportal.gmo.server.entity.SysMenu" extends="BaseResultMap">
         <collection property="roles" ofType="cn.geoportal.gmo.server.entity.SysRole">
             <id column="rid" property="id" />
@@ -40,12 +43,8 @@
         </collection>
     </resultMap>
 
-
     <sql id="Base_Column_List">
-        id,url,path,
-        component,name,iconcls,
-        keepalive,requireauth,parentid,
-        enabled
+        id,url,path,component,name,iconcls,keepalive,requireauth,parentid,enabled
     </sql>
 
     <!--根据用户id查询菜单列表-->
@@ -85,12 +84,12 @@
         r.NAME rname,
         r.nameZh rnameZh
       FROM
-            t_sys_menu m,
-            t_sys_menu_role mr,
-            t_sys_role r
+        t_sys_menu m,
+        t_sys_menu_role mr,
+        t_sys_role r
       WHERE
-                m.id = mr.menu_id
-          AND r.id = mr.role_id
+            m.id = mr.menu_id
+        AND r.id = mr.role_id
       ORDER BY
         m.id
   </select>

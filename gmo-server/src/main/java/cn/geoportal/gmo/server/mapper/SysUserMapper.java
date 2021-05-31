@@ -11,7 +11,6 @@ import java.util.List;
  */
 public interface SysUserMapper extends BaseMapper<SysUser> {
 
-
 }
 
 

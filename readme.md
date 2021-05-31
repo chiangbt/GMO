@@ -1,13 +1,13 @@
 ## GMO系统介绍
 
-PMS是一款基于SpringBoot、Mybatis Plus、Security和Knife4j等组件打造的一款基于后台服务管理信息系统。
+GMO是一款基于SpringBoot、Mybatis Plus、Security和Knife4j等组件打造的一款基于后台服务RBAC管理信息系统。
 
-- JDK: 11
+- JDK: 11（JDK 8中的JJWT会出现异常）
 - SpringBoot 2.4.5
 - PostgreSQL 数据库
 - Druid 作为数据源
-- Mybatis Plus 作为ORM系统
-- Knife4j 作为API
+- Mybatis Plus 作为半自动ORM系统
+- Knife4j 作为API文档
 - Security 作为权限系统
 - Redis 使用redis作为token存储
 
@@ -15,12 +15,14 @@ PMS是一款基于SpringBoot、Mybatis Plus、Security和Knife4j等组件打造�
 
 ### 1、数据结构
 
-表数据存放在`resources/sql`中
+由于我们使用的是Mybatis Plus作为ORM框架库，因此，在进行系统开发和部署之前，必须使用`sql`将对应的SQL语句进行执行，将必要的数据输入到数据库中。
 
-数据结构中包含了6张表：
-- t_sys_auth: 权限表
+本系统的sql文件保存在`resources\sql`中。
+
+数据结构中包含了多张表：
+- t_sys_menu: 菜单（权限）表
 - t_sys_role: 角色表
-- t_sys_role_auth: 角色权限关联表
+- t_sys_role_menu: 角色菜单（权限）关联表
 - t_sys_user: 用户表
 - t_sys_user_role: 用户角色关联表
 
@@ -33,6 +35,13 @@ PMS是一款基于SpringBoot、Mybatis Plus、Security和Knife4j等组件打造�
 ### 2、使用`MyBatisX Generator`建构系统的ORM组件
 
 在数据库表中右键，打开`MybatisX Generator`，打开Mybatis生成器，生成对应的*Mapper.xml文件及*Mapper类、Entity类、Service类等。
+
+注意：
+
+```
+basePackage: cn.geoportal.gmo.server
+relativePackage: entity
+```
 
 #### 2.1 在`*mapper.xml`中添加合适方法的SQL语句
 

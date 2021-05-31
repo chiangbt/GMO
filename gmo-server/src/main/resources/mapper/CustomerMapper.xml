@@ -5,20 +5,19 @@
 <mapper namespace="cn.geoportal.gmo.server.mapper.CustomerMapper">
 
     <resultMap id="BaseResultMap" type="cn.geoportal.gmo.server.entity.Customer">
-            <id property="id" column="id" jdbcType="INTEGER"/>
-            <result property="name" column="name" jdbcType="VARCHAR"/>
-            <result property="age" column="age" jdbcType="INTEGER"/>
-            <result property="address" column="address" jdbcType="VARCHAR"/>
-            <result property="createdat" column="createdat" jdbcType="TIMESTAMP"/>
-            <result property="updatedat" column="updatedat" jdbcType="TIMESTAMP"/>
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="age" column="age" jdbcType="INTEGER"/>
+        <result property="address" column="address" jdbcType="VARCHAR"/>
+        <result property="createdat" column="createdat" jdbcType="TIMESTAMP"/>
+        <result property="updatedat" column="updatedat" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,name,age,
-        address,createdat,updatedat
+        id,name,age,address,createdat,updatedat
     </sql>
 
-    <!-- 在Mapper类中有实现 -->
+    <!-- 在Mapper类中实现调用 -->
     <!-- selectByName方法，支持基于name的模糊查询 -->
     <select id="selectByName" resultMap="BaseResultMap">
         select <include refid="Base_Column_List"/> from t_customer where name like '%${name}%' order by id desc

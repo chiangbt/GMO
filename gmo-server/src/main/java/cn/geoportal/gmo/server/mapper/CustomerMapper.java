@@ -27,7 +27,7 @@ public interface CustomerMapper extends BaseMapper<Customer> {
     List<Customer> selectByName(@Param("name") String name);
 
     /**
-     * customerCompactList，返回压缩版本的数据
+     * 2、customerCompactList，返回压缩版本的数据
      * @param page 页数对象
      * @param wrapper 包装器
      * @return
@@ -35,7 +35,7 @@ public interface CustomerMapper extends BaseMapper<Customer> {
     IPage<Map> customerCompactList(Page<Map> page, @Param(Constants.WRAPPER) QueryWrapper<Customer> wrapper);
 
     /**
-     * 2、基于@Select的注解功能
+     * 3、基于@Select的注解功能
      * 自定义添加Customer
      * @param name 姓名
      * @param age 年龄

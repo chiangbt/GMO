@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface SysRoleMapper extends BaseMapper<SysRole> {
     /**
-     * 根据用户id查询角色列表
+     * 1、根据用户id查询角色列表
      * @param userId
      * @return
      */
