@@ -1,6 +1,8 @@
 package cn.geoportal.gmo.server.config.security;
 
 import cn.geoportal.gmo.server.entity.SysUser;
+import cn.geoportal.gmo.server.security.filter.CustomUrlDecisionManager;
+import cn.geoportal.gmo.server.security.filter.CustomerFilter;
 import cn.geoportal.gmo.server.security.filter.JwtAuthencationTokenFilter;
 import cn.geoportal.gmo.server.security.handler.RestAuthorizationEntryPoint;
 import cn.geoportal.gmo.server.security.handler.RestfulAccessDeniedHandler;
@@ -8,6 +10,7 @@ import cn.geoportal.gmo.server.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -17,6 +20,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
@@ -36,6 +40,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private RestfulAccessDeniedHandler restfulAccessDeniedHandler;
     @Autowired
     private RestAuthorizationEntryPoint restAuthorizationEntryPoint;
+    @Autowired
+    private CustomUrlDecisionManager customUrlDecisionManager;
+    @Autowired
+    private CustomerFilter customFilter;
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -73,22 +81,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                // 允许登陆访问
-//                .antMatchers("/druid/**").permitAll()       // 允许druid使用
-//                .antMatchers("/doc.html").permitAll()       // 允许knife4j使用
-//                .antMatchers("/webjars/**").permitAll()
-//                .antMatchers("/swagger-ui/**").permitAll()
-//                .antMatchers("/swagger-resources/**").permitAll()
-//                .antMatchers("/v2/api-docs/**").permitAll()
-//                .antMatchers("/api/**").permitAll()
-//                .antMatchers("/").permitAll()   // 让resource/static中的vue app可以访问
-//                .antMatchers("/js/**").permitAll()
-//                .antMatchers("/css/**").permitAll()
-//                .antMatchers("/img/**").permitAll()
-//                .antMatchers("/uploads/**").permitAll()
-//                .antMatchers("/favicon.ico").permitAll()
                 // 除了上面的都需要认证
                 .anyRequest().authenticated()
+                // 动态权限配置
+                .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
+                    @Override
+                    public <O extends FilterSecurityInterceptor> O postProcess(O obj) {
+                        obj.setAccessDecisionManager(customUrlDecisionManager);
+                        obj.setSecurityMetadataSource(customFilter);
+                        return obj;
+                    }
+                })
                 .and()
                 // 禁用缓存
                 .headers()
@@ -107,7 +110,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return username -> {
             SysUser sysUser = sysUserService.getUserByUserName(username);
             if (null != sysUser) {
-//                sysUser.setRoles(sysUserService.getRoles(sysUser.getId()));
+                sysUser.setRoles(sysUserService.getRoles(sysUser.getId()));
                 return sysUser;
             }
             throw new UsernameNotFoundException("用户名密码不正确");

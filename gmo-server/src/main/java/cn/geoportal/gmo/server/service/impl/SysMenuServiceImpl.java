@@ -2,6 +2,7 @@ package cn.geoportal.gmo.server.service.impl;
 
 import cn.geoportal.gmo.server.entity.SysUser;
 import cn.geoportal.gmo.server.mapper.SysMenuMapper;
+import cn.geoportal.gmo.server.mapper.SysRoleMapper;
 import cn.geoportal.gmo.server.service.SysMenuService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.geoportal.gmo.server.entity.SysMenu;
@@ -22,6 +23,8 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
 
     @Autowired
     private SysMenuMapper sysMenuMapper;
+    @Autowired
+    private SysRoleMapper sysRoleMapper;
     @Autowired
     private RedisTemplate redisTemplate;
     /**
@@ -49,7 +52,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
      */
     @Override
     public List<SysMenu> getMenusWithRole() {
-        return null;
+        return sysMenuMapper.getMenusWithRole();
     }
 }
 

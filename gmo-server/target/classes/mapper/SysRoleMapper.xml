@@ -16,14 +16,14 @@
 
     <!--根据用户id查询角色列表-->
     <select id="getRoles" resultType="cn.geoportal.gmo.server.entity.SysRole">
-    SELECT
-      r.id,
-      r.name,
-      r.nameZh
-    FROM
-      t_role r
-      LEFT JOIN t_admin_role ar ON r.id = ar.role_id
-    WHERE
-      ar.user_id = #{userId}
+        SELECT
+            r.id,
+            r.name,
+            r.nameZh
+        FROM
+            t_sys_role r
+                LEFT JOIN t_sys_user_role ar ON r.id = ar.role_id
+        WHERE
+            ar.user_id = #{userId}
   </select>
 </mapper>

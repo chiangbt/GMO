@@ -59,7 +59,7 @@ public class AuthController {
         String username = userDetails.getUsername();
         SysUser sysUser = sysUserService.getUserByUserName(username);
         sysUser.setPassword(null);
-//        sysUser.setRoles(sysUserService.getRoles(sysUser.getId()));
+        sysUser.setRoles(sysUserService.getRoles(sysUser.getId()));
         return sysUser;
     }
 

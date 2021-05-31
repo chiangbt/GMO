@@ -24,6 +24,10 @@ comment on column t_sys_user.username is '登录名';
 
 -- SQLINES DEMO *** -----------
 INSERT INTO t_sys_user(username,email,password) VALUES ('admin' , 'admin@sleeep.io','$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe');
+INSERT INTO t_sys_user(username,email,password) VALUES ('user1', 'xx@cn.cn', '$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe');
+INSERT INTO t_sys_user(username,email,password) VALUES ('user2', 'xx2@cn.cn', '$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe');
+INSERT INTO t_sys_user(username,email,password) VALUES ('user3', 'xx3@cn.cn', '$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe' );
+INSERT INTO t_sys_user(username,email,password) VALUES ('user4', 'xx4@cn.cn', '$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe');
 
 /**
   角色表
@@ -62,6 +66,17 @@ comment on column t_sys_user_role.user_id is '用户id';
 comment on column t_sys_user_role.role_id is '权限id';
 
 INSERT INTO t_sys_user_role(user_id, role_id) VALUES (1, 6);
+INSERT INTO t_sys_user_role(user_id, role_id) VALUES (5, 4);
+INSERT INTO t_sys_user_role(user_id, role_id) VALUES (5, 3);
+INSERT INTO t_sys_user_role(user_id, role_id) VALUES (5, 2);
+INSERT INTO t_sys_user_role(user_id, role_id) VALUES (4, 3);
+INSERT INTO t_sys_user_role(user_id, role_id) VALUES (4, 2);
+INSERT INTO t_sys_user_role(user_id, role_id) VALUES (4, 4);
+INSERT INTO t_sys_user_role(user_id, role_id) VALUES (4, 5);
+INSERT INTO t_sys_user_role(user_id, role_id) VALUES (3, 3);
+INSERT INTO t_sys_user_role(user_id, role_id) VALUES (3, 4);
+INSERT INTO t_sys_user_role(user_id, role_id) VALUES (2, 3);
+INSERT INTO t_sys_user_role(user_id, role_id) VALUES (2, 4);
 
 /**
   菜单表
@@ -154,3 +169,35 @@ INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (26, 6);
 INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (27, 6);
 INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (28, 6);
 INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (24, 6);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (7, 3);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (7, 2);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (8, 2);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (9, 2);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (10, 2);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (12, 2);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (13, 2);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (7, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (8, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (9, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (10, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (11, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (12, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (13, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (14, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (15, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (16, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (17, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (18, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (19, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (20, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (21, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (22, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (23, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (24, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (25, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (26, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (27, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (28, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (11, 4);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (8, 4);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (7, 4);

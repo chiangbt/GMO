@@ -2,7 +2,9 @@ package cn.geoportal.gmo.server.service.impl;
 
 import cn.geoportal.gmo.server.config.security.JwtTokenUtil;
 import cn.geoportal.gmo.server.entity.SysMenu;
+import cn.geoportal.gmo.server.entity.SysRole;
 import cn.geoportal.gmo.server.entity.common.RespBean;
+import cn.geoportal.gmo.server.mapper.SysRoleMapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.geoportal.gmo.server.entity.SysUser;
@@ -32,6 +34,8 @@ implements SysUserService{
 
     @Autowired
     private SysUserMapper sysUserMapper;
+    @Autowired
+    private SysRoleMapper sysRoleMapper;
     @Autowired
     private UserDetailsService userDetailsService;
     @Autowired
@@ -86,6 +90,16 @@ implements SysUserService{
     public SysUser getUserByUserName(String username) {
         return sysUserMapper.selectOne(new QueryWrapper<SysUser>().eq("username", username)
                 .eq("enabled", true));
+    }
+
+    /**
+     * 根据用户id查询角色
+     * @param userId
+     * @return
+     */
+    @Override
+    public List<SysRole> getRoles(Long userId) {
+        return sysRoleMapper.getRoles(userId);
     }
 
 }

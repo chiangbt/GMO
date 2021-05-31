@@ -71,7 +71,7 @@
               m1.id = m2.parentid
           AND m2.id = mr.menu_id
           AND mr.role_id = ar.role_id
-          AND ar.user_id = #{id}
+          AND ar.user_id = #{userId}
           AND m2.enabled = 1
         ORDER BY
             m2.id
@@ -84,14 +84,14 @@
         r.id rid,
         r.NAME rname,
         r.nameZh rnameZh
-    FROM
-        t_sys_menu m,
-        t_sys_menu_role mr,
-        t_sys_role r
-    WHERE
-            m.id = mr.menu_id
-      AND r.id = mr.role_id
-    ORDER BY
+      FROM
+            t_sys_menu m,
+            t_sys_menu_role mr,
+            t_sys_role r
+      WHERE
+                m.id = mr.menu_id
+          AND r.id = mr.role_id
+      ORDER BY
         m.id
   </select>
 </mapper>

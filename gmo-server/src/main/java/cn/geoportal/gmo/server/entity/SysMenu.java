@@ -112,6 +112,7 @@ public class SysMenu implements Serializable {
     @TableField(exist = false)
     private List<SysRole> roles;
 
+
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
