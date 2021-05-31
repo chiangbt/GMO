@@ -11,8 +11,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="gmo" target="1.8" />
-      <module name="gmo-server" target="1.8" />
+      <module name="gmo" target="11" />
+      <module name="gmo-server" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

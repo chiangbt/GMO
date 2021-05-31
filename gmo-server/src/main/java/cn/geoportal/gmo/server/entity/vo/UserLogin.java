@@ -22,10 +22,12 @@ public class UserLogin {
     @ApiModelProperty(value = "用户名", required = true)
     @JSONField(ordinal = 0)
     private String username;
+
     @ApiModelProperty(value = "密码", required = true)
     @JSONField(ordinal = 1)
     private String password;
+
     @ApiModelProperty(value = "验证码", required = true)
     @JSONField(ordinal = 2)
-    private String captcha;
+    private String kaptcha;
 }

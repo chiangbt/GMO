@@ -59,15 +59,14 @@ public class CustomerController {
         wrapper.like("name", name);
         wrapper.orderByDesc("id");
         Page<Customer> ipage = new Page<>(pageNo, pageSize);
-        IPage<Customer> users = customerService.selectPage(ipage, wrapper);
-        PageResult<?> pageResult = new PageResult<Customer>(users.getCurrent(), users.getSize(), users.getTotal(), users.getRecords());
+        try{
+            IPage<Customer> users = customerService.selectPage(ipage, wrapper);
+            PageResult<?> pageResult = new PageResult<Customer>(users.getCurrent(), users.getSize(), users.getTotal(), users.getRecords());
 
-//        boolean cache = globalCache.hasKey("customer_"+pageNo+"_"+pageSize);
-//        if(cache){
-//            return HttpResult.ok(HttpStatus.SC_OK, true, "获取成功", globalCache.get("customer_"+pageNo+"_"+pageSize));
-//        }
-//        globalCache.set("customer_"+pageNo+"_"+pageSize, pageResult);
-        return RespBean.success("获取成功", pageResult);
+            return RespBean.success("获取成功", pageResult);
+        }catch (Exception e){
+            return RespBean.error("无数据");
+        }
     }
 
     /**

@@ -45,7 +45,7 @@ public class AuthController {
     @ApiOperation(value = "登录返回token")
     @PostMapping(value = "/login", consumes = "application/json", produces = "application/json")
     public RespBean login(@RequestBody UserLogin userLogin, HttpServletRequest request){
-        return sysUserService.login(userLogin.getUsername(), userLogin.getPassword(), userLogin.getCaptcha(), request);
+        return sysUserService.login(userLogin.getUsername(), userLogin.getPassword(), userLogin.getKaptcha(), request);
     }
 
 

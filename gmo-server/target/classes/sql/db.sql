@@ -1,6 +1,7 @@
 /**
   客户表
  */
+DROP TABLE IF EXISTS t_customer;
 CREATE TABLE t_customer(
     id SERIAL PRIMARY KEY     NOT NULL,
     name      TEXT    NOT NULL,
