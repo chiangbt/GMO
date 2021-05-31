@@ -58,13 +58,18 @@ public class AuthController {
     @ApiOperation("获取当前登录用户的信息")
     @GetMapping("/user/info")
     public SysUser getUserInfo() {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
+        // 获取当前登录对象
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if(null == userDetails) {
             return null;
         }
+        // 获取当前登录对象的username
         String username = userDetails.getUsername();
+        // 获取完整的用户对象
         SysUser sysUser = sysUserService.getUserByUserName(username);
+        // 保护密码
         sysUser.setPassword(null);
+        // 获取该用户的角色信息
         sysUser.setRoles(sysUserService.getRoles(sysUser.getId()));
         return sysUser;
     }

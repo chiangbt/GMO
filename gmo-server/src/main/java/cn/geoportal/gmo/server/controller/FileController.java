@@ -28,7 +28,7 @@ import java.util.Date;
 @Api(tags = "文件模块")
 @ApiSupport(order = 204)
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/file")
 public class FileController {
 
     @Autowired
@@ -65,7 +65,7 @@ public class FileController {
     }
 
     @ApiOperation(value = "静态目录", nickname = "获取服务器静态服务器文件夹的实际目录")
-    @RequestMapping(value="/getstaticpath", method = RequestMethod.GET)
+    @RequestMapping(value="/static_path", method = RequestMethod.GET)
     @PreAuthorize(value = "hasRole('ADMIN')")
     public RespBean getStaticPath() throws FileNotFoundException {
         File path2 = new File(ResourceUtils.getURL("classpath:").getPath());

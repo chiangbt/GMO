@@ -1,6 +1,7 @@
 package cn.geoportal.gmo.server.entity.common;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
  * @Description: 翻页返回对象
  * @Date: 2021/5/31 10:04
  */
+@ApiModel(value = "翻页结果")
 public class PageResult<T> {
 
     @ApiModelProperty(value = "当前页码")
@@ -35,7 +37,7 @@ public class PageResult<T> {
     private List<T> records;
 
     private long offset = 0;// 偏移量，当前页起始记录数
-    private long limit = 15;
+    private long limit = 15;// 每页记录数量
 
     private boolean count = true;
 

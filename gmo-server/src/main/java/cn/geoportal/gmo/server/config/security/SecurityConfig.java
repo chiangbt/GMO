@@ -52,6 +52,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception{
+        /**
+         * 以下路径不需要使用token进行判断
+         */
         web.ignoring().antMatchers(
                 "/api/auth/register",
                 "/api/auth/login",
@@ -67,6 +70,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/swagger-ui/**",
                 "/swagger-resources/**",
                 "/v2/api-docs/**",
+                "/",
                 "/img/**",
                 "/uploads/**"
         );
@@ -87,6 +91,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
                     @Override
                     public <O extends FilterSecurityInterceptor> O postProcess(O obj) {
+                        // 动态权限配置
                         obj.setAccessDecisionManager(customUrlDecisionManager);
                         obj.setSecurityMetadataSource(customFilter);
                         return obj;
@@ -96,9 +101,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 禁用缓存
                 .headers()
                 .cacheControl();
-        // 添加jwt登录授权过滤器
+        // 添加jwt登录授权过滤器，对包含token的请求进行前置过滤
         http.addFilterBefore(jwtAuthencationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-        // 自定义未授权和未登录的结果返回
+        // 自定义未授权和未登录的结果返回定义
         http.exceptionHandling()
                 .accessDeniedHandler(restfulAccessDeniedHandler)
                 .authenticationEntryPoint(restAuthorizationEntryPoint);
@@ -110,6 +115,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return username -> {
             SysUser sysUser = sysUserService.getUserByUserName(username);
             if (null != sysUser) {
+                // 如果用户存在设置roles，该字段并不存在数据库字段中，而是动态生成
                 sysUser.setRoles(sysUserService.getRoles(sysUser.getId()));
                 return sysUser;
             }

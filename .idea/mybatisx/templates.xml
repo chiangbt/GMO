@@ -8,23 +8,22 @@
             <option name="annotationType" value="MYBATIS_PLUS3" />
             <option name="basePackage" value="cn.geoportal.gmo.server" />
             <option name="basePath" value="src/main/java" />
-            <option name="domainObjectName" value="SysMenuRole" />
+            <option name="domainObjectName" value="SysPosition" />
             <option name="encoding" value="UTF-8" />
             <option name="extraTemplateNames">
               <list>
-                <option value="mapperInterface" />
                 <option value="mapperXml" />
                 <option value="serviceImpl" />
+                <option value="mapperInterface" />
                 <option value="serviceInterface" />
               </list>
             </option>
             <option name="moduleName" value="gmo-server" />
             <option name="modulePath" value="$PROJECT_DIR$/gmo-server" />
-            <option name="needToStringHashcodeEquals" value="true" />
             <option name="needsComment" value="true" />
             <option name="relativePackage" value="entity" />
             <option name="rootClass" value="" />
-            <option name="tableName" value="t_sys_menu_role" />
+            <option name="tableName" value="t_sys_position" />
             <option name="targetProject" value="$PROJECT_DIR$" />
             <option name="templatesName" value="mybatis-plus3" />
             <option name="useLombokPlugin" value="true" />

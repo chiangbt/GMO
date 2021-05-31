@@ -201,3 +201,21 @@ INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (28, 1);
 INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (11, 4);
 INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (8, 4);
 INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (7, 4);
+
+
+DROP TABLE IF EXISTS t_sys_position;
+/**
+  职位表
+ */
+CREATE TABLE t_sys_position  (
+    id         BIGSERIAL PRIMARY KEY,
+    name       VARCHAR(32) NULL DEFAULT NULL ,
+    enabled    BOOLEAN NOT NULL DEFAULT true,
+    createdAt  timestamp(3) NOT NULL DEFAULT (CURRENT_TIMESTAMP)
+);
+
+INSERT INTO t_sys_position(name) VALUES ('技术总监');
+INSERT INTO t_sys_position(name) VALUES ('运营总监');
+INSERT INTO t_sys_position(name) VALUES ('市场总监');
+INSERT INTO t_sys_position(name) VALUES ('研发工程师');
+INSERT INTO t_sys_position(name) VALUES ('运维工程师');

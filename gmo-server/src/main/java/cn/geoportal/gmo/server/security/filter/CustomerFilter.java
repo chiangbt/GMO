@@ -34,12 +34,14 @@ public class CustomerFilter implements FilterInvocationSecurityMetadataSource {
     public Collection<ConfigAttribute> getAttributes(Object o) throws IllegalArgumentException {
         // 获取请求的rul
         String requestUrl = ((FilterInvocation) o).getRequestUrl();
+        System.out.println(requestUrl);
         List<SysMenu> menus = menuService.getMenusWithRole();
         for (SysMenu menu : menus) {
             // 判断请求url与角色是否相配
             if(antPathMatcher.match(menu.getUrl(), requestUrl)){
+                // 将SysMenu对象的role取出名称进行匹配
                 String[] str = menu.getRoles().stream().map(SysRole::getName).toArray(String[]::new);
-                System.out.println("权限-------------"+SecurityConfig.createList(str));
+                System.out.println("权限-------------" + SecurityConfig.createList(str));
                 return SecurityConfig.createList(str);
             }
         }

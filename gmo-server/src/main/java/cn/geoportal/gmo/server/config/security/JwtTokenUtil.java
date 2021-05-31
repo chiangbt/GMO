@@ -156,5 +156,4 @@ public class JwtTokenUtil {
         Date date = new Date(System.currentTimeMillis() + expiration * 1000);
         return date;
     }
-
 }

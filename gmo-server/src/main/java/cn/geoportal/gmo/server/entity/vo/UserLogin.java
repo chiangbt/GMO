@@ -17,7 +17,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value = "userLogin对象", description = "")
+@ApiModel(value = "UserLogin对象", description = "")
 public class UserLogin {
     @ApiModelProperty(value = "用户名", required = true)
     @JSONField(ordinal = 0)
