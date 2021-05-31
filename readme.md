@@ -56,3 +56,5 @@ PMS是一款基于SpringBoot、Mybatis Plus、Security和Knife4j等组件打造�
 
 ### 5、测试代码
 
+https://gitee.com/DeyN/yeb
+https://www.bilibili.com/video/BV1U44y1r7iR?p=18&spm_id_from=pageDriver
