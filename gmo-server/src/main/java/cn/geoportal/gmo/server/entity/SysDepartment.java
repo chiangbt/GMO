@@ -29,40 +29,47 @@ public class SysDepartment implements Serializable {
     /**
      * 
      */
+    @JSONField(ordinal = 1)
     @ApiModelProperty(value = "部门名称")
     private String name;
 
     /**
      * 
      */
+    @JSONField(ordinal = 2)
     @ApiModelProperty(value = "父id")
-    private Short parentid;
+    private Integer parentid;
 
     /**
      * 
      */
+    @JSONField(ordinal = 3)
     @ApiModelProperty(value = "路径", required = false, hidden = true)
     private String deppath;
 
     /**
      * 
      */
+    @JSONField(ordinal = 4)
     @ApiModelProperty(value = "是否启用")
     private Boolean enabled;
 
     /**
      * 
      */
+    @JSONField(ordinal = 5)
     @ApiModelProperty(value = "是否上级", required = false, hidden = true)
     private Boolean isparent;
 
+    @JSONField(ordinal = 6)
     @ApiModelProperty(value = "子部门", required = false, hidden = true)
     @TableField(exist = false)
     private List<SysDepartment> children;
 
-    @ApiModelProperty(value = "返回结果，存储过程使用", required = false, hidden = true)
-    @TableField(exist = false)
-    private Integer result;
+//    @JSONField(ordinal = 7)
+//    @ApiModelProperty(value = "返回结果，存储过程使用", required = false, hidden = true)
+//    @TableField(exist = false)
+//    private Integer result;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

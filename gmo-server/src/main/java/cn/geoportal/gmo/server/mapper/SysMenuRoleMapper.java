@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface SysMenuRoleMapper extends BaseMapper<SysMenuRole> {
     /**
-     * 根据角色菜单
+     * 1、根据角色菜单
      * @param rid
      * @param mids
      * @return

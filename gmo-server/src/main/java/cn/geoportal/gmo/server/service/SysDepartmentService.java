@@ -12,14 +12,13 @@ import java.util.List;
 public interface SysDepartmentService extends IService<SysDepartment> {
 
     /**
-     * 获取所有部门
-     *
+     * 1、获取所有部门
      * @return
      */
     List<SysDepartment> getAllDepartments();
 
     /**
-     *
+     * 2、添加department
      * @param sysDepartment
      * @return
      */

@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface SysMenuRoleService extends IService<SysMenuRole> {
     /**
-     * 更新角色菜单
+     * 1、更新角色菜单
      * @param rid
      * @param mids
      * @return

@@ -7,7 +7,7 @@
     <resultMap id="BaseResultMap" type="cn.geoportal.gmo.server.entity.SysDepartment">
         <id property="id" column="id" jdbcType="BIGINT"/>
         <result property="name" column="name" jdbcType="VARCHAR"/>
-        <result property="parentid" column="parentid" jdbcType="SMALLINT"/>
+        <result property="parentid" column="parentid" jdbcType="INTEGER"/>
         <result property="deppath" column="deppath" jdbcType="VARCHAR"/>
         <result property="enabled" column="enabled" jdbcType="BOOLEAN"/>
         <result property="isparent" column="isparent" jdbcType="BOOLEAN"/>
@@ -36,13 +36,11 @@
         where parentid = #{parentId} order by id asc
     </select>
 
-    <!--添加部门,调用存储过程-->
-    <select id="addDepartment" useCache="false" statementType="CALLABLE">
+    <select id="addDep" resultType="integer" statementType = "CALLABLE">
         {
-        call addDepartment(#{depName, mode=IN, jdbcType=VARCHAR},
-            #{parentId, mode=IN, jdbcType=INTEGER},
-            #{enabled, mode=IN, jdbcType=BOOLEAN}
-            #{result,mode=OUT,jdbcType=INTEGER})
+            call adddepartment(#{depName, mode=IN, jdbcType=VARCHAR},
+                               #{parentId, mode=IN, jdbcType=INTEGER},
+                               #{enabled, mode=IN, jdbcType=BOOLEAN})
         }
     </select>
 </mapper>

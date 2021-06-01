@@ -244,7 +244,7 @@ DROP TABLE IF EXISTS t_sys_department;
 CREATE TABLE t_sys_department  (
     id         BIGSERIAL PRIMARY KEY,
     name       VARCHAR(32) NULL DEFAULT NULL ,
-    parentid   smallint null default null,
+    parentid   integer null default null,
     deppath    varchar(255) null default  null,
     enabled    BOOLEAN NOT NULL DEFAULT true,
     isparent   BOOLEAN NOT NULL DEFAULT false
@@ -264,9 +264,10 @@ INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('�
 INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('运维部', 3, '.1.2.3.13', true, false);
 
 
-CREATE OR REPLACE FUNCTION addDepartment(in depName varchar(32),in parentId int,in enabled boolean, out result int)
+CREATE OR REPLACE FUNCTION addDepartment(in depName varchar(32),in parentId int,in enabled boolean)
     RETURNS integer LANGUAGE plpgsql as $$
 declare
+    result integer;
     pDepPath varchar(255);
 begin
     insert into t_sys_department(name,parentid,enabled)
@@ -275,5 +276,5 @@ begin
     --select deppath from t_sys_department where id = parentId;
     update t_sys_department set deppath=concat(pDepPath,'.',result) where id=result;
     execute format('update t_sys_department set isparent=true where id = (%s)',parentId);
-    return;
+    return result;
 end  $$;

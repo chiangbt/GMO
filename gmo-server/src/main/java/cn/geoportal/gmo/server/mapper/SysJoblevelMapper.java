@@ -10,6 +10,12 @@ import org.apache.ibatis.annotations.Select;
  */
 public interface SysJoblevelMapper extends BaseMapper<SysJoblevel> {
 
+    /**
+     * 1、添加一个新职称
+     * @param name
+     * @param titlelevel
+     * @return
+     */
     @Select("INSERT INTO t_sys_joblevel(name, titlelevel) values(#{name},#{titlelevel}) RETURNING id")
     @Options(flushCache = Options.FlushCachePolicy.TRUE)
     int addJoblevel(String name, String titlelevel);
