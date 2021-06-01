@@ -23,42 +23,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99a0de75-65ce-4347-8d15-a85431a5c45a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/readme_zh.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ffe850b8-8bde-46fb-8796-70115216cdf0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ffe850b8-8bde-46fb-8796-70115216cdf0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ffe850b8-8bde-46fb-8796-70115216cdf0/storage_v2/_src_/database/gmo.SZABAA/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ffe850b8-8bde-46fb-8796-70115216cdf0/storage_v2/_src_/database/gmo.SZABAA/schema/public.abK9xQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/mybatisx/templates.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mybatisx/templates.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gmo-server/src/main/java/cn/geoportal/gmo/server/controller/PositionController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gmo-server/src/main/java/cn/geoportal/gmo/server/config/Knife4jConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/gmo-server/src/main/java/cn/geoportal/gmo/server/config/Knife4jConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gmo-server/src/main/java/cn/geoportal/gmo/server/config/security/JwtTokenUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/gmo-server/src/main/java/cn/geoportal/gmo/server/config/security/JwtTokenUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gmo-server/src/main/java/cn/geoportal/gmo/server/config/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/gmo-server/src/main/java/cn/geoportal/gmo/server/config/security/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gmo-server/src/main/java/cn/geoportal/gmo/server/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/gmo-server/src/main/java/cn/geoportal/gmo/server/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gmo-server/src/main/java/cn/geoportal/gmo/server/controller/FileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/gmo-server/src/main/java/cn/geoportal/gmo/server/controller/FileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gmo-server/src/main/java/cn/geoportal/gmo/server/entity/SysRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/gmo-server/src/main/java/cn/geoportal/gmo/server/entity/SysRole.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gmo-server/src/main/java/cn/geoportal/gmo/server/entity/SysUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/gmo-server/src/main/java/cn/geoportal/gmo/server/entity/SysUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gmo-server/src/main/java/cn/geoportal/gmo/server/entity/common/PageResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/gmo-server/src/main/java/cn/geoportal/gmo/server/entity/common/PageResult.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gmo-server/src/main/java/cn/geoportal/gmo/server/entity/vo/UserLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/gmo-server/src/main/java/cn/geoportal/gmo/server/entity/vo/UserLogin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gmo-server/src/main/java/cn/geoportal/gmo/server/security/filter/CustomerFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/gmo-server/src/main/java/cn/geoportal/gmo/server/security/filter/CustomerFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gmo-server/src/main/java/cn/geoportal/gmo/server/security/filter/JwtAuthencationTokenFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/gmo-server/src/main/java/cn/geoportal/gmo/server/security/filter/JwtAuthencationTokenFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gmo-server/src/main/resources/sql/sys.sql" beforeDir="false" afterPath="$PROJECT_DIR$/gmo-server/src/main/resources/sql/sys.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gmo-server/target/classes/cn/geoportal/gmo/server/config/Knife4jConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/gmo-server/target/classes/cn/geoportal/gmo/server/config/Knife4jConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gmo-server/target/classes/cn/geoportal/gmo/server/config/security/SecurityConfig$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/gmo-server/target/classes/cn/geoportal/gmo/server/config/security/SecurityConfig$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gmo-server/target/classes/cn/geoportal/gmo/server/config/security/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/gmo-server/target/classes/cn/geoportal/gmo/server/config/security/SecurityConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gmo-server/target/classes/cn/geoportal/gmo/server/controller/AuthController.class" beforeDir="false" afterPath="$PROJECT_DIR$/gmo-server/target/classes/cn/geoportal/gmo/server/controller/AuthController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gmo-server/target/classes/cn/geoportal/gmo/server/controller/FileController.class" beforeDir="false" afterPath="$PROJECT_DIR$/gmo-server/target/classes/cn/geoportal/gmo/server/controller/FileController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gmo-server/target/classes/cn/geoportal/gmo/server/entity/SysRole.class" beforeDir="false" afterPath="$PROJECT_DIR$/gmo-server/target/classes/cn/geoportal/gmo/server/entity/SysRole.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gmo-server/target/classes/cn/geoportal/gmo/server/entity/SysUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/gmo-server/target/classes/cn/geoportal/gmo/server/entity/SysUser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gmo-server/target/classes/cn/geoportal/gmo/server/entity/common/PageResult.class" beforeDir="false" afterPath="$PROJECT_DIR$/gmo-server/target/classes/cn/geoportal/gmo/server/entity/common/PageResult.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gmo-server/target/classes/cn/geoportal/gmo/server/entity/vo/UserLogin.class" beforeDir="false" afterPath="$PROJECT_DIR$/gmo-server/target/classes/cn/geoportal/gmo/server/entity/vo/UserLogin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gmo-server/target/classes/cn/geoportal/gmo/server/security/filter/CustomerFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/gmo-server/target/classes/cn/geoportal/gmo/server/security/filter/CustomerFilter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gmo-server/target/classes/cn/geoportal/gmo/server/security/filter/JwtAuthencationTokenFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/gmo-server/target/classes/cn/geoportal/gmo/server/security/filter/JwtAuthencationTokenFilter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gmo-server/target/classes/cn/geoportal/gmo/server/service/impl/SysMenuServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/gmo-server/target/classes/cn/geoportal/gmo/server/service/impl/SysMenuServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gmo-server/target/classes/cn/geoportal/gmo/server/service/impl/SysUserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/gmo-server/target/classes/cn/geoportal/gmo/server/service/impl/SysUserServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gmo-server/target/classes/mapper/CustomerMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/gmo-server/target/classes/mapper/CustomerMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gmo-server/target/classes/mapper/SysMenuMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/gmo-server/target/classes/mapper/SysMenuMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gmo-server/target/classes/mapper/SysMenuRoleMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/gmo-server/target/classes/mapper/SysMenuRoleMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gmo-server/target/classes/mapper/SysRoleMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/gmo-server/target/classes/mapper/SysRoleMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gmo-server/target/classes/mapper/SysUserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/gmo-server/target/classes/mapper/SysUserMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gmo-server/target/classes/mapper/SysUserRoleMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/gmo-server/target/classes/mapper/SysUserRoleMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gmo-server/src/main/java/cn/geoportal/gmo/server/mapper/SysPositionMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/gmo-server/src/main/java/cn/geoportal/gmo/server/mapper/SysPositionMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gmo-server/src/main/java/cn/geoportal/gmo/server/service/SysPositionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/gmo-server/src/main/java/cn/geoportal/gmo/server/service/SysPositionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gmo-server/src/main/java/cn/geoportal/gmo/server/service/impl/SysPositionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/gmo-server/src/main/java/cn/geoportal/gmo/server/service/impl/SysPositionServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,13 +72,15 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -159,6 +130,7 @@
       <workItem from="1622455661290" duration="3187000" />
       <workItem from="1622459410457" duration="14000" />
       <workItem from="1622465887195" duration="11048000" />
+      <workItem from="1622510115578" duration="1767000" />
     </task>
     <servers />
   </component>
