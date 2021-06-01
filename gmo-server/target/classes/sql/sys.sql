@@ -231,3 +231,49 @@ CREATE TABLE t_sys_joblevel  (
   enabled    BOOLEAN NOT NULL DEFAULT true,
   createdAt  timestamp(3) NOT NULL DEFAULT (CURRENT_TIMESTAMP)
 );
+INSERT INTO t_sys_joblevel(name, titleLevel) VALUES ('教授','正高级');
+INSERT INTO t_sys_joblevel(name, titleLevel) VALUES ('副教授','副高级');
+INSERT INTO t_sys_joblevel(name, titleLevel) VALUES ('助教','初级');
+INSERT INTO t_sys_joblevel(name, titleLevel) VALUES ('讲师','中级');
+INSERT INTO t_sys_joblevel(name, titleLevel) VALUES ('初级工程师','初级');
+INSERT INTO t_sys_joblevel(name, titleLevel) VALUES ('中级工程师','中级');
+INSERT INTO t_sys_joblevel(name, titleLevel) VALUES ('高级工程','副高级');
+INSERT INTO t_sys_joblevel(name, titleLevel) VALUES ('教授级工程师','正高级');
+
+DROP TABLE IF EXISTS t_sys_department;
+CREATE TABLE t_sys_department  (
+    id         BIGSERIAL PRIMARY KEY,
+    name       VARCHAR(32) NULL DEFAULT NULL ,
+    parentid   smallint null default null,
+    deppath    varchar(255) null default  null,
+    enabled    BOOLEAN NOT NULL DEFAULT true,
+    isparent   BOOLEAN NOT NULL DEFAULT false
+);
+INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('股东会', -1, '.1', true, true);
+INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('董事会', 1, '.1.2', true, true);
+INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('总办', 2, '.1.2.3', true, true);
+INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('财务部', 3, '.1.2.3.4', true, false);
+INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('市场部', 3, '.1.2.3.5', true, true);
+INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('华东市场部', 5, '1.2.3.5.6', true, true);
+INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('华南市场部', 5, '1.2.3.5.7', true, false);
+INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('上海市场部', 6, '1.2.3.5.6.8', true, false);
+INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('西北市场部', 5, '.1.2.3.5.9', true, true);
+INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('贵阳市场', 9, '.1.2.3.5.9.10', true, true);
+INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('乌当区市场', 10, '.1.2.3.5.9.10.11', true, false);
+INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('技术部', 3, '.1.2.3.12', true, false);
+INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('运维部', 3, '.1.2.3.13', true, false);
+
+
+CREATE OR REPLACE FUNCTION addDepartment(in depName varchar(32),in parentId int,in enabled boolean, out result int)
+    RETURNS integer LANGUAGE plpgsql as $$
+declare
+    pDepPath varchar(255);
+begin
+    insert into t_sys_department(name,parentid,enabled)
+    VALUES(depName, parentId, enabled) RETURNING id INTO result;
+    execute format('select deppath from t_sys_department where id = (%s)', parentId) into pDepPath;
+    --select deppath from t_sys_department where id = parentId;
+    update t_sys_department set deppath=concat(pDepPath,'.',result) where id=result;
+    execute format('update t_sys_department set isparent=true where id = (%s)',parentId);
+    return;
+end  $$;
