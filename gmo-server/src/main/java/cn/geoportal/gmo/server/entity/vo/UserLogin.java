@@ -29,5 +29,5 @@ public class UserLogin {
 
     @ApiModelProperty(value = "验证码", required = true)
     @JSONField(ordinal = 2)
-    private String kaptcha;
+    private String verifycode;
 }

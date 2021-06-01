@@ -1,5 +1,6 @@
 package cn.geoportal.gmo.server.controller;
 
+import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Description: 测试模块
  * @Date: 2021/5/31 16:10
  */
+@ApiSupport(order = 304)
 @RestController
 public class HelloController {
 

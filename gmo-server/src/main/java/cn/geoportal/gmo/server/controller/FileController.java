@@ -26,7 +26,7 @@ import java.util.Date;
  * @Date: 2021/5/31 14:37
  */
 @Api(tags = "文件模块")
-@ApiSupport(order = 204)
+@ApiSupport(order = 303)
 @RestController
 @RequestMapping("/api/file")
 public class FileController {

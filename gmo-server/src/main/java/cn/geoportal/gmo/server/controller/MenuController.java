@@ -22,7 +22,7 @@ import java.util.List;
  * @Date: 2021/5/31 12:57
  */
 @Api(tags = "菜单模块")
-@ApiSupport(order = 201)    // 分组排序
+@ApiSupport(order = 306)    // 分组排序
 @RestController
 @RequestMapping("/api/menu")
 public class MenuController {

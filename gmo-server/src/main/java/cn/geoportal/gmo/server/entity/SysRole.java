@@ -24,7 +24,7 @@ public class SysRole implements Serializable {
      */
     @TableId(value = "id", type = IdType.AUTO)
     @JSONField(ordinal = 0)
-    @ApiModelProperty(value = "id")
+    @ApiModelProperty(value = "id", required = false, hidden = true)
     private Long id;
 
     /**

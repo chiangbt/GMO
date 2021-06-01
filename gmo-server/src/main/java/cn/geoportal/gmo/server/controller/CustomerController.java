@@ -27,7 +27,7 @@ import java.util.Map;
  * @Date: 2021/5/31 11:55
  */
 @Api(tags = "客户模块")
-@ApiSupport(order = 201)    // 分组排序
+@ApiSupport(order = 302)    // 分组排序
 @RestController
 @RequestMapping("/api/customer")
 public class CustomerController {
@@ -167,7 +167,7 @@ public class CustomerController {
     @ApiOperation(value = "更新一个Customer")
     @PatchMapping(value = "", consumes = "application/json", produces = "application/json")
 //    @PreAuthorize(value = "hasAnyRole('ADMIN')")
-    public RespBean updateCustomer(@RequestBody Customer customer, @RequestParam(value="id") Integer id){
+    public RespBean updateCustomer(@RequestBody Customer customer, @PathVariable(value="id") Integer id){
         try{
             customer.setId(id);
             int result = customerService.updateCustomer(customer);

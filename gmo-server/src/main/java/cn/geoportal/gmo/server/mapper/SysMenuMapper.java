@@ -22,6 +22,12 @@ public interface SysMenuMapper extends BaseMapper<SysMenu> {
      * @return
      */
     List<SysMenu> getMenusWithRole();
+
+    /**
+     * 3、查询所有菜单
+     * @return
+     */
+    List<SysMenu> getAllMenus();
 }
 
 

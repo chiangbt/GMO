@@ -43,6 +43,19 @@
         </collection>
     </resultMap>
 
+    <resultMap id="MenusWithChildren" type="cn.geoportal.gmo.server.entity.SysMenu" extends="BaseResultMap">
+        <id column="id1" property="id" />
+        <result column="name1" property="name" />
+        <collection property="children" ofType="cn.geoportal.gmo.server.entity.SysMenu">
+            <id column="id2" property="id" />
+            <result column="name2" property="name" />
+            <collection property="children" ofType="cn.geoportal.gmo.server.entity.SysMenu">
+                <id column="id3" property="id" />
+                <result column="name3" property="name" />
+            </collection>
+        </collection>
+    </resultMap>
+
     <sql id="Base_Column_List">
         id,url,path,component,name,iconcls,keepalive,requireauth,parentid,enabled
     </sql>
@@ -92,5 +105,25 @@
         AND r.id = mr.role_id
       ORDER BY
         m.id
-  </select>
+    </select>
+
+    <!--查询所有菜单-->
+    <select id="getAllMenus" resultMap="MenusWithChildren">
+        SELECT
+            m1.id id1,
+            m1.name name1,
+            m2.id id2,
+            m2.name name2,
+            m3.id id3,
+            m3.name name3
+        FROM
+            t_sys_menu m1,
+            t_sys_menu m2,
+            t_sys_menu m3
+        WHERE
+            m1.id = m2.parentid
+            AND m2.id = m3.parentid
+            AND m3.enabled = 1
+    </select>
+
 </mapper>

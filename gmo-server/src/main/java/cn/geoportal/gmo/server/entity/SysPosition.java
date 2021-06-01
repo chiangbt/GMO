@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -14,6 +15,7 @@ import lombok.Data;
  * 
  * @TableName t_sys_position
  */
+@ApiModel(value = "职位对象")
 @TableName(value ="t_sys_position")
 @Data
 public class SysPosition implements Serializable {
@@ -22,7 +24,7 @@ public class SysPosition implements Serializable {
      */
     @TableId(value = "id", type = IdType.AUTO)
     @JSONField(ordinal = 0)
-    @ApiModelProperty(value = "id")
+    @ApiModelProperty(value = "id", required = false, hidden = true)
     private Long id;
 
     /**
@@ -36,7 +38,7 @@ public class SysPosition implements Serializable {
      * 
      */
     @JSONField(ordinal = 2)
-    @ApiModelProperty(value = "是否启用")
+    @ApiModelProperty(value = "是否启用", required = false, hidden = true)
     private Boolean enabled;
 
     /**
@@ -44,8 +46,7 @@ public class SysPosition implements Serializable {
      */
     @TableField(fill = FieldFill.INSERT)
     @JSONField(ordinal = 3)
-    @ApiModelProperty(value = "创建时间")
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Shanghai")
+    @ApiModelProperty(value = "创建时间", required = false, hidden = true)
     private Date createdat;
 
     @TableField(exist = false)

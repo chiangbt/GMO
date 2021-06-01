@@ -5,6 +5,7 @@ import cn.geoportal.gmo.server.entity.common.RespBean;
 import cn.geoportal.gmo.server.entity.vo.UserLogin;
 import cn.geoportal.gmo.server.service.SysUserService;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
+import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import io.swagger.annotations.Api;
@@ -31,8 +32,9 @@ import java.io.IOException;
  * @Description: 登录相关
  * @Date: 2021/5/31 10:12
  */
-@RestController
 @Api(tags = "权限模块")
+@ApiSupport(order = 330)    // 分组排序
+@RestController
 @RequestMapping("/api/auth")
 public class AuthController {
 
@@ -47,15 +49,21 @@ public class AuthController {
      * @param request
      * @return
      */
-    @ApiOperation(value = "登录返回token")
+    @ApiOperation(value = "用户登录")
     @PostMapping(value = "/login", consumes = "application/json", produces = "application/json")
     public RespBean login(@RequestBody UserLogin userLogin, HttpServletRequest request){
+        System.out.println("*************************************");
+        System.out.println(userLogin.getVerifycode());
         // token在login函数中生成
-        return sysUserService.login(userLogin.getUsername(), userLogin.getPassword(), userLogin.getKaptcha(), request);
+        return sysUserService.login(userLogin.getUsername(), userLogin.getPassword(), userLogin.getVerifycode(), request);
     }
 
 
-    @ApiOperation("获取当前登录用户的信息")
+    /**
+     * 获取登录信息
+     * @return
+     */
+    @ApiOperation("获取登录用户信息")
     @GetMapping("/user/info")
     public SysUser getUserInfo() {
         // 获取当前登录对象
@@ -86,6 +94,12 @@ public class AuthController {
     }
 
 
+    /**
+     * 获取验证码
+     * @param request
+     * @param response
+     * @throws IOException
+     */
     @ApiOperationSupport(order = 4)
     @ApiOperation(value = "获取验证码")
     @GetMapping(value = "/captcha", produces = "image/jpeg")

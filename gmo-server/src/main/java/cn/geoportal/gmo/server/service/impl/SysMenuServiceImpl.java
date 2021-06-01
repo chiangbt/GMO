@@ -55,6 +55,11 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     public List<SysMenu> getMenusWithRole() {
         return sysMenuMapper.getMenusWithRole();
     }
+
+    @Override
+    public List<SysMenu> getAllMenus() {
+        return sysMenuMapper.getAllMenus();
+    }
 }
 
 
