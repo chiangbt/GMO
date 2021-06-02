@@ -1,4 +1,4 @@
-package cn.geoportal.gmo.server.Utils;
+package cn.geoportal.gmo.server.utils;
 
 import cn.geoportal.gmo.server.entity.SysUser;
 import org.springframework.security.core.context.SecurityContextHolder;

@@ -57,4 +57,12 @@ public interface SysUserService extends IService<SysUser> {
      * @return
      */
     int deleteCustomer(Integer id);
+
+    /**
+     * 7、更新操作员角色
+     * @param userId
+     * @param rids
+     * @return
+     */
+    RespBean updateSysUserRole(Integer userId, Integer[] rids);
 }

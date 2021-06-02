@@ -53,13 +53,19 @@ public class CustomerController {
     public RespBean customerList(@RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,
                                  @RequestParam(value = "pageSize", defaultValue = "15") Integer pageSize,
                                  @RequestParam(value="name", defaultValue = "") String name){
+        // 翻页参数包装器
         QueryWrapper<Customer> wrapper = new QueryWrapper<>();
         wrapper.like("name", name);
         wrapper.orderByDesc("id");
+        // 翻页对象
         Page<Customer> ipage = new Page<>(pageNo, pageSize);
         try{
             IPage<Customer> users = customerService.selectPage(ipage, wrapper);
-            PageResult<?> pageResult = new PageResult<Customer>(users.getCurrent(), users.getSize(), users.getTotal(), users.getRecords());
+            PageResult<?> pageResult = new PageResult<Customer>(
+                    users.getCurrent(),
+                    users.getSize(),
+                    users.getTotal(),
+                    users.getRecords());
 
             return RespBean.success("获取成功", pageResult);
         }catch (Exception e){
@@ -112,6 +118,7 @@ public class CustomerController {
         List<Customer> customerList = customerService.selectByName(name);
         return RespBean.success("获取成功", customerList);
     }
+
 
     /**
      *

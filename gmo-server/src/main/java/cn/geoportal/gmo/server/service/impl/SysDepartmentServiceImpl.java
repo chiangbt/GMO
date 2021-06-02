@@ -37,7 +37,6 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
     @Override
     public RespBean deleteDepartment(Integer id) {
         Integer result = sysDepartmentMapper.delDep(id);
-        System.out.println(result);
         if (1 == result) {
             return RespBean.success("部门成功！", result);
         }

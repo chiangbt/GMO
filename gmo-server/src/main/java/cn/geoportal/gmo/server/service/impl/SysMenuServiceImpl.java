@@ -1,7 +1,6 @@
 package cn.geoportal.gmo.server.service.impl;
 
-import cn.geoportal.gmo.server.Utils.SysUserUtils;
-import cn.geoportal.gmo.server.entity.SysUser;
+import cn.geoportal.gmo.server.utils.SysUserUtils;
 import cn.geoportal.gmo.server.mapper.SysMenuMapper;
 import cn.geoportal.gmo.server.mapper.SysRoleMapper;
 import cn.geoportal.gmo.server.service.SysMenuService;
@@ -10,7 +9,6 @@ import cn.geoportal.gmo.server.entity.SysMenu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.CollectionUtils;
 import org.springframework.stereotype.Service;
 

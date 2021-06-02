@@ -13,4 +13,13 @@
     <sql id="Base_Column_List">
         id,user_id,role_id
     </sql>
+
+    <!-- 更新操作员角色 -->
+    <insert id="updateSysUserRole">
+        INSERT INTO t_sys_user_role(user_id, role_id) values 
+        <foreach collection="rids" item="rid" separator=",">
+            (#{userId}, #{rid})
+        </foreach>
+    </insert>
+
 </mapper>

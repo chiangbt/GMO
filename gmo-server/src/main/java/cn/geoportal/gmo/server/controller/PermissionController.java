@@ -89,8 +89,6 @@ public class PermissionController {
     @ApiOperation(value = "更新角色菜单")
     @PatchMapping(value = "/menuid/{rid}")
     public RespBean updatePostion(@PathVariable("rid") Integer rid, Integer[] mids){
-        System.out.println(rid);
-        System.out.println(mids);
         return sysMenuRoleService.updateMenuRole(rid, mids);
     }
 }

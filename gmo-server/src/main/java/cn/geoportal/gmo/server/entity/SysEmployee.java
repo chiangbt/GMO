@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 /**
@@ -34,6 +36,7 @@ public class SysEmployee implements Serializable {
     /**
      * 奖金
      */
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Aisa/Shanghai")
     private Date birthday;
 
     /**
@@ -114,6 +117,7 @@ public class SysEmployee implements Serializable {
     /**
      * 入职日期
      */
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Aisa/Shanghai")
     private Date begindate;
 
     /**
@@ -134,21 +138,25 @@ public class SysEmployee implements Serializable {
     /**
      * 转正日期
      */
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Aisa/Shanghai")
     private Date conversiontime;
 
     /**
      * 离职日期
      */
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Aisa/Shanghai")
     private Date notworkdate;
 
     /**
      * 合同起始日期
      */
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Aisa/Shanghai")
     private Date begincontract;
 
     /**
      * 合同终止日期
      */
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Aisa/Shanghai")
     private Date endcontract;
 
     /**

@@ -1,7 +1,9 @@
 package cn.geoportal.gmo.server.controller;
 
+import cn.geoportal.gmo.server.entity.SysRole;
 import cn.geoportal.gmo.server.entity.SysUser;
 import cn.geoportal.gmo.server.entity.common.RespBean;
+import cn.geoportal.gmo.server.service.SysRoleService;
 import cn.geoportal.gmo.server.service.SysUserService;
 import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import io.swagger.annotations.Api;
@@ -27,6 +29,8 @@ public class UserController {
 
     @Autowired
     private SysUserService sysUserService;
+    @Autowired
+    private SysRoleService sysRoleService;
 
     @ApiOperation(value = "操作员列表")
     @RequestMapping(value = "", method = RequestMethod.GET)
@@ -59,5 +63,17 @@ public class UserController {
         }catch (Exception exp){
             return RespBean.error("删除不成功");
         }
+    }
+
+    @ApiOperation(value = "获取所有角色")
+    @GetMapping(value = "/roles")
+    public List<SysRole> getAllRoles(){
+        return sysRoleService.list();
+    }
+
+    @ApiOperation(value = "更新操作员角色")
+    @PatchMapping(value = "/role/{userId}")
+    public RespBean updateSysUserRole(@PathVariable(value="userId") Integer userId, Integer[] rids){
+        return sysUserService.updateSysUserRole(userId, rids);
     }
 }

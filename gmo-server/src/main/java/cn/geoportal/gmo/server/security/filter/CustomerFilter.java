@@ -34,7 +34,7 @@ public class CustomerFilter implements FilterInvocationSecurityMetadataSource {
     public Collection<ConfigAttribute> getAttributes(Object o) throws IllegalArgumentException {
         // 获取请求的rul
         String requestUrl = ((FilterInvocation) o).getRequestUrl();
-        System.out.println(requestUrl);
+        System.out.println("request url:" + requestUrl);
         List<SysMenu> menus = menuService.getMenusWithRole();
         for (SysMenu menu : menus) {
             // 判断请求url与角色是否相配

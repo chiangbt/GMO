@@ -1,11 +1,12 @@
 package cn.geoportal.gmo.server.service.impl;
 
-import cn.geoportal.gmo.server.Utils.SysUserUtils;
+import cn.geoportal.gmo.server.utils.SysUserUtils;
 import cn.geoportal.gmo.server.config.security.JwtTokenUtil;
-import cn.geoportal.gmo.server.entity.SysMenu;
 import cn.geoportal.gmo.server.entity.SysRole;
+import cn.geoportal.gmo.server.entity.SysUserRole;
 import cn.geoportal.gmo.server.entity.common.RespBean;
 import cn.geoportal.gmo.server.mapper.SysRoleMapper;
+import cn.geoportal.gmo.server.mapper.SysUserRoleMapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.geoportal.gmo.server.entity.SysUser;
@@ -20,6 +21,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -38,6 +40,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     private SysRoleMapper sysRoleMapper;
     @Autowired
     private UserDetailsService userDetailsService;
+    @Autowired
+    private SysUserRoleMapper sysUserRoleMapper;
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
@@ -109,7 +113,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
      */
     @Override
     public List<SysUser> getAllSysUser(String keywords) {
-        System.out.println(keywords);
+//        System.out.println(keywords);
         return sysUserMapper.getAllSysUser(
                 SysUserUtils.getCurrentSysUser().getId(),
                 keywords
@@ -124,13 +128,32 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     public int updateSysUser(SysUser sysUser) {
         System.out.println(sysUser.getId());
-        System.out.println(sysUser.getUsername());
+        System.out.println(sysUser.getPhone());
         return sysUserMapper.updateById(sysUser);
     }
 
     @Override
     public int deleteCustomer(Integer id) {
         return sysUserMapper.deleteById(id);
+    }
+
+    /**
+     * 更新操作员角色
+     * @param userId
+     * @param rids
+     * @return
+     */
+    @Override
+    @Transactional
+    public RespBean updateSysUserRole(Integer userId, Integer[] rids) {
+        System.out.println(userId);
+        System.out.println(rids);
+        sysUserRoleMapper.delete(new QueryWrapper<SysUserRole>().eq("user_id", userId));
+        Integer result =  sysUserRoleMapper.updateSysUserRole(userId, rids);
+        if(rids.length == result){
+            return RespBean.success("更新操作员角色成功");
+        }
+        return RespBean.error("更新操作员角色失败");
     }
 
 }

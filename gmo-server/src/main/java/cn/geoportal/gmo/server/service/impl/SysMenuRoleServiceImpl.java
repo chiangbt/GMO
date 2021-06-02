@@ -22,7 +22,7 @@ public class SysMenuRoleServiceImpl extends ServiceImpl<SysMenuRoleMapper, SysMe
     @Override
     @Transactional
     public RespBean updateMenuRole(Integer rid, Integer[] mids) {
-        System.out.println(mids);
+//        System.out.println(mids);
         sysMenuRoleMapper.delete(new QueryWrapper<SysMenuRole>().eq("role_id", rid));
         if (null == mids || 0 == mids.length) {
             return RespBean.success("更新成功！");
