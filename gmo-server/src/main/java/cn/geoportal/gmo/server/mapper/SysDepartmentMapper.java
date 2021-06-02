@@ -29,6 +29,14 @@ public interface SysDepartmentMapper extends BaseMapper<SysDepartment> {
      * @return
      */
     Integer addDep(String depName, Integer parentId, Boolean enabled);
+
+
+    /**
+     * 3、删除部门
+     * @param did
+     * @return
+     */
+    Integer delDep(Integer did);
 }
 
 

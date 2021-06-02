@@ -11,7 +11,9 @@ import java.util.stream.Collectors;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -86,6 +88,7 @@ public class SysUser implements Serializable, UserDetails {
      */
     @ApiModelProperty(value = "是否激活")
     @JSONField(ordinal = 8)
+    @Getter(AccessLevel.NONE)
     private Boolean enabled;
 
     /**
@@ -146,7 +149,7 @@ public class SysUser implements Serializable, UserDetails {
             && (this.getPhone() == null ? other.getPhone() == null : this.getPhone().equals(other.getPhone()))
             && (this.getTelephone() == null ? other.getTelephone() == null : this.getTelephone().equals(other.getTelephone()))
             && (this.getAddress() == null ? other.getAddress() == null : this.getAddress().equals(other.getAddress()))
-            && (this.getEnabled() == null ? other.getEnabled() == null : this.getEnabled().equals(other.getEnabled()))
+//            && (this.getEnabled() == null ? other.getEnabled() == null : this.getEnabled().equals(other.getEnabled()))
             && (this.getUserface() == null ? other.getUserface() == null : this.getUserface().equals(other.getUserface()))
             && (this.getRemark() == null ? other.getRemark() == null : this.getRemark().equals(other.getRemark()))
             && (this.getCreatedat() == null ? other.getCreatedat() == null : this.getCreatedat().equals(other.getCreatedat()))
@@ -165,7 +168,7 @@ public class SysUser implements Serializable, UserDetails {
         result = prime * result + ((getPhone() == null) ? 0 : getPhone().hashCode());
         result = prime * result + ((getTelephone() == null) ? 0 : getTelephone().hashCode());
         result = prime * result + ((getAddress() == null) ? 0 : getAddress().hashCode());
-        result = prime * result + ((getEnabled() == null) ? 0 : getEnabled().hashCode());
+//        result = prime * result + ((getEnabled() == null) ? 0 : getEnabled().hashCode());
         result = prime * result + ((getUserface() == null) ? 0 : getUserface().hashCode());
         result = prime * result + ((getRemark() == null) ? 0 : getRemark().hashCode());
         result = prime * result + ((getCreatedat() == null) ? 0 : getCreatedat().hashCode());

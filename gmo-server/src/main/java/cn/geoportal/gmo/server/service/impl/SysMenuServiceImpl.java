@@ -1,5 +1,6 @@
 package cn.geoportal.gmo.server.service.impl;
 
+import cn.geoportal.gmo.server.Utils.SysUserUtils;
 import cn.geoportal.gmo.server.entity.SysUser;
 import cn.geoportal.gmo.server.mapper.SysMenuMapper;
 import cn.geoportal.gmo.server.mapper.SysRoleMapper;
@@ -35,7 +36,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     @Override
     public List<SysMenu> getMenusByUserId() {
         // 获取用户id
-        Long userId = ((SysUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+        Long userId = SysUserUtils.getCurrentSysUser().getId();
         ValueOperations<String, Object> valueOperations = redisTemplate.opsForValue();
         // 从redis获取菜单数据
         List<SysMenu> menus = (List<SysMenu>) valueOperations.get("menu_" + userId);

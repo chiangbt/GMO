@@ -40,4 +40,9 @@ public class DepartmentController {
         return sysDepartmentService.addDepartment(sysDepartment);
     }
 
+    @ApiOperation("删除部门")
+    @DeleteMapping("/{id}")
+    public RespBean deleteDepart(@PathVariable("id") Integer id) {
+        return sysDepartmentService.deleteDepartment(id);
+    }
 }

@@ -50,7 +50,6 @@ public class CustomerController {
             @ApiImplicitParam(name = "name",value = "名称", required = false, example = "")
     })
     @RequestMapping(value = "", method = RequestMethod.GET)
-//    @PreAuthorize(value = "hasAnyRole('ADMIN', 'USER')")
     public RespBean customerList(@RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,
                                  @RequestParam(value = "pageSize", defaultValue = "15") Integer pageSize,
                                  @RequestParam(value="name", defaultValue = "") String name){
@@ -83,7 +82,6 @@ public class CustomerController {
             @ApiImplicitParam(name = "name",value = "名称", required = false, example = "")
     })
     @RequestMapping(value="/compact", method = RequestMethod.GET)
-//    @PreAuthorize(value = "hasAnyRole('ADMIN', 'USER')")
     public RespBean compactCustomerList(@RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,
                                         @RequestParam(value = "pageSize", defaultValue = "3") Integer pageSize,
                                         @RequestParam(value="name", defaultValue = "") String name){
@@ -110,7 +108,6 @@ public class CustomerController {
             @ApiImplicitParam(name = "name",value = "名称", required = true, example = "")
     })
     @RequestMapping(value="/selectByName", method = RequestMethod.GET)
-//    @PreAuthorize(value = "hasAnyRole('ADMIN', 'USER')")
     public RespBean searchByName(@RequestParam("name") String name){
         List<Customer> customerList = customerService.selectByName(name);
         return RespBean.success("获取成功", customerList);
@@ -124,7 +121,6 @@ public class CustomerController {
     @ApiOperationSupport(order = 4)
     @ApiOperation(value = "新建一个Customer")
     @PostMapping(value = "", consumes = "application/json", produces = "application/json")
-//    @PreAuthorize(value = "hasAnyRole('ADMIN')")
     public RespBean addCustomer(@RequestBody Customer customer){
         try{
             int result = customerService.addCustomer(customer.getName(), customer.getAge(), customer.getAddress());
@@ -143,7 +139,6 @@ public class CustomerController {
     @ApiOperationSupport(order = 5)
     @ApiOperation(value = "获取指定id的Customer")
     @GetMapping(value = "/{id}", produces = "application/json")
-//    @PreAuthorize(value = "hasAnyRole('ADMIN', 'USER')")
     public RespBean getCustomerById(@PathVariable(value="id") Integer id){
         try{
             Customer customer = customerService.findCustomerById(id);
@@ -165,9 +160,8 @@ public class CustomerController {
      */
     @ApiOperationSupport(order = 6)
     @ApiOperation(value = "更新一个Customer")
-    @PatchMapping(value = "", consumes = "application/json", produces = "application/json")
-//    @PreAuthorize(value = "hasAnyRole('ADMIN')")
-    public RespBean updateCustomer(@RequestBody Customer customer, @PathVariable(value="id") Integer id){
+    @PatchMapping(value = "/{id}", produces = "application/json")
+    public RespBean updateCustomer(@PathVariable(value="id") Integer id, @RequestBody Customer customer){
         try{
             customer.setId(id);
             int result = customerService.updateCustomer(customer);
@@ -188,7 +182,6 @@ public class CustomerController {
     @ApiOperationSupport(order = 7)
     @ApiOperation(value = "删除指定id的Customer")
     @DeleteMapping(value = "/{id}", produces = "application/json")
-//    @PreAuthorize(value = "hasAnyRole('ADMIN')")
     public RespBean deleteCustomerById(@PathVariable(value="id") Integer id){
         try{
             int result = customerService.deleteCustomer(id);

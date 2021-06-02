@@ -18,7 +18,6 @@
                     ofType="cn.geoportal.gmo.server.entity.SysDepartment"
                     select="cn.geoportal.gmo.server.mapper.SysDepartmentMapper.getAllDepartments"
                     column="id">
-
         </collection>
     </resultMap>
 
@@ -36,11 +35,18 @@
         where parentid = #{parentId} order by id asc
     </select>
 
+    <!-- 调用adddepartment储存过程（过程名均为小写） -->
     <select id="addDep" resultType="integer" statementType = "CALLABLE">
         {
             call adddepartment(#{depName, mode=IN, jdbcType=VARCHAR},
                                #{parentId, mode=IN, jdbcType=INTEGER},
                                #{enabled, mode=IN, jdbcType=BOOLEAN})
+        }
+    </select>
+
+    <select id="delDep" resultType="integer" statementType="CALLABLE">
+        {
+            call deletedepartment(#{did,mode=IN,jdbcType=INTEGER})
         }
     </select>
 </mapper>

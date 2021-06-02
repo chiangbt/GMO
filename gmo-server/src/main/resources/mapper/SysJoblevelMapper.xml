@@ -5,11 +5,11 @@
 <mapper namespace="cn.geoportal.gmo.server.mapper.SysJoblevelMapper">
 
     <resultMap id="BaseResultMap" type="cn.geoportal.gmo.server.entity.SysJoblevel">
-            <id property="id" column="id" jdbcType="BIGINT"/>
-            <result property="name" column="name" jdbcType="VARCHAR"/>
-            <result property="titlelevel" column="titlelevel" jdbcType="VARCHAR"/>
-            <result property="enabled" column="enabled" jdbcType="BOOLEAN"/>
-            <result property="createdat" column="createdat" jdbcType="TIMESTAMP"/>
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="titlelevel" column="titlelevel" jdbcType="VARCHAR"/>
+        <result property="enabled" column="enabled" jdbcType="BOOLEAN"/>
+        <result property="createdat" column="createdat" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">

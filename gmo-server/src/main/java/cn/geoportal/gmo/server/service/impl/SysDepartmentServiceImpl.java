@@ -27,11 +27,27 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
     @Override
     public RespBean addDepartment(SysDepartment sysDepartment) {
         Integer result = sysDepartmentMapper.addDep(sysDepartment.getName(), sysDepartment.getParentid(), sysDepartment.getEnabled());
-        System.out.println(result);
+//        System.out.println(result);
         if (result != null) {
             return RespBean.success("添加成功！", result);
         }
         return RespBean.error("添加失败！");
+    }
+
+    @Override
+    public RespBean deleteDepartment(Integer id) {
+        Integer result = sysDepartmentMapper.delDep(id);
+        System.out.println(result);
+        if (1 == result) {
+            return RespBean.success("部门成功！", result);
+        }
+        if (result == -2) {
+            return RespBean.error("删除失败，该部门存在子部门！", result);
+        }
+        if (result == -1) {
+            return RespBean.error("删除失败，该部门存在员工！", result);
+        }
+        return RespBean.success("删除成功！", result);
     }
 }
 

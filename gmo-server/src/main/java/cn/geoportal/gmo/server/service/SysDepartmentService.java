@@ -23,4 +23,11 @@ public interface SysDepartmentService extends IService<SysDepartment> {
      * @return
      */
     RespBean addDepartment(SysDepartment sysDepartment);
+
+    /**
+     * 3、删除部门
+     * @param id
+     * @return
+     */
+    RespBean deleteDepartment(Integer id);
 }

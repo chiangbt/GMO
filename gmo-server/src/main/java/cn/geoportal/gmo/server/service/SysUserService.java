@@ -36,4 +36,25 @@ public interface SysUserService extends IService<SysUser> {
      * @return
      */
     List<SysRole> getRoles(Long userId);
+
+    /**
+     * 4、获取操作员用户
+     * @param keywords
+     * @return
+     */
+    List<SysUser> getAllSysUser(String keywords);
+
+    /**
+     * 5、更新操作员用户
+     * @param sysUser
+     * @return
+     */
+    int updateSysUser(SysUser sysUser);
+
+    /**
+     * 6、删除指定的操作员用户
+     * @param id
+     * @return
+     */
+    int deleteCustomer(Integer id);
 }

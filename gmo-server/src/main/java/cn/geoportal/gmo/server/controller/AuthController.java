@@ -52,8 +52,6 @@ public class AuthController {
     @ApiOperation(value = "用户登录")
     @PostMapping(value = "/login", consumes = "application/json", produces = "application/json")
     public RespBean login(@RequestBody UserLogin userLogin, HttpServletRequest request){
-        System.out.println("*************************************");
-        System.out.println(userLogin.getVerifycode());
         // token在login函数中生成
         return sysUserService.login(userLogin.getUsername(), userLogin.getPassword(), userLogin.getVerifycode(), request);
     }

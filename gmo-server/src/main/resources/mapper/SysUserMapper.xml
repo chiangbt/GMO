@@ -20,9 +20,35 @@
         <result property="updatedat" column="updatedat" jdbcType="TIMESTAMP"/>
     </resultMap>
 
+    <resultMap id="SysUserWithRole" type="cn.geoportal.gmo.server.entity.SysUser" extends="BaseResultMap">
+        <collection property="roles" ofType="cn.geoportal.gmo.server.entity.SysRole">
+            <id property="id" column="rid" jdbcType="BIGINT"/>
+            <result property="name" column="rname" jdbcType="VARCHAR"/>
+            <result property="namezh" column="rnamezh" jdbcType="VARCHAR"/>
+        </collection>
+    </resultMap>
+    
     <sql id="Base_Column_List">
         id,username,email,password,name,phone,
         telephone,address,enabled,userface,remark,createdat,updatedat
     </sql>
 
+    <select id="getAllSysUser" resultMap="SysUserWithRole">
+        SELECT
+            a.*,
+            r.id AS rid,
+            r.name as rname,
+            r.namezh as rnamezh
+        FROM
+            t_sys_user a
+            LEFT JOIN t_sys_user_role ar ON a.id = ar.user_id
+            LEFT JOIN t_sys_role r ON r.id = ar.role_id
+        WHERE
+            a.id != #{id}
+            <if test="null!=keywords and '' !=keywords">
+                AND a.username LIKE concat('%', #{keywords},'%')
+            </if>
+        ORDER BY
+            a.id
+    </select>
 </mapper>

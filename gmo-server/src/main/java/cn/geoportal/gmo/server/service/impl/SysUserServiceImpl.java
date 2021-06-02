@@ -1,5 +1,6 @@
 package cn.geoportal.gmo.server.service.impl;
 
+import cn.geoportal.gmo.server.Utils.SysUserUtils;
 import cn.geoportal.gmo.server.config.security.JwtTokenUtil;
 import cn.geoportal.gmo.server.entity.SysMenu;
 import cn.geoportal.gmo.server.entity.SysRole;
@@ -57,8 +58,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     public RespBean login(String username, String password, String code, HttpServletRequest request) {
         // 校验验证码
         String captcha = (String) request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
-        System.out.println("*************************************");
-        System.out.println(captcha);
         if ((code == null && code.length() == 0) || !code.equalsIgnoreCase(captcha)) {
             return RespBean.error("验证码输入错误，请重新输入！");
         }
@@ -101,6 +100,37 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     public List<SysRole> getRoles(Long userId) {
         return sysRoleMapper.getRoles(userId);
+    }
+
+    /**
+     * 获取操作员用户
+     * @param keywords
+     * @return
+     */
+    @Override
+    public List<SysUser> getAllSysUser(String keywords) {
+        System.out.println(keywords);
+        return sysUserMapper.getAllSysUser(
+                SysUserUtils.getCurrentSysUser().getId(),
+                keywords
+        );
+    }
+
+    /**
+     * 更新操作员用户
+     * @param sysUser
+     * @return
+     */
+    @Override
+    public int updateSysUser(SysUser sysUser) {
+        System.out.println(sysUser.getId());
+        System.out.println(sysUser.getUsername());
+        return sysUserMapper.updateById(sysUser);
+    }
+
+    @Override
+    public int deleteCustomer(Integer id) {
+        return sysUserMapper.deleteById(id);
     }
 
 }
