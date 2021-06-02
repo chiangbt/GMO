@@ -4,6 +4,8 @@ package cn.geoportal.gmo.server.controller;
 import cn.geoportal.gmo.server.entity.SysJoblevel;
 import cn.geoportal.gmo.server.entity.common.RespBean;
 import cn.geoportal.gmo.server.service.SysJoblevelService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -21,7 +23,7 @@ import java.util.List;
  * @Description: 职称模块
  * @Date: 2021/6/1 11:14
  */
-@Api(tags = "职称模块")
+@Api(tags = "6.职称模块")
 @ApiSupport(order = 308)
 @RestController
 @RequestMapping(value = "/system/basic/joblevel")
@@ -30,18 +32,21 @@ public class JoblevelController {
     @Autowired
     private SysJoblevelService sysJoblevelService;
 
+    @ApiOperationSupport(order = 1)
     @ApiOperation(value = "获取所有职称")
     @GetMapping("")
     public List<SysJoblevel> getAlJoblevel(){
-        return sysJoblevelService.list();
+        return sysJoblevelService.list(new QueryWrapper<SysJoblevel>().orderByDesc("id"));
     }
 
+    @ApiOperationSupport(order = 3)
     @ApiOperation(value = "获取职称")
     @GetMapping(value = "/{id}", produces = "application/json")
     public SysJoblevel getJoblevelById(@PathVariable(value="id") Integer id){
         return sysJoblevelService.findJoblevelById(id);
     }
 
+    @ApiOperationSupport(order = 2)
     @ApiOperation(value = "添加职称")
     @PostMapping(value = "", consumes = "application/json", produces = "application/json")
     public RespBean addJoblevel(@RequestBody SysJoblevel sysJoblevel){
@@ -53,6 +58,7 @@ public class JoblevelController {
         }
     }
 
+    @ApiOperationSupport(order = 4)
     @ApiOperation(value = "更新职称")
     @PatchMapping(value = "/{id}", consumes = "application/json", produces = "application/json")
     public RespBean updateJoblevel(@RequestBody SysJoblevel sysJoblevel, @PathVariable(value="id") Long id){
@@ -68,6 +74,7 @@ public class JoblevelController {
         }
     }
 
+    @ApiOperationSupport(order = 5)
     @ApiOperation(value = "删除职称")
     @DeleteMapping(value = "/{id}", produces = "application/json")
     public RespBean deleteJoblevelById(@PathVariable(value="id") Integer id){
@@ -82,8 +89,9 @@ public class JoblevelController {
         }
     }
 
+    @ApiOperationSupport(order = 6)
     @ApiOperation(value = "批量删除职称")
-    @DeleteMapping(value = "/")
+    @DeleteMapping(value = "")
     public RespBean deleteJoblevelByIds(Integer[] ids){
         if(sysJoblevelService.removeByIds(Arrays.asList(ids))){
             return RespBean.success("批量删除成功");

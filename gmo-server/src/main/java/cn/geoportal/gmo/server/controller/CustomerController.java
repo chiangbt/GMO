@@ -16,6 +16,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 /**
@@ -26,7 +27,7 @@ import java.util.Map;
  * @Description: 客户API
  * @Date: 2021/5/31 11:55
  */
-@Api(tags = "客户模块")
+@Api(tags = "1.客户模块")
 @ApiSupport(order = 302)    // 分组排序
 @RestController
 @RequestMapping("/api/customer")
@@ -196,5 +197,21 @@ public class CustomerController {
         }catch (Exception exp){
             return RespBean.error("删除不成功");
         }
+    }
+
+
+    /**
+     * http://127.0.0.1:3000/api/customer?ids=5,6,7,8,9,10,11,12
+     * @param ids
+     * @return
+     */
+    @ApiOperationSupport(order = 8)
+    @ApiOperation(value = "删除多条记录")
+    @DeleteMapping(value = "")
+    public RespBean deleteManyCustomerByIds(Integer[] ids){
+        if(customerService.removeByIds(Arrays.asList(ids))){
+            return RespBean.success("批量删除成功");
+        }
+        return RespBean.error("批量删除失败");
     }
 }

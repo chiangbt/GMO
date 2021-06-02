@@ -21,7 +21,7 @@ import java.util.List;
  * @Description: 菜单模块
  * @Date: 2021/5/31 12:57
  */
-@Api(tags = "菜单模块")
+@Api(tags = "4.菜单模块")
 @ApiSupport(order = 306)    // 分组排序
 @RestController
 @RequestMapping("/api/menu")
@@ -30,7 +30,7 @@ public class MenuController {
     @Autowired
     private SysMenuService sysMenuService;
 
-    @ApiOperation(value = "通过用户id获取菜单列表")
+    @ApiOperation(value = "登录用户可访问菜单列表")
     @GetMapping("/menu")
     public List<SysMenu> getMenuByUserId(){
         return sysMenuService.getMenusByUserId();

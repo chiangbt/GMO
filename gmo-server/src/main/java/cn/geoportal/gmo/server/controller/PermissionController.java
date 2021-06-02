@@ -9,6 +9,7 @@ import cn.geoportal.gmo.server.service.SysMenuRoleService;
 import cn.geoportal.gmo.server.service.SysMenuService;
 import cn.geoportal.gmo.server.service.SysRoleService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,7 +27,7 @@ import java.util.stream.Collectors;
  * @Description: 权限组模块
  * @Date: 2021/6/1 11:29
  */
-@Api(tags = "权限组模块")
+@Api(tags = "7.权限组模块")
 @ApiSupport(order = 309)
 @RestController
 @RequestMapping(value = "/system/basic/permission")
@@ -39,12 +40,14 @@ public class PermissionController {
     @Autowired
     private SysMenuRoleService sysMenuRoleService;
 
+    @ApiOperationSupport(order = 1)
     @ApiOperation(value = "获取所有角色")
     @GetMapping("")
     public List<SysRole> getAllRoles(){
-        return sysRoleService.list();
+        return sysRoleService.list(new QueryWrapper<SysRole>().orderByDesc("id"));
     }
 
+    @ApiOperationSupport(order = 3)
     @ApiOperation(value = "添加角色")
     @PostMapping(value = "/role", consumes = "application/json", produces = "application/json")
     public RespBean addRole(@RequestBody SysRole sysRole){
@@ -59,6 +62,7 @@ public class PermissionController {
         }
     }
 
+    @ApiOperationSupport(order = 6)
     @ApiOperation(value = "删除角色")
     @DeleteMapping(value = "/role/{rid}", produces = "application/json")
     public RespBean deleteRoleById(@PathVariable(value="rid") Integer rid){
@@ -73,12 +77,14 @@ public class PermissionController {
         }
     }
 
+    @ApiOperationSupport(order = 2)
     @ApiOperation("查询所有菜单")
     @GetMapping(value = "/menus")
     public List<SysMenu> getAllMenus() {
         return sysMenuService.getAllMenus();
     }
 
+    @ApiOperationSupport(order = 4)
     @ApiOperation("根据角色id查询菜单id")
     @GetMapping("/menuid/{rid}")
     public List<Long> getMenuidByRid(@PathVariable("rid") Integer rid) {
@@ -86,6 +92,7 @@ public class PermissionController {
         return sysMenuRoleService.list(new QueryWrapper<SysMenuRole>().eq("role_id", rid)).stream().map(SysMenuRole::getMenuId).collect(Collectors.toList());
     }
 
+    @ApiOperationSupport(order = 5)
     @ApiOperation(value = "更新角色菜单")
     @PatchMapping(value = "/menuid/{rid}")
     public RespBean updatePostion(@PathVariable("rid") Integer rid, Integer[] mids){

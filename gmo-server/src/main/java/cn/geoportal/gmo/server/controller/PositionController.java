@@ -3,6 +3,8 @@ package cn.geoportal.gmo.server.controller;
 import cn.geoportal.gmo.server.entity.SysPosition;
 import cn.geoportal.gmo.server.entity.common.RespBean;
 import cn.geoportal.gmo.server.service.SysPositionService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -16,7 +18,7 @@ import java.util.List;
  * @author: chiangbt@geoportal.cn
  * @CreatedAt: 2021/6/1 9:17 上午
  **/
-@Api(tags = "职位模块")
+@Api(tags = "5.职位模块")
 @ApiSupport(order = 307)
 @RestController
 @RequestMapping(value = "/system/basic/position")
@@ -25,18 +27,21 @@ public class PositionController {
     @Autowired
     private SysPositionService sysPositionService;
 
+    @ApiOperationSupport(order = 1)
     @ApiOperation(value = "获取所有职位")
     @GetMapping("")
     public List<SysPosition> getAllPostion(){
-        return sysPositionService.list();
+        return sysPositionService.list(new QueryWrapper<SysPosition>().orderByDesc("id"));
     }
 
+    @ApiOperationSupport(order = 3)
     @ApiOperation(value = "获取职位")
     @GetMapping(value = "/{id}", produces = "application/json")
     public SysPosition getPositionById(@PathVariable(value="id") Integer id){
         return sysPositionService.findPositionById(id);
     }
 
+    @ApiOperationSupport(order = 2)
     @ApiOperation(value = "添加职位")
     @PostMapping(value = "", consumes = "application/json", produces = "application/json")
     public RespBean addPosition(@RequestBody SysPosition sysPosition){
@@ -48,6 +53,7 @@ public class PositionController {
         }
     }
 
+    @ApiOperationSupport(order = 4)
     @ApiOperation(value = "更新职位")
     @PatchMapping(value = "/{id}", consumes = "application/json", produces = "application/json")
     public RespBean updatePostion(@RequestBody SysPosition sysPosition, @PathVariable(value="id") Long id){
@@ -63,6 +69,7 @@ public class PositionController {
         }
     }
 
+    @ApiOperationSupport(order = 5)
     @ApiOperation(value = "删除职位")
     @DeleteMapping(value = "/{id}", produces = "application/json")
     public RespBean deletePositionById(@PathVariable(value="id") Integer id){
@@ -77,8 +84,9 @@ public class PositionController {
         }
     }
 
+    @ApiOperationSupport(order = 6)
     @ApiOperation(value = "批量删除职位")
-    @DeleteMapping(value = "/")
+    @DeleteMapping(value = "")
     public RespBean deletePostionsByIds(Integer[] ids){
         if(sysPositionService.removeByIds(Arrays.asList(ids))){
             return RespBean.success("批量删除成功");

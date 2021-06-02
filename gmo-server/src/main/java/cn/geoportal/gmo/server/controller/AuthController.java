@@ -33,7 +33,7 @@ import java.io.IOException;
  * @Date: 2021/5/31 10:12
  */
 @Api(tags = "权限模块")
-@ApiSupport(order = 330)    // 分组排序
+@ApiSupport(order = 350)    // 分组排序
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -61,7 +61,7 @@ public class AuthController {
      * 获取登录信息
      * @return
      */
-    @ApiOperation("获取登录用户信息")
+    @ApiOperation("登录操作员信息")
     @GetMapping("/user/info")
     public SysUser getUserInfo() {
         // 获取当前登录对象

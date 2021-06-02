@@ -35,6 +35,7 @@ public class CustomerFilter implements FilterInvocationSecurityMetadataSource {
         // 获取请求的rul
         String requestUrl = ((FilterInvocation) o).getRequestUrl();
         System.out.println("request url:" + requestUrl);
+        // 获取所有的菜单-角色
         List<SysMenu> menus = menuService.getMenusWithRole();
         for (SysMenu menu : menus) {
             // 判断请求url与角色是否相配

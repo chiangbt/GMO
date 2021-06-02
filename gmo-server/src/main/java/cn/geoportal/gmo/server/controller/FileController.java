@@ -25,7 +25,7 @@ import java.util.Date;
  * @Description: 文件上传模块
  * @Date: 2021/5/31 14:37
  */
-@Api(tags = "文件模块")
+@Api(tags = "2.文件模块")
 @ApiSupport(order = 303)
 @RestController
 @RequestMapping("/api/file")
@@ -36,6 +36,13 @@ public class FileController {
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_");
 
+    /**
+     *
+     * @param file
+     * @return
+     * @throws IOException
+     * @throws FileNotFoundException
+     */
     @ApiOperation(value = "文件上传", nickname = "将文件上传至服务器的静态文件夹中")
     @PostMapping("/upload")
     @PreAuthorize(value = "hasAnyRole('ADMIN', 'USER')")
@@ -64,8 +71,13 @@ public class FileController {
         return RespBean.error("文件未设置或上传失败");
     }
 
+    /**
+     * 
+     * @return
+     * @throws FileNotFoundException
+     */
     @ApiOperation(value = "静态目录", nickname = "获取服务器静态服务器文件夹的实际目录")
-    @RequestMapping(value="/static_path", method = RequestMethod.GET)
+    @RequestMapping(value="/upload_path", method = RequestMethod.GET)
     @PreAuthorize(value = "hasRole('ADMIN')")
     public RespBean getStaticPath() throws FileNotFoundException {
         File path2 = new File(ResourceUtils.getURL("classpath:").getPath());
