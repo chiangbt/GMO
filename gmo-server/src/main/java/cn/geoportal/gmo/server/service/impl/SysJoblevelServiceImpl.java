@@ -1,9 +1,9 @@
 package cn.geoportal.gmo.server.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.geoportal.gmo.server.entity.SysJoblevel;
-import cn.geoportal.gmo.server.service.SysJoblevelService;
 import cn.geoportal.gmo.server.mapper.SysJoblevelMapper;
+import cn.geoportal.gmo.server.service.SysJoblevelService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  *
  */
 @Service
-public class SysJoblevelServiceImpl extends ServiceImpl<SysJoblevelMapper, SysJoblevel> implements SysJoblevelService{
+public class SysJoblevelServiceImpl extends ServiceImpl<SysJoblevelMapper, SysJoblevel> implements SysJoblevelService {
 
     @Autowired
     private SysJoblevelMapper sysJoblevelMapper;

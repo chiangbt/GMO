@@ -3,7 +3,6 @@ package cn.geoportal.gmo.server.controller;
 import cn.geoportal.gmo.server.entity.SysRole;
 import cn.geoportal.gmo.server.entity.SysUser;
 import cn.geoportal.gmo.server.entity.common.RespBean;
-import cn.geoportal.gmo.server.entity.vo.SysUserUpdate;
 import cn.geoportal.gmo.server.service.SysRoleService;
 import cn.geoportal.gmo.server.service.SysUserService;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;

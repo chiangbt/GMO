@@ -1,7 +1,7 @@
 package cn.geoportal.gmo.server.service.impl;
 
-import cn.geoportal.gmo.server.entity.common.RespBean;
 import cn.geoportal.gmo.server.entity.vo.SysEmployeeSearch;
+import cn.geoportal.gmo.server.entity.common.RespBean;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -12,8 +12,6 @@ import cn.geoportal.gmo.server.mapper.SysEmployeeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.xml.crypto.Data;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -49,6 +47,11 @@ public class SysEmployeeServiceImpl extends ServiceImpl<SysEmployeeMapper, SysEm
     @Override
     public List<SysEmployee> getEmployee(Integer id) {
         return sysEmployeeMapper.getEmployee(id);
+    }
+
+    @Override
+    public int deletePosition(Integer id) {
+        return sysEmployeeMapper.deleteById(id);
     }
 }
 

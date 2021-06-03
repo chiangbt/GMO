@@ -2,7 +2,6 @@ package cn.geoportal.gmo.server.controller;
 
 import cn.geoportal.gmo.server.entity.SysMenu;
 import cn.geoportal.gmo.server.entity.SysMenuRole;
-import cn.geoportal.gmo.server.entity.SysPosition;
 import cn.geoportal.gmo.server.entity.SysRole;
 import cn.geoportal.gmo.server.entity.common.RespBean;
 import cn.geoportal.gmo.server.service.SysMenuRoleService;

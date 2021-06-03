@@ -2,7 +2,6 @@ package cn.geoportal.gmo.server.controller;
 
 import cn.geoportal.gmo.server.entity.SysMenu;
 import cn.geoportal.gmo.server.service.SysMenuService;
-import cn.geoportal.gmo.server.service.SysUserService;
 import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

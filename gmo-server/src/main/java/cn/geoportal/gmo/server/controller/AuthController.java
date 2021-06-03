@@ -1,8 +1,8 @@
 package cn.geoportal.gmo.server.controller;
 
+import cn.geoportal.gmo.server.entity.vo.UserLogin;
 import cn.geoportal.gmo.server.entity.SysUser;
 import cn.geoportal.gmo.server.entity.common.RespBean;
-import cn.geoportal.gmo.server.entity.vo.UserLogin;
 import cn.geoportal.gmo.server.service.SysUserService;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.github.xiaoymin.knife4j.annotations.ApiSupport;

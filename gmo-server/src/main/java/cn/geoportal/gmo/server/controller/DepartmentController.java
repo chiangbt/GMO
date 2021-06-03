@@ -1,8 +1,8 @@
 package cn.geoportal.gmo.server.controller;
 
 import cn.geoportal.gmo.server.entity.SysDepartment;
-import cn.geoportal.gmo.server.entity.common.RespBean;
 import cn.geoportal.gmo.server.service.SysDepartmentService;
+import cn.geoportal.gmo.server.entity.common.RespBean;
 import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

@@ -1,8 +1,8 @@
 package cn.geoportal.gmo.server.security.filter;
 
 import cn.geoportal.gmo.server.entity.SysMenu;
-import cn.geoportal.gmo.server.entity.SysRole;
 import cn.geoportal.gmo.server.service.SysMenuService;
+import cn.geoportal.gmo.server.entity.SysRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;

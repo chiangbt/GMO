@@ -5,9 +5,9 @@ import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
 import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
 import cn.geoportal.gmo.server.entity.*;
+import cn.geoportal.gmo.server.entity.vo.SysEmployeeSearch;
 import cn.geoportal.gmo.server.entity.common.PageResult;
 import cn.geoportal.gmo.server.entity.common.RespBean;
-import cn.geoportal.gmo.server.entity.vo.SysEmployeeSearch;
 import cn.geoportal.gmo.server.service.*;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -151,6 +151,21 @@ public class EmployeeController {
             e.printStackTrace();
         }finally {
             out.close();
+        }
+    }
+
+    @ApiOperation(value = "删除雇员")
+    @ApiOperationSupport(order = 9)
+    @DeleteMapping(value = "/{id}", produces = "application/json")
+    public RespBean deleteEmployee(@PathVariable(value="id") Integer id){
+        try{
+            int result = sysEmployeeService.deletePosition(id);
+            if(0 == result){
+                return RespBean.error("需要删除的对象不存在");
+            }
+            return RespBean.success("删除成功", result);
+        }catch (Exception exp){
+            return RespBean.error("删除不成功");
         }
     }
 }
