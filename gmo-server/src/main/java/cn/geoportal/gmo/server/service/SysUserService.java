@@ -4,6 +4,7 @@ import cn.geoportal.gmo.server.entity.SysMenu;
 import cn.geoportal.gmo.server.entity.SysRole;
 import cn.geoportal.gmo.server.entity.SysUser;
 import cn.geoportal.gmo.server.entity.common.RespBean;
+import cn.geoportal.gmo.server.entity.vo.SysUserUpdate;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import javax.servlet.http.HttpServletRequest;

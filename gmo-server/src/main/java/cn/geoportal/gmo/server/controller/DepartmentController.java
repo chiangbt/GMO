@@ -19,7 +19,7 @@ import java.util.List;
  * @Description: 部门模块
  * @Date: 2021/6/1 15:43
  */
-@Api(tags = "部门模块")
+@Api(tags = "8.部门模块")
 @ApiSupport(order = 310)
 @RestController
 @RequestMapping(value = "/system/basic/department")

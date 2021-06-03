@@ -40,6 +40,10 @@ public class PermissionController {
     @Autowired
     private SysMenuRoleService sysMenuRoleService;
 
+    /**
+     *
+     * @return
+     */
     @ApiOperationSupport(order = 1)
     @ApiOperation(value = "获取所有角色")
     @GetMapping("")
@@ -47,6 +51,11 @@ public class PermissionController {
         return sysRoleService.list(new QueryWrapper<SysRole>().orderByDesc("id"));
     }
 
+    /**
+     *
+     * @param sysRole
+     * @return
+     */
     @ApiOperationSupport(order = 3)
     @ApiOperation(value = "添加角色")
     @PostMapping(value = "/role", consumes = "application/json", produces = "application/json")
@@ -62,6 +71,11 @@ public class PermissionController {
         }
     }
 
+    /**
+     *
+     * @param rid
+     * @return
+     */
     @ApiOperationSupport(order = 6)
     @ApiOperation(value = "删除角色")
     @DeleteMapping(value = "/role/{rid}", produces = "application/json")
@@ -77,6 +91,10 @@ public class PermissionController {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     @ApiOperationSupport(order = 2)
     @ApiOperation("查询所有菜单")
     @GetMapping(value = "/menus")
@@ -84,6 +102,11 @@ public class PermissionController {
         return sysMenuService.getAllMenus();
     }
 
+    /**
+     *
+     * @param rid
+     * @return
+     */
     @ApiOperationSupport(order = 4)
     @ApiOperation("根据角色id查询菜单id")
     @GetMapping("/menuid/{rid}")
@@ -92,6 +115,12 @@ public class PermissionController {
         return sysMenuRoleService.list(new QueryWrapper<SysMenuRole>().eq("role_id", rid)).stream().map(SysMenuRole::getMenuId).collect(Collectors.toList());
     }
 
+    /**
+     *
+     * @param rid
+     * @param mids
+     * @return
+     */
     @ApiOperationSupport(order = 5)
     @ApiOperation(value = "更新角色菜单")
     @PatchMapping(value = "/menuid/{rid}")

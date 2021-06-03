@@ -3,7 +3,8 @@
 /.idea/
 /.settings/
 /.vscode/
-/bin/
+/bin
+/node_modules/
 
 .classpath
 .project

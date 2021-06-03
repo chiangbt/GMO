@@ -39,12 +39,14 @@ public class Knife4jConfig {
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
+                .groupName("default")
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("cn.geoportal.gmo.server.controller"))
                 .paths(PathSelectors.any())
                 .build()
                 .securityContexts(securityContexts())
                 .securitySchemes(securitySchemes())
+                .extensions(openApiExtensionResolver.buildExtensions("default"))
                 .extensions(openApiExtensionResolver.buildSettingExtensions());
     }
 

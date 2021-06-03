@@ -1,6 +1,6 @@
 package cn.geoportal.gmo.server.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -23,6 +23,7 @@ public class SysNation implements Serializable {
     /**
      * 民族
      */
+    @Excel(name = "民族")
     private String name;
 
     @TableField(exist = false)

@@ -3,8 +3,10 @@ package cn.geoportal.gmo.server.controller;
 import cn.geoportal.gmo.server.entity.SysRole;
 import cn.geoportal.gmo.server.entity.SysUser;
 import cn.geoportal.gmo.server.entity.common.RespBean;
+import cn.geoportal.gmo.server.entity.vo.SysUserUpdate;
 import cn.geoportal.gmo.server.service.SysRoleService;
 import cn.geoportal.gmo.server.service.SysUserService;
+import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -21,8 +23,8 @@ import java.util.List;
  * @Description: 操作员管理
  * @Date: 2021/6/2 14:35
  */
-@Api(tags = "操作用户模块")
-@ApiSupport(order = 329)
+@Api(tags = "9.操作用户模块")
+@ApiSupport(order = 311)
 @RestController
 @RequestMapping("/system/admin")
 public class UserController {
@@ -32,6 +34,7 @@ public class UserController {
     @Autowired
     private SysRoleService sysRoleService;
 
+    @ApiOperationSupport(order = 1)
     @ApiOperation(value = "操作员列表")
     @RequestMapping(value = "", method = RequestMethod.GET)
     public List<SysUser> getAllSysUser(String keywords){
@@ -65,6 +68,7 @@ public class UserController {
         }
     }
 
+    @ApiOperationSupport(order = 2)
     @ApiOperation(value = "获取所有角色")
     @GetMapping(value = "/roles")
     public List<SysRole> getAllRoles(){

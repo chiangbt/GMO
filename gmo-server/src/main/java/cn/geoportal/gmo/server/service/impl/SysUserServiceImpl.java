@@ -1,5 +1,6 @@
 package cn.geoportal.gmo.server.service.impl;
 
+import cn.geoportal.gmo.server.entity.vo.SysUserUpdate;
 import cn.geoportal.gmo.server.utils.SysUserUtils;
 import cn.geoportal.gmo.server.config.security.JwtTokenUtil;
 import cn.geoportal.gmo.server.entity.SysRole;
@@ -129,6 +130,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     public int updateSysUser(SysUser sysUser) {
         System.out.println(sysUser.getId());
         System.out.println(sysUser.getPhone());
+
         return sysUserMapper.updateById(sysUser);
     }
 

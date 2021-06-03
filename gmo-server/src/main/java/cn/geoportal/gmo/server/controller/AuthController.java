@@ -32,8 +32,8 @@ import java.io.IOException;
  * @Description: 登录相关
  * @Date: 2021/5/31 10:12
  */
-@Api(tags = "权限模块")
-@ApiSupport(order = 350)    // 分组排序
+@Api(tags = "0.权限模块")
+@ApiSupport(order = 301)    // 分组排序
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -44,56 +44,7 @@ public class AuthController {
     private DefaultKaptcha defaultKaptcha;
 
     /**
-     * 用户登录并返回token
-     * @param userLogin
-     * @param request
-     * @return
-     */
-    @ApiOperation(value = "用户登录")
-    @PostMapping(value = "/login", consumes = "application/json", produces = "application/json")
-    public RespBean login(@RequestBody UserLogin userLogin, HttpServletRequest request){
-        // token在login函数中生成
-        return sysUserService.login(userLogin.getUsername(), userLogin.getPassword(), userLogin.getVerifycode(), request);
-    }
-
-
-    /**
-     * 获取登录信息
-     * @return
-     */
-    @ApiOperation("登录操作员信息")
-    @GetMapping("/user/info")
-    public SysUser getUserInfo() {
-        // 获取当前登录对象
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if(null == userDetails) {
-            return null;
-        }
-        // 获取当前登录对象的username
-        String username = userDetails.getUsername();
-        // 获取完整的用户对象
-        SysUser sysUser = sysUserService.getUserByUserName(username);
-        // 保护密码
-        sysUser.setPassword(null);
-        // 获取该用户的角色信息
-        sysUser.setRoles(sysUserService.getRoles(sysUser.getId()));
-        return sysUser;
-    }
-
-
-    /**
-     * 返回成功即可，具体实现在前端进行，因为使用token，退出时在前端把tokenHead删除就行了
-     * @return
-     */
-    @ApiOperation("退出登录")
-    @PostMapping("/logout")
-    public RespBean logout() {
-        return RespBean.success("注销成功！");
-    }
-
-
-    /**
-     * 获取验证码
+     * 1、获取验证码
      * @param request
      * @param response
      * @throws IOException
@@ -117,4 +68,54 @@ public class AuthController {
         ImageIO.write(image, "jpg", os);
         IOUtils.closeQuietly(os);
     }
+
+
+    /**
+     * 2、用户登录并返回token
+     * @param userLogin
+     * @param request
+     * @return
+     */
+    @ApiOperation(value = "用户登录")
+    @PostMapping(value = "/login", consumes = "application/json", produces = "application/json")
+    public RespBean login(@RequestBody UserLogin userLogin, HttpServletRequest request){
+        // token在login函数中生成
+        return sysUserService.login(userLogin.getUsername(), userLogin.getPassword(), userLogin.getVerifycode(), request);
+    }
+
+
+    /**
+     * 3、获取登录信息
+     * @return
+     */
+    @ApiOperation("登录操作员信息")
+    @GetMapping("/user/info")
+    public SysUser getUserInfo() {
+        // 获取当前登录对象
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(null == userDetails) {
+            return null;
+        }
+        // 获取当前登录对象的username
+        String username = userDetails.getUsername();
+        // 获取完整的用户对象
+        SysUser sysUser = sysUserService.getUserByUserName(username);
+        // 保护密码
+        sysUser.setPassword(null);
+        // 获取该用户的角色信息
+        sysUser.setRoles(sysUserService.getRoles(sysUser.getId()));
+        return sysUser;
+    }
+
+
+    /**
+     * 4、返回成功即可，具体实现在前端进行，因为使用token，退出时在前端把tokenHead删除就行了
+     * @return
+     */
+    @ApiOperation("退出登录")
+    @PostMapping("/logout")
+    public RespBean logout() {
+        return RespBean.success("注销成功！");
+    }
+
 }

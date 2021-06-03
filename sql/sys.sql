@@ -17,11 +17,10 @@ CREATE TABLE t_sys_user  (
   createdAt  timestamp(3) NOT NULL DEFAULT (CURRENT_TIMESTAMP),
   updatedAt  timestamp(3) NOT NULL DEFAULT (CURRENT_TIMESTAMP)
 );
-COMMENT ON table t_sys_user is '角色表';
+COMMENT ON table  t_sys_user is '角色表';
 COMMENT ON COLUMN t_sys_user.id is 'ID';
 COMMENT ON COLUMN t_sys_user.name is '用户名';
 COMMENT ON COLUMN t_sys_user.username is '登录名';
-
 -- SQLINES DEMO *** -----------
 INSERT INTO t_sys_user(username,email,password) VALUES ('admin' , 'admin@sleeep.io','$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe');
 INSERT INTO t_sys_user(username,email,password) VALUES ('user1', 'xx@cn.cn', '$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe');
@@ -33,21 +32,20 @@ INSERT INTO t_sys_user(username,email,password) VALUES ('chiangbt2', 'xx42@cn.cn
 INSERT INTO t_sys_user(username,email,password) VALUES ('jiangbotao', 'xx43@cn.cn', '$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe');
 
 
-
 /**
   2、角色表
  */
 DROP TABLE IF EXISTS t_sys_role;
 CREATE TABLE t_sys_role(
-  id     BIGSERIAL primary key,
-  name   VARCHAR(50) null default null,
-  nameZh VARCHAR(50) null default null
+  id     BIGSERIAL PRIMARY KEY,
+  name   VARCHAR(50) NULL DEFAULT NULL,
+  nameZh VARCHAR(50) NULL DEFAULT NULL
 );
-COMMENT ON TABLE t_sys_role is '角色表';
+COMMENT ON TABLE  t_sys_role is '角色表';
 COMMENT ON COLUMN t_sys_role.id is 'ID';
 COMMENT ON COLUMN t_sys_role.name is '角色名称';
 COMMENT ON COLUMN t_sys_role.nameZh is '角色中文名';
-
+-- SQLINES DEMO *** -----------
 INSERT INTO t_sys_role(name, nameZh) VALUES ('ROLE_manager', '部门经理');
 INSERT INTO t_sys_role(name, nameZh) VALUES ('ROLE_personnel', '人事专员');
 INSERT INTO t_sys_role(name, nameZh) VALUES ('ROLE_recruiter', '招聘主管');
@@ -57,21 +55,20 @@ INSERT INTO t_sys_role(name, nameZh) VALUES ('ROLE_admin', '系统管理员');
 INSERT INTO t_sys_role(name, nameZh) VALUES ('ROLE_test', '测试角色');
 
 
-
 /**
   3、用户角色表
  */
 DROP TABLE IF EXISTS t_sys_user_role;
 CREATE TABLE t_sys_user_role(
-  id       BIGSERIAL primary key,
+  id       BIGSERIAL PRIMARY KEY,
   user_id  BIGINT NULL,
   role_id  BIGINT NULL
 );
-COMMENT ON TABLE t_sys_user_role is '用户权限表';
+COMMENT ON TABLE  t_sys_user_role is '用户权限表';
 COMMENT ON COLUMN t_sys_user_role.id is 'ID';
 COMMENT ON COLUMN t_sys_user_role.user_id is '用户id';
 COMMENT ON COLUMN t_sys_user_role.role_id is '权限id';
-
+-- SQLINES DEMO *** -----------
 INSERT INTO t_sys_user_role(user_id, role_id) VALUES (1, 6);
 INSERT INTO t_sys_user_role(user_id, role_id) VALUES (5, 4);
 INSERT INTO t_sys_user_role(user_id, role_id) VALUES (5, 3);
@@ -86,24 +83,23 @@ INSERT INTO t_sys_user_role(user_id, role_id) VALUES (2, 3);
 INSERT INTO t_sys_user_role(user_id, role_id) VALUES (2, 4);
 
 
-
 /**
-  菜单表
+  4、菜单表
  */
 DROP TABLE IF EXISTS t_sys_menu;
 CREATE TABLE t_sys_menu(
-    id          BIGSERIAL primary key,
+    id          BIGSERIAL PRIMARY KEY,
     url         varchar(64) NULL DEFAULT NULL,
     path        varchar(64) NULL DEFAULT NULL,
     component   varchar(64) NULL DEFAULT NULL,
     name        varchar(64) NULL DEFAULT NULL,
     iconCls     varchar(64) NULL DEFAULT NULL,
-    keepAlive   BIGINT default 0,
-    requireAuth BIGINT default 0,
-    parentId    BIGINT null default null,
-    enabled     BIGINT default 0
+    keepAlive   BIGINT DEFAULT 0,
+    requireAuth BIGINT DEFAULT 0,
+    parentId    BIGINT NULL DEFAULT NULL,
+    enabled     BIGINT DEFAULT 0
 );
-COMMENT ON TABLE t_sys_menu is '菜单表';
+COMMENT ON TABLE  t_sys_menu is '菜单表';
 COMMENT ON COLUMN t_sys_menu.url is 'url';
 COMMENT ON COLUMN t_sys_menu.path is 'path';
 COMMENT ON COLUMN t_sys_menu.component is '组件';
@@ -113,7 +109,7 @@ COMMENT ON COLUMN t_sys_menu.keepAlive is '是否保持激活';
 COMMENT ON COLUMN t_sys_menu.requireAuth is '是否要求权限';
 COMMENT ON COLUMN t_sys_menu.parentId is '父id';
 COMMENT ON COLUMN t_sys_menu.enabled is '是否启用';
-
+-- SQLINES DEMO *** -----------
 INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled) VALUES ('/', NULL, NULL, '所有', NULL, NULL, NULL, NULL, 1);
 INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled) VALUES ('/', '/home', 'Home', '员工资料', 'fa fa-user-circle-o', NULL, 1, 1, 1);
 INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled) VALUES ('/', '/home', 'Home', '人事管理', 'fa fa-address-card-o', NULL, 1, 1, 1);
@@ -144,21 +140,20 @@ INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,par
 INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled) VALUES ('/system/init/**', '/sys/init', 'SysInit', '初始化数据库', NULL, NULL, 1, 6, 1);
 
 
-
 /**
-  菜单角色表
+  5、菜单角色表
  */
 DROP TABLE IF EXISTS t_sys_menu_role;
 CREATE TABLE t_sys_menu_role(
-    id       BIGSERIAL primary key,
+    id       BIGSERIAL PRIMARY KEY,
     menu_id  BIGINT NULL,
     role_id  BIGINT NULL
 );
-COMMENT ON TABLE t_sys_menu_role is '菜单权限表';
+COMMENT ON TABLE  t_sys_menu_role is '菜单权限表';
 COMMENT ON COLUMN t_sys_menu_role.id is 'ID';
 COMMENT ON COLUMN t_sys_menu_role.menu_id is '菜单id';
 COMMENT ON COLUMN t_sys_menu_role.role_id is '权限id';
-
+-- SQLINES DEMO *** -----------
 INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (7, 6);
 INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (9, 6);
 INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (10, 6);
@@ -213,40 +208,41 @@ INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (11, 4);
 INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (8, 4);
 INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (7, 4);
 
+
 /**
-  职位表
+  6、职位表
  */
 DROP TABLE IF EXISTS t_sys_position;
 CREATE TABLE t_sys_position  (
     id         BIGSERIAL PRIMARY KEY,
     name       VARCHAR(32) NULL DEFAULT NULL ,
-    enabled    BOOLEAN NOT NULL DEFAULT true,
+    enabled    BOOLEAN NOT NULL DEFAULT TRUE,
     createdAt  timestamp(3) NOT NULL DEFAULT (CURRENT_TIMESTAMP)
 );
-COMMENT ON TABLE t_sys_position is '职位表';
+COMMENT ON TABLE  t_sys_position is '职位表';
 COMMENT ON COLUMN t_sys_position.id is 'ID';
 COMMENT ON COLUMN t_sys_position.name is '职位名称';
 COMMENT ON COLUMN t_sys_position.enabled is '是否有效';
-
+-- SQLINES DEMO *** -----------
 INSERT INTO t_sys_position(name) VALUES ('技术总监');
 INSERT INTO t_sys_position(name) VALUES ('运营总监');
 INSERT INTO t_sys_position(name) VALUES ('市场总监');
 INSERT INTO t_sys_position(name) VALUES ('研发工程师');
 INSERT INTO t_sys_position(name) VALUES ('运维工程师');
 
+
 /**
-  民族表
+  7、民族表
  */
 DROP TABLE IF EXISTS t_sys_nation;
 CREATE TABLE t_sys_nation  (
-    id         BIGSERIAL PRIMARY KEY,
-    name       VARCHAR(32) NULL DEFAULT NULL
+    id     BIGSERIAL PRIMARY KEY,
+    name   VARCHAR(32) NULL DEFAULT NULL
 );
-
-COMMENT ON TABLE t_sys_nation is '民族表';
+COMMENT ON TABLE  t_sys_nation is '民族表';
 COMMENT ON COLUMN t_sys_nation.id is 'ID';
 COMMENT ON COLUMN t_sys_nation.name is '民族';
-
+-- SQLINES DEMO *** -----------
 INSERT INTO t_sys_nation(name) VALUES ('汉族');
 INSERT INTO t_sys_nation(name) VALUES ('蒙古族');
 INSERT INTO t_sys_nation(name) VALUES ('回族');
@@ -306,18 +302,17 @@ INSERT INTO t_sys_nation(name) VALUES ('基诺族');
 
 
 /**
-  政治面貌表
+  8、政治面貌表
  */
 DROP TABLE IF EXISTS t_sys_politics_status;
 CREATE TABLE t_sys_politics_status  (
     id         BIGSERIAL PRIMARY KEY,
     name       VARCHAR(32) NULL DEFAULT NULL
 );
-
-COMMENT ON TABLE t_sys_politics_status is '政治面貌表';
+COMMENT ON TABLE  t_sys_politics_status is '政治面貌表';
 COMMENT ON COLUMN t_sys_politics_status.id is 'ID';
 COMMENT ON COLUMN t_sys_politics_status.name is '政治面貌';
-
+-- SQLINES DEMO *** -----------
 INSERT INTO t_sys_politics_status(name) VALUES ('中共党员');
 INSERT INTO t_sys_politics_status(name) VALUES ('中共预备党员');
 INSERT INTO t_sys_politics_status(name) VALUES ('共青团员');
@@ -333,26 +328,26 @@ INSERT INTO t_sys_politics_status(name) VALUES ('无党派民主人士');
 INSERT INTO t_sys_politics_status(name) VALUES ('普通公民');
 
 /**
-  工资表
+  9、工资表
  */
 DROP TABLE IF EXISTS t_sys_salary;
 CREATE TABLE t_sys_salary  (
-    id         BIGSERIAL PRIMARY KEY,
-    basicSalary float NULL DEFAULT NULL,
-    bonus float NULL DEFAULT NULL,
-    lunchSalary float NULL DEFAULT NULL,
-    trafficSalary float NULL DEFAULT NULL,
-    allSalary float NULL DEFAULT NULL,
-    pensionBase float NULL DEFAULT NULL,
-    pensionPer float NULL DEFAULT NULL,
-    createDate timestamp(0) NULL DEFAULT NULL,
-    medicalBase float NULL DEFAULT NULL,
-    medicalPer float NULL DEFAULT NULL,
-    accumulationFundBase float NULL DEFAULT NULL,
-    accumulationFundPer float NULL DEFAULT NULL,
-    name varchar(32) NULL DEFAULT NULL
+    id                      BIGSERIAL PRIMARY KEY,
+    basicSalary             FLOAT NULL DEFAULT NULL,
+    bonus                   FLOAT NULL DEFAULT NULL,
+    lunchSalary             FLOAT NULL DEFAULT NULL,
+    trafficSalary           FLOAT NULL DEFAULT NULL,
+    allSalary               FLOAT NULL DEFAULT NULL,
+    pensionBase             FLOAT NULL DEFAULT NULL,
+    pensionPer              FLOAT NULL DEFAULT NULL,
+    createDate              TIMESTAMP(0) NULL DEFAULT NULL,
+    medicalBase             FLOAT NULL DEFAULT NULL,
+    medicalPer              FLOAT NULL DEFAULT NULL,
+    accumulationFundBase    FLOAT NULL DEFAULT NULL,
+    accumulationFundPer     FLOAT NULL DEFAULT NULL,
+    name                    VARCHAR(32) NULL DEFAULT NULL
 );
-COMMENT ON TABLE t_sys_salary is '工资表';
+COMMENT ON TABLE  t_sys_salary is '工资表';
 COMMENT ON COLUMN t_sys_salary.id is 'ID';
 COMMENT ON COLUMN t_sys_salary.name is '名称';
 COMMENT ON COLUMN t_sys_salary.basicSalary is '基本工资';
@@ -367,7 +362,6 @@ COMMENT ON COLUMN t_sys_salary.medicalBase is '医疗基数';
 COMMENT ON COLUMN t_sys_salary.medicalPer is '医疗保险比率';
 COMMENT ON COLUMN t_sys_salary.accumulationFundBase is '公积金基数';
 COMMENT ON COLUMN t_sys_salary.accumulationFundPer is '公积金比率';
-
 -- ----------------------------
 -- Records of t_salary
 -- ----------------------------
@@ -377,7 +371,7 @@ INSERT INTO t_sys_salary VALUES (3, 9000, 500, 1000, 1000, NULL, 3000, 0.06, '20
 INSERT INTO t_sys_salary VALUES (4, 5000, 500, 500, 500, NULL, 500, 0.06, '2020-04-10 14:15:45', 500, 0.06, 500, 0.06, '财务部工资账套');
 
 /**
-  职称表
+  10、职称表
  */
 DROP TABLE IF EXISTS t_sys_joblevel;
 CREATE TABLE t_sys_joblevel  (
@@ -387,8 +381,13 @@ CREATE TABLE t_sys_joblevel  (
     enabled    BOOLEAN NOT NULL DEFAULT true,
     createdAt  timestamp(3) NOT NULL DEFAULT (CURRENT_TIMESTAMP)
 );
-
-
+COMMENT ON TABLE  t_sys_joblevel is '职称表';
+COMMENT ON COLUMN t_sys_joblevel.id is 'ID';
+COMMENT ON COLUMN t_sys_joblevel.name is '职称名称';
+COMMENT ON COLUMN t_sys_joblevel.titleLevel is '职称等级';
+COMMENT ON COLUMN t_sys_joblevel.enabled is '是否启用';
+COMMENT ON COLUMN t_sys_joblevel.createdAt is '新建时间';
+-- SQLINES DEMO *** -----------
 INSERT INTO t_sys_joblevel(name, titleLevel) VALUES ('教授','正高级');
 INSERT INTO t_sys_joblevel(name, titleLevel) VALUES ('副教授','副高级');
 INSERT INTO t_sys_joblevel(name, titleLevel) VALUES ('助教','初级');
@@ -398,8 +397,87 @@ INSERT INTO t_sys_joblevel(name, titleLevel) VALUES ('中级工程师','中级')
 INSERT INTO t_sys_joblevel(name, titleLevel) VALUES ('高级工程','副高级');
 INSERT INTO t_sys_joblevel(name, titleLevel) VALUES ('教授级工程师','正高级');
 
+
+
 /**
-  雇员表
+  11、部门表
+ */
+DROP TABLE IF EXISTS t_sys_department;
+CREATE TABLE t_sys_department  (
+    id         BIGSERIAL PRIMARY KEY,
+    name       VARCHAR(32) NULL DEFAULT NULL ,
+    parentid   INTEGER NULL DEFAULT NULL,
+    deppath    VARCHAR(255) NULL DEFAULT  NULL,
+    enabled    BOOLEAN NOT NULL DEFAULT true,
+    isparent   BOOLEAN NOT NULL DEFAULT false
+);
+INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('股东会', -1, '.1', true, true);
+INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('董事会', 1, '.1.2', true, true);
+INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('总办', 2, '.1.2.3', true, true);
+INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('财务部', 3, '.1.2.3.4', true, false);
+INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('市场部', 3, '.1.2.3.5', true, true);
+INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('华东市场部', 5, '1.2.3.5.6', true, true);
+INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('华南市场部', 5, '1.2.3.5.7', true, false);
+INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('上海市场部', 6, '1.2.3.5.6.8', true, false);
+INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('西北市场部', 5, '.1.2.3.5.9', true, true);
+INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('贵阳市场', 9, '.1.2.3.5.9.10', true, true);
+INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('乌当区市场', 10, '.1.2.3.5.9.10.11', true, false);
+INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('技术部', 3, '.1.2.3.12', true, false);
+INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('运维部', 3, '.1.2.3.13', true, false);
+
+/**
+  添加department对象需要自行多条SQL语句
+  在这里我们采用了存储过程的方式
+  新建了一个function为adddepartment
+ */
+CREATE OR REPLACE FUNCTION addDepartment(in depName varchar(32),in parentId int,in enabled boolean)
+    RETURNS integer LANGUAGE plpgsql as $$
+declare
+    result integer;
+    pDepPath varchar(255);
+begin
+    insert into t_sys_department(name,parentid,enabled)
+    VALUES(depName, parentId, enabled) RETURNING id INTO result;
+    execute format('select deppath from t_sys_department where id = (%s)', parentId) into pDepPath;
+    --select deppath from t_sys_department where id = parentId;
+    update t_sys_department set deppath=concat(pDepPath,'.',result) where id=result;
+    execute format('update t_sys_department set isparent=true where id = (%s)',parentId);
+    return result;
+end  $$;
+
+/**
+  删除department
+ */
+CREATE OR REPLACE FUNCTION deleteDepartment(in did int)
+    RETURNS integer LANGUAGE plpgsql as $$
+declare
+    result integer;
+    ecount integer;
+    pid integer;
+    pcount integer;
+    a integer;
+begin
+    select count(*) into a from t_sys_department where id=did and isparent=false;
+    if a=0 then
+        result=-2;
+    else
+        select count(*) into ecount from t_sys_employee where departmentId=did;
+        if ecount>0 then
+            result=-1;
+        else
+            select parentid into pid from t_sys_department where id=did;
+            delete from t_sys_department where id=did and isparent=false;
+            select count(*) into result;
+            select count(*) into pcount from t_sys_department where parentid=pid;
+            if pcount=0 then update t_sys_department set isparent=false where id=pid;
+            end if;
+        end if;
+    end if;
+    return result;
+end  $$;
+
+/**
+  12、雇员表
  */
 DROP TABLE IF EXISTS t_sys_employee;
 -- DROP TYPE IF EXISTS wedlock;
@@ -436,7 +514,7 @@ CREATE TABLE t_sys_employee  (
     notWorkDate     date NULL DEFAULT NULL,
     beginContract   date NULL DEFAULT NULL,
     endContract     date NULL DEFAULT NULL,
-    workAge         integer NULL DEFAULT NULL,
+    workAge         float NULL DEFAULT NULL,
     salaryId        integer NULL DEFAULT NULL,
     FOREIGN KEY (departmentId) REFERENCES t_sys_department (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
     FOREIGN KEY (jobLevelId) REFERENCES t_sys_joblevel (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
@@ -446,7 +524,7 @@ CREATE TABLE t_sys_employee  (
     FOREIGN KEY (salaryId) REFERENCES t_sys_salary (id) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
-COMMENT ON TABLE t_sys_employee is '工资表';
+COMMENT ON TABLE  t_sys_employee is '工资表';
 COMMENT ON COLUMN t_sys_employee.id is 'ID';
 COMMENT ON COLUMN t_sys_employee.name is '名称';
 COMMENT ON COLUMN t_sys_employee.gender is '基本工资';
@@ -577,81 +655,3 @@ INSERT INTO t_sys_employee VALUES (97, '原红霞', '男', '1997-04-07', '341701
 INSERT INTO t_sys_employee VALUES (98, '王玉英', '女', '1998-03-12', '370282193508208316', '已婚', 1, '英县', 7, 'liaochao@gmail.com', '14798666739', '湖北省贵阳县花溪汕尾街e座 501635', 13, 5, 3, '劳动合同', '高中', '中国语言文学', '中国科学技术大学', '2017-12-19', '在职', '00000098', 2.23, '2017-11-02', NULL, '2018-05-08', '2019-10-21', NULL, 3);
 INSERT INTO t_sys_employee VALUES (99, '张红梅', '女', '1991-07-18', '350923199911240828', '已婚', 1, '燕市', 2, 'yili@hotmail.com', '13506023869', '浙江省兰州县大兴侯路x座 732564', 2, 8, 4, '劳动合同', '高中', '电子工程', '上海交通大学', '2017-11-27', '在职', '00000099', 2.4, '2018-03-13', NULL, '2019-01-30', '2019-07-04', NULL, 1);
 INSERT INTO t_sys_employee VALUES (100, '李强', '男', '1994-02-17', '330127200203300889', '已婚', 1, '淑兰县', 4, 'fang76@ds.cn', '15703517874', '重庆市凤兰市山亭马路l座 594007', 5, 2, 1, '劳务合同', '高中', '无', '上海交通大学', '2015-12-14', '在职', '00000100', 5.96, '2017-09-06', NULL, '2017-06-16', '2019-06-08', NULL, 3);
-
-
-/**
-  部门表
- */
-DROP TABLE IF EXISTS t_sys_department;
-CREATE TABLE t_sys_department  (
-    id         BIGSERIAL PRIMARY KEY,
-    name       VARCHAR(32) NULL DEFAULT NULL ,
-    parentid   integer null default null,
-    deppath    varchar(255) null default  null,
-    enabled    BOOLEAN NOT NULL DEFAULT true,
-    isparent   BOOLEAN NOT NULL DEFAULT false
-);
-INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('股东会', -1, '.1', true, true);
-INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('董事会', 1, '.1.2', true, true);
-INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('总办', 2, '.1.2.3', true, true);
-INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('财务部', 3, '.1.2.3.4', true, false);
-INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('市场部', 3, '.1.2.3.5', true, true);
-INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('华东市场部', 5, '1.2.3.5.6', true, true);
-INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('华南市场部', 5, '1.2.3.5.7', true, false);
-INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('上海市场部', 6, '1.2.3.5.6.8', true, false);
-INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('西北市场部', 5, '.1.2.3.5.9', true, true);
-INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('贵阳市场', 9, '.1.2.3.5.9.10', true, true);
-INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('乌当区市场', 10, '.1.2.3.5.9.10.11', true, false);
-INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('技术部', 3, '.1.2.3.12', true, false);
-INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('运维部', 3, '.1.2.3.13', true, false);
-
-/**
-  添加department对象需要自行多条SQL语句
-  在这里我们采用了存储过程的方式
-  新建了一个function为adddepartment
- */
-CREATE OR REPLACE FUNCTION addDepartment(in depName varchar(32),in parentId int,in enabled boolean)
-    RETURNS integer LANGUAGE plpgsql as $$
-declare
-    result integer;
-    pDepPath varchar(255);
-begin
-    insert into t_sys_department(name,parentid,enabled)
-    VALUES(depName, parentId, enabled) RETURNING id INTO result;
-    execute format('select deppath from t_sys_department where id = (%s)', parentId) into pDepPath;
-    --select deppath from t_sys_department where id = parentId;
-    update t_sys_department set deppath=concat(pDepPath,'.',result) where id=result;
-    execute format('update t_sys_department set isparent=true where id = (%s)',parentId);
-    return result;
-end  $$;
-
-/**
-  删除department
- */
-CREATE OR REPLACE FUNCTION deleteDepartment(in did int)
-    RETURNS integer LANGUAGE plpgsql as $$
-declare
-    result integer;
-    ecount integer;
-    pid integer;
-    pcount integer;
-    a integer;
-begin
-    select count(*) into a from t_sys_department where id=did and isparent=false;
-    if a=0 then
-        result=-2;
-    else
-        select count(*) into ecount from t_sys_employee where departmentId=did;
-        if ecount>0 then
-            result=-1;
-        else
-            select parentid into pid from t_sys_department where id=did;
-            delete from t_sys_department where id=did and isparent=false;
-            select count(*) into result;
-            select count(*) into pcount from t_sys_department where parentid=pid;
-            if pcount=0 then update t_sys_department set isparent=false where id=pid;
-            end if;
-        end if;
-    end if;
-    return result;
-end  $$;
