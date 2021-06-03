@@ -1,9 +1,9 @@
 package cn.geoportal.gmo.server.service.impl;
 
+import cn.geoportal.gmo.server.mapper.SysPositionMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.geoportal.gmo.server.entity.SysPosition;
 import cn.geoportal.gmo.server.service.SysPositionService;
-import cn.geoportal.gmo.server.mapper.SysPositionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

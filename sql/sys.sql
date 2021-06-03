@@ -17,10 +17,10 @@ CREATE TABLE t_sys_user  (
   createdAt  timestamp(3) NOT NULL DEFAULT (CURRENT_TIMESTAMP),
   updatedAt  timestamp(3) NOT NULL DEFAULT (CURRENT_TIMESTAMP)
 );
-COMMENT ON table  t_sys_user is '角色表';
-COMMENT ON COLUMN t_sys_user.id is 'ID';
-COMMENT ON COLUMN t_sys_user.name is '用户名';
-COMMENT ON COLUMN t_sys_user.username is '登录名';
+COMMENT ON table  t_sys_user IS '角色表';
+COMMENT ON COLUMN t_sys_user.id IS 'ID';
+COMMENT ON COLUMN t_sys_user.name IS '用户名';
+COMMENT ON COLUMN t_sys_user.username IS '登录名';
 -- SQLINES DEMO *** -----------
 INSERT INTO t_sys_user(username,email,password) VALUES ('admin' , 'admin@sleeep.io','$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe');
 INSERT INTO t_sys_user(username,email,password) VALUES ('user1', 'xx@cn.cn', '$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe');
@@ -41,10 +41,10 @@ CREATE TABLE t_sys_role(
   name   VARCHAR(50) NULL DEFAULT NULL,
   nameZh VARCHAR(50) NULL DEFAULT NULL
 );
-COMMENT ON TABLE  t_sys_role is '角色表';
-COMMENT ON COLUMN t_sys_role.id is 'ID';
-COMMENT ON COLUMN t_sys_role.name is '角色名称';
-COMMENT ON COLUMN t_sys_role.nameZh is '角色中文名';
+COMMENT ON TABLE  t_sys_role IS '角色表';
+COMMENT ON COLUMN t_sys_role.id IS 'ID';
+COMMENT ON COLUMN t_sys_role.name IS '角色名称';
+COMMENT ON COLUMN t_sys_role.nameZh IS '角色中文名';
 -- SQLINES DEMO *** -----------
 INSERT INTO t_sys_role(name, nameZh) VALUES ('ROLE_manager', '部门经理');
 INSERT INTO t_sys_role(name, nameZh) VALUES ('ROLE_personnel', '人事专员');
@@ -64,10 +64,10 @@ CREATE TABLE t_sys_user_role(
   user_id  BIGINT NULL,
   role_id  BIGINT NULL
 );
-COMMENT ON TABLE  t_sys_user_role is '用户权限表';
-COMMENT ON COLUMN t_sys_user_role.id is 'ID';
-COMMENT ON COLUMN t_sys_user_role.user_id is '用户id';
-COMMENT ON COLUMN t_sys_user_role.role_id is '权限id';
+COMMENT ON TABLE  t_sys_user_role IS '用户权限表';
+COMMENT ON COLUMN t_sys_user_role.id IS 'ID';
+COMMENT ON COLUMN t_sys_user_role.user_id IS '用户id';
+COMMENT ON COLUMN t_sys_user_role.role_id IS '权限id';
 -- SQLINES DEMO *** -----------
 INSERT INTO t_sys_user_role(user_id, role_id) VALUES (1, 6);
 INSERT INTO t_sys_user_role(user_id, role_id) VALUES (5, 4);
@@ -99,16 +99,16 @@ CREATE TABLE t_sys_menu(
     parentId    BIGINT NULL DEFAULT NULL,
     enabled     BIGINT DEFAULT 0
 );
-COMMENT ON TABLE  t_sys_menu is '菜单表';
-COMMENT ON COLUMN t_sys_menu.url is 'url';
-COMMENT ON COLUMN t_sys_menu.path is 'path';
-COMMENT ON COLUMN t_sys_menu.component is '组件';
-COMMENT ON COLUMN t_sys_menu.name is '菜单名';
-COMMENT ON COLUMN t_sys_menu.iconCls is '菜单图标';
-COMMENT ON COLUMN t_sys_menu.keepAlive is '是否保持激活';
-COMMENT ON COLUMN t_sys_menu.requireAuth is '是否要求权限';
-COMMENT ON COLUMN t_sys_menu.parentId is '父id';
-COMMENT ON COLUMN t_sys_menu.enabled is '是否启用';
+COMMENT ON TABLE  t_sys_menu IS '菜单表';
+COMMENT ON COLUMN t_sys_menu.url IS 'url';
+COMMENT ON COLUMN t_sys_menu.path IS 'path';
+COMMENT ON COLUMN t_sys_menu.component IS '组件';
+COMMENT ON COLUMN t_sys_menu.name IS '菜单名';
+COMMENT ON COLUMN t_sys_menu.iconCls IS '菜单图标';
+COMMENT ON COLUMN t_sys_menu.keepAlive IS '是否保持激活';
+COMMENT ON COLUMN t_sys_menu.requireAuth IS '是否要求权限';
+COMMENT ON COLUMN t_sys_menu.parentId IS '父id';
+COMMENT ON COLUMN t_sys_menu.enabled IS '是否启用';
 -- SQLINES DEMO *** -----------
 INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled) VALUES ('/', NULL, NULL, '所有', NULL, NULL, NULL, NULL, 1);
 INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled) VALUES ('/', '/home', 'Home', '员工资料', 'fa fa-user-circle-o', NULL, 1, 1, 1);
@@ -149,10 +149,10 @@ CREATE TABLE t_sys_menu_role(
     menu_id  BIGINT NULL,
     role_id  BIGINT NULL
 );
-COMMENT ON TABLE  t_sys_menu_role is '菜单权限表';
-COMMENT ON COLUMN t_sys_menu_role.id is 'ID';
-COMMENT ON COLUMN t_sys_menu_role.menu_id is '菜单id';
-COMMENT ON COLUMN t_sys_menu_role.role_id is '权限id';
+COMMENT ON TABLE  t_sys_menu_role IS '菜单权限表';
+COMMENT ON COLUMN t_sys_menu_role.id IS 'ID';
+COMMENT ON COLUMN t_sys_menu_role.menu_id IS '菜单id';
+COMMENT ON COLUMN t_sys_menu_role.role_id IS '权限id';
 -- SQLINES DEMO *** -----------
 INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (7, 6);
 INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (9, 6);
@@ -219,10 +219,10 @@ CREATE TABLE t_sys_position  (
     enabled    BOOLEAN NOT NULL DEFAULT TRUE,
     createdAt  timestamp(3) NOT NULL DEFAULT (CURRENT_TIMESTAMP)
 );
-COMMENT ON TABLE  t_sys_position is '职位表';
-COMMENT ON COLUMN t_sys_position.id is 'ID';
-COMMENT ON COLUMN t_sys_position.name is '职位名称';
-COMMENT ON COLUMN t_sys_position.enabled is '是否有效';
+COMMENT ON TABLE  t_sys_position IS '职位表';
+COMMENT ON COLUMN t_sys_position.id IS 'ID';
+COMMENT ON COLUMN t_sys_position.name IS '职位名称';
+COMMENT ON COLUMN t_sys_position.enabled IS '是否有效';
 -- SQLINES DEMO *** -----------
 INSERT INTO t_sys_position(name) VALUES ('技术总监');
 INSERT INTO t_sys_position(name) VALUES ('运营总监');
@@ -239,9 +239,9 @@ CREATE TABLE t_sys_nation  (
     id     BIGSERIAL PRIMARY KEY,
     name   VARCHAR(32) NULL DEFAULT NULL
 );
-COMMENT ON TABLE  t_sys_nation is '民族表';
-COMMENT ON COLUMN t_sys_nation.id is 'ID';
-COMMENT ON COLUMN t_sys_nation.name is '民族';
+COMMENT ON TABLE  t_sys_nation IS '民族表';
+COMMENT ON COLUMN t_sys_nation.id IS 'ID';
+COMMENT ON COLUMN t_sys_nation.name IS '民族';
 -- SQLINES DEMO *** -----------
 INSERT INTO t_sys_nation(name) VALUES ('汉族');
 INSERT INTO t_sys_nation(name) VALUES ('蒙古族');
@@ -309,9 +309,9 @@ CREATE TABLE t_sys_politics_status  (
     id         BIGSERIAL PRIMARY KEY,
     name       VARCHAR(32) NULL DEFAULT NULL
 );
-COMMENT ON TABLE  t_sys_politics_status is '政治面貌表';
-COMMENT ON COLUMN t_sys_politics_status.id is 'ID';
-COMMENT ON COLUMN t_sys_politics_status.name is '政治面貌';
+COMMENT ON TABLE  t_sys_politics_status IS '政治面貌表';
+COMMENT ON COLUMN t_sys_politics_status.id IS 'ID';
+COMMENT ON COLUMN t_sys_politics_status.name IS '政治面貌';
 -- SQLINES DEMO *** -----------
 INSERT INTO t_sys_politics_status(name) VALUES ('中共党员');
 INSERT INTO t_sys_politics_status(name) VALUES ('中共预备党员');
@@ -347,21 +347,21 @@ CREATE TABLE t_sys_salary  (
     accumulationFundPer     FLOAT NULL DEFAULT NULL,
     name                    VARCHAR(32) NULL DEFAULT NULL
 );
-COMMENT ON TABLE  t_sys_salary is '工资表';
-COMMENT ON COLUMN t_sys_salary.id is 'ID';
-COMMENT ON COLUMN t_sys_salary.name is '名称';
-COMMENT ON COLUMN t_sys_salary.basicSalary is '基本工资';
-COMMENT ON COLUMN t_sys_salary.bonus is '奖金';
-COMMENT ON COLUMN t_sys_salary.lunchSalary is '午餐补助';
-COMMENT ON COLUMN t_sys_salary.trafficSalary is '交通补助';
-COMMENT ON COLUMN t_sys_salary.allSalary is '应发工资';
-COMMENT ON COLUMN t_sys_salary.pensionBase is '养老金基数';
-COMMENT ON COLUMN t_sys_salary.pensionPer is '养老金比率';
-COMMENT ON COLUMN t_sys_salary.createDate is '启用时间';
-COMMENT ON COLUMN t_sys_salary.medicalBase is '医疗基数';
-COMMENT ON COLUMN t_sys_salary.medicalPer is '医疗保险比率';
-COMMENT ON COLUMN t_sys_salary.accumulationFundBase is '公积金基数';
-COMMENT ON COLUMN t_sys_salary.accumulationFundPer is '公积金比率';
+COMMENT ON TABLE  t_sys_salary IS '工资表';
+COMMENT ON COLUMN t_sys_salary.id IS 'ID';
+COMMENT ON COLUMN t_sys_salary.name IS '名称';
+COMMENT ON COLUMN t_sys_salary.basicSalary IS '基本工资';
+COMMENT ON COLUMN t_sys_salary.bonus IS '奖金';
+COMMENT ON COLUMN t_sys_salary.lunchSalary IS '午餐补助';
+COMMENT ON COLUMN t_sys_salary.trafficSalary IS '交通补助';
+COMMENT ON COLUMN t_sys_salary.allSalary IS '应发工资';
+COMMENT ON COLUMN t_sys_salary.pensionBase IS '养老金基数';
+COMMENT ON COLUMN t_sys_salary.pensionPer IS '养老金比率';
+COMMENT ON COLUMN t_sys_salary.createDate IS '启用时间';
+COMMENT ON COLUMN t_sys_salary.medicalBase IS '医疗基数';
+COMMENT ON COLUMN t_sys_salary.medicalPer IS '医疗保险比率';
+COMMENT ON COLUMN t_sys_salary.accumulationFundBase IS '公积金基数';
+COMMENT ON COLUMN t_sys_salary.accumulationFundPer IS '公积金比率';
 -- ----------------------------
 -- Records of t_salary
 -- ----------------------------
@@ -381,12 +381,12 @@ CREATE TABLE t_sys_joblevel  (
     enabled    BOOLEAN NOT NULL DEFAULT true,
     createdAt  timestamp(3) NOT NULL DEFAULT (CURRENT_TIMESTAMP)
 );
-COMMENT ON TABLE  t_sys_joblevel is '职称表';
-COMMENT ON COLUMN t_sys_joblevel.id is 'ID';
-COMMENT ON COLUMN t_sys_joblevel.name is '职称名称';
-COMMENT ON COLUMN t_sys_joblevel.titleLevel is '职称等级';
-COMMENT ON COLUMN t_sys_joblevel.enabled is '是否启用';
-COMMENT ON COLUMN t_sys_joblevel.createdAt is '新建时间';
+COMMENT ON TABLE  t_sys_joblevel IS '职称表';
+COMMENT ON COLUMN t_sys_joblevel.id IS 'ID';
+COMMENT ON COLUMN t_sys_joblevel.name IS '职称名称';
+COMMENT ON COLUMN t_sys_joblevel.titleLevel IS '职称等级';
+COMMENT ON COLUMN t_sys_joblevel.enabled IS '是否启用';
+COMMENT ON COLUMN t_sys_joblevel.createdAt IS '新建时间';
 -- SQLINES DEMO *** -----------
 INSERT INTO t_sys_joblevel(name, titleLevel) VALUES ('教授','正高级');
 INSERT INTO t_sys_joblevel(name, titleLevel) VALUES ('副教授','副高级');
@@ -488,34 +488,34 @@ DROP TABLE IF EXISTS t_sys_employee;
 -- create type workstate as enum('在职','离职');
 CREATE TABLE t_sys_employee  (
     id              BIGSERIAL PRIMARY KEY,
-    name            varchar(10)  NULL DEFAULT NULL,
-    gender          varchar(4) NULL DEFAULT NULL,
-    birthday        date NULL DEFAULT NULL,
-    idCard          varchar(18) NULL DEFAULT NULL,
-    wedlock         varchar(3) null DEFAULT '未婚',
-    nationId        integer NULL DEFAULT NULL,
-    nativePlace     varchar(20) NULL DEFAULT NULL,
-    politicId       integer NULL DEFAULT NULL,
-    email           varchar(64)NULL DEFAULT NULL,
-    phone           varchar(11) NULL DEFAULT NULL,
-    address         varchar(64) NULL DEFAULT NULL,
-    departmentId    integer NULL DEFAULT NULL,
-    jobLevelId      integer NULL DEFAULT NULL,
-    posId           integer NULL DEFAULT NULL,
-    engageForm      varchar(8) NULL DEFAULT NULL,
-    tiptopDegree    varchar(3) null default '本科',
-    specialty       varchar(32) NULL DEFAULT NULL,
-    school          varchar(32) NULL DEFAULT NULL,
+    name            VARCHAR(10)  NULL DEFAULT NULL,
+    gender          VARCHAR(4) NULL DEFAULT NULL,
+    birthday        DATE NULL DEFAULT NULL,
+    idCard          VARCHAR(18) NULL DEFAULT NULL,
+    wedlock         VARCHAR(3) null DEFAULT '未婚',
+    nationId        INTEGER NULL DEFAULT NULL,
+    nativePlace     VARCHAR(20) NULL DEFAULT NULL,
+    politicId       INTEGER NULL DEFAULT NULL,
+    email           VARCHAR(64)NULL DEFAULT NULL,
+    phone           VARCHAR(11) NULL DEFAULT NULL,
+    address         VARCHAR(64) NULL DEFAULT NULL,
+    departmentId    INTEGER NULL DEFAULT NULL,
+    jobLevelId      INTEGER NULL DEFAULT NULL,
+    posId           INTEGER NULL DEFAULT NULL,
+    engageForm      VARCHAR(8) NULL DEFAULT NULL,
+    tiptopDegree    VARCHAR(3) null default '本科',
+    specialty       VARCHAR(32) NULL DEFAULT NULL,
+    school          VARCHAR(32) NULL DEFAULT NULL,
     beginDate       date NULL DEFAULT NULL,
-    workState       varchar(3) NULL DEFAULT '在职',
-    workID          varchar(8) NULL DEFAULT NULL ,
+    workState       VARCHAR(3) NULL DEFAULT '在职',
+    workID          VARCHAR(8) NULL DEFAULT NULL ,
     contractTerm    float NULL DEFAULT NULL,
-    conversionTime  date NULL DEFAULT NULL,
-    notWorkDate     date NULL DEFAULT NULL,
-    beginContract   date NULL DEFAULT NULL,
-    endContract     date NULL DEFAULT NULL,
-    workAge         float NULL DEFAULT NULL,
-    salaryId        integer NULL DEFAULT NULL,
+    conversionTime  DATE NULL DEFAULT NULL,
+    notWorkDate     DATE NULL DEFAULT NULL,
+    beginContract   DATE NULL DEFAULT NULL,
+    endContract     DATE NULL DEFAULT NULL,
+    workAge         FLOAT NULL DEFAULT NULL,
+    salaryId        INTEGER NULL DEFAULT NULL,
     FOREIGN KEY (departmentId) REFERENCES t_sys_department (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
     FOREIGN KEY (jobLevelId) REFERENCES t_sys_joblevel (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
     FOREIGN KEY (posId) REFERENCES t_sys_position (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
@@ -524,36 +524,36 @@ CREATE TABLE t_sys_employee  (
     FOREIGN KEY (salaryId) REFERENCES t_sys_salary (id) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
-COMMENT ON TABLE  t_sys_employee is '工资表';
-COMMENT ON COLUMN t_sys_employee.id is 'ID';
-COMMENT ON COLUMN t_sys_employee.name is '名称';
-COMMENT ON COLUMN t_sys_employee.gender is '基本工资';
-COMMENT ON COLUMN t_sys_employee.birthday is '奖金';
-COMMENT ON COLUMN t_sys_employee.idCard is '午餐补助';
-COMMENT ON COLUMN t_sys_employee.wedlock is '婚姻状况';
-COMMENT ON COLUMN t_sys_employee.nationId is '民族';
-COMMENT ON COLUMN t_sys_employee.nativePlace is '籍贯';
-COMMENT ON COLUMN t_sys_employee.politicId is '政治面貌';
-COMMENT ON COLUMN t_sys_employee.email is '邮箱';
-COMMENT ON COLUMN t_sys_employee.phone is '电话';
-COMMENT ON COLUMN t_sys_employee.address is '地址';
-COMMENT ON COLUMN t_sys_employee.departmentId is '所属部门';
-COMMENT ON COLUMN t_sys_employee.jobLevelId is '职称ID';
-COMMENT ON COLUMN t_sys_employee.posId is '职位ID';
-COMMENT ON COLUMN t_sys_employee.engageForm is '聘用形式';
-COMMENT ON COLUMN t_sys_employee.tiptopDegree is '最高学历';
-COMMENT ON COLUMN t_sys_employee.specialty is '所属专业';
-COMMENT ON COLUMN t_sys_employee.school is '毕业院校';
-COMMENT ON COLUMN t_sys_employee.beginDate is '入职日期';
-COMMENT ON COLUMN t_sys_employee.workState is '在职状态';
-COMMENT ON COLUMN t_sys_employee.workID is '工号';
-COMMENT ON COLUMN t_sys_employee.contractTerm is '合同期限';
-COMMENT ON COLUMN t_sys_employee.conversionTime is '转正日期';
-COMMENT ON COLUMN t_sys_employee.notWorkDate is '离职日期';
-COMMENT ON COLUMN t_sys_employee.beginContract is '合同起始日期';
-COMMENT ON COLUMN t_sys_employee.endContract is '合同终止日期';
-COMMENT ON COLUMN t_sys_employee.workAge is '工龄';
-COMMENT ON COLUMN t_sys_employee.salaryId is '工资账套ID';
+COMMENT ON TABLE  t_sys_employee IS '工资表';
+COMMENT ON COLUMN t_sys_employee.id IS 'ID';
+COMMENT ON COLUMN t_sys_employee.name IS '名称';
+COMMENT ON COLUMN t_sys_employee.gender IS '基本工资';
+COMMENT ON COLUMN t_sys_employee.birthday IS '奖金';
+COMMENT ON COLUMN t_sys_employee.idCard IS '午餐补助';
+COMMENT ON COLUMN t_sys_employee.wedlock IS '婚姻状况';
+COMMENT ON COLUMN t_sys_employee.nationId IS '民族';
+COMMENT ON COLUMN t_sys_employee.nativePlace IS '籍贯';
+COMMENT ON COLUMN t_sys_employee.politicId IS '政治面貌';
+COMMENT ON COLUMN t_sys_employee.email IS '邮箱';
+COMMENT ON COLUMN t_sys_employee.phone IS '电话';
+COMMENT ON COLUMN t_sys_employee.address IS '地址';
+COMMENT ON COLUMN t_sys_employee.departmentId IS '所属部门';
+COMMENT ON COLUMN t_sys_employee.jobLevelId IS '职称ID';
+COMMENT ON COLUMN t_sys_employee.posId IS '职位ID';
+COMMENT ON COLUMN t_sys_employee.engageForm IS '聘用形式';
+COMMENT ON COLUMN t_sys_employee.tiptopDegree IS '最高学历';
+COMMENT ON COLUMN t_sys_employee.specialty IS '所属专业';
+COMMENT ON COLUMN t_sys_employee.school IS '毕业院校';
+COMMENT ON COLUMN t_sys_employee.beginDate IS '入职日期';
+COMMENT ON COLUMN t_sys_employee.workState IS '在职状态';
+COMMENT ON COLUMN t_sys_employee.workID IS '工号';
+COMMENT ON COLUMN t_sys_employee.contractTerm IS '合同期限';
+COMMENT ON COLUMN t_sys_employee.conversionTime IS '转正日期';
+COMMENT ON COLUMN t_sys_employee.notWorkDate IS '离职日期';
+COMMENT ON COLUMN t_sys_employee.beginContract IS '合同起始日期';
+COMMENT ON COLUMN t_sys_employee.endContract IS '合同终止日期';
+COMMENT ON COLUMN t_sys_employee.workAge IS '工龄';
+COMMENT ON COLUMN t_sys_employee.salaryId IS '工资账套ID';
 
 INSERT INTO t_sys_employee VALUES (1, '韦梅', '女', '1999-11-20', '341502198810196427', '未婚', 1, '英市', 11, 'xia53@gangjing.cn', '15567487644', '贵州省洁市清城汕尾街d座 502246', 3, 5, 5, '劳动合同', '博士', '电子工程', '中国科学技术大学', '2018-10-16', '在职', '00000001', 9.31, '2018-08-29', NULL, '2017-09-03', '2019-08-26', NULL, 4);
 INSERT INTO t_sys_employee VALUES (2, '王丹', '女', '1992-03-25', '350481197304037905', '未婚', 1, '关岭市', 2, 'jieqian@yahoo.com', '18762780051', '山西省合肥县西峰香港街C座 302114', 4, 8, 2, '劳动合同', '博士', '无', '北京大学', '2018-06-25', '在职', '00000002', 9.5, '2017-08-05', NULL, '2017-05-31', '2020-01-06', NULL, 1);

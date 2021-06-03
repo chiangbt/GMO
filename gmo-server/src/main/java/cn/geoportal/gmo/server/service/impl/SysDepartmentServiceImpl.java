@@ -1,9 +1,9 @@
 package cn.geoportal.gmo.server.service.impl;
 
 import cn.geoportal.gmo.server.entity.SysDepartment;
-import cn.geoportal.gmo.server.mapper.SysDepartmentMapper;
-import cn.geoportal.gmo.server.service.SysDepartmentService;
 import cn.geoportal.gmo.server.entity.common.RespBean;
+import cn.geoportal.gmo.server.service.SysDepartmentService;
+import cn.geoportal.gmo.server.mapper.SysDepartmentMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

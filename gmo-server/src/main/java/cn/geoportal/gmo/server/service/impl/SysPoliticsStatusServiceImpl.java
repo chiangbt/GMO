@@ -1,9 +1,9 @@
 package cn.geoportal.gmo.server.service.impl;
 
+import cn.geoportal.gmo.server.entity.SysPoliticsStatus;
 import cn.geoportal.gmo.server.mapper.SysPoliticsStatusMapper;
 import cn.geoportal.gmo.server.service.SysPoliticsStatusService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cn.geoportal.gmo.server.entity.SysPoliticsStatus;
 import org.springframework.stereotype.Service;
 
 /**

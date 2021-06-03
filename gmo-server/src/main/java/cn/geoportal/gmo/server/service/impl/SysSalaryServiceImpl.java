@@ -1,9 +1,9 @@
 package cn.geoportal.gmo.server.service.impl;
 
 import cn.geoportal.gmo.server.entity.SysSalary;
+import cn.geoportal.gmo.server.mapper.SysSalaryMapper;
 import cn.geoportal.gmo.server.service.SysSalaryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cn.geoportal.gmo.server.mapper.SysSalaryMapper;
 import org.springframework.stereotype.Service;
 
 /**

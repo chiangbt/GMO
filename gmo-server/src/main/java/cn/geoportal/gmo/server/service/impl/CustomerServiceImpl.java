@@ -1,12 +1,12 @@
 package cn.geoportal.gmo.server.service.impl;
 
+import cn.geoportal.gmo.server.entity.Customer;
+import cn.geoportal.gmo.server.service.CustomerService;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cn.geoportal.gmo.server.entity.Customer;
-import cn.geoportal.gmo.server.service.CustomerService;
 import cn.geoportal.gmo.server.mapper.CustomerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ import java.util.Map;
  */
 @Service
 public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer>
-implements CustomerService{
+implements CustomerService {
     @Autowired
     private CustomerMapper customerMapper;
 
