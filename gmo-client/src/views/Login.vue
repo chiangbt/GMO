@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="background: #102a43;width: 100vw;height: 100vh;display: flex;justify-content: center;align-items: center;">
     <el-form
       :model="loginForm"
       ref="form"
@@ -10,13 +10,16 @@
       element-loading-spinner="el-icon-loading"
       element-loading-background="rgba(0, 0, 0, 0.8)"
     >
-      <h3 class="loginTitle">系统登录</h3>
+      <h3 class="loginTitle">
+        <i class="el-icon-discover"/>&nbsp;&nbsp;系统登录
+      </h3>
       <el-form-item prop="username">
         <el-input
           type="text"
           v-model="loginForm.username"
           placeholder="请输入用户名"
           clearable
+          prefix-icon="fa fa-user"
           auto-complete="false"
         ></el-input>
       </el-form-item>
@@ -26,6 +29,7 @@
           v-model="loginForm.password"
           placeholder="请输入密码"
           clearable
+          prefix-icon="fa fa-lock"
           auto-complete="false"
         ></el-input>
       </el-form-item>
@@ -83,7 +87,7 @@ export default {
               window.sessionStorage.setItem("tokenStr", tokenStr);
               //跳转页面
               let path = this.$route.query.redirect;
-              this.$router.replace(path=='/'||path==undefined?'/home':path)
+              this.$router.push(path=='/'||path==undefined?'/home':path).catch(err => { console.log(err) })
             }
           });
         } else {

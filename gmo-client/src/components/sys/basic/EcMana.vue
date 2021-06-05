@@ -1,13 +1,10 @@
-<template>
-  <div>test1</div>
-</template>
+<template></template>
 
 <script>
 export default {
-
-}
+  name: "EcMana",
+};
 </script>
 
 <style>
-
 </style>
