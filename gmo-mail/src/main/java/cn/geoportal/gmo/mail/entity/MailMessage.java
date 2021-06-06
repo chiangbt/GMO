@@ -19,36 +19,52 @@ import java.time.LocalDateTime;
 @Data
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, scope = MailMessage.class)
 public class MailMessage implements Serializable {
-    private String empName;
-    private String empId;
+
+    private String from;
+    private String to;
+    private String content;
+    private String date;
 
     public MailMessage(){
 
     }
 
-    public MailMessage(String empName, String empId){
-        this.empName = empName;
-        this.empId = empId;
+    public MailMessage(String from, String to, String content, String date){
+        this.from = from;
+        this.to = to;
+        this.content = content;
+        this.date = date;
     }
 
-    public String getEmpName() {
-        return empName;
+    public String getFrom() {
+        return from;
     }
 
-    public void setEmpName(String empName) {
-        this.empName = empName;
+    public void setFrom(String from) {
+        this.from = from;
     }
 
-    public String getEmpId() {
-        return empId;
+    public String getTo() {
+        return to;
     }
 
-    public void setEmpId(String empId) {
-        this.empId = empId;
+    public void setTo(String to) {
+        this.to = to;
     }
 
-    @Override
-    public String toString() {
-        return "Employee [empName=" + empName + ", empId=" + empId + "]";
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

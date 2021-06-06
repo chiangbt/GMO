@@ -1,12 +1,14 @@
 package cn.geoportal.gmo.server.controller.mail;
 
 import cn.geoportal.gmo.server.config.RabbitMqConfig;
+import cn.geoportal.gmo.server.entity.MailLog;
 import cn.geoportal.gmo.server.entity.mail.MailMessage;
+import cn.geoportal.gmo.server.service.MailLogService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.AmqpException;
-import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,11 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 /**
  * @ProjectName: gmo
@@ -36,6 +34,8 @@ public class ChatController {
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
+    @Autowired
+    private MailLogService mailLogService;
 
     /**
      * 发送消息
@@ -43,6 +43,7 @@ public class ChatController {
      * @param msg 消息内容
      * @return
      */
+    @ApiOperation(value = "发送消息")
     @RequestMapping(value = "/send/message", method = RequestMethod.GET)
     public boolean send(String msg) {
         try {
@@ -54,11 +55,19 @@ public class ChatController {
         return true;
     }
 
+    @ApiOperation(value = "发送邮件")
     @RequestMapping(value = "/send/mail", method = RequestMethod.POST)
-    public boolean send2(@RequestBody MailMessage msg) {
+    public boolean send2(@RequestBody MailMessage mailMessage) {
         try {
-            MailMessage emailSend = new MailMessage("a", "b");
+            MailMessage emailSend = new MailMessage(mailMessage.getFrom(), mailMessage.getTo(), mailMessage.getContent(), LocalDateTime.now().toString());
 
+            // 保存到日志表
+            MailLog mailLog = new MailLog();
+            mailLog.setMailto(mailMessage.getTo());
+            mailLog.setContent(mailMessage.getContent());
+            mailLogService.save(mailLog);
+
+            // 向RabbitMQ发送消息序列，以用于邮件发送
             rabbitTemplate.convertAndSend(RabbitMqConfig.EXCHANGE_NAME, RabbitMqConfig.BINDING_KEY_2, emailSend);
         } catch (AmqpException e) {
             log.error("发送消息2异常：{}", e);
@@ -67,16 +76,5 @@ public class ChatController {
             e.printStackTrace();
         }
         return true;
-    }
-
-    //对象转化为字节码
-    private  byte[] getBytesFromObject(Serializable obj) throws Exception {
-        if (obj == null) {
-            return null;
-        }
-        ByteArrayOutputStream bo = new ByteArrayOutputStream();
-        ObjectOutputStream oo = new ObjectOutputStream(bo);
-        oo.writeObject(obj);
-        return bo.toByteArray();
     }
 }

@@ -4,12 +4,16 @@ server:
 spring:
   # 邮件配置
   mail:
-    host: smtp.163.com
-    protocol: smtp
-    default-encoding: UTF-8
-    password: GMCWSOCEIPMWKBRF
-    username: xyf1224626810@163.com
-    port: 25
+    host: smtp.qq.com #个人邮箱
+    port: 465
+    username: 22666457@qq.com #邮箱地址，对应host的主机
+    password: leoxorlqmwpzbjbf #此处为邮箱**授权码**，qq独有
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
+
   rabbitmq:
     host: 127.0.0.1
     port: 5672

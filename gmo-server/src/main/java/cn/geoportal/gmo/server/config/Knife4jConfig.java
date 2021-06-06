@@ -70,9 +70,6 @@ public class Knife4jConfig {
     private List<SecurityContext> securityContexts() {
         // 设置需要登录认证的路径
         List<SecurityContext> result = new ArrayList<>();
-//        result.add(getContextByPath("/api/customer"));
-//        result.add(getContextByPath("/api/menu"));
-//        result.add(getContextByPath("/api/file"));
         return result;
     }
 

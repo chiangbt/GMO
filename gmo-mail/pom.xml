@@ -20,17 +20,17 @@
   </properties>
 
   <dependencies>
-    <!--    rabbitmq依赖-->
+    <!-- rabbitmq依赖-->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-amqp</artifactId>
     </dependency>
-    <!--    mail依赖-->
+    <!-- mail依赖-->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-mail</artifactId>
     </dependency>
-    <!--    thymeleaf依赖-->
+    <!-- thymeleaf依赖-->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -48,12 +48,6 @@
       <groupId>io.swagger</groupId>
       <artifactId>swagger-annotations</artifactId>
       <version>1.5.20</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.alibaba</groupId>
-      <artifactId>fastjson</artifactId>
-      <version>1.2.70</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
