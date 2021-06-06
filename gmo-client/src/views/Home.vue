@@ -152,7 +152,7 @@ export default {
 }
 .homeRouterView{
   margin-top:20px ;
-  widows: 100%;
+  width: 100%;
 }
 .elaside {
   width: 200px;
