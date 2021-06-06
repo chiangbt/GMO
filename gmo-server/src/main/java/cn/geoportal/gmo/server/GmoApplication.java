@@ -9,11 +9,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Package: cn.geoportal.gmo.server
  * @ClassName: GmoApplication
  * @Author: chiangbt@geoportal.cn
- * @Description: 启动类
+ * @Description: GMO-Server启动类
  * @Date: 2021/5/31 9:02
  */
-@SpringBootApplication
-@MapperScan("cn.geoportal.gmo.server.mapper")
+@SpringBootApplication  // SpringBoot应用程序
+@MapperScan("cn.geoportal.gmo.server.mapper")   // 扫描mapper包
 public class GmoApplication {
 
     public static void main(String[] args){

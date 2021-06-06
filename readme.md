@@ -13,6 +13,13 @@ GMO是一款基于SpringBoot、Mybatis Plus、Security和Knife4j等组件打造�
 
 [参考](https://www.cnblogs.com/cao-lei/)
 
+### 0、系统启动的前置条件
+
+1、安装java 11
+2、安装PostgreSQL数据
+3、安装Redis数据库
+4、安装RabbitMQ消息序列
+
 ### 1、数据结构
 
 由于我们使用的是Mybatis Plus作为ORM框架库，因此，在进行系统开发和部署之前，必须使用`sql`将对应的SQL语句进行执行，将必要的数据输入到数据库中。

@@ -72,7 +72,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/v2/api-docs/**",
                 "/",
                 "/img/**",
-                "/uploads/**"
+                "/uploads/**",
+                "ws/**"
         );
     }
 

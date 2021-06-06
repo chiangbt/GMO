@@ -1,1 +1,2 @@
-cn/geoportal/gmo/mail/MailApplication.class
+cn\geoportal\gmo\mail\service\HandleMsgService.class
+cn\geoportal\gmo\mail\MailApplication.class

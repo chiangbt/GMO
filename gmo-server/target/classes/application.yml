@@ -1,3 +1,4 @@
+# YAML是一种层级格式，它和.properties很容易互相转换，它的优点是去掉了大量重复的前缀，并且更加易读。
 server:
   port: 3000
 
@@ -59,6 +60,12 @@ spring:
         max-idle: 200
         # 最小空闲连接
         min-idle: 5
+
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
 
 mybatis-plus:
   # xml地址
