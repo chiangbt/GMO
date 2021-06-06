@@ -1,7 +1,11 @@
 package cn.geoportal.gmo.mail.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -13,12 +17,38 @@ import java.time.LocalDateTime;
  * @Date: 2021/6/6 15:38
  */
 @Data
-public class MailMessage {
-    private String from;
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, scope = MailMessage.class)
+public class MailMessage implements Serializable {
+    private String empName;
+    private String empId;
 
-    private String to;
+    public MailMessage(){
 
-    private String content;
+    }
 
-    private LocalDateTime dt;
+    public MailMessage(String empName, String empId){
+        this.empName = empName;
+        this.empId = empId;
+    }
+
+    public String getEmpName() {
+        return empName;
+    }
+
+    public void setEmpName(String empName) {
+        this.empName = empName;
+    }
+
+    public String getEmpId() {
+        return empId;
+    }
+
+    public void setEmpId(String empId) {
+        this.empId = empId;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee [empName=" + empName + ", empId=" + empId + "]";
+    }
 }

@@ -93,12 +93,14 @@ public class RabbitMqConfig {
         return BindingBuilder.bind(test2Queue()).to(topicExchange()).with(BINDING_KEY_2);
     }
 
+
     @Bean
-    public MessageConverter jsonMessageConverter(){
+    public MessageConverter jsonMessageConverter() {
         return new Jackson2JsonMessageConverter();
     }
 
-    public AmqpTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
+    @Bean
+    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
         final RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
         rabbitTemplate.setMessageConverter(jsonMessageConverter());
         return rabbitTemplate;

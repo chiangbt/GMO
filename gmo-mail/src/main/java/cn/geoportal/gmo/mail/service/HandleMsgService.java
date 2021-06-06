@@ -27,7 +27,7 @@ public class HandleMsgService {
 
     @RabbitListener(queues = "mail.queue")
     public void handle2(MailMessage emailSend) throws Exception {
-        System.out.println("  order : " + emailSend.getFrom()+"#"+emailSend.getTo()+"#"+emailSend.getContent());
+        System.out.println("  order : " + emailSend.getEmpName());
     }
 
 }

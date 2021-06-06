@@ -57,7 +57,7 @@ public class ChatController {
     @RequestMapping(value = "/send/mail", method = RequestMethod.POST)
     public boolean send2(@RequestBody MailMessage msg) {
         try {
-            MailMessage emailSend = new MailMessage("a", "b", "c", LocalDateTime.now());
+            MailMessage emailSend = new MailMessage("a", "b");
 
             rabbitTemplate.convertAndSend(RabbitMqConfig.EXCHANGE_NAME, RabbitMqConfig.BINDING_KEY_2, emailSend);
         } catch (AmqpException e) {
