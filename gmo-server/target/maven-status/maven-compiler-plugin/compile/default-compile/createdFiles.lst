@@ -45,6 +45,7 @@ cn/geoportal/gmo/server/mapper/SysMenuRoleMapper.class
 cn/geoportal/gmo/server/service/SysPoliticsStatusService.class
 cn/geoportal/gmo/server/service/impl/SysPoliticsStatusServiceImpl.class
 cn/geoportal/gmo/server/controller/JoblevelController.class
+cn/geoportal/gmo/server/entity/mail/MailConstants.class
 cn/geoportal/gmo/server/mapper/SysMenuMapper.class
 cn/geoportal/gmo/server/service/SysJoblevelService.class
 cn/geoportal/gmo/server/security/filter/JwtAuthencationTokenFilter.class

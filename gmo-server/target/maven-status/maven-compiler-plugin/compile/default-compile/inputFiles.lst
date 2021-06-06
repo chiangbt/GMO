@@ -47,6 +47,7 @@
 /Users/jiangbotao/IdeaProjects/GMO/gmo-server/src/main/java/cn/geoportal/gmo/server/service/impl/SysEmployeeServiceImpl.java
 /Users/jiangbotao/IdeaProjects/GMO/gmo-server/src/main/java/cn/geoportal/gmo/server/service/SysEmployeeService.java
 /Users/jiangbotao/IdeaProjects/GMO/gmo-server/src/main/java/cn/geoportal/gmo/server/service/SysSalaryService.java
+/Users/jiangbotao/IdeaProjects/GMO/gmo-server/src/main/java/cn/geoportal/gmo/server/entity/mail/MailConstants.java
 /Users/jiangbotao/IdeaProjects/GMO/gmo-server/src/main/java/cn/geoportal/gmo/server/controller/EmployeeController.java
 /Users/jiangbotao/IdeaProjects/GMO/gmo-server/src/main/java/cn/geoportal/gmo/server/controller/UserController.java
 /Users/jiangbotao/IdeaProjects/GMO/gmo-server/src/main/java/cn/geoportal/gmo/server/mapper/SysDepartmentMapper.java

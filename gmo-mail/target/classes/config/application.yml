@@ -1,0 +1,40 @@
+server:
+  port: 3009
+
+spring:
+  # 邮件配置
+  mail:
+    host: smtp.163.com
+    protocol: smtp
+    default-encoding: UTF-8
+    password: GMCWSOCEIPMWKBRF
+    username: xyf1224626810@163.com
+    port: 25
+  rabbitmq:
+    username: guest
+    password: guest
+    host: 127.0.0.1
+    port: 5672
+    listener:
+      simple:
+        #开启手动确认
+        acknowledge-mode: manual
+  redis:
+    timeout: 10000ms
+    #服务器端口
+    host: 127.0.0.1
+    #服务器端口
+    port: 6379
+    #数据库
+    database: 1
+    password:
+    lettuce:
+      pool:
+        #最大连接数
+        max-active: 1024
+        #最大连接阻塞等待时间
+        max-wait: 10000ms
+        #最大空闲连接
+        max-idle: 200
+        #最小空闲连接
+        min-idle: 5
