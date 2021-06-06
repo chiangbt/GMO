@@ -1,45 +1,26 @@
 <template>
   <div>
     <div>
-      <el-input
-        size="small"
-        class="addPosInput"
-        placeholder="添加职位"
-        suffix-icon="el-icon-plus"
-        v-model="pos.name"
-        @keydown.enter.native="addPosition"
-      >
-      </el-input>
-      <el-button
-        type="primary"
-        icon="el-icon-plus"
-        size="small"
-        @click="addPosition"
-        >添加</el-button
-      >
+      <el-input size="small" class="addPosInput" placeholder="添加职位" suffix-icon="el-icon-plus"
+        v-model="pos.name" @keydown.enter.native="addPosition"></el-input>
+      <el-button type="primary" icon="el-icon-plus" size="small" @click="addPosition">添加</el-button>
     </div>
     <div class="posMain">
-      <el-table
-        :data="positions"
-        stripe
-        border=""
-        style="width: 100%"
-        @selection-change="handleSelectionChange"
-      >
-        <el-table-column type="selection" width="55"></el-table-column>
-        <el-table-column prop="id" label="编号" width="55"> </el-table-column>
-        <el-table-column prop="name" label="职位" width="120"></el-table-column>
-        <el-table-column prop="enabled" label="是否启用" width="150"></el-table-column>
+      <el-table :data="positions" stripe border="" style="width: 100%" @selection-change="handleSelectionChange">
+        <el-table-column type="selection" width="40"/>
+        <el-table-column type="index" label="编号" align="center" width="55" :index='(index)=>{return (index+1)}' />
+        <el-table-column prop="name" label="职位"></el-table-column>
+        <el-table-column prop="enabled" label="是否启用" width="150">
+          <template slot-scope="scope">
+            <el-tag v-if="scope.row.enabled" type="success">已启用</el-tag>
+            <el-tag v-else type="danger">未启用</el-tag>
+          </template>
+        </el-table-column>
         <el-table-column prop="createdat" label="创建时间" width="200"></el-table-column>
-        <el-table-column label="操作">
+        <el-table-column label="操作" align="center" width="180">
           <template slot-scope="scope">
             <el-button size="mini" @click="showEditView(scope.$index, scope.row)">编辑</el-button>
-            <el-button
-              size="mini"
-              type="danger"
-              @click="handleDelete(scope.$index, scope.row)"
-              >删除</el-button
-            >
+            <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -49,14 +30,13 @@
       size="small"
       style="margin-top: 10px"
       :disabled="this.multipleSelection.length == 0"
-      @click="deleteMany"
-      >批量删除</el-button
-    >
-    <el-dialog title="编辑职位" :visible.sync="dialogVisible" width="30%">
-      <div>
-        <el-tag>职位名称</el-tag>
-        <el-input v-model="updatePos.name" class="updatePos"></el-input>
-      </div>
+      @click="deleteMany">批量删除</el-button>
+    <el-dialog title="编辑职位" :visible.sync="dialogVisible" width="25%">
+      <el-form ref="form" :model="form" :label-position='left' label-width="80px">
+        <el-form-item label="职位名称">
+          <el-input v-model="updatePos.name" class="updatePos"></el-input>
+        </el-form-item>
+      </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false" size="small">取消</el-button>
         <el-button type="primary" @click="doUpdate" size="small"
@@ -132,7 +112,7 @@ export default {
       }
     },
     doUpdate() {
-      this.putRequest("/system/basic/position/", this.updatePos).then((resp) => {
+      this.patchRequest("/system/basic/position/" + this.updatePos.id, this.updatePos).then((resp) => {
         if (resp) {
           this.initPositions();
           this.dialogVisible = false;

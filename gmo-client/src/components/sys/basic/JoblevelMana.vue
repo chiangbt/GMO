@@ -37,9 +37,9 @@
         border
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="55"></el-table-column>
-        <el-table-column prop="id" label="编号" width="50"> </el-table-column>
-        <el-table-column prop="name" label="职称" width="120">
+        <el-table-column type="selection" width="40"></el-table-column>
+        <el-table-column type='index' label="编号" align="center" width="50" :index='(index)=>{return (index+1)}'/>
+        <el-table-column prop="name" label="职称">
         </el-table-column>
         <el-table-column prop="titlelevel" label="职称等级" width="130">
         </el-table-column>
@@ -51,7 +51,7 @@
             <el-tag v-else type="danger">未启用</el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="操作">
+        <el-table-column label="操作" align="center" width="180">
           <template slot-scope="scope">
             <el-button
               size="mini"
@@ -182,7 +182,7 @@ export default {
       this.multipleSelection = val;
     },
     doUpdate() {
-      this.putRequest("/system/basic/joblevel/", this.updatejl).then((resp) => {
+      this.patchRequest("/system/basic/joblevel/" + this.updatejl.id , this.updatejl).then((resp) => {
         if (resp) {
           this.initJls();
           this.dialogVisible = false;

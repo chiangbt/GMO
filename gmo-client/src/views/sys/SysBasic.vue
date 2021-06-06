@@ -9,9 +9,6 @@
     <el-tab-pane label="职称管理" name="third">
       <JoblevelMana></JoblevelMana>
     </el-tab-pane>
-    <el-tab-pane label="奖惩规则" name="fourth">
-      <EcMana></EcMana>
-    </el-tab-pane>
     <el-tab-pane label="权限组" name="five">
       <PermissMana></PermissMana>
     </el-tab-pane>
@@ -21,7 +18,6 @@
 <script>
 import PosMana from "../../components/sys/basic/PosMana";
 import DepMana from "../../components/sys/basic/DepMana";
-import EcMana from "../../components/sys/basic/EcMana";
 import JoblevelMana from "../../components/sys/basic/JoblevelMana";
 import PermissMana from "../../components/sys/basic/PermissMana";
 
@@ -35,7 +31,6 @@ export default {
   },
   components: {
     DepMana,
-    EcMana,
     JoblevelMana,
     PosMana,
     PermissMana,
