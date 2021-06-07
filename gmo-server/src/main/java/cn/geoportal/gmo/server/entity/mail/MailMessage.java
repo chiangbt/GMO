@@ -21,8 +21,6 @@ import java.time.LocalDateTime;
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, scope = MailMessage.class)
 public class MailMessage implements Serializable {
 
-    @ApiModelProperty(value = "from", example = "mail@geoportal.cn", hidden = true)
-    private String from;
     private String to;
     private String content;
     @ApiModelProperty(hidden = true)
@@ -32,20 +30,12 @@ public class MailMessage implements Serializable {
 
     }
 
-    public MailMessage(String from, String to, String content, String date){
-        this.from = from;
+    public MailMessage(String to, String content, String date){
         this.to = to;
         this.content = content;
         this.date = date;
     }
 
-    public String getFrom() {
-        return from;
-    }
-
-    public void setFrom(String from) {
-        this.from = from;
-    }
 
     public String getTo() {
         return to;

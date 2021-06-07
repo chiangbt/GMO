@@ -59,7 +59,7 @@ public class ChatController {
     @RequestMapping(value = "/send/mail", method = RequestMethod.POST)
     public boolean send2(@RequestBody MailMessage mailMessage) {
         try {
-            MailMessage emailSend = new MailMessage(mailMessage.getFrom(), mailMessage.getTo(), mailMessage.getContent(), LocalDateTime.now().toString());
+            MailMessage emailSend = new MailMessage(mailMessage.getTo(), mailMessage.getContent(), LocalDateTime.now().toString());
 
             // 保存到日志表
             MailLog mailLog = new MailLog();

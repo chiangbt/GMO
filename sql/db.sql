@@ -33,3 +33,26 @@ COMMENT ON COLUMN t_mail_log.id IS 'ID';
 COMMENT ON COLUMN t_mail_log.mailto IS '客户名';
 COMMENT ON COLUMN t_mail_log.content IS '邮件内容';
 COMMENT ON COLUMN t_mail_log.createdAt IS '数据新建时间';
+
+/**
+  3、Quartz定时任务表
+ */
+DROP TABLE IF EXISTS t_task_config;
+CREATE TABLE t_task_config
+(
+    id          SERIAL PRIMARY KEY NOT NULL,
+    task_id     VARCHAR(8)         NOT NULL,
+    cron        VARCHAR(20)        NOT NULL,
+    class_name  VARCHAR(255)       NOT NULL,
+    description VARCHAR(255)       NOT NULL,
+    status      INTEGER            NOT NULL,
+    createdAt   timestamp(3)       NOT NULL DEFAULT (CURRENT_TIMESTAMP)
+);
+COMMENT ON table  t_task_config IS '定时任务表';
+COMMENT ON COLUMN t_task_config.id IS 'ID';
+COMMENT ON COLUMN t_task_config.task_id IS '任务id';
+COMMENT ON COLUMN t_task_config.cron IS 'CRON表达式';
+COMMENT ON COLUMN t_task_config.class_name IS 'job引用地址';
+COMMENT ON COLUMN t_task_config.description IS '描述';
+COMMENT ON COLUMN t_task_config.status IS '定时任务状态 0 停用,1启用';
+COMMENT ON COLUMN t_task_config.createdAt IS '数据新建时间';
