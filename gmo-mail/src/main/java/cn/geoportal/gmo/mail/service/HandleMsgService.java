@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
@@ -25,6 +26,8 @@ public class HandleMsgService {
 
     @Autowired
     private JavaMailSender emailSender;
+    @Value("${spring.mail.username}")
+    private String emailFrom;
 
     @RabbitListener(queues = "test1.queue")
     public void handle1(String msg) {
@@ -36,7 +39,7 @@ public class HandleMsgService {
         System.out.println("Mail Message : " + emailSend.getContent());
         // 邮件设置
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("chiangbt@163.com");
+        message.setFrom(emailFrom);
         message.setTo(emailSend.getTo());
         message.setSubject("邮件通知");
         message.setText(emailSend.getContent());

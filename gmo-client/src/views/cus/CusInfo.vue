@@ -1,8 +1,19 @@
 <template>
   <div>
-    <div style="text-align: right; margin-top: 30px;">
-      <el-button type="primary" icon="el-icon-plus" @click="dialogFormVisible = true">添加</el-button>
-      <el-button type="danger" icon="el-icon-circle-close"  @click="handleDeleteMany()">>批量删除</el-button>
+    <div style="text-align: right; margin-top: 30px; margin-bottom:20px;">
+      <el-row :gutter="20">
+        <el-col :md="12">
+          <el-input
+            Placeholder="Search..." clearable @clear="onClearSearch"
+            v-model="searchVal" @keyup.enter.native="onEnterSearch">
+            <i slot="prefix" class="el-input__icon el-icon-search"></i>
+          </el-input>
+        </el-col>
+        <el-col :md="12">
+          <el-button type="primary" icon="el-icon-plus" @click="dialogFormVisible = true">添加</el-button>
+          <el-button type="danger" icon="el-icon-circle-close"  @click="handleDeleteMany()">批量删除</el-button>
+        </el-col>
+      </el-row>
     </div>
     <el-table :data="menuList" stripe border style="width: 100%" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="40"></el-table-column>
@@ -31,7 +42,7 @@
       >
       </el-pagination>
     </div>
-    <el-dialog title="添加" :visible.sync="dialogFormVisible" width="25%">
+    <el-dialog title="添加" :visible.sync="dialogFormVisible" width="30%">
       <el-form :model="userForm" ref="userForm" :rules="rules" label-position="left">
         <el-form-item label="名称" prop="name">
           <el-input v-model="userForm.name"></el-input>
@@ -48,7 +59,7 @@
         <el-button type="primary" @click="add(userForm)">确定</el-button>
       </div>
     </el-dialog>
-    <el-dialog title="更新" :visible.sync="editDialogVisible" width="25%">
+    <el-dialog title="更新" :visible.sync="editDialogVisible" width="30%">
       <el-form :model="editForm" ref="editForm" :rules="rules" label-position="left">
         <el-form-item label="姓名" prop="name">
           <el-input v-model="editForm.name"></el-input>
@@ -85,8 +96,9 @@ export default {
     return {
       menuList:[],
       multipleSelection: [],
+      searchVal: '',
       queryInfo: {
-        name: "",
+        query: "",
         pageNo: 1,
         pageSize: 15
       },
@@ -112,8 +124,8 @@ export default {
   },
   methods:{
     async getCustomerList() {
-      const { data, code, message } = await this.getRequest("/api/customer?name=" + 
-        this.queryInfo.name + "&pageNo=" + 
+      const { data, code, message } = await this.getRequest("/api/customer?query=" + 
+        this.queryInfo.query + "&pageNo=" + 
         this.queryInfo.pageNo + "&pageSize=" + this.queryInfo.pageSize);
 
       if (code !== 200) {
@@ -131,6 +143,14 @@ export default {
     },
     handleCurrentChange(newPage) {
       this.queryInfo.pageNo = newPage;
+      this.getCustomerList();
+    },
+    onEnterSearch(e,searchVal) {
+      this.queryInfo.query = this.searchVal;
+      this.getCustomerList();
+    },
+    onClearSearch(){
+      this.queryInfo.query = '';
       this.getCustomerList();
     },
     add(form) {

@@ -50,15 +50,15 @@ public class CustomerController {
     @ApiImplicitParams({
             @ApiImplicitParam(name="pageNo", value = "当前页号", required = true, example = "1"),
             @ApiImplicitParam(name="pageSize", value = "批次数量", required = true, example = "15"),
-            @ApiImplicitParam(name = "name",value = "名称", required = false, example = "")
+            @ApiImplicitParam(name = "query",value = "名称", required = false, example = "")
     })
     @RequestMapping(value = "", method = RequestMethod.GET)
     public RespBean customerList(@RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,
                                  @RequestParam(value = "pageSize", defaultValue = "15") Integer pageSize,
-                                 @RequestParam(value="name", defaultValue = "") String name){
+                                 @RequestParam(value="query", defaultValue = "") String query){
         // 翻页参数包装器
         QueryWrapper<Customer> wrapper = new QueryWrapper<>();
-        wrapper.like("name", name);
+        wrapper.like("name", query);
         wrapper.orderByDesc("id");
         // 翻页对象
         Page<Customer> ipage = new Page<>(pageNo, pageSize);
