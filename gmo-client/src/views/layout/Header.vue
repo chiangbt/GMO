@@ -2,7 +2,7 @@
     <el-header class="homeHeader" style="padding-Left: 20px;padding-right:0px;height:60px;">
         <div class="title">
             <div v-if="!this.$store.state.isCollapse">GeoMO</div>
-            <i v-else style="font-size:34px;" class="fa fa-snowflake-o" ></i>
+            <i v-else style="font-size:34px;" class="fa fa-globe" ></i>
         </div>
         <div class="toggleBtn" ref="toggleBtn" @click="collapseChage">
             <i v-if="this.$store.state.isCollapse" style="font-size:24px;" class="el-icon-s-unfold"></i>

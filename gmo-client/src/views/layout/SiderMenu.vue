@@ -3,7 +3,7 @@
         <el-menu :collapse="isToggle" router unique-opened style="height:100%;">
           <el-submenu :index="index + ''" v-for="(item, index) in routes" :key="index" v-if="!item.hidden" >
             <template slot="title">
-              <i :class="item.iconcls" style="color: #laccff; margin-right: 5px"></i>
+              <i :class="item.iconcls" style="color: #f56c6c; margin-right: 5px"></i>
               <span>{{ item.name }}</span>
             </template>
             <el-menu-item :index="children.path" v-for="(children, indexj) in item.children" :key="indexj">

@@ -15,6 +15,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,6 +29,7 @@ import java.util.Map;
  * @Date: 2021/5/31 11:55
  */
 @Api(tags = "1.客户模块")
+@ApiIgnore
 @ApiSupport(order = 302)    // 分组排序
 @RestController
 @RequestMapping("/api/customer")

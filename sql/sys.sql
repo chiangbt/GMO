@@ -26,7 +26,6 @@ INSERT INTO t_sys_user(username,email,password) VALUES ('admin' , 'admin@sleeep.
 INSERT INTO t_sys_user(username,email,password) VALUES ('user1', 'xx@cn.cn', '$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe');
 INSERT INTO t_sys_user(username,email,password) VALUES ('user2', 'xx2@cn.cn', '$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe');
 INSERT INTO t_sys_user(username,email,password) VALUES ('user3', 'xx3@cn.cn', '$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe' );
-INSERT INTO t_sys_user(username,email,password) VALUES ('user4', 'xx4@cn.cn', '$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe');
 INSERT INTO t_sys_user(username,email,password) VALUES ('chiangbt', 'xx41@cn.cn', '$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe');
 INSERT INTO t_sys_user(username,email,password) VALUES ('chiangbt2', 'xx42@cn.cn', '$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe');
 INSERT INTO t_sys_user(username,email,password) VALUES ('jiangbotao', 'xx43@cn.cn', '$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe');
@@ -51,7 +50,7 @@ INSERT INTO t_sys_role(name, nameZh) VALUES ('ROLE_personnel', '人事专员');
 INSERT INTO t_sys_role(name, nameZh) VALUES ('ROLE_recruiter', '招聘主管');
 INSERT INTO t_sys_role(name, nameZh) VALUES ('ROLE_train', '培训主管');
 INSERT INTO t_sys_role(name, nameZh) VALUES ('ROLE_performance', '薪酬绩效主管');
-INSERT INTO t_sys_role(name, nameZh) VALUES ('ROLE_admin', '系统管理员');
+INSERT INTO t_sys_role(name, nameZh) VALUES ('ROLE_admin', '超级管理员');
 INSERT INTO t_sys_role(name, nameZh) VALUES ('ROLE_test', '测试角色');
 
 
@@ -81,8 +80,9 @@ INSERT INTO t_sys_user_role(user_id, role_id) VALUES (3, 3);
 INSERT INTO t_sys_user_role(user_id, role_id) VALUES (3, 4);
 INSERT INTO t_sys_user_role(user_id, role_id) VALUES (2, 3);
 INSERT INTO t_sys_user_role(user_id, role_id) VALUES (2, 4);
-
-
+INSERT INTO t_sys_user_role(user_id, role_id) VALUES (5, 7);
+INSERT INTO t_sys_user_role(user_id, role_id) VALUES (6, 7);
+INSERT INTO t_sys_user_role(user_id, role_id) VALUES (7, 7);
 /**
   4、菜单表
  */
@@ -111,13 +111,13 @@ COMMENT ON COLUMN t_sys_menu.parentId IS '父id';
 COMMENT ON COLUMN t_sys_menu.enabled IS '是否启用';
 -- SQLINES DEMO *** -----------
 INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled) VALUES ('/', NULL, NULL, '所有', NULL, NULL, NULL, NULL, 1);
-INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled) VALUES ('/', '/home', 'Home', '员工资料', 'fa fa-user-circle-o', NULL, 1, 1, 1);
+INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled) VALUES ('/', '/home', 'Home', '客户资料', 'fa fa-user-circle-o', NULL, 1, 1, 1);
 INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled) VALUES ('/', '/home', 'Home', '人事管理', 'fa fa-address-card-o', NULL, 1, 1, 1);
 INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled) VALUES ('/', '/home', 'Home', '薪资管理', 'fa fa-money', NULL, 1, 1, 1);
 INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled) VALUES ('/', '/home', 'Home', '统计管理', 'fa fa-bar-chart', NULL, 1, 1, 1);
 INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled) VALUES ('/', '/home', 'Home', '系统管理', 'fa fa-windows', NULL, 1, 1, 1);
-INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled) VALUES ('/employee/basic/**', '/emp/basic', 'EmpBasic', '基本资料', NULL, NULL, 1, 2, 1);
-INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled) VALUES ('/employee/advanced/**', '/emp/adv', 'EmpAdv', '高级资料', NULL, NULL, 1, 2, 1);
+INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled) VALUES ('/customer/info/**', '/cus/info', 'CusInfo', '客户信息', NULL, NULL, 1, 2, 1);
+INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled) VALUES ('/customer/mail/**', '/cus/mail', 'CusMail', '客户邮件', NULL, NULL, 1, 2, 1);
 INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled) VALUES ('/personnel/emp/**', '/per/emp', 'PerEmp', '员工资料', NULL, NULL, 1, 3, 1);
 INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled) VALUES ('/personnel/ec/**', '/per/ec', 'PerEc', '员工奖惩', NULL, NULL, 1, 3, 1);
 INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled) VALUES ('/personnel/train/**', '/per/train', 'PerTrain', '员工培训', NULL, NULL, 1, 3, 1);
@@ -155,6 +155,7 @@ COMMENT ON COLUMN t_sys_menu_role.menu_id IS '菜单id';
 COMMENT ON COLUMN t_sys_menu_role.role_id IS '权限id';
 -- SQLINES DEMO *** -----------
 INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (7, 6);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (8, 6);
 INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (9, 6);
 INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (10, 6);
 INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (11, 6);

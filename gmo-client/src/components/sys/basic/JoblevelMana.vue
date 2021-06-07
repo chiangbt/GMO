@@ -118,8 +118,8 @@
         </tr>
       </table>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="doUpdate">确 定</el-button>
+        <el-button @click="dialogVisible = false">取消</el-button>
+        <el-button type="primary" @click="doUpdate">确定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -150,32 +150,27 @@ export default {
   },
   methods: {
     deleteMany() {
-      this.$confirm(
-        "此操作将删除[" + this.multipleSelection.length + "]条记录,提示",
-        {
-          confirmButtonText: "确定",
-          cancelButtonText: "取消",
-          type: "warning",
-        }
-      )
-        .then(() => {
-          let ids = "?";
-          this.multipleSelection.forEach((item) => {
-            ids += "ids=" + item.id + "&";
-          });
-          console.log(ids);
-          this.deleteRequest("/system/basic/joblevel/" + ids).then((resp) => {
-            if (resp) {
-              this.initJls();
-            }
-          });
-        })
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "已取消操作",
-          });
+      this.$confirm("此操作将删除[" + this.multipleSelection.length + "]条记录,提示",{
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      }).then(() => {
+        let ids = "?";
+        this.multipleSelection.forEach((item) => {
+          ids += "ids=" + item.id + "&";
         });
+        console.log(ids);
+        this.deleteRequest("/system/basic/joblevel/" + ids).then((resp) => {
+          if (resp) {
+            this.initJls();
+          }
+        });
+      }).catch(() => {
+        this.$message({
+          type: "info",
+          message: "已取消操作",
+        });
+      });
     },
     handleSelectionChange(val) {
       this.multipleSelection = val;

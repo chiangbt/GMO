@@ -29,7 +29,7 @@ public class KaptchaConfig {
         // 边框颜色
         properties.setProperty("kaptcha.border.color", "105,179,90");
         // 字体颜色
-        properties.setProperty("kaptcha.textproducer.font.color", "blue");
+        properties.setProperty("kaptcha.textproducer.font.color", "red");
         // 图片宽
         properties.setProperty("kaptcha.image.width", "110");
         // 图片高
