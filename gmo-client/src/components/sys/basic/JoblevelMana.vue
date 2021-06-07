@@ -64,8 +64,8 @@
               @click="handleDelete(scope.$index, scope.row)"
               >删除</el-button
             >
-          </template></el-table-column
-        >
+          </template>
+        </el-table-column>
       </el-table>
     </div>
     <el-button
@@ -84,7 +84,6 @@
             <el-input v-model="updatejl.name" size="small"></el-input>
           </td>
         </tr>
-
         <tr>
           <td><el-tag>职称等级</el-tag></td>
           <td>

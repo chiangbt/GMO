@@ -4,6 +4,7 @@ import cn.geoportal.gmo.server.config.RabbitMqConfig;
 import cn.geoportal.gmo.server.entity.MailLog;
 import cn.geoportal.gmo.server.entity.mail.MailMessage;
 import cn.geoportal.gmo.server.service.MailLogService;
+import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -27,6 +28,7 @@ import java.time.LocalDateTime;
  * @Date: 2021/6/6 12:14
  */
 @Api(tags = "11.Websocket发送信息")
+@ApiSupport(order = 313)
 @RestController
 public class ChatController {
 

@@ -87,7 +87,7 @@
           AND m2.enabled = 1
         ORDER BY
             m2.id
-     </select>
+    </select>
 
     <!--根据角色获取菜单列表-->
     <select id="getMenusWithRole" resultMap="MenusWithRole">

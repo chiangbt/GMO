@@ -10,10 +10,15 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @author: chiangbt@geoportal.cn
  * @CreatedAt: 2021/6/6 4:06 下午
+ * RabbitMQ 配置项
  **/
 @Configuration
 public class RabbitMqConfig {
 
+    /**
+     * RabbitMQ使用JSON转换对象
+     * @return
+     */
     @Bean
     public MessageConverter jsonMessageConverter() {
         return new Jackson2JsonMessageConverter();

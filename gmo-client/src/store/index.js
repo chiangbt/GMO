@@ -6,7 +6,9 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        routes: []
+        routes: [],
+        isCollapse: false,
+        aside_width: '200px'
     },
     mutations: {
         initRoutes(state, data) {

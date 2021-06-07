@@ -137,7 +137,7 @@ export default {
       selectedKeys.forEach((key) => {
         url += "&mids=" + key;
       });
-      this.putRequest(url).then((resp) => {
+      this.patchRequest(url).then((resp) => {
         if (resp) {
           this.activeName = -1;
         }

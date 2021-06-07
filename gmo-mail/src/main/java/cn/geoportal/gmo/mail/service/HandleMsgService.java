@@ -36,7 +36,7 @@ public class HandleMsgService {
         System.out.println("Mail Message : " + emailSend.getContent());
         // 邮件设置
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("22666457@qq.com");
+        message.setFrom("chiangbt@163.com");
         message.setTo(emailSend.getTo());
         message.setSubject("邮件通知");
         message.setText(emailSend.getContent());
