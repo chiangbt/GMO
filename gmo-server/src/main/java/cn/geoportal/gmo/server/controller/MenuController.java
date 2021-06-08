@@ -1,14 +1,13 @@
 package cn.geoportal.gmo.server.controller;
 
 import cn.geoportal.gmo.server.entity.SysMenu;
+import cn.geoportal.gmo.server.entity.common.RespBean;
 import cn.geoportal.gmo.server.service.SysMenuService;
 import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,5 +32,22 @@ public class MenuController {
     @GetMapping("/menu")
     public List<SysMenu> getMenuByUserId(){
         return sysMenuService.getMenusByUserId();
+    }
+
+    @ApiOperation(value = "更新菜单名称")
+    @PatchMapping(value = "/{id}", produces = "application/json")
+    public RespBean updateMenuNameById(@PathVariable(value="id") Integer id, String name){
+        SysMenu sysMenu = sysMenuService.findMenuById(id);
+        try{
+            sysMenu.setName(name);
+            int result = sysMenuService.UpdateMenuById(sysMenu);
+            if(0 == result){
+                return RespBean.error("需要更新的数据不存在");
+            }
+            return RespBean.success("更新成功", result);
+        }catch (Exception exp){
+            System.out.println(exp.getMessage());
+            return RespBean.error("更新不成功");
+        }
     }
 }

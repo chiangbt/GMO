@@ -204,7 +204,6 @@ INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (24, 1);
 INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (25, 1);
 INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (26, 1);
 INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (27, 1);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (28, 1);
 INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (11, 4);
 INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (8, 4);
 INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (7, 4);

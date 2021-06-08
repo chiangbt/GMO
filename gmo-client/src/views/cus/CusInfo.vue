@@ -15,33 +15,35 @@
         </el-col>
       </el-row>
     </div>
-    <el-table :data="menuList" stripe border style="width: 100%" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="40"></el-table-column>
-      <el-table-column type='index' label="编号" align="center" width="50" :index='(index)=>{return (index+1)}'/>
-      <el-table-column prop="name" label="姓名"></el-table-column>
-      <el-table-column prop="age" label="年龄" width="180"></el-table-column>
-      <el-table-column prop="address" label="地址"></el-table-column>
-      <el-table-column prop="updatedat" label="录入时间"></el-table-column>
-      <el-table-column label="操作" align="center" width="180">
-        <template slot-scope="scope">
-          <el-button size="mini" @click="handleEdit(scope.row)" class="el-icon-edit">编辑</el-button>
-          <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)" class="el-icon-delete">删除</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-    <div style="text-align: right; margin-top: 30px;">
-      <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="queryInfo.pageNo"
-        :page-sizes="[15, 25, 50]"
-        :page-size="queryInfo.pageSize"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="total"
-        background
-      >
-      </el-pagination>
-    </div>
+    <el-card class="box-card" shadow="always">
+      <el-table :data="menuList" stripe border style="width: 100%" @selection-change="handleSelectionChange">
+        <el-table-column type="selection" width="40"></el-table-column>
+        <el-table-column type='index' label="编号" align="center" width="50" :index='(index)=>{return (index+1)}'/>
+        <el-table-column prop="name" label="姓名"></el-table-column>
+        <el-table-column prop="age" label="年龄" width="180"></el-table-column>
+        <el-table-column prop="address" label="地址"></el-table-column>
+        <el-table-column prop="updatedat" label="录入时间"></el-table-column>
+        <el-table-column label="操作" align="center" width="180">
+          <template slot-scope="scope">
+            <el-button size="mini" @click="handleEdit(scope.row)" class="el-icon-edit">编辑</el-button>
+            <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)" class="el-icon-delete">删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <div style="text-align: right; margin-top: 30px;">
+        <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="queryInfo.pageNo"
+          :page-sizes="[15, 25, 50]"
+          :page-size="queryInfo.pageSize"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="total"
+          background
+        >
+        </el-pagination>
+      </div>
+    </el-card>
     <el-dialog title="添加" :visible.sync="dialogFormVisible" width="30%">
       <el-form :model="userForm" ref="userForm" :rules="rules" label-position="left">
         <el-form-item label="名称" prop="name">

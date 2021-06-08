@@ -1,15 +1,48 @@
 server:
   port: 3099
 
-#eueka 主机名
+spring:
+  application:
+    name: eureka-server
+# 详见EurekaServerConfigBean，需要注意与Client和Instance在client的jar包不同，Server是在server的jar包。
+# eureka的各项配置可见EurekaXXXConfigBean。
 eureka:
   instance:
     hostname: 127.0.0.1
+    prefer-ip-address: true
+    leaseRenewalIntervalInSeconds:  5 # 心跳间隔，5秒
+    leaseExpirationDurationInSeconds: 10  # 没有心跳的淘汰时间，10秒
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.application.instance_id:${server.port}} #SpringCloud 2.0 已经改成 ${spring.cloud.client.ip-address} 了，于是修改
   client:
-    #不注册自己
-    register-with-eureka: false
-    #获取服务
-    fetch-registry: false
-    #提供者和消费者的注册地址
-    service-url:
-      defaultZone: http://127.0.0.1:3099/eureka/
+    healthcheck:
+      enabled: true
+    # 默认情况下，eureka server同时也是eureka client，用于相互注册形成高可用eureka服务。
+    # 单点时，如果registerWithEureka配置为true，则eureka server会报错Cannot execute request on any known server
+    registerWithEureka: false # 是否注册到eureka服务，默认为true，当前已为eureka server，且单点eureka，故配置为false
+    fetchRegistry: false # eureka之间如果网络不稳定，客户端一般也会缓存了注册列表，因此eureka服务可以不缓存，我觉得更能确保eureka之间的一致。
+    serviceUrl:
+      # registerWithEureka关闭后，defaultZone没有配置的必要。如果打开，即使配置为本机一样报错。
+      # 也就是说defaultZone任何时候都没有配置为localhost的必要。这点上John的配置更好，永超和周立包括志朋的配置有点多余。
+      # 但是周立说的对，这个属性默认配置是http://localhost:8761/eureka，也就是当你没有用户名密码安全认证时，本机调试时，客户端可以不配置，
+      # 但对于server来说，这个默认没有什么作用。对于client来说，也只有调试的时候有点作用。
+      # 但有一点很奇怪，既然默认了8761端口，为什么eureka server的默认端口要用8080而不是8761呢？
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/ #应用的主机名称
+  #      defaultZone: http://${security.user.name}:${security.user.password}@localhost:${server.port}/eureka # 本配置应删除。
+  server:
+    # 自我保护机制，默认true。打开后，心跳失败在15分钟内低于85%(renewalPercentThreshold)的服务，也不进行剔除。
+    # 关闭后，主页提示：RENEWALS ARE LESSER THAN THE THRESHOLD. THE SELF PRESERVATION MODE IS TURNED OFF.
+    # THIS MAY NOT PROTECT INSTANCE EXPIRY IN CASE OF NETWORK/OTHER PROBLEMS.
+    enableSelfPreservation: true # 本地调试时可fasle关闭。但生产建议打开，可防止因网络不稳定等原因导致误剔除服务。
+    renewalPercentThreshold: 0.85 # 默认85%
+    # 在服务器接收请求之前等待的初始时间，默认等待5min（John Carnell）
+    waitTimeInMsWhenSyncEmpty: 5 # John说开发时最好注释此配置，服务注册需要3次心跳，每次10s，也就是30s才能显示在eureka。但是为什么我这里马上就显示呢？
+    # eureka server刷新readCacheMap的时间，注意，client读取的是readCacheMap，这个时间决定了多久会把readWriteCacheMap的缓存更新到readCacheMap上
+    # 默认30秒，eclipse提示默认0应该是错误的，源代码中responseCacheUpdateIntervalMs = 30 * 1000。
+    response-cache-update-interval-ms: 3000 # 网上很多专家的博客错误写成responseCacheUpdateInvervalMs，请注意。这里配置为3秒。
+    # eureka server缓存readWriteCacheMap失效时间，这个只有在这个时间过去后缓存才会失效，失效前不会更新，
+    # 过期后从registry重新读取注册服务信息，registry是一个ConcurrentHashMap。
+    # 由于启用了evict其实就用不太上改这个配置了，默认180s
+    responseCacheAutoExpirationInSeconds: 180
+    # 启用主动失效，并且每次主动失效检测间隔为3s。源码evictionIntervalTimerInMs = 60 * 1000，默认一分钟。
+    # 需要注意的是该配置会打印INFO日志，增加info日志量，修改后从每60秒打印一次变成3秒打印一次。
+    evictionIntervalTimerInMs: 3000 # 注意不要写成EvictionIntervalTimerInMs，yml大小写敏感。

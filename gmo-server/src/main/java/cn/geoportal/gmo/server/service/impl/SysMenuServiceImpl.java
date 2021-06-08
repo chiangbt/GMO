@@ -59,6 +59,19 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     public List<SysMenu> getAllMenus() {
         return sysMenuMapper.getAllMenus();
     }
+
+    @Override
+    public SysMenu findMenuById(Integer id) {
+        return sysMenuMapper.selectById(id);
+    }
+
+    @Override
+    public int UpdateMenuById(SysMenu sysMenu) {
+        Long userId = SysUserUtils.getCurrentSysUser().getId();
+        redisTemplate.delete("menu_" + userId);
+
+        return sysMenuMapper.updateById(sysMenu);
+    }
 }
 
 

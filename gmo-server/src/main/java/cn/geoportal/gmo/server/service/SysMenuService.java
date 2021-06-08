@@ -29,4 +29,17 @@ public interface SysMenuService extends IService<SysMenu> {
      */
     List<SysMenu> getAllMenus();
 
+    /**
+     * 4、查询menu
+     * @param id
+     * @return
+     */
+    SysMenu findMenuById(Integer id);
+
+    /**
+     * 5、更新menu
+     * @param sysMenu
+     * @return
+     */
+    int UpdateMenuById(SysMenu sysMenu);
 }

@@ -2,13 +2,6 @@
 server:
   port: 3000
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:3099/eureka
-  instance:
-    preferIpAddress: true
-
 spring:
   application:
     name: GMO_Server
@@ -131,5 +124,16 @@ management:
   endpoint:
     health:
       show-details: always
+      enabled: true
     shutdown:
       enabled: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:3099/eureka
+    enabled: true
+    healthcheck:
+      enabled: true
+  instance:
+    preferIpAddress: true
