@@ -60,6 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/api/auth/login",
                 "/api/auth/logout",
                 "/api/auth/captcha",
+                "/actuator/**",
                 "/css/**",
                 "/js/**",
                 "index.html",

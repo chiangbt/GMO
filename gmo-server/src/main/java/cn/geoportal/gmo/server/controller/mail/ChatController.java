@@ -64,7 +64,7 @@ public class ChatController {
 
     @ApiOperation(value = "发送邮件")
     @RequestMapping(value = "/mail", method = RequestMethod.POST)
-    public boolean send2(@RequestBody MailMessage mailMessage) {
+    public RespBean send2(@RequestBody MailMessage mailMessage) {
         try {
             MailMessage emailSend = new MailMessage(mailMessage.getTo(), mailMessage.getContent(), LocalDateTime.now().toString());
 
@@ -78,11 +78,11 @@ public class ChatController {
             rabbitTemplate.convertAndSend(RabbitMqConfig.EXCHANGE_NAME, RabbitMqConfig.BINDING_KEY_2, emailSend);
         } catch (AmqpException e) {
             log.error("发送消息2异常：{}", e);
-            return false;
+            return RespBean.error("发送失败");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return true;
+        return RespBean.success("发送成功");
     }
 
     @ApiOperation(value = "客户信息列表")

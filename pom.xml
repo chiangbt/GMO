@@ -5,6 +5,7 @@
     <modules>
         <module>gmo-server</module>
         <module>gmo-mail</module>
+        <module>gmo-admin</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

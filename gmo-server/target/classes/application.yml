@@ -60,12 +60,17 @@ spring:
         max-idle: 200
         # 最小空闲连接
         min-idle: 5
-
   rabbitmq:
     host: 127.0.0.1
     port: 5672
     username: guest
     password: guest
+  boot:
+    admin:
+      client:
+        url: http://localhost:3005
+        username: admin
+        password: archesadmin
 
 mybatis-plus:
   # xml地址
@@ -108,3 +113,14 @@ knife4j:
     enableFooterCustom: true
     footerCustomContent: Copyright  2019 - [GeoPortal.cn](https://www.geoportal.cn)
     enableHomeCustom: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+    shutdown:
+      enabled: true
