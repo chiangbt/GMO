@@ -1,0 +1,15 @@
+server:
+  port: 3099
+
+#eueka 主机名
+eureka:
+  instance:
+    hostname: 127.0.0.1
+  client:
+    #不注册自己
+    register-with-eureka: false
+    #获取服务
+    fetch-registry: false
+    #提供者和消费者的注册地址
+    service-url:
+      defaultZone: http://127.0.0.1:3099/eureka/

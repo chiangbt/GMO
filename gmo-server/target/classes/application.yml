@@ -2,7 +2,16 @@
 server:
   port: 3000
 
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:3099/eureka
+  instance:
+    preferIpAddress: true
+
 spring:
+  application:
+    name: GMO_Server
   datasource:
     name: druidDataSource
     type: com.alibaba.druid.pool.DruidDataSource

@@ -1,4 +1,0 @@
-cn/geoportal/gmo/mail/MailApplication.class
-cn/geoportal/gmo/mail/config/RabbitMqConfig.class
-cn/geoportal/gmo/mail/service/HandleMsgService.class
-cn/geoportal/gmo/mail/entity/MailMessage.class
