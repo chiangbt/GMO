@@ -23,6 +23,11 @@ public class MailLogServiceImpl extends ServiceImpl<MailLogMapper, MailLog> impl
     public IPage<MailLog> selectPage(Page page, Wrapper<MailLog> wrapper) {
         return mailLogMapper.selectPage(page, wrapper);
     }
+
+    @Override
+    public int deleteMailLog(Integer id) {
+        return mailLogMapper.deleteById(id);
+    }
 }
 
 

@@ -20,6 +20,7 @@ import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.time.LocalDateTime;
 
@@ -32,6 +33,7 @@ import java.time.LocalDateTime;
  * @Date: 2021/6/6 12:14
  */
 @Api(tags = "11.Websocket发送信息")
+@ApiIgnore
 @ApiSupport(order = 313)
 @RestController
 @RequestMapping("/api/send")
@@ -85,7 +87,7 @@ public class ChatController {
         return RespBean.success("发送成功");
     }
 
-    @ApiOperation(value = "客户信息列表")
+    @ApiOperation(value = "客户邮件列表")
     @ApiImplicitParams({
             @ApiImplicitParam(name="pageNo", value = "当前页号", required = true, example = "1"),
             @ApiImplicitParam(name="pageSize", value = "批次数量", required = true, example = "15"),
@@ -112,6 +114,17 @@ public class ChatController {
             return RespBean.success("获取成功", pageResult);
         }catch (Exception e){
             return RespBean.error("无数据");
+        }
+    }
+
+    @ApiOperation(value = "删除指定id的MailLog")
+    @DeleteMapping(value = "/maillist/{id}", produces = "application/json")
+    public RespBean deleteMailLogById(@PathVariable(value="id") Integer id){
+        try{
+            int result = mailLogService.deleteMailLog(id);
+            return RespBean.success("删除成功", result);
+        }catch (Exception exp){
+            return RespBean.error("删除不成功");
         }
     }
 }

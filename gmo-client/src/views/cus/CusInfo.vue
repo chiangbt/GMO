@@ -190,10 +190,10 @@ export default {
     },
     handleDelete(key, data){
       console.log(data.id);
-        this.$confirm("此操作将删除[" + data.name + "]记录,提示", {
-          confirmButtonText: "确定",
-          cancelButtonText: "取消",
-          type: "warning"
+      this.$confirm("此操作将删除[" + data.name + "]记录,提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
       }).then(() => {
         this.deleteRequest("/api/customer/" + data.id).then((resp) => {
           if (resp) {
