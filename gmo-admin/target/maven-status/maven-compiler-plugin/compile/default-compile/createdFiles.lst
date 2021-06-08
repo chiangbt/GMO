@@ -1,2 +1,2 @@
-cn\geoportal\gmo\admin\config\SecurityConfiguration.class
-cn\geoportal\gmo\admin\SpringBootAdminApplication.class
+cn/geoportal/gmo/admin/SpringBootAdminApplication.class
+cn/geoportal/gmo/admin/config/SecurityConfiguration.class
