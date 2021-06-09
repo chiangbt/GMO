@@ -10,7 +10,7 @@ CREATE TABLE t_customer(
     createdAt timestamp(3) NOT NULL DEFAULT (CURRENT_TIMESTAMP),
     updatedAt timestamp(3) NOT NULL DEFAULT (CURRENT_TIMESTAMP)
 );
-COMMENT ON table  t_customer IS '客户表';
+COMMENT ON TABLE  t_customer IS '客户表';
 COMMENT ON COLUMN t_customer.id IS 'ID';
 COMMENT ON COLUMN t_customer.name IS '客户名';
 COMMENT ON COLUMN t_customer.age IS '客户年龄';
@@ -28,7 +28,7 @@ CREATE TABLE t_mail_log(
    content   VARCHAR(500),
    createdAt timestamp(3) NOT NULL DEFAULT (CURRENT_TIMESTAMP)
 );
-COMMENT ON table  t_mail_log IS '邮件日志表';
+COMMENT ON TABLE  t_mail_log IS '邮件日志表';
 COMMENT ON COLUMN t_mail_log.id IS 'ID';
 COMMENT ON COLUMN t_mail_log.mailto IS '客户名';
 COMMENT ON COLUMN t_mail_log.content IS '邮件内容';
@@ -48,7 +48,7 @@ CREATE TABLE t_task_config
     status      INTEGER            NOT NULL,
     createdAt   timestamp(3)       NOT NULL DEFAULT (CURRENT_TIMESTAMP)
 );
-COMMENT ON table  t_task_config IS '定时任务表';
+COMMENT ON TABLE  t_task_config IS '定时任务表';
 COMMENT ON COLUMN t_task_config.id IS 'ID';
 COMMENT ON COLUMN t_task_config.task_id IS '任务id';
 COMMENT ON COLUMN t_task_config.cron IS 'CRON表达式';
@@ -63,6 +63,7 @@ INSERT INTO t_task_config (task_id, cron, class_name, description, status) VALUE
   4、shopInfo空间表
  */
 DROP TABLE IF EXISTS t_shopInfo;
+DROP INDEX IF EXISTS idx_t_shopInfo_geom;
 CREATE TABLE t_shopInfo(
     id SERIAL PRIMARY KEY NOT NULL,
     name      TEXT NOT NULL,
@@ -73,7 +74,9 @@ CREATE TABLE t_shopInfo(
     createdAt timestamp(3) NOT NULL DEFAULT (CURRENT_TIMESTAMP),
     updatedAt timestamp(3) NOT NULL DEFAULT (CURRENT_TIMESTAMP)
 );
-COMMENT ON table  t_shopInfo IS '商店空间表';
+CREATE INDEX idx_t_shopInfo_geom ON t_shopInfo USING gist(geom);
+
+COMMENT ON TABLE  t_shopInfo IS '商店空间表';
 COMMENT ON COLUMN t_shopInfo.id IS 'ID';
 COMMENT ON COLUMN t_shopInfo.name IS '名称';
 COMMENT ON COLUMN t_shopInfo.address IS '地址';
@@ -82,3 +85,10 @@ COMMENT ON COLUMN t_shopInfo.lng IS '经度';
 COMMENT ON COLUMN t_shopInfo.geom IS '时空位置';
 COMMENT ON COLUMN t_shopInfo.createdAt IS '数据新建时间';
 COMMENT ON COLUMN t_shopInfo.updatedAt IS '数据更新时间';
+
+INSERT INTO t_shopInfo (name, address, lat, lng, geom) VALUES ('南京农业大学', '技术南京', 32.033371, 118.843587, ST_GeomFromText('POINT(118.843587 32.033371)', 4326));
+INSERT INTO t_shopInfo (name, address, lat, lng, geom) VALUES ('南京理工大学', '技术南京', 32.028154, 118.856517, ST_GeomFromText('POINT(118.856517 32.028154)', 4326));
+INSERT INTO t_shopInfo (name, address, lat, lng, geom) VALUES ('南京体育学院', '技术南京', 32.044067, 118.866954, ST_GeomFromText('POINT(118.866954 32.044067)', 4326));
+INSERT INTO t_shopInfo (name, address, lat, lng, geom) VALUES ('江苏农业科学院', '技术南京', 32.033437, 118.874588, ST_GeomFromText('POINT(118.874588 32.033437)', 4326));
+INSERT INTO t_shopInfo (name, address, lat, lng, geom) VALUES ('南京博物院', '技术南京', 32.040766, 118.825048, ST_GeomFromText('POINT(118.825048 32.040766)', 4326));
+INSERT INTO t_shopInfo (name, address, lat, lng, geom) VALUES ('南京东郊国宾馆', '技术南京', 32.05978, 118.847481, ST_GeomFromText('POINT(118.847481 32.05978)', 4326));

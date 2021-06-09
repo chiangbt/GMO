@@ -31,4 +31,12 @@ public interface ShopinfoMapper extends BaseMapper<Shopinfo> {
      * @return
      */
     List<Shopinfo> findDistanceWithIn(String pt, double radius);
+
+    /**
+     *
+     * @param pt
+     * @param count
+     * @return
+     */
+    List<Shopinfo> findNearestPOI(String pt, Integer count);
 }

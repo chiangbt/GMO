@@ -37,6 +37,12 @@ public class ShopinfoServiceImpl extends ServiceImpl<ShopinfoMapper, Shopinfo> i
     }
 
     @Override
+    public List<Shopinfo> findNearestPOI(double lat, double lng, Integer count) {
+        String pt = "POINT" + "(" + lng + " " + lat + ")";
+        return shopinfoMapper.findNearestPOI(pt, count);
+    }
+
+    @Override
     public int addShopInfo(String name, String address, double lat, double lng) {
         String geomStr = "POINT" + "(" + lng + " " + lat + ")";
         return shopinfoMapper.addShopInfo(name, address, lat, lng, geomStr);

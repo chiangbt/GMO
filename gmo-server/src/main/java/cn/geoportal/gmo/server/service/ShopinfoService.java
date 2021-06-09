@@ -30,6 +30,15 @@ public interface ShopinfoService extends IService<Shopinfo> {
 
     /**
      *
+     * @param lat
+     * @param lng
+     * @param count
+     * @return
+     */
+    List<Shopinfo> findNearestPOI(double lat, double lng, Integer count);
+
+    /**
+     *
      * @param name
      * @param address
      * @param lat

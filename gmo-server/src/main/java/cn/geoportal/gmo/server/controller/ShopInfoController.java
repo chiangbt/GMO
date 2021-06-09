@@ -54,17 +54,37 @@ public class ShopInfoController {
 
     @ApiOperation(value = "范围查询")
     @ApiImplicitParams({
-            @ApiImplicitParam(name="lat", value = "纬度", required = true, example = "40.033073"),
-            @ApiImplicitParam(name="lng", value = "经度", required = true, example = "116.31417"),
-            @ApiImplicitParam(name = "radius",value = "范围距离", required = false, example = "20")
+            @ApiImplicitParam(name="lat", value = "纬度", required = true, example = "32.033305"),
+            @ApiImplicitParam(name="lng", value = "经度", required = true, example = "118.850675"),
+            @ApiImplicitParam(name = "radius",value = "范围距离", required = false, example = "1000")
     })
     @RequestMapping(value = "/distance", method = RequestMethod.GET)
-    public RespBean getAllShopinfoList(@RequestParam(value = "lat", defaultValue = "1") Float lat,
-                                       @RequestParam(value = "lng", defaultValue = "15") Float lng,
-                                       @RequestParam(value="radius", defaultValue = "") Float radius){
+    public RespBean getAllShopinfoList(@RequestParam(value = "lat", defaultValue = "32.033305") Float lat,
+                                       @RequestParam(value = "lng", defaultValue = "118.850675") Float lng,
+                                       @RequestParam(value="radius", defaultValue = "1000") Float radius){
 
         try{
             List<Shopinfo> shopInfos = shopinfoService.findWithDistance(lat, lng, radius);
+
+            return RespBean.success("获取成功", shopInfos);
+        }catch (Exception e){
+            return RespBean.error("无数据");
+        }
+    }
+
+    @ApiOperation(value = "所在点最近要素查询")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name="lat", value = "纬度", required = true, example = "32.033305"),
+            @ApiImplicitParam(name="lng", value = "经度", required = true, example = "118.850675"),
+            @ApiImplicitParam(name = "count",value = "要素数量", required = false, example = "10")
+    })
+    @RequestMapping(value = "/nearest", method = RequestMethod.GET)
+    public RespBean getNearestShopinfoList(@RequestParam(value = "lat", defaultValue = "32.033305") Float lat,
+                                       @RequestParam(value = "lng", defaultValue = "118.850675") Float lng,
+                                       @RequestParam(value="count", defaultValue = "10") Integer count){
+
+        try{
+            List<Shopinfo> shopInfos = shopinfoService.findNearestPOI(lat, lng, count);
 
             return RespBean.success("获取成功", shopInfos);
         }catch (Exception e){

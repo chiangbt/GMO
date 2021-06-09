@@ -23,6 +23,14 @@
         <result property="updatedat" column="updatedat" jdbcType="TIMESTAMP"/>
     </resultMap>
 
+    <resultMap id="geoResultDistance" type="cn.geoportal.gmo.server.entity.vo.ShopinfoDistance">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="address" column="address" jdbcType="VARCHAR"/>
+        <result property="lat" column="lat" jdbcType="REAL"/>
+        <result property="lng" column="lng" jdbcType="REAL"/>
+    </resultMap>
+
     <sql id="Base_Column_List">
         id,name,address,
         lat,lng,geom,
@@ -36,9 +44,16 @@
         limit #{pageSize} offset #{offset};
     </select>
 
-    <select id="findDistanceWithIn" resultMap="geoResult">
-        select id, name ,address, lat, lng, st_asgeojson(geom) as geomStr, createdat, updatedat
+    <select id="findDistanceWithIn" resultMap="geoResultDistance">
+        select id, name ,address, st_asgeojson(geom) as geomStr,
+               ST_Distance(geom::geography, ST_GeomFromText(#{pt}, 4326)::geography) as distance
         from t_shopinfo
-        where ST_DWithin(ST_GeometryFromText(ST_AsText(geom),4326) , ST_GeometryFromText(#{pt} , 4326) ,#{radius});
+        where ST_DWithin(ST_SetSRID(geom, 4326)::geography , ST_GeomFromText(#{pt} , 4326)::geography , #{radius});
+    </select>
+
+    <select id="findNearestPOI" resultMap="geoResultDistance">
+        SELECT id, name ,address, st_asgeojson(geom) as geomStr,
+                ST_Distance(geom::geography, ST_GeomFromText(#{pt}, 4326)::geography) as distance
+        FROM t_shopinfo ORDER BY ST_Distance(geom::geography, ST_GeomFromText(#{pt}, 4326)::geography)  LIMIT #{count};
     </select>
 </mapper>
