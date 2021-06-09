@@ -45,7 +45,6 @@ export default {
 .homeWelcome {
   text-align: center;
   font-size: 30px;
-  font-family: 华文楷体;
   color: #409eff;
   padding-top: 200px;
 }

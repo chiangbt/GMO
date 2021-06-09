@@ -2,6 +2,7 @@ package cn.geoportal.gmo.server.controller;
 
 import cn.geoportal.gmo.server.entity.SysMenu;
 import cn.geoportal.gmo.server.entity.common.RespBean;
+import cn.geoportal.gmo.server.entity.vo.SysMenuUpdate;
 import cn.geoportal.gmo.server.service.SysMenuService;
 import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import io.swagger.annotations.Api;
@@ -36,10 +37,10 @@ public class MenuController {
 
     @ApiOperation(value = "更新菜单名称")
     @PatchMapping(value = "/{id}", produces = "application/json")
-    public RespBean updateMenuNameById(@PathVariable(value="id") Integer id, String name){
+    public RespBean updateMenuNameById(@PathVariable(value="id") Integer id, @RequestBody SysMenuUpdate sysMenuUpdate){
         SysMenu sysMenu = sysMenuService.findMenuById(id);
         try{
-            sysMenu.setName(name);
+            sysMenu.setName(sysMenuUpdate.getName());
             int result = sysMenuService.UpdateMenuById(sysMenu);
             if(0 == result){
                 return RespBean.error("需要更新的数据不存在");

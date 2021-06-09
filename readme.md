@@ -16,12 +16,16 @@ GMO是一款基于SpringBoot、Mybatis Plus、Security和Knife4j等组件打造�
 ### 0、系统启动的前置条件
 
 1、安装java 11
+
 2、安装PostgreSQL数据
+
 3、安装Redis数据库
+
 4、安装RabbitMQ消息序列
 
-http://127.0.0.1:3000  系统主要端口
-http://127.0.0.1:3005  系统监视端口
+
+- http://127.0.0.1:3000  系统主要端口
+- http://127.0.0.1:3005  系统监视端口
 
 ### 1、数据结构
 

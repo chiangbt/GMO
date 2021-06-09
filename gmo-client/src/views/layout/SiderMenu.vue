@@ -17,17 +17,17 @@
 <script>
 
 export default {
-    name: 'SiderMenu',
-    computed: {
-        routes() {
-            return this.$store.state.routes;
-        },
-        isToggle(){
-            return this.$store.state.isCollapse;
-        },
-        asideWidth(){
-            return this.$store.state.aside_width;
-        }
+  name: 'SiderMenu',
+  computed: {
+    routes() {
+      return this.$store.state.routes;
+    },
+    isToggle(){
+      return this.$store.state.isCollapse;
+    },
+    asideWidth(){
+      return this.$store.state.aside_width;
+    }
   },
 }
 </script>
@@ -42,7 +42,8 @@ export default {
   -o-transition: width 0.25s;
 }
 .el-menu-vertical-demo:not(.el-menu--collapse) {
-    width: 200px;
-    min-height: 400px;
+  width: 200px;
+  min-height: 400px;
+  background-color: #ebeef5;
 }
 </style>

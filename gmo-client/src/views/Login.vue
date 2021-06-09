@@ -1,11 +1,6 @@
 <template>
-  <div style="background: #102a43;width: 100vw;height: 100vh;display: flex;justify-content: center;align-items: center;">
-    <el-form
-      :model="loginForm"
-      ref="form"
-      :rules="loginRules"
-      class="loginContainer"
-      v-loading="loading"
+  <div style="background:#102a43;width:100vw;height:100vh;display:flex;justify-content: center;align-items: center;">
+    <el-form :model="loginForm" ref="form" :rules="loginRules" class="loginContainer" v-loading="loading"
       element-loading-text="正在登录..."
       element-loading-spinner="el-icon-loading"
       element-loading-background="rgba(0, 0, 0, 0.8)"
@@ -43,9 +38,7 @@
         <img :src="captchaUrl" @click="updateCaptcha" />
       </el-form-item>
       <el-checkbox v-model="checked" class="loginRemember">记住我</el-checkbox>
-      <el-button type="primary" style="width: 100%" @click="submitLogin"
-        >登录</el-button
-      >
+      <el-button type="primary" style="width: 100%" @click="submitLogin">登录</el-button>
     </el-form>
   </div>
 </template>
@@ -95,7 +88,7 @@ export default {
           return false;
         }
       });
-     // this.updateCaptcha();
+     this.updateCaptcha();
     },
   },
 };
@@ -103,10 +96,11 @@ export default {
 
 <style>
 .loginContainer {
-  border-radius: 10px;
+  border-radius: 5px;
   background: padding-box;
   margin: 100px auto;
   width: 350px;
+  margin-top: -10px;
   padding: 45px 35px 35px 35px;
   background: white;
   border: 1px solid #eeeaaa;

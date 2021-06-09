@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.geoportal.gmo.server.mapper.ShopinfoMapper">
+
+    <resultMap id="BaseResultMap" type="cn.geoportal.gmo.server.entity.Shopinfo">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="address" column="address" jdbcType="VARCHAR"/>
+            <result property="lat" column="lat" jdbcType="REAL"/>
+            <result property="lng" column="lng" jdbcType="REAL"/>
+            <result property="geom" column="geom" jdbcType="OTHER"/>
+            <result property="createdat" column="createdat" jdbcType="TIMESTAMP"/>
+            <result property="updatedat" column="updatedat" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,name,address,
+        lat,lng,geom,
+        createdat,updatedat
+    </sql>
+</mapper>

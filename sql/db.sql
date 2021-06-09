@@ -58,3 +58,27 @@ COMMENT ON COLUMN t_task_config.status IS '定时任务状态 0 停用,1启用';
 COMMENT ON COLUMN t_task_config.createdAt IS '数据新建时间';
 
 INSERT INTO t_task_config (task_id, cron, class_name, description, status) VALUES ('TB00001', '0 * * * * ?', 'cn.geoportal.gmo.server.job.MyJob', '每一分钟触发一次', '1');
+
+/**
+  4、shopInfo空间表
+ */
+DROP TABLE IF EXISTS t_shopInfo;
+CREATE TABLE t_shopInfo(
+    id SERIAL PRIMARY KEY NOT NULL,
+    name      TEXT NOT NULL,
+    address   VARCHAR(50),
+    lat real,
+    lng real,
+    geom geometry(Point, 4326),
+    createdAt timestamp(3) NOT NULL DEFAULT (CURRENT_TIMESTAMP),
+    updatedAt timestamp(3) NOT NULL DEFAULT (CURRENT_TIMESTAMP)
+);
+COMMENT ON table  t_shopInfo IS '商店空间表';
+COMMENT ON COLUMN t_shopInfo.id IS 'ID';
+COMMENT ON COLUMN t_shopInfo.name IS '名称';
+COMMENT ON COLUMN t_shopInfo.address IS '地址';
+COMMENT ON COLUMN t_shopInfo.lat IS '纬度';
+COMMENT ON COLUMN t_shopInfo.lng IS '经度';
+COMMENT ON COLUMN t_shopInfo.geom IS '时空位置';
+COMMENT ON COLUMN t_shopInfo.createdAt IS '数据新建时间';
+COMMENT ON COLUMN t_shopInfo.updatedAt IS '数据更新时间';

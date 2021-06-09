@@ -1,12 +1,12 @@
 <template>
     <el-header class="homeHeader" style="padding-Left: 20px;padding-right:0px;height:60px;">
         <div class="title">
-            <div v-if="!this.$store.state.isCollapse">GeoMO</div>
+            <div v-if="!this.$store.state.isCollapse">GeoMO&nbsp;&nbsp;<i style="font-size:34px;" class="fa fa-globe" ></i></div>
             <i v-else style="font-size:34px;" class="fa fa-globe" ></i>
         </div>
         <div class="toggleBtn" ref="toggleBtn" @click="collapseChage">
-            <i v-if="this.$store.state.isCollapse" style="font-size:24px;" class="el-icon-s-unfold"></i>
-            <i v-else style="font-size:24px;" class="el-icon-s-fold"></i>
+            <i v-if="this.$store.state.isCollapse" style="font-size:16px;" class="el-icon-s-unfold"></i>
+            <i v-else style="font-size:16px;" class="el-icon-s-fold"></i>
         </div>
         <el-menu class="el-menu-demo" mode="horizontal" @select="handleSelect"
             background-color="#409EFF" text-color="#FFFFFF">
