@@ -42,7 +42,7 @@ public class CustomerController {
      * 客户信息
      * @param pageNo
      * @param pageSize
-     * @param name
+     * @param query
      * @return
      */
     @ApiOperationSupport(order = 1)

@@ -5,14 +5,22 @@
 <mapper namespace="cn.geoportal.gmo.server.mapper.ShopinfoMapper">
 
     <resultMap id="BaseResultMap" type="cn.geoportal.gmo.server.entity.Shopinfo">
-            <id property="id" column="id" jdbcType="INTEGER"/>
-            <result property="name" column="name" jdbcType="VARCHAR"/>
-            <result property="address" column="address" jdbcType="VARCHAR"/>
-            <result property="lat" column="lat" jdbcType="REAL"/>
-            <result property="lng" column="lng" jdbcType="REAL"/>
-            <result property="geom" column="geom" jdbcType="OTHER"/>
-            <result property="createdat" column="createdat" jdbcType="TIMESTAMP"/>
-            <result property="updatedat" column="updatedat" jdbcType="TIMESTAMP"/>
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="address" column="address" jdbcType="VARCHAR"/>
+        <result property="lat" column="lat" jdbcType="REAL"/>
+        <result property="lng" column="lng" jdbcType="REAL"/>
+        <result property="createdat" column="createdat" jdbcType="TIMESTAMP"/>
+        <result property="updatedat" column="updatedat" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <resultMap id="geoResult" type="cn.geoportal.gmo.server.entity.Shopinfo">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="address" column="address" jdbcType="VARCHAR"/>
+        <result property="lat" column="lat" jdbcType="REAL"/>
+        <result property="lng" column="lng" jdbcType="REAL"/>
+        <result property="updatedat" column="updatedat" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -20,4 +28,17 @@
         lat,lng,geom,
         createdat,updatedat
     </sql>
+
+    <select id="findShopPage" resultMap="geoResult">
+        select id, name, address, lat, lng, st_asgeojson(geom) as geomStr, createdat, updatedat
+        from t_shopinfo
+        where name like '%${query}%'
+        limit #{pageSize} offset #{offset};
+    </select>
+
+    <select id="findDistanceWithIn" resultMap="geoResult">
+        select id, name ,address, lat, lng, st_asgeojson(geom) as geomStr, createdat, updatedat
+        from t_shopinfo
+        where ST_DWithin(ST_GeometryFromText(ST_AsText(geom),4326) , ST_GeometryFromText(#{pt} , 4326) ,#{radius});
+    </select>
 </mapper>
