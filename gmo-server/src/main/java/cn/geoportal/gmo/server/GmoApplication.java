@@ -3,7 +3,6 @@ package cn.geoportal.gmo.server;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * @ProjectName: gmo
@@ -13,7 +12,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * @Description: GMO-Server启动类
  * @Date: 2021/5/31 9:02
  */
-@EnableDiscoveryClient
 @SpringBootApplication                          // SpringBoot应用程序
 @MapperScan("cn.geoportal.gmo.server.mapper")   // 扫描mapper包
 public class GmoApplication {
