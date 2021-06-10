@@ -4,66 +4,31 @@
       <el-input placeholder="请输入角色英文名" v-model="role.name" size="small">
         <template slot="prepend">ROLE_</template>
       </el-input>
-      <el-input
-        placeholder="请输入角色中文名"
-        v-model="role.namezh"
-        size="small"
-        @keydown.enter.native="doAddRole"
-      >
-      </el-input>
-      <el-button
-        size="small"
-        type="primary"
-        icon="el-icon-plus"
-        @click="doAddRole"
-        >添加角色</el-button
-      >
+      <el-input placeholder="请输入角色中文名" v-model="role.namezh" size="small" @keydown.enter.native="doAddRole"></el-input>
+      <el-button size="small" type="primary" icon="el-icon-plus" @click="doAddRole">添加角色</el-button>
     </div>
     <div class="permissManaMain">
-        <el-card class="box-card" shadow="always">
-            <el-collapse accordion @change="change" v-model="activeName">
-                <el-collapse-item
-                :title="r.namezh"
-                :name="r.id"
-                v-for="(r, index) in roles"
-                :key="index"
-                >
-                <el-card class="box-card">
-                    <div slot="header" class="clearfix">
-                    <span>可访问资源</span>
-                    <el-button
-                        style="float: right; padding: 3px 0 color:#ff0000"
-                        type="text"
-                        icon="el-icon-delete"
-                        @click="doDeleteRole(r)"
-                    ></el-button>
-                    </div>
-                    <div>
-                    <el-tree
-                        show-checkbox
-                        :data="allMenus"
-                        :props="defaultProps"
-                        :default-checked-keys="selectedMenus"
-                        ref="tree"
-                        node-key="id"
-                        :key="index"
-                    ></el-tree>
-                    <div style="display: flex; justify-content: flex-end">
-                        <el-button size="mini" @click="cancelUpdate"
-                        >取消修改</el-button
-                        >
-                        <el-button
-                        type="primary"
-                        size="mini"
-                        @click="doUpdate(r.id, index)"
-                        >确认修改</el-button
-                        >
-                    </div>
-                    </div>
-                </el-card>
-                </el-collapse-item>
-            </el-collapse>
-        </el-card>
+      <el-card class="box-card" shadow="always">
+        <el-collapse accordion @change="change" v-model="activeName">
+          <el-collapse-item :title="r.namezh" :name="r.id" v-for="(r, index) in roles" :key="index">
+              <el-card class="box-card">
+                <div slot="header" class="clearfix">
+                  <span>可访问资源</span>
+                  <el-button style="float: right; padding: 3px 0 color:#ff0000"
+                      type="text" icon="el-icon-delete" @click="doDeleteRole(r)"></el-button>
+                </div>
+                <div>
+                  <el-tree show-checkbox :data="allMenus" :props="defaultProps" :default-checked-keys="selectedMenus"
+                      ref="tree" node-key="id" :key="index"></el-tree>
+                  <div style="display: flex; justify-content: flex-end">
+                    <el-button size="mini" @click="cancelUpdate">取消修改</el-button>
+                    <el-button type="primary" size="mini" @click="doUpdate(r.id, index)">确认修改</el-button>
+                  </div>
+                </div>
+              </el-card>
+          </el-collapse-item>
+        </el-collapse>
+      </el-card>
     </div>
   </div>
 </template>
@@ -135,13 +100,21 @@ export default {
     doUpdate(rid, index) {
       let tree = this.$refs.tree[index];
       let selectedKeys = tree.getCheckedKeys();
-      let url = "/system/basic/permission/?rid=" + rid;
-      selectedKeys.forEach((key) => {
-        url += "&mids=" + key;
+      let url = "/system/basic/permission/menuid/" + rid;
+      var mids = [];
+      selectedKeys.map(item => {
+        mids.push(item);
       });
-      this.patchRequest(url).then((resp) => {
+      console.log("mids: " + mids.toString())
+      this.patchRequest(url, {
+        mids: mids.toString()
+      }).then((resp) => {
         if (resp) {
           this.activeName = -1;
+          this.$message({
+            type: "success",
+            message: "角色-菜单更新成功!",
+          });
         }
       });
     },

@@ -30,8 +30,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         successHandler.setTargetUrlParameter("redirectTo");
         successHandler.setDefaultTargetUrl(adminContextPath + "/");
 
-        http
-                .authorizeRequests().antMatchers(adminContextPath + "/assets/**").permitAll()
+        http.authorizeRequests().antMatchers(adminContextPath + "/assets/**").permitAll()
                 .antMatchers(adminContextPath + "/login").permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage(adminContextPath + "/login").successHandler(successHandler)

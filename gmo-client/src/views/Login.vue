@@ -88,7 +88,7 @@ export default {
           return false;
         }
       });
-     this.updateCaptcha();
+    //  this.updateCaptcha();
     },
   },
 };

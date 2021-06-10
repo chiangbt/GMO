@@ -34,7 +34,6 @@ import java.io.IOException;
  * @Date: 2021/5/31 10:12
  */
 @Api(tags = "0.权限模块")
-@ApiIgnore
 @ApiSupport(order = 301)    // 分组排序
 @RestController
 @RequestMapping("/api/auth")

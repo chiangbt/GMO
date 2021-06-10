@@ -16,6 +16,7 @@
         <result property="requireauth" column="requireauth" jdbcType="BIGINT"/>
         <result property="parentid" column="parentid" jdbcType="BIGINT"/>
         <result property="enabled" column="enabled" jdbcType="BIGINT"/>
+        <result property="orders" column="orders" jdbcType="BIGINT"/>
     </resultMap>
 
     <!-- 返回Menu集合 -->
@@ -31,6 +32,7 @@
             <result column="requireAuth2" property="requireauth"/>
             <result column="parentId2" property="parentid"/>
             <result column="enabled2" property="enabled"/>
+            <result column="orders2" property="orders"/>
         </collection>
     </resultMap>
 
@@ -57,7 +59,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,url,path,component,name,iconcls,keepalive,requireauth,parentid,enabled
+        id,url,path,component,name,iconcls,keepalive,requireauth,parentid,enabled,orders
     </sql>
 
     <!--根据用户id查询菜单列表-->
@@ -73,7 +75,8 @@
           m2.keepAlive   keepAlive2,
           m2.requireAuth requireAuth2,
           m2.parentId    parentId2,
-          m2.enabled     enabled2
+          m2.enabled     enabled2,
+          m2.orders      orders2
         FROM
           t_sys_menu m1,
           t_sys_menu m2,
@@ -86,7 +89,7 @@
           AND ar.user_id = #{userId}
           AND m2.enabled = 1
         ORDER BY
-            m2.id
+            m2.orders
     </select>
 
     <!--根据角色获取菜单列表-->

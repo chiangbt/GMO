@@ -41,6 +41,7 @@ public class MenuController {
         SysMenu sysMenu = sysMenuService.findMenuById(id);
         try{
             sysMenu.setName(sysMenuUpdate.getName());
+            sysMenu.setOrders(sysMenuUpdate.getOrders());
             int result = sysMenuService.UpdateMenuById(sysMenu);
             if(0 == result){
                 return RespBean.error("需要更新的数据不存在");

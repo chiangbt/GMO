@@ -25,7 +25,7 @@ GMO是一款基于SpringBoot、Mybatis Plus、Security和Knife4j等组件打造�
 
 
 - http://127.0.0.1:3000  系统主要端口
-- http://127.0.0.1:3005  系统监视端口
+- http://127.0.0.1:3030  系统监视端口
 
 ### 1、数据结构
 

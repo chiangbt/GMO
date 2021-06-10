@@ -1,8 +1,0 @@
-server:
-  port: 3005
-
-spring:
-  security:
-    user:
-      name: admin
-      password: archesadmin

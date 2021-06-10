@@ -19,15 +19,15 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @ApiModel(value = "UserLogin对象", description = "")
 public class UserLogin {
-    @ApiModelProperty(value = "用户名", required = true)
+    @ApiModelProperty(value = "用户名", required = true, example = "admin")
     @JSONField(ordinal = 0)
     private String username;
 
-    @ApiModelProperty(value = "密码", required = true)
+    @ApiModelProperty(value = "密码", required = true, example = "123")
     @JSONField(ordinal = 1)
     private String password;
 
-    @ApiModelProperty(value = "验证码", required = true)
+    @ApiModelProperty(value = "验证码", required = true, example = "")
     @JSONField(ordinal = 2)
     private String verifycode;
 }

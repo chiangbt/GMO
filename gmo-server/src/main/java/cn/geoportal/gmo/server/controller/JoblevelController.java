@@ -36,7 +36,7 @@ public class JoblevelController {
     @ApiOperation(value = "获取所有职称")
     @GetMapping("")
     public List<SysJoblevel> getAlJoblevel(){
-        return sysJoblevelService.list(new QueryWrapper<SysJoblevel>().orderByDesc("id"));
+        return sysJoblevelService.list(new QueryWrapper<SysJoblevel>().orderByDesc("titlelevel"));
     }
 
     @ApiOperationSupport(order = 3)

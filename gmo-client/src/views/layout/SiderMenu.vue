@@ -1,6 +1,9 @@
 <template>
     <el-aside class="elaside" :width="asideWidth">
         <el-menu :collapse="isToggle" router unique-opened style="height:100%;">
+          <el-menu-item index="/home">
+            <i class="el-icon-s-home" style="color: #f56c6c; margin-right: 5px"></i><span slot="title">首页</span>
+          </el-menu-item>
           <el-submenu :index="index + ''" v-for="(item, index) in routes" :key="index" v-if="!item.hidden" >
             <template slot="title">
               <i :class="item.iconcls" style="color: #f56c6c; margin-right: 5px"></i>

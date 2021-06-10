@@ -4,6 +4,7 @@ import cn.geoportal.gmo.server.entity.SysMenu;
 import cn.geoportal.gmo.server.entity.SysMenuRole;
 import cn.geoportal.gmo.server.entity.SysRole;
 import cn.geoportal.gmo.server.entity.common.RespBean;
+import cn.geoportal.gmo.server.entity.vo.MenuRoleUpdate;
 import cn.geoportal.gmo.server.service.SysMenuRoleService;
 import cn.geoportal.gmo.server.service.SysMenuService;
 import cn.geoportal.gmo.server.service.SysRoleService;
@@ -12,9 +13,11 @@ import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -117,13 +120,17 @@ public class PermissionController {
     /**
      *
      * @param rid
-     * @param mids
+     * @param menuRoleUpdate
      * @return
      */
     @ApiOperationSupport(order = 5)
     @ApiOperation(value = "更新角色菜单")
     @PatchMapping(value = "/menuid/{rid}")
-    public RespBean updatePostion(@PathVariable("rid") Integer rid, Integer[] mids){
-        return sysMenuRoleService.updateMenuRole(rid, mids);
+    public RespBean updateMenuByRole(@PathVariable("rid") Integer rid, @RequestBody MenuRoleUpdate menuRoleUpdate){
+        System.out.println(menuRoleUpdate.getMids());
+        int[] menuids = Arrays.asList(menuRoleUpdate.getMids().split(",")).stream().mapToInt(Integer::parseInt).toArray();
+        Integer[] newArray = ArrayUtils.toObject(menuids);
+        System.out.println(newArray);
+        return sysMenuRoleService.updateMenuRole(rid, newArray);
     }
 }

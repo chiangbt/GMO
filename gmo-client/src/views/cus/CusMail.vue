@@ -82,8 +82,8 @@ export default {
       },
       total: 0,
       emailForm: {
-        to: '',
-        content: "测试邮件",
+        to: 'chiangbt@geoportal.cn',
+        content: "Geoportal通知您",
       },
       rules: {
         to: [
@@ -148,8 +148,8 @@ export default {
               this.pageNo = 1;
               this.getMailList();
               this.emailForm = {
-                to: '',
-                content: "测试邮件",
+                to: 'chiangbt@geoportal.cn',
+                content: "Geoportal通知您",
               };
               this.$message({
                 type: "success",

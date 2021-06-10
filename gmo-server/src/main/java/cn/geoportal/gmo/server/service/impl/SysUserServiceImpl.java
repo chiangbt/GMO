@@ -60,8 +60,10 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
      */
     @Override
     public RespBean login(String username, String password, String code, HttpServletRequest request) {
+        System.out.println(code);
         // 校验验证码
         String captcha = (String) request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
+        System.out.println(captcha);
         if ((code == null && code.length() == 0) || !code.equalsIgnoreCase(captcha)) {
             return RespBean.error("验证码输入错误，请重新输入！");
         }

@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
@@ -46,8 +45,10 @@ public class HandleMsgService {
         //true表示需要创建一个multipart message
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
         helper.setFrom(emailFrom);
+        // 抄送给自己，避免被163屏蔽
+        helper.addCc("chiangbt@163.com");
         helper.setTo(emailSend.getTo());//邮件接收者
-        helper.setSubject("测试邮件");//邮件主题
+        helper.setSubject("Geoportal信息通知");//邮件主题
         helper.setText(emailSend.getContent(), true);//邮件内容
         // 发送邮件
         emailSender.send(message);

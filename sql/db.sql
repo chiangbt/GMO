@@ -57,7 +57,7 @@ COMMENT ON COLUMN t_task_config.description IS '描述';
 COMMENT ON COLUMN t_task_config.status IS '定时任务状态 0 停用,1启用';
 COMMENT ON COLUMN t_task_config.createdAt IS '数据新建时间';
 
-INSERT INTO t_task_config (task_id, cron, class_name, description, status) VALUES ('TB00001', '0 * * * * ?', 'cn.geoportal.gmo.server.job.MyJob', '每一分钟触发一次', '1');
+INSERT INTO t_task_config (task_id, cron, class_name, description, status) VALUES ('TB00001', '*/600 * * * * ?', 'cn.geoportal.gmo.server.job.MyJob', '每一分钟触发一次', '1');
 
 /**
   4、shopInfo空间表

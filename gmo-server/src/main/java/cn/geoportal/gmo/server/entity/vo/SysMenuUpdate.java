@@ -21,4 +21,7 @@ public class SysMenuUpdate {
 
     @ApiModelProperty(value = "菜单名称")
     private String name;
+
+    @ApiModelProperty(value = "菜单顺序")
+    private Long orders;
 }

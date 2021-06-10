@@ -4,10 +4,10 @@ server:
 spring:
   # 邮件配置
   mail:
-    host: smtp.163.com
+    host: smtp.qq.com
     port: 465
-    username: chiangbt@163.com #邮箱地址，对应host的主机
-    password: GPOSZPHXJVFKNHGH
+    username: chiangbt@qq.com #邮箱地址，对应host的主机
+    password: xrxrjkiryfjtbjgf
     properties:
       mail:
         smtp:

@@ -96,9 +96,16 @@ public class SysMenu implements Serializable {
     private Long enabled;
 
     /**
-     * 数据库中不存在这个字段
+     * 菜单顺序
      */
     @JSONField(ordinal = 10)
+    @ApiModelProperty(value = "菜单顺序")
+    private Long orders;
+
+    /**
+     * 数据库中不存在这个字段
+     */
+    @JSONField(ordinal = 11)
     @ApiModelProperty(value = "子菜单")
     @TableField(exist = false)
     private List<SysMenu> children;
@@ -107,7 +114,7 @@ public class SysMenu implements Serializable {
     /**
      * 数据库中不存在这个字段
      */
-    @JSONField(ordinal = 11)
+    @JSONField(ordinal = 12)
     @ApiModelProperty(value = "角色列表")
     @TableField(exist = false)
     private List<SysRole> roles;
@@ -137,7 +144,8 @@ public class SysMenu implements Serializable {
             && (this.getKeepalive() == null ? other.getKeepalive() == null : this.getKeepalive().equals(other.getKeepalive()))
             && (this.getRequireauth() == null ? other.getRequireauth() == null : this.getRequireauth().equals(other.getRequireauth()))
             && (this.getParentid() == null ? other.getParentid() == null : this.getParentid().equals(other.getParentid()))
-            && (this.getEnabled() == null ? other.getEnabled() == null : this.getEnabled().equals(other.getEnabled()));
+            && (this.getEnabled() == null ? other.getEnabled() == null : this.getEnabled().equals(other.getEnabled()))
+            && (this.getOrders() == null ? other.getOrders() == null : this.getOrders().equals(other.getOrders()));
     }
 
     @Override
@@ -154,6 +162,7 @@ public class SysMenu implements Serializable {
         result = prime * result + ((getRequireauth() == null) ? 0 : getRequireauth().hashCode());
         result = prime * result + ((getParentid() == null) ? 0 : getParentid().hashCode());
         result = prime * result + ((getEnabled() == null) ? 0 : getEnabled().hashCode());
+        result = prime * result + ((getOrders() == null) ? 0 : getOrders().hashCode());
         return result;
     }
 
@@ -173,6 +182,7 @@ public class SysMenu implements Serializable {
         sb.append(", requireauth=").append(requireauth);
         sb.append(", parentid=").append(parentid);
         sb.append(", enabled=").append(enabled);
+        sb.append(", orders=").append(orders);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

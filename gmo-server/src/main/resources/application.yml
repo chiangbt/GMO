@@ -71,7 +71,7 @@ spring:
   boot:
     admin:
       client:
-        url: http://localhost:3005
+        url: http://localhost:3030
         username: admin
         password: archesadmin
 

@@ -139,7 +139,7 @@ export default {
         titlelevel: "",
         enabled: false,
       },
-      titleLevels: ["正高级", "副高级", "中级", "初级", "员级"],
+      titleLevels: ["正高级", "副高级", "中级", "初级", "未评级"],
       jls: [],
       dialogVisible: false,
       multipleSelection: [],
