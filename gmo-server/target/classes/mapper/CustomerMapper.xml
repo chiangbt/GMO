@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.geoportal.gmo.server.mapper.CustomerMapper">
+
+    <resultMap id="BaseResultMap" type="cn.geoportal.gmo.server.entity.Customer">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="age" column="age" jdbcType="INTEGER"/>
+        <result property="address" column="address" jdbcType="VARCHAR"/>
+        <result property="createdat" column="createdat" jdbcType="TIMESTAMP"/>
+        <result property="updatedat" column="updatedat" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,name,age,address,createdat,updatedat
+    </sql>
+
+    <!-- 在Mapper类中实现调用 -->
+    <!-- selectByName方法，支持基于name的模糊查询 -->
+    <select id="selectByName" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from t_customer where name like '%${name}%' order by id desc
+    </select>
+
+    <!-- customerCompactList方法，返回压缩版本的数据列表 -->
+    <select id="customerCompactList" resultType="map">
+        select id, name, age from t_customer ${ew.customSqlSegment} order by id desc
+    </select>
+</mapper>

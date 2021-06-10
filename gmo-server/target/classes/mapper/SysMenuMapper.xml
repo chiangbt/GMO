@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.geoportal.gmo.server.mapper.SysMenuMapper">
+
+    <!-- 基本返回项 -->
+    <resultMap id="BaseResultMap" type="cn.geoportal.gmo.server.entity.SysMenu">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="url" column="url" jdbcType="VARCHAR"/>
+        <result property="path" column="path" jdbcType="VARCHAR"/>
+        <result property="component" column="component" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="iconcls" column="iconcls" jdbcType="VARCHAR"/>
+        <result property="keepalive" column="keepalive" jdbcType="BIGINT"/>
+        <result property="requireauth" column="requireauth" jdbcType="BIGINT"/>
+        <result property="parentid" column="parentid" jdbcType="BIGINT"/>
+        <result property="enabled" column="enabled" jdbcType="BIGINT"/>
+        <result property="orders" column="orders" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <!-- 返回Menu集合 -->
+    <resultMap id="Menus" type="cn.geoportal.gmo.server.entity.SysMenu" extends="BaseResultMap">
+        <collection property="children" ofType="cn.geoportal.gmo.server.entity.SysMenu">
+            <id column="id2" property="id"/>
+            <result column="url2" property="url"/>
+            <result column="path2" property="path"/>
+            <result column="component2" property="component"/>
+            <result column="name2" property="name"/>
+            <result column="iconCls2" property="iconcls"/>
+            <result column="keepAlive2" property="keepalive"/>
+            <result column="requireAuth2" property="requireauth"/>
+            <result column="parentId2" property="parentid"/>
+            <result column="enabled2" property="enabled"/>
+            <result column="orders2" property="orders"/>
+        </collection>
+    </resultMap>
+
+    <!-- 角色相关的菜单列表 -->
+    <resultMap id="MenusWithRole" type="cn.geoportal.gmo.server.entity.SysMenu" extends="BaseResultMap">
+        <collection property="roles" ofType="cn.geoportal.gmo.server.entity.SysRole">
+            <id column="rid" property="id" />
+            <result column="rname" property="name" />
+            <result column="rnameZh" property="namezh" />
+        </collection>
+    </resultMap>
+
+    <resultMap id="MenusWithChildren" type="cn.geoportal.gmo.server.entity.SysMenu" extends="BaseResultMap">
+        <id column="id1" property="id" />
+        <result column="name1" property="name" />
+        <collection property="children" ofType="cn.geoportal.gmo.server.entity.SysMenu">
+            <id column="id2" property="id" />
+            <result column="name2" property="name" />
+            <collection property="children" ofType="cn.geoportal.gmo.server.entity.SysMenu">
+                <id column="id3" property="id" />
+                <result column="name3" property="name" />
+            </collection>
+        </collection>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,url,path,component,name,iconcls,keepalive,requireauth,parentid,enabled,orders
+    </sql>
+
+    <!--根据用户id查询菜单列表-->
+    <select id="getMenusByUserId" resultMap="Menus">
+        SELECT distinct
+          m1.*,
+          m2.id          id2,
+          m2.url         url2,
+          m2.path        path2,
+          m2.component   component2,
+          m2.name AS     name2,
+          m2.iconCls     iconCls2,
+          m2.keepAlive   keepAlive2,
+          m2.requireAuth requireAuth2,
+          m2.parentId    parentId2,
+          m2.enabled     enabled2,
+          m2.orders      orders2
+        FROM
+          t_sys_menu m1,
+          t_sys_menu m2,
+          t_sys_user_role ar,
+          t_sys_menu_role mr
+        WHERE
+              m1.id = m2.parentid
+          AND m2.id = mr.menu_id
+          AND mr.role_id = ar.role_id
+          AND ar.user_id = #{userId}
+          AND m2.enabled = 1
+        ORDER BY
+            m2.orders
+    </select>
+
+    <!--根据角色获取菜单列表-->
+    <select id="getMenusWithRole" resultMap="MenusWithRole">
+      SELECT
+        m.*,
+        r.id rid,
+        r.NAME rname,
+        r.nameZh rnameZh
+      FROM
+        t_sys_menu m,
+        t_sys_menu_role mr,
+        t_sys_role r
+      WHERE
+            m.id = mr.menu_id
+        AND r.id = mr.role_id
+      ORDER BY
+        m.id
+    </select>
+
+    <!--查询所有菜单-->
+    <select id="getAllMenus" resultMap="MenusWithChildren">
+        SELECT
+            m1.id id1,
+            m1.name name1,
+            m2.id id2,
+            m2.name name2,
+            m3.id id3,
+            m3.name name3
+        FROM
+            t_sys_menu m1,
+            t_sys_menu m2,
+            t_sys_menu m3
+        WHERE
+            m1.id = m2.parentid
+            AND m2.id = m3.parentid
+            AND m3.enabled = 1
+    </select>
+
+</mapper>

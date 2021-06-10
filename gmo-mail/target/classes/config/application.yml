@@ -1,0 +1,24 @@
+server:
+  port: 3009
+
+spring:
+  # 邮件配置
+  mail:
+    host: smtp.qq.com
+    port: 465
+    username: chiangbt@qq.com #邮箱地址，对应host的主机
+    password: xrxrjkiryfjtbjgf
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
+
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+
+  application:
+    name: GEO_Mail

@@ -1,0 +1,8 @@
+server:
+  port: 3030
+
+spring:
+  security:
+    user:
+      name: admin
+      password: archesadmin

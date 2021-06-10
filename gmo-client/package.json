@@ -7,12 +7,15 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@turf/turf": "^6.3.0",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "element-ui": "^2.15.1",
+    "esri-loader": "^3.1.0",
     "font-awesome": "^4.7.0",
     "js-file-download": "^0.4.12",
     "lodash": "^4.17.21",
+    "moment": "^2.29.1",
     "vue": "^2.6.10",
     "vue-router": "2.8.0",
     "vue2-editor": "^2.10.2",
@@ -22,6 +25,8 @@
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
+    "less": "^3.0.4",
+    "less-loader": "^5.0.0",
     "vue-template-compiler": "^2.6.11"
   },
   "browserslist": [

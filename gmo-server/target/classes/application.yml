@@ -1,0 +1,130 @@
+# YAML是一种层级格式，它和.properties很容易互相转换，它的优点是去掉了大量重复的前缀，并且更加易读。
+# 系统启动端口
+server:
+  port: 3000
+
+spring:
+  application:
+    name: GMO_Server
+  datasource:
+    name: druidDataSource
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: org.postgresql.Driver
+      url: jdbc:postgresql://localhost:5432/gmo
+      username: postgres
+      password: archesadmin
+      # 初始化大小，最小，最大
+      initialSize: 1
+      minIdle: 3
+      maxActive: 20
+      # 配置获取连接等待超时的时间
+      maxWait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      timeBetweenEvictionRunsMillis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      minEvictableIdleTimeMillis: 30000
+      validationQuery: select 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      # 打开PSCache，并且指定每个连接上PSCache的大小
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+      # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+      filters: stat,wall,slf4j
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connect-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      filter:
+        stat:
+          log-slow-sql: true
+          db-type: postgresql
+          enabled: true
+      # druid管理界面
+      stat-view-servlet:
+        enabled: true
+        login-username: admin
+        login-password: archesadmin
+  redis:
+    # 超时时间
+    timeout: 10000ms
+    # 服务器地址
+    host: 127.0.0.1
+    # 服务器端口
+    port: 6379
+    database: 0
+    lettuce:
+      pool:
+        # 连接池最大连接数 默认8 ，负数表示没有限制
+        max-active: 1024
+        # 最大连接阻塞等待时间，默认-1
+        max-wait: 10000ms
+        # 最大空闲连接
+        max-idle: 200
+        # 最小空闲连接
+        min-idle: 5
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+  boot:
+    admin:
+      client:
+        url: http://localhost:3030
+        username: admin
+        password: archesadmin
+
+mybatis-plus:
+  # xml地址
+  mapper-locations: classpath:mapper/*.xml
+  # 自己的实体类地址
+  type-aliases-package: cn.geoportal.gmo.server.entity
+  configuration:
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 开启驼峰命名法
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      id-type: auto
+    banner: false
+
+logging:
+  level:
+    cn.geoportal.server.mapper: debug
+
+jwt:
+  # JWT存储的请求头
+  tokenHeader: Authorization
+  # JWT加解密使用的秘钥
+  secret: geoportal
+  # JWT的超期限时间(60 * 60 * 24)
+  expiration: 604800
+  # JWT 负载中的头标识
+  tokenHead: Bearer
+
+knife4j:
+  enable: true
+  setting:
+    language: zh-CN
+    enableGroup: false
+    enableSwaggerModels: true
+    enableDocumentManage: true
+    swaggerModelName: 实体类列表
+    enableFooter: false
+    enableFooterCustom: true
+    footerCustomContent: Copyright  2019 - [GeoPortal.cn](https://www.geoportal.cn)
+    enableHomeCustom: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+      enabled: true
+    shutdown:
+      enabled: true

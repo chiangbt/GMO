@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.geoportal.gmo.server.mapper.ShopinfoMapper">
+
+    <resultMap id="BaseResultMap" type="cn.geoportal.gmo.server.entity.Shopinfo">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="address" column="address" jdbcType="VARCHAR"/>
+        <result property="lat" column="lat" jdbcType="REAL"/>
+        <result property="lng" column="lng" jdbcType="REAL"/>
+        <result property="createdat" column="createdat" jdbcType="TIMESTAMP"/>
+        <result property="updatedat" column="updatedat" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <resultMap id="geoResult" type="cn.geoportal.gmo.server.entity.Shopinfo">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="address" column="address" jdbcType="VARCHAR"/>
+        <result property="lat" column="lat" jdbcType="REAL"/>
+        <result property="lng" column="lng" jdbcType="REAL"/>
+        <result property="updatedat" column="updatedat" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <resultMap id="geoResultDistance" type="cn.geoportal.gmo.server.entity.vo.ShopinfoDistance">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="address" column="address" jdbcType="VARCHAR"/>
+        <result property="lat" column="lat" jdbcType="REAL"/>
+        <result property="lng" column="lng" jdbcType="REAL"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,name,address,
+        lat,lng,geom,
+        createdat,updatedat
+    </sql>
+
+    <select id="findShopPage" resultMap="geoResult">
+        select id, name, address, lat, lng, st_asgeojson(geom) as geomStr, createdat, updatedat
+        from t_shopinfo
+        where name like '%${query}%'
+        limit #{pageSize} offset #{offset};
+    </select>
+
+    <select id="findDistanceWithIn" resultMap="geoResultDistance">
+        select id, name ,address, st_asgeojson(geom) as geomStr,
+               ST_Distance(geom::geography, ST_GeomFromText(#{pt}, 4326)::geography) as distance
+        from t_shopinfo
+        where ST_DWithin(ST_SetSRID(geom, 4326)::geography , ST_GeomFromText(#{pt} , 4326)::geography , #{radius});
+    </select>
+
+    <select id="findNearestPOI" resultMap="geoResultDistance">
+        SELECT id, name ,address, st_asgeojson(geom) as geomStr,
+                ST_Distance(geom::geography, ST_GeomFromText(#{pt}, 4326)::geography) as distance
+        FROM t_shopinfo ORDER BY ST_Distance(geom::geography, ST_GeomFromText(#{pt}, 4326)::geography)  LIMIT #{count};
+    </select>
+</mapper>
