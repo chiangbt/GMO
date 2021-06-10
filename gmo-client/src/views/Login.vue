@@ -65,6 +65,9 @@ export default {
       },
     };
   },
+  mounted() {
+    this.checkStatus()
+  },
   methods: {
     updateCaptcha() {
       this.captchaUrl = "/api/auth/captcha?time=" + new Date();
@@ -90,6 +93,12 @@ export default {
       });
     //  this.updateCaptcha();
     },
+    checkStatus() {
+      if (window.sessionStorage.getItem('tokenStr')) {
+        let path = this.$route.query.redirect;
+        this.$router.push(path=='/'||path==undefined?'/home':path)
+      } 
+    }
   },
 };
 </script>

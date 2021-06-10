@@ -2,7 +2,6 @@ import axios from 'axios'
 import { Message } from 'element-ui'
 import router from '../router'
 
-
 axios.interceptors.request.use(config => {
     const token = window.sessionStorage.getItem('tokenStr')
     //如果存在token,请求携带这个token
@@ -13,7 +12,6 @@ axios.interceptors.request.use(config => {
 }, error => {
     console.log(error);
 })
-
 
 //响应拦截器
 axios.interceptors.response.use(success => {
