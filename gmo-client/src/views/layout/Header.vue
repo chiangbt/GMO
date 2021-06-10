@@ -9,7 +9,7 @@
             <i v-else style="font-size:16px;" class="el-icon-s-fold"></i>
         </div>
         <el-menu class="el-menu-demo" mode="horizontal" @select="handleSelect"
-            background-color="#409EFF" text-color="#FFFFFF">
+            background-color="#2490FF" text-color="#FFFFFF">
             <el-submenu index="1">
                 <template slot="title"><i class="el-icon-user" style="color:#ffffff"/>&nbsp;{{ user.username }}</template>
                 <el-menu-item index="userinfo">个人中心</el-menu-item>
@@ -69,7 +69,7 @@ export default {
 
 <style scope>
 .homeHeader {
-    background: #409EFF;
+    background: #2490FF;
     display: flex;
     align-items: center;
     justify-content: space-between;
