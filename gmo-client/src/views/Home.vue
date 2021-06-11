@@ -5,7 +5,7 @@
       <SiderMenu></SiderMenu>
       <el-container>
         <el-main>
-          <el-card class="box-card">
+          <el-card>
             <el-breadcrumb v-if="this.$router.currentRoute.path != '/home'" separator="/">
               <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
               <el-breadcrumb-item>{{

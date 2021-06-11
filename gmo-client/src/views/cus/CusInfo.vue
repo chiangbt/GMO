@@ -2,14 +2,14 @@
   <div>
     <div style="text-align: right; margin-top: 30px; margin-bottom:20px;">
       <el-row :gutter="20">
-        <el-col :sm="12" :md="24">
+        <el-col :sm="12" :md="12">
           <el-input
             Placeholder="Search..." clearable @clear="onClearSearch"
             v-model="searchVal" @keyup.enter.native="onEnterSearch">
             <i slot="prefix" class="el-input__icon el-icon-search"></i>
           </el-input>
         </el-col>
-        <el-col :sm="12" :md="24">
+        <el-col :sm="12" :md="12">
           <el-button type="primary" icon="el-icon-plus" @click="dialogFormVisible = true">添加</el-button>
           <el-button type="danger" icon="el-icon-circle-close"  @click="handleDeleteMany()">批量删除</el-button>
         </el-col>

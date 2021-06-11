@@ -1,8 +1,9 @@
 <template>
     <el-aside class="elaside" :width="asideWidth">
-        <el-menu :collapse="isToggle" router unique-opened style="height:100%;">
+        <el-menu :collapse="isToggle" :default-active="$route.path" router unique-opened style="height:100%;">
           <el-menu-item index="/home" key="Home">
-            <i class="el-icon-s-home" style="color: #f56c6c; margin-right: 5px"></i><span slot="title">首页</span>
+            <i class="el-icon-s-home" style="color: #f56c6c; margin-right: 5px; text-align:left;"></i>
+            <span slot="title">首页</span>
           </el-menu-item>
           <el-submenu :index="index + ''" v-for="(item, index) in routes" :key="index" v-if="!item.hidden" >
             <template slot="title">
@@ -37,7 +38,7 @@ export default {
 
 <style scope>
 .elaside {
-  width: 200px;
+  width: 200px !important;
   transition: width 0.25s;
   -webkit-transition: width 0.25s;
   -moz-transition: width 0.25s;
@@ -49,4 +50,7 @@ export default {
   min-height: 400px;
   background-color: #ebeef5;
 }
+.horizontal-collapse-transition { 
+  transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out; 
+} 
 </style>

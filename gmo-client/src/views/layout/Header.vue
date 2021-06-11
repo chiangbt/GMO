@@ -1,5 +1,5 @@
 <template>
-    <el-header class="homeHeader" style="padding-Left: 20px;padding-right:0px;height:60px;">
+    <el-header class="homeHeader" style="padding-Left: 20px; padding-right:0px; height:60px;">
         <div class="title">
             <div v-if="!this.$store.state.isCollapse">GeoMO&nbsp;&nbsp;<i style="font-size:34px;" class="fa fa-globe" ></i></div>
             <i v-else style="font-size:34px;" class="fa fa-globe" ></i>
@@ -11,7 +11,9 @@
         <el-menu class="el-menu-demo" mode="horizontal" @select="handleSelect"
             background-color="#2490FF" text-color="#FFFFFF">
             <el-submenu index="1">
-                <template slot="title"><i class="el-icon-user" style="color:#ffffff"/>&nbsp;{{ user.username }}</template>
+                <template slot="title">
+                    <i class="el-icon-user" style="color:#ffffff"/>&nbsp;{{ user.username }}
+                </template>
                 <el-menu-item index="userinfo">个人中心</el-menu-item>
                 <el-menu-item index="setting">设置</el-menu-item>
                 <el-menu-item index="logout">注销登录</el-menu-item>
