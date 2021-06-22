@@ -51,7 +51,7 @@
       <artifactId>lombok</artifactId>
       <optional>true</optional>
     </dependency>
-    <!-- 数据库 -->
+    <!-- 数据库为PostgreSQL -->
     <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>

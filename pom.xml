@@ -2,11 +2,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <!-- 子模块 -->
     <modules>
         <module>gmo-server</module>
         <module>gmo-mail</module>
         <module>gmo-admin</module>
     </modules>
+    <!-- springboot基础版本 -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -19,7 +21,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>gmo</name>
-    <description>GeoManager os project for Spring Boot</description>
+    <description>GeoManager System project for Spring Boot</description>
 
     <properties>
         <java.version>11</java.version>

@@ -49,7 +49,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Value("${jwt.tokenHead}")
     private String tokenHead;
 
-
     /**
      * 用户登录返回token
      * @param username
@@ -115,7 +114,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
      */
     @Override
     public List<SysUser> getAllSysUser(String keywords) {
-//        System.out.println(keywords);
         return sysUserMapper.getAllSysUser(
                 SysUserUtils.getCurrentSysUser().getId(),
                 keywords
@@ -149,8 +147,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     @Transactional
     public RespBean updateSysUserRole(Integer userId, Integer[] rids) {
-        System.out.println(userId);
-        System.out.println(rids);
         sysUserRoleMapper.delete(new QueryWrapper<SysUserRole>().eq("user_id", userId));
         Integer result =  sysUserRoleMapper.updateSysUserRole(userId, rids);
         if(rids.length == result){

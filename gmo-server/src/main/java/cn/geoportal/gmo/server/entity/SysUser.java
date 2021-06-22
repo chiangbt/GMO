@@ -19,7 +19,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**
- * 
+ * SysUser实现UserDetails接口，可以实现基于自定义的DB架构的认证与授权
  * @TableName t_sys_user
  */
 @ApiModel(value = "系统用户")
@@ -27,7 +27,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Data
 public class SysUser implements Serializable, UserDetails {
     /**
-     * 
+     * id值
      */
     @TableId(value = "id", type = IdType.AUTO)
     @JSONField(ordinal = 0)
@@ -35,56 +35,56 @@ public class SysUser implements Serializable, UserDetails {
     private Long id;
 
     /**
-     * 
+     * 用户名
      */
     @ApiModelProperty(value = "用户名")
     @JSONField(ordinal = 1)
     private String username;
 
     /**
-     * 
+     * 电子邮件
      */
     @ApiModelProperty(value = "电子邮件")
     @JSONField(ordinal = 2)
     private String email;
 
     /**
-     * 
+     * 用户密码
      */
     @ApiModelProperty(value = "用户密码")
     @JSONField(ordinal = 3)
     private String password;
 
     /**
-     * 
+     * 用户姓名
      */
     @ApiModelProperty(value = "用户姓名")
     @JSONField(ordinal = 4)
     private String name;
 
     /**
-     * 
+     * 移动电话
      */
     @ApiModelProperty(value = "移动电话")
     @JSONField(ordinal = 5)
     private String phone;
 
     /**
-     * 
+     * 座机电话
      */
     @ApiModelProperty(value = "座机电话")
     @JSONField(ordinal = 6)
     private String telephone;
 
     /**
-     * 
+     * 地址
      */
     @ApiModelProperty(value = "地址")
     @JSONField(ordinal = 7)
     private String address;
 
     /**
-     * 
+     * 是否激活
      */
     @ApiModelProperty(value = "是否激活")
     @JSONField(ordinal = 8)
@@ -92,26 +92,30 @@ public class SysUser implements Serializable, UserDetails {
     private Boolean enabled;
 
     /**
-     * 
+     * 用户图标
      */
     @ApiModelProperty(value = "用户图像")
     @JSONField(ordinal = 9)
     private String userface;
 
     /**
-     * 
+     * 用户注记
      */
     @ApiModelProperty(value = "注记")
     @JSONField(ordinal = 10)
     private String remark;
 
+    /**
+     * 用户角色
+     * 非数据表的字段
+     */
     @JSONField(ordinal = 11)
     @ApiModelProperty(value = "角色")
     @TableField(exist = false)
     private List<SysRole> roles;
 
     /**
-     * 
+     * 新建时间
      */
     @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(value = "新建时间")
@@ -119,7 +123,7 @@ public class SysUser implements Serializable, UserDetails {
     private Date createdat;
 
     /**
-     * 
+     * 更新时间
      */
     @TableField(value = "updatedat", fill = FieldFill.INSERT_UPDATE)
     @ApiModelProperty(value = "更新时间")
@@ -128,77 +132,6 @@ public class SysUser implements Serializable, UserDetails {
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
-
-    @Override
-    public boolean equals(Object that) {
-        if (this == that) {
-            return true;
-        }
-        if (that == null) {
-            return false;
-        }
-        if (getClass() != that.getClass()) {
-            return false;
-        }
-        SysUser other = (SysUser) that;
-        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
-            && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()))
-            && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
-            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getPhone() == null ? other.getPhone() == null : this.getPhone().equals(other.getPhone()))
-            && (this.getTelephone() == null ? other.getTelephone() == null : this.getTelephone().equals(other.getTelephone()))
-            && (this.getAddress() == null ? other.getAddress() == null : this.getAddress().equals(other.getAddress()))
-//            && (this.getEnabled() == null ? other.getEnabled() == null : this.getEnabled().equals(other.getEnabled()))
-            && (this.getUserface() == null ? other.getUserface() == null : this.getUserface().equals(other.getUserface()))
-            && (this.getRemark() == null ? other.getRemark() == null : this.getRemark().equals(other.getRemark()))
-            && (this.getCreatedat() == null ? other.getCreatedat() == null : this.getCreatedat().equals(other.getCreatedat()))
-            && (this.getUpdatedat() == null ? other.getUpdatedat() == null : this.getUpdatedat().equals(other.getUpdatedat()));
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getUsername() == null) ? 0 : getUsername().hashCode());
-        result = prime * result + ((getEmail() == null) ? 0 : getEmail().hashCode());
-        result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
-        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
-        result = prime * result + ((getPhone() == null) ? 0 : getPhone().hashCode());
-        result = prime * result + ((getTelephone() == null) ? 0 : getTelephone().hashCode());
-        result = prime * result + ((getAddress() == null) ? 0 : getAddress().hashCode());
-//        result = prime * result + ((getEnabled() == null) ? 0 : getEnabled().hashCode());
-        result = prime * result + ((getUserface() == null) ? 0 : getUserface().hashCode());
-        result = prime * result + ((getRemark() == null) ? 0 : getRemark().hashCode());
-        result = prime * result + ((getCreatedat() == null) ? 0 : getCreatedat().hashCode());
-        result = prime * result + ((getUpdatedat() == null) ? 0 : getUpdatedat().hashCode());
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", username=").append(username);
-        sb.append(", email=").append(email);
-        sb.append(", password=").append(password);
-        sb.append(", name=").append(name);
-        sb.append(", phone=").append(phone);
-        sb.append(", telephone=").append(telephone);
-        sb.append(", address=").append(address);
-        sb.append(", enabled=").append(enabled);
-        sb.append(", userface=").append(userface);
-        sb.append(", remark=").append(remark);
-        sb.append(", createdat=").append(createdat);
-        sb.append(", updatedat=").append(updatedat);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
-    }
 
     @JSONField(ordinal = 14)
     @Override
