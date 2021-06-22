@@ -30,7 +30,6 @@ INSERT INTO t_sys_user(username,email,password) VALUES ('chiangbt', 'xx41@cn.cn'
 INSERT INTO t_sys_user(username,email,password) VALUES ('chiangbt2', 'xx42@cn.cn', '$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe');
 INSERT INTO t_sys_user(username,email,password) VALUES ('jiangbotao', 'xx43@cn.cn', '$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe');
 
-
 /**
   2、角色表
  */
@@ -83,6 +82,7 @@ INSERT INTO t_sys_user_role(user_id, role_id) VALUES (2, 4);
 INSERT INTO t_sys_user_role(user_id, role_id) VALUES (5, 7);
 INSERT INTO t_sys_user_role(user_id, role_id) VALUES (6, 7);
 INSERT INTO t_sys_user_role(user_id, role_id) VALUES (7, 7);
+
 /**
   4、菜单表
  */
