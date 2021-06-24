@@ -1,0 +1,80 @@
+<template>
+  <a-row :gutter="16">
+    <a-col :span="24">
+      <a-card :bordered="false">
+        <div id="map"></div>
+      </a-card>
+    </a-col>
+  </a-row>
+</template>
+
+<script>
+import Map from "@arcgis/core/Map";
+import MapView from "@arcgis/core/views/MapView";
+import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
+import Bookmarks from "@arcgis/core/widgets/Bookmarks";
+import Expand from "@arcgis/core/widgets/Expand";
+
+export default {
+  name: "SDB2D",
+  methods: {
+    _createMapView () {
+      var map = new Map({
+        basemap: 'topo',
+        ground: 'world-elevation'
+      })
+      const view = new MapView({
+        container: this.$el,
+        map: map,
+        center: [-118.805, 34.027],
+        zoom: 13
+      });
+      const bookmarks = new Bookmarks({
+        view: view,
+        editingEnabled: true,
+      });
+      const bkExpand = new Expand({
+        view: view,
+        content: bookmarks,
+        expanded: false,
+      });
+      view.ui.add(bkExpand, "top-right");
+      
+      
+      const popupTrailheads = {
+        "title": "Trailhead",
+        "content": "<b>Trail:</b> {TRL_NAME}<br><b>City:</b> {CITY_JUR}<br><b>Cross Street:</b> {X_STREET}<br><b>Parking:</b> {PARKING}<br><b>Elevation:</b> {ELEV_FT} ft"
+      }
+      const trailheads = new FeatureLayer({
+        url: "https://services3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Trailheads_Styled/FeatureServer/0",
+        outFields: ["TRL_NAME","CITY_JUR","X_STREET","PARKING","ELEV_FT"],
+        popupTemplate: popupTrailheads
+      });
+      map.add(trailheads);
+
+      const trailsLayer = new FeatureLayer({
+        url: "https://services3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Trails_Styled/FeatureServer/0"
+      });
+      map.add(trailsLayer, 0);
+    }
+  },
+  async mounted () {
+    this._createMapView()
+  }
+}
+</script>
+
+<style lang="less" scoped>
+#map {
+  width: 100%;
+  height: calc(80vh);
+  z-index: 1;
+}
+/deep/ * {
+    outline: none
+}
+/deep/ .esri-view .esri-view-surface--inset-outline:focus::after {
+    outline: auto 0px Highlight !important;
+    outline: auto 0px -webkit-focus-ring-color !important;
+}
+</style>

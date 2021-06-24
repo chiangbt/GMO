@@ -1,5 +1,5 @@
 <template>
-  <div style="background:#102a43;width:100vw;height:100vh;display:flex;justify-content: center;align-items: center;">
+  <div class="page">
     <el-form :model="loginForm" ref="form" :rules="loginRules" class="loginContainer" v-loading="loading"
       element-loading-text="正在登录..."
       element-loading-spinner="el-icon-loading"
@@ -34,6 +34,7 @@
           v-model="loginForm.verifycode"
           placeholder="点击图片更换验证码"
           style="width: 250px; margin-right: 5px"
+          @keyup.enter.native="submitLogin"
         ></el-input>
         <img :src="captchaUrl" @click="updateCaptcha" />
       </el-form-item>
@@ -44,6 +45,7 @@
 </template>
 
 <script>
+import { Message } from 'element-ui'
 export default {
   name: "Login",
   data() {
@@ -77,6 +79,11 @@ export default {
         if (valid) {
           this.postRequest("/api/auth/login", this.loginForm).then((resp) => {
             if (resp) {
+              if(resp.code === 500 || resp.code == 401 || resp.code == 403){
+                Message.error({ message: resp.message });
+                this.updateCaptcha();
+                return;
+              }
               this.loading = false;
               const tokenStr = resp.data.tokenHead + resp.data.token;
               //存储用户token
@@ -104,7 +111,16 @@ export default {
 </script>
 
 <style>
+.page {
+  background:#aac5de;
+  width:100vw;
+  height:100vh;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
 .loginContainer {
+  opacity: 0.9;
   border-radius: 5px;
   background: padding-box;
   margin: 100px auto;

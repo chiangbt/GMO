@@ -24,6 +24,7 @@ public class MyFastJsonConfig {
         FastJsonConfig config = new FastJsonConfig();
         config.setDateFormat("yyyy-MM-dd HH:mm:ss");
         config.setCharset(Charset.forName("UTF-8"));
+
         config.setSerializerFeatures(
                 SerializerFeature.WriteMapNullValue,
                 SerializerFeature.PrettyFormat,

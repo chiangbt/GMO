@@ -5,7 +5,8 @@ import ElementUI from 'element-ui';
 import store from './store';
 import 'font-awesome/css/font-awesome.css';
 import 'element-ui/lib/theme-chalk/index.css';
-import 'font-awesome/css/font-awesome.css'
+import 'font-awesome/css/font-awesome.css';
+import '@arcgis/core/assets/esri/themes/light/main.css';
 
 import { postRequest, patchRequest, deleteRequest, getRequest } from './utils/api'
 import { initMenu } from './utils/menu'

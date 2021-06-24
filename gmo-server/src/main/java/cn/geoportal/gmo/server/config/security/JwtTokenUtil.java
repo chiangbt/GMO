@@ -30,7 +30,6 @@ public class JwtTokenUtil {
 
     /**
      * 根据用户信息生成Token
-     *
      * @param userDetails
      * @return
      */
@@ -43,7 +42,6 @@ public class JwtTokenUtil {
 
     /**
      * congtoken中获取登录用户名
-     *
      * @param token
      * @return
      */
@@ -60,7 +58,6 @@ public class JwtTokenUtil {
 
     /**
      * 验证token是否有效
-     *
      * @param token
      * @param userDetails
      * @return
@@ -72,7 +69,6 @@ public class JwtTokenUtil {
 
     /**
      * 判断token是否可以被刷新
-     *
      * @param token
      * @return
      */
@@ -82,7 +78,6 @@ public class JwtTokenUtil {
 
     /**
      * 刷新token
-     *
      * @param token
      * @return
      */
@@ -94,7 +89,6 @@ public class JwtTokenUtil {
 
     /**
      * 判断token是否失效
-     *
      * @param token
      * @return
      */
@@ -105,7 +99,6 @@ public class JwtTokenUtil {
 
     /**
      * 从token中获取过期时间
-     *
      * @param token
      * @return
      */
@@ -116,7 +109,6 @@ public class JwtTokenUtil {
 
     /**
      * 从token中获取荷载
-     *
      * @param token
      * @return
      */
@@ -135,7 +127,6 @@ public class JwtTokenUtil {
 
     /**
      * 根据荷载生成JWT token
-     *
      * @param claims
      * @return
      */
@@ -149,7 +140,6 @@ public class JwtTokenUtil {
 
     /**
      * 生成token失效时间
-     *
      * @return
      */
     private Date generateExpiration() {

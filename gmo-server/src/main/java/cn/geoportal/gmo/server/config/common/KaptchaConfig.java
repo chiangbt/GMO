@@ -13,7 +13,7 @@ import java.util.Properties;
  * @Package: cn.geoportal.gmo.server.config.common
  * @ClassName: KaptchaConfig
  * @Author: chiangbt@geoportal.cn
- * @Description: 验证码配置
+ * @Description: 验证码配置类
  * @Date: 2021/5/31 11:28
  */
 @Configuration

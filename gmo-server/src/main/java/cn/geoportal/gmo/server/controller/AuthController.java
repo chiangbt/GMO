@@ -53,18 +53,19 @@ public class AuthController {
     @ApiOperation(value = "获取验证码")
     @GetMapping(value = "/captcha", produces = "image/jpeg")
     public void getKaptcha(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        //设置响应头
+        // 设置响应头
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Pragma", "no-cache");
         response.setContentType("image/jpeg");
-
+        // 生成验证码字符
         String text = defaultKaptcha.createText();
         HttpSession session = request.getSession();
-        // 保存到验证码到 session
+        // 保存验证码到 session
         request.getSession().setAttribute(Constants.KAPTCHA_SESSION_KEY, text);
         //创建验证码图片
         BufferedImage image = defaultKaptcha.createImage(text);
         ServletOutputStream os = response.getOutputStream();
+        // 返回验证码图片
         ImageIO.write(image, "jpg", os);
         IOUtils.closeQuietly(os);
     }
@@ -80,7 +81,10 @@ public class AuthController {
     @PostMapping(value = "/login", consumes = "application/json", produces = "application/json")
     public RespBean login(@RequestBody UserLogin userLogin, HttpServletRequest request){
         // token在login函数中生成
-        return sysUserService.login(userLogin.getUsername(), userLogin.getPassword(), userLogin.getVerifycode(), request);
+        return sysUserService.login(userLogin.getUsername(),
+                userLogin.getPassword(),
+                userLogin.getVerifycode(),
+                request);
     }
 
 

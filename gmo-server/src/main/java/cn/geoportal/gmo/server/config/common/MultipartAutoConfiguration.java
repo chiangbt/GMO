@@ -11,7 +11,7 @@ import org.springframework.web.servlet.DispatcherServlet;
  * @Package: cn.geoportal.gmo.server.config.common
  * @ClassName: MultipartAutoConfiguration
  * @Author: chiangbt@geoportal.cn
- * @Description: 文件上传配置
+ * @Description: 文件上传配置类
  * @Date: 2021/5/31 14:36
  */
 public class MultipartAutoConfiguration {
