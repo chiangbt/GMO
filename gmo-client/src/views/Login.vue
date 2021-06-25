@@ -6,7 +6,7 @@
       element-loading-background="rgba(0, 0, 0, 0.8)"
     >
       <h3 class="loginTitle">
-        <i class="el-icon-discover"/>&nbsp;&nbsp;系统登录
+        <i class="el-icon-discover"/>&nbsp;&nbsp;GMO登录
       </h3>
       <el-form-item prop="username">
         <el-input
@@ -112,7 +112,8 @@ export default {
 
 <style>
 .page {
-  background:#aac5de;
+  background-image: url('./../assets/bg.jpg');
+  background-repeat: round;
   width:100vw;
   height:100vh;
   display:flex;
@@ -120,7 +121,7 @@ export default {
   align-items: center;
 }
 .loginContainer {
-  opacity: 0.9;
+  opacity: 0.98;
   border-radius: 5px;
   background: padding-box;
   margin: 100px auto;

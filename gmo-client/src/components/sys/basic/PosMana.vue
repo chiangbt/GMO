@@ -25,23 +25,24 @@
         </el-table-column>
       </el-table>
     </div>
-    <el-button
-      type="danger"
-      size="small"
-      style="margin-top: 10px"
-      :disabled="this.multipleSelection.length == 0"
+    <el-button type="danger" size="small" style="margin-top: 10px" :disabled="this.multipleSelection.length == 0"
       @click="deleteMany">批量删除</el-button>
     <el-dialog title="编辑职位" :visible.sync="dialogVisible" width="25%">
-      <el-form ref="form" :model="form" :label-position='left' label-width="80px">
-        <el-form-item label="职位名称">
-          <el-input v-model="updatePos.name" class="updatePos"></el-input>
+      <el-form ref="updatePos" :model="updatePos" label-width="80px" label-position="right">
+        <el-form-item label="名称" prop="name">
+          <el-input v-model="updatePos.name"/>
+        </el-form-item>
+        <el-form-item label="是否启用" prop="enabled">
+          <el-switch
+            v-model="updatePos.enabled"
+            active-color="#13ce66"
+            inactive-color="#ff4949"
+          />
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false" size="small">取消</el-button>
-        <el-button type="primary" @click="doUpdate" size="small"
-          >确定</el-button
-        >
+        <el-button type="primary" @click="doUpdate" size="small">确定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -53,14 +54,15 @@ export default {
   data() {
     return {
       pos: {
-        name: "",
+        name: ""
       },
       updatePos: {
         name: "",
+        enabled: false
       },
       positions: [],
       dialogVisible: false,
-      multipleSelection: [],
+      multipleSelection: []
     };
   },
   mounted() {
@@ -68,7 +70,7 @@ export default {
   },
   methods: {
     initPositions() {
-      this.getRequest("/system/basic/position/").then((resp) => {
+      this.getRequest("/system/basic/position").then((resp) => {
         if (resp) {
           this.positions = resp;
         }
@@ -76,7 +78,6 @@ export default {
     },
     showEditView(index, data) {
       Object.assign(this.updatePos, data);
-      //this.updatePos = data;
       this.dialogVisible = true;
     },
     handleDelete(index, data) {
@@ -84,24 +85,23 @@ export default {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
-      })
-        .then(() => {
-          this.deleteRequest("/system/basic/position/" + data.id).then((resp) => {
-            if (resp) {
-              this.initPositions();
-            }
-          });
-        })
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "已取消操作",
-          });
+      }).then(() => {
+        this.deleteRequest("/system/basic/position/" + data.id).then((resp) => {
+          if (resp) {
+            this.initPositions();
+          }
         });
+      })
+      .catch(() => {
+        this.$message({
+          type: "info",
+          message: "已取消操作"
+        });
+      });
     },
     addPosition() {
       if (this.pos.name) {
-        this.postRequest("/system/basic/position/", this.pos).then((resp) => {
+        this.postRequest("/system/basic/position", this.pos).then((resp) => {
           if (resp) {
             this.initPositions();
             this.pos.name = "";
@@ -122,34 +122,31 @@ export default {
     handleSelectionChange(val) {
       this.multipleSelection = val;
     },
-
     deleteMany() {
-      this.$confirm(
-        "此操作将删除[" + this.multipleSelection.length + "]条记录,提示",
+      this.$confirm("此操作将删除[" + this.multipleSelection.length + "]条记录,提示",
         {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
-          type: "warning",
+          type: "warning"
         }
       )
-        .then(() => {
-          let ids = "?";
-          this.multipleSelection.forEach((item) => {
-            ids += "ids=" + item.id + "&";
-          });
-          console.log(ids);
-          this.deleteRequest("/system/basic/position/" + ids).then((resp) => {
-            if (resp) {
-              this.initPositions();
-            }
-          });
-        })
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "已取消操作",
-          });
+      .then(() => {
+        let ids = "?ids=";
+        this.multipleSelection.forEach((item) => {
+          ids += item.id + ",";
         });
+        this.deleteRequest("/system/basic/position" + ids).then((resp) => {
+          if (resp) {
+            this.initPositions();
+          }
+        });
+      })
+      .catch(() => {
+        this.$message({
+          type: "info",
+          message: "已取消操作"
+        });
+      });
     },
   },
 };

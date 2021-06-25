@@ -71,7 +71,7 @@ export default {
 
 <style scope>
 .homeHeader {
-    background: #2490FF;
+    background: #1864b1;
     display: flex;
     align-items: center;
     justify-content: space-between;

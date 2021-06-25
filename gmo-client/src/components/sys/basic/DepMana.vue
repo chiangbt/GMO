@@ -2,65 +2,32 @@
   <div style="width: 500px">
     <div>
       <el-input placeholder="输入部门名称进行搜索" v-model="filterText"></el-input>
-      <el-tree
-        :data="deps"
-        :props="defaultProps"
-        :filter-node-method="filterNode"
-        ref="tree"
-        :expand-on-click-node="false"
-      >
-        <span
-          class="custom-tree-node"
-          slot-scope="{ node, data }"
-          style="display: flex; justify-content: space-between; width: 100%"
-        >
+      <br/>
+      <el-tree :data="deps" :props="defaultProps" :filter-node-method="filterNode" ref="tree" :expand-on-click-node="false" default-expand-all>
+        <span class="custom-tree-node" slot-scope="{ node, data }" style="display: flex; justify-content: space-between; width: 100%">
           <span>{{ node.label }}</span>
           <span>
-            <el-button
-              type="primary"
-              size="mini"
-              class="depBtn"
-              @click="() => showAddDep(data)"
-            >
-              添加
-            </el-button>
-            <el-button
-              type="danger"
-              size="mini"
-              class="depBtn"
-              @click="() => deleteDep(data)"
-            >
-              删除
-            </el-button>
+            <el-button type="primary" class="depBtn" @click="() => showAddDep(data)">添加</el-button>
+            <el-button type="danger" class="depBtn" @click="() => deleteDep(data)">删除</el-button>
           </span>
         </span>
       </el-tree>
 
       <el-dialog title="添加部门" :visible.sync="dialogVisible" width="30%">
-        <div>
-          <table>
-            <tr>
-              <td><el-tag>上级部门</el-tag></td>
-              <td>{{ pname }}</td>
-            </tr>
-            <tr>
-              <td><el-tag>部门名称</el-tag></td>
-              <td>
-                <el-input
-                  v-model="dep.name"
-                  placeholder="请输入部门名称..."
-                ></el-input>
-              </td>
-            </tr>
-          </table>
-        </div>
+        <el-form :model="dep" ref="dep" label-width="80px" label-position="right">
+          <el-form-item label="上级部门">
+            <el-input v-model="pname"/>
+          </el-form-item>
+          <el-form-item label="部门名称" prop="name">
+            <el-input v-model="dep.name" placeholder="请输入部门名称..."/>
+          </el-form-item>
+        </el-form>
         <span slot="footer" class="dialog-footer">
           <el-button type="danger" @click="dialogVisible = false">取消</el-button>
           <el-button type="primary" @click="doAddDep">确定</el-button>
         </span>
       </el-dialog>
     </div>
-    <div></div>
   </div>
 </template>
 
@@ -79,15 +46,16 @@ export default {
       pname: "",
       dep: {
         parentid: -1,
+        id: -1,
         name: "",
         enabled: true
-      },
+      }
     };
   },
   watch: {
     filterText(val) {
       this.$refs.tree.filter(val);
-    },
+    }
   },
   mounted() {
     this.initDeps();
@@ -99,7 +67,7 @@ export default {
         parentid: -1,
         enabled: true
       }),
-        (this.pname = "");
+      (this.pname = "");
     },
     addDep2Deps(deps, dep) {
       for (let i = 0; i < deps.length; i++) {
@@ -115,7 +83,8 @@ export default {
     doAddDep() {
       this.postRequest("/system/basic/department/", this.dep).then((resp) => {
         if (resp) {
-          this.addDep2Deps(this.deps, resp.obj);
+          this.dep.id = resp.data;
+          this.addDep2Deps(this.deps, this.dep);
           this.dialogVisible = false;
           this.initDep();
         }
@@ -133,7 +102,7 @@ export default {
           deps.splice(i, 1);
           return;
         } else {
-          this.removeDepFromDeps(d.children,id);
+          this.removeDepFromDeps(d.children, id);
         }
       }
     },
@@ -143,29 +112,34 @@ export default {
         cancelButtonText: "取消",
         type: "warning",
       })
-        .then(() => {
-          this.deleteRequest("/system/basic/department/" + data.id).then(
-            (resp) => {
-              if (resp) {
+      .then(() => {
+        this.deleteRequest("/system/basic/department/" + data.id).then((resp) => {
+            if (resp) {
+              if(resp.code === 500){
+                this.$message({
+                  type: "warning",
+                  message: resp.message,
+                });
+              }else{
                 this.removeDepFromDeps(this.deps, data.id);
-                //this.initDeps();
+                this.initDeps();
               }
             }
-          );
-        })
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "已取消操作",
-          });
         });
+      })
+      .catch(() => {
+        this.$message({
+          type: "info",
+          message: "已取消操作",
+        });
+      });
     },
     filterNode(value, data) {
       if (!value) return true;
       return data.name.indexOf(value) !== -1;
     },
     initDeps() {
-      this.getRequest("/system/basic/department/").then((resp) => {
+      this.getRequest("/system/basic/department").then((resp) => {
         if (resp) {
           this.deps = resp;
         }

@@ -1,7 +1,7 @@
 <template>
   <el-container style="height: 100%; display: block;">
     <Header></Header>
-    <el-container style="display:flex;">
+    <el-container style="display:flex; height: 93.5vh">
       <SiderMenu></SiderMenu>
       <el-container>
         <el-main>

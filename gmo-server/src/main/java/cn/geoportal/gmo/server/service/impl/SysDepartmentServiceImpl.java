@@ -41,7 +41,7 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
             return RespBean.success("删除部门成功！", result);
         }
         if (result == -2) {
-            return RespBean.error("删除失败，该部门存在子部门！", result);
+            return RespBean.error("删除失败，该部门存在下级部门！", result);
         }
         if (result == -1) {
             return RespBean.error("删除失败，该部门存在员工！", result);

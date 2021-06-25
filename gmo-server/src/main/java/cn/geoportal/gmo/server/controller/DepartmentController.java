@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ import java.util.List;
  * @Date: 2021/6/1 15:43
  */
 @Api(tags = "8.部门模块")
+@ApiIgnore
 @ApiSupport(order = 310)
 @RestController
 @RequestMapping(value = "/system/basic/department")

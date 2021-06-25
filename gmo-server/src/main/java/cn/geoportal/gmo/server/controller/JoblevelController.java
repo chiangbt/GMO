@@ -1,6 +1,5 @@
 package cn.geoportal.gmo.server.controller;
 
-
 import cn.geoportal.gmo.server.entity.SysJoblevel;
 import cn.geoportal.gmo.server.entity.common.RespBean;
 import cn.geoportal.gmo.server.service.SysJoblevelService;
@@ -11,6 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,6 +24,7 @@ import java.util.List;
  * @Date: 2021/6/1 11:14
  */
 @Api(tags = "6.职称模块")
+@ApiIgnore
 @ApiSupport(order = 308)
 @RestController
 @RequestMapping(value = "/system/basic/joblevel")
@@ -36,14 +37,7 @@ public class JoblevelController {
     @ApiOperation(value = "获取所有职称")
     @GetMapping("")
     public List<SysJoblevel> getAlJoblevel(){
-        return sysJoblevelService.list(new QueryWrapper<SysJoblevel>().orderByDesc("titlelevel"));
-    }
-
-    @ApiOperationSupport(order = 3)
-    @ApiOperation(value = "获取职称")
-    @GetMapping(value = "/{id}", produces = "application/json")
-    public SysJoblevel getJoblevelById(@PathVariable(value="id") Integer id){
-        return sysJoblevelService.findJoblevelById(id);
+        return sysJoblevelService.list(new QueryWrapper<SysJoblevel>().orderByDesc("titlelevel", "name"));
     }
 
     @ApiOperationSupport(order = 2)
@@ -56,6 +50,13 @@ public class JoblevelController {
         }catch (Exception e){
             return RespBean.error("添加失败");
         }
+    }
+
+    @ApiOperationSupport(order = 3)
+    @ApiOperation(value = "获取职称")
+    @GetMapping(value = "/{id}", produces = "application/json")
+    public SysJoblevel getJoblevelById(@PathVariable(value="id") Integer id){
+        return sysJoblevelService.findJoblevelById(id);
     }
 
     @ApiOperationSupport(order = 4)

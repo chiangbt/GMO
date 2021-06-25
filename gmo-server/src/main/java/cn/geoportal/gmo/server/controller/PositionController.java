@@ -10,6 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.List;
  * @CreatedAt: 2021/6/1 9:17 上午
  **/
 @Api(tags = "5.职位模块")
+@ApiIgnore
 @ApiSupport(order = 307)
 @RestController
 @RequestMapping(value = "/system/basic/position")
@@ -34,13 +36,6 @@ public class PositionController {
         return sysPositionService.list(new QueryWrapper<SysPosition>().orderByDesc("id"));
     }
 
-    @ApiOperationSupport(order = 3)
-    @ApiOperation(value = "获取职位")
-    @GetMapping(value = "/{id}", produces = "application/json")
-    public SysPosition getPositionById(@PathVariable(value="id") Integer id){
-        return sysPositionService.findPositionById(id);
-    }
-
     @ApiOperationSupport(order = 2)
     @ApiOperation(value = "添加职位")
     @PostMapping(value = "", consumes = "application/json", produces = "application/json")
@@ -51,6 +46,13 @@ public class PositionController {
         }catch (Exception e){
             return RespBean.error("添加失败");
         }
+    }
+
+    @ApiOperationSupport(order = 3)
+    @ApiOperation(value = "获取职位")
+    @GetMapping(value = "/{id}", produces = "application/json")
+    public SysPosition getPositionById(@PathVariable(value="id") Integer id){
+        return sysPositionService.findPositionById(id);
     }
 
     @ApiOperationSupport(order = 4)
