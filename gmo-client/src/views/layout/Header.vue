@@ -45,9 +45,9 @@ export default {
         handleSelect(key, keyPath) {
             if (key == "logout") {
                 this.$confirm("你确定要注销吗?", "提示", {
-                confirmButtonText: "确定",
-                cancelButtonText: "取消",
-                type: "warning",
+                    confirmButtonText: "确定",
+                    cancelButtonText: "取消",
+                    type: "warning"
                 }).then(() => {
                     this.postRequest("/api/auth/logout");
                     window.sessionStorage.removeItem("tokenStr");
@@ -57,8 +57,8 @@ export default {
                 })
                 .catch(() => {
                     this.$message({
-                    type: "info",
-                    message: "已取消操作",
+                        type: "info",
+                        message: "已取消操作"
                     });
                 });
             }else if(key == "setting"){

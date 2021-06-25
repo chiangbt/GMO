@@ -12,11 +12,10 @@
           </span>
         </span>
       </el-tree>
-
       <el-dialog title="添加部门" :visible.sync="dialogVisible" width="30%">
         <el-form :model="dep" ref="dep" label-width="80px" label-position="right">
           <el-form-item label="上级部门">
-            <el-input v-model="pname"/>
+            <el-input v-model="pname" disabled/>
           </el-form-item>
           <el-form-item label="部门名称" prop="name">
             <el-input v-model="dep.name" placeholder="请输入部门名称..."/>

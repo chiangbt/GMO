@@ -1,11 +1,7 @@
 <template>
-  <a-row :gutter="16">
-    <a-col :span="24">
-      <a-card :bordered="false">
-        <div id="map"></div>
-      </a-card>
-    </a-col>
-  </a-row>
+  <a-card :bordered="false">
+    <div id="map"></div>
+  </a-card>
 </template>
 
 <script>

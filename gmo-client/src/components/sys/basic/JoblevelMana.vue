@@ -44,6 +44,8 @@
             v-model="updatejl.enabled"
             active-color="#13ce66"
             inactive-color="#ff4949"
+            active-text="启用"
+            inactive-text="不启用"
           />
         </el-form-item>
       </el-form>

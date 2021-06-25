@@ -1,11 +1,7 @@
 <template>
-  <a-row :gutter="16">
-    <a-col :span="24">
-      <a-card :bordered="false">
-        <div id="map"></div>
-      </a-card>
-    </a-col>
-  </a-row>
+  <a-card :bordered="false">
+    <div id="map"></div>
+  </a-card>
 </template>
 
 <script>
@@ -39,7 +35,6 @@ export default {
         expanded: false,
       });
       view.ui.add(bkExpand, "top-right");
-      
       
       const popupTrailheads = {
         "title": "Trailhead",

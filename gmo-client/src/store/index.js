@@ -1,3 +1,4 @@
+import { camelCase } from 'lodash';
 import Vue from 'vue'
 import Vuex from 'vuex'
 
@@ -8,7 +9,7 @@ export default new Vuex.Store({
     state: {
         routes: [],
         isCollapse: false,
-        aside_width: '200px'
+        aside_width: '200px',
     },
     mutations: {
         initRoutes(state, data) {
