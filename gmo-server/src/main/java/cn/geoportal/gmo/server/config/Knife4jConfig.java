@@ -21,7 +21,7 @@ import java.util.List;
  * @Package: cn.geoportal.gmo.server.config
  * @ClassName: Swagger2Config
  * @Author: chiangbt@geoportal.cn
- * @Description: Swagger2配置类
+ * @Description: Knife4j API配置类
  * @Date: 2021/5/31 10:45
  */
 @Configuration

@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * Customer 用户类
  * @Entity cn.geoportal.gmo.server.entity.Customer
  */
 public interface CustomerMapper extends BaseMapper<Customer> {
