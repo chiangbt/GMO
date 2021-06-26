@@ -88,6 +88,7 @@
           AND mr.role_id = ar.role_id
           AND ar.user_id = #{userId}
           AND m2.enabled = 1
+          AND m2.path != '/home'
         ORDER BY
             m2.orders
     </select>
