@@ -9,7 +9,7 @@
             <i v-else style="font-size:16px;" class="el-icon-s-fold"></i>
         </div>
         <el-menu class="el-menu-demo" mode="horizontal" @select="handleSelect"
-            background-color="#2490FF" text-color="#FFFFFF">
+            background-color="#145190" text-color="#FFFFFF">
             <el-submenu index="1">
                 <template slot="title">
                     <i class="el-icon-user" style="color:#ffffff"/>&nbsp;{{ user.username }}

@@ -31,7 +31,7 @@ import java.util.Map;
 @Api(tags = "1.客户模块")
 @ApiSupport(order = 302)    // 分组排序
 @RestController
-@RequestMapping("/api/customer")
+@RequestMapping("/api/person/customer")
 public class CustomerController {
 
     @Autowired

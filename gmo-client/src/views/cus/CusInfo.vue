@@ -126,7 +126,7 @@ export default {
   },
   methods:{
     async getCustomerList() {
-      const { data, code, message } = await this.getRequest("/api/customer?query=" + 
+      const { data, code, message } = await this.getRequest("/api/person/customer?query=" + 
         this.queryInfo.query + "&pageNo=" + 
         this.queryInfo.pageNo + "&pageSize=" + this.queryInfo.pageSize);
 
@@ -158,7 +158,7 @@ export default {
     add(form) {
       this.$refs.userForm.validate(valid => {
         if (valid) { //表单验证通过
-          this.postRequest("/api/customer", form).then((resp) => {
+          this.postRequest("/api/person/customer", form).then((resp) => {
             if (resp.code == 200) {
               this.pageNo = 1;
               this.getCustomerList();
@@ -182,7 +182,7 @@ export default {
     },
     update(form){
       console.log(form)
-      this.patchRequest("/api/customer/" + form.id, form).then((resp) => {
+      this.patchRequest("/api/person/customer/" + form.id, form).then((resp) => {
         if (resp.code == 200) {
           this.pageNo = 1;
           this.getCustomerList();
@@ -197,7 +197,7 @@ export default {
         cancelButtonText: "取消",
         type: "warning"
       }).then(() => {
-        this.deleteRequest("/api/customer/" + data.id).then((resp) => {
+        this.deleteRequest("/api/person/customer/" + data.id).then((resp) => {
           if (resp) {
             this.getCustomerList();
           }
@@ -219,7 +219,7 @@ export default {
         cancelButtonText: "取消",
         type: "warning"
       }).then(() => {
-        this.deleteRequest("/api/customer?ids=" + sel.toString()).then((resp) => {
+        this.deleteRequest("/api/person/customer?ids=" + sel.toString()).then((resp) => {
           if (resp) {
             this.getCustomerList();
           }

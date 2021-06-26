@@ -101,7 +101,7 @@ export default {
   },
   methods: {
     async getMailList() {
-      const { data, code, message } = await this.getRequest("/api/send/maillist?query=" + 
+      const { data, code, message } = await this.getRequest("/api/person/mail/maillist?query=" + 
         this.queryInfo.query + "&pageNo=" + 
         this.queryInfo.pageNo + "&pageSize=" + this.queryInfo.pageSize);
 
@@ -128,7 +128,7 @@ export default {
         cancelButtonText: "取消",
         type: "warning"
       }).then(() => {
-        this.deleteRequest("/api/send/maillist/" + data.id).then((resp) => {
+        this.deleteRequest("/api/person/mail/maillist/" + data.id).then((resp) => {
           if (resp) {
             this.getMailList();
           }
@@ -143,7 +143,7 @@ export default {
     add(form){
       this.$refs.emailForm.validate(valid => {
         if (valid) { //表单验证通过
-          this.postRequest("/api/send/mail", form).then((resp) => {
+          this.postRequest("/api/person/mail/mail", form).then((resp) => {
             if (resp.code == 200) {
               this.pageNo = 1;
               this.getMailList();

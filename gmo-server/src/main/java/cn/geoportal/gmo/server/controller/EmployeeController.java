@@ -39,7 +39,7 @@ import java.util.List;
 @Api(tags = "10.雇员模块")
 @ApiSupport(order = 312)
 @RestController
-@RequestMapping("/employee/basic")
+@RequestMapping("/api/person/employee")
 public class EmployeeController {
 
     @Autowired

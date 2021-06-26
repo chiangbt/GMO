@@ -36,7 +36,7 @@ import java.time.LocalDateTime;
 @ApiIgnore
 @ApiSupport(order = 313)
 @RestController
-@RequestMapping("/api/send")
+@RequestMapping("/api/person/mail")
 public class ChatController {
 
     private static Logger log = LoggerFactory.getLogger(ChatController.class);
