@@ -1,7 +1,7 @@
 <template>
-  <a-card :bordered="false">
+  <div style="margin-top:20px;">
     <div id="map"></div>
-  </a-card>
+</div>
 </template>
 
 <script>
@@ -54,7 +54,7 @@ export default {
 <style lang="less" scoped>
 #map {
   width: 100%;
-  height: calc(80vh);
+  height: calc(78vh);
   z-index: 1;
 }
 /deep/ * {

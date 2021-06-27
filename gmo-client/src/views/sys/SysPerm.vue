@@ -160,6 +160,6 @@ export default {
 }
 .permissManaMain {
   margin-top: 10px;
-  width: 700px;
+  width: 50%;
 }
 </style>
