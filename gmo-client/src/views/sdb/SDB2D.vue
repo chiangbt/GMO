@@ -13,6 +13,7 @@ import Home from '@arcgis/core/widgets/Home';
 import Bookmarks from '@arcgis/core/widgets/Bookmarks';
 import Expand from '@arcgis/core/widgets/Expand';
 import Sketch from '@arcgis/core/widgets/Sketch';
+import SimpleMarkerSymbol from '@arcgis/core/symbols/SimpleMarkerSymbol';
 
 export default {
   name: "SDB2D",
@@ -98,6 +99,15 @@ export default {
             const geom = event.graphic.geometry;
             switch (geom.type) {
               case 'point':
+                event.graphic.symbol= new SimpleMarkerSymbol({
+                  style: "circle",
+                  color: "red",
+                  size: "8px",  // pixels
+                  outline: {  // autocasts as new SimpleLineSymbol()
+                    color: [ 255, 255, 0 ],
+                    width: 3  // points
+                  }
+                });
                 console.log(`point: [${geom.x},${geom.y}]`);
                 break;
               case 'polyline':
