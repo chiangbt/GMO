@@ -3,8 +3,7 @@
         <div style="text-align: right; margin-top: 30px; margin-bottom:20px;">
             <el-row :gutter="20">
                 <el-col :sm="12" :md="12">
-                    <el-input
-                        Placeholder="Search..." clearable @clear="onClearSearch"
+                    <el-input Placeholder="Search..." clearable @clear="onClearSearch"
                         v-model="searchVal" @keyup.enter.native="onEnterSearch">
                         <i slot="prefix" class="el-input__icon el-icon-search"></i>
                     </el-input>
@@ -16,33 +15,33 @@
             </el-row>
         </div>
         <el-card class="box-card" shadow="always">
-          <el-table :data="menuList" stripe border style="width: 100%" @selection-change="handleSelectionChange">
-              <el-table-column type="selection" width="40"></el-table-column>
-              <el-table-column type='index' label="编号" align="center" width="50" :index='(index)=>{return (index+1)}'/>
-              <el-table-column prop="name" label="姓名"></el-table-column>
-              <el-table-column prop="age" label="年龄" width="180"></el-table-column>
-              <el-table-column prop="address" label="地址"></el-table-column>
-              <el-table-column prop="updatedat" label="录入时间"></el-table-column>
-              <el-table-column label="操作" align="center" width="180">
-                  <template slot-scope="scope">
-                      <el-button size="mini" @click="handleEdit(scope.row)" class="el-icon-edit">编辑</el-button>
-                      <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)" class="el-icon-delete">删除</el-button>
-                  </template>
-              </el-table-column>
-          </el-table>
-          <div style="text-align: right; margin-top: 30px;">
-              <el-pagination
-                  @size-change="handleSizeChange"
-                  @current-change="handleCurrentChange"
-                  :current-page="queryInfo.pageNo"
-                  :page-sizes="[15, 25, 50]"
-                  :page-size="queryInfo.pageSize"
-                  layout="total, sizes, prev, pager, next, jumper"
-                  :total="total"
-                  background
-              >
-              </el-pagination>
-          </div>
+            <el-table :data="customerList" stripe border style="width: 100%" @selection-change="handleSelectionChange">
+                <el-table-column type="selection" width="40"></el-table-column>
+                <el-table-column type='index' label="编号" align="center" width="50" :index='(index)=>{return (index+1)}'/>
+                <el-table-column prop="name" label="姓名"></el-table-column>
+                <el-table-column prop="age" label="年龄" width="180"></el-table-column>
+                <el-table-column prop="address" label="地址"></el-table-column>
+                <el-table-column prop="updatedat" label="录入时间"></el-table-column>
+                <el-table-column label="操作" align="center" width="180">
+                    <template slot-scope="scope">
+                        <el-button size="mini" @click="handleEdit(scope.row)" class="el-icon-edit">编辑</el-button>
+                        <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)" class="el-icon-delete">删除</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+            <div style="text-align: right; margin-top: 30px;">
+                    <el-pagination
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        :current-page="queryInfo.pageNo"
+                        :page-sizes="[15, 25, 50]"
+                        :page-size="queryInfo.pageSize"
+                        layout="total, sizes, prev, pager, next, jumper"
+                        :total="total"
+                        background
+                    >
+                    </el-pagination>
+            </div>
         </el-card>
         <el-dialog title="添加" :visible.sync="dialogFormVisible" width="30%">
             <el-form :model="userForm" ref="userForm" :rules="rules" label-position="left">
@@ -96,7 +95,7 @@ export default {
             }
         };
         return {
-            menuList:[],
+            customerList:[],
             multipleSelection: [],
             searchVal: '',
             queryInfo: {
@@ -133,7 +132,7 @@ export default {
             if (code !== 200) {
                 return this.$message.error(message);
             }
-            this.menuList = data.records;
+            this.customerList = data.records;
             this.total = data.total;
         },
         handleSelectionChange(val) {
@@ -167,7 +166,7 @@ export default {
                         }
                     });
                 } else {
-                    console.log("error submit!!");
+                    console.log("提交错误!!");
                     return false;
                 }
             });
@@ -192,7 +191,7 @@ export default {
         },
         handleDelete(key, data){
             console.log(data.id);
-            this.$confirm("此操作将删除[" + data.name + "]记录,提示", {
+            this.$confirm("此操作将删除[" + data.name + "]记录，提示", {
                 confirmButtonText: "确定",
                 cancelButtonText: "取消",
                 type: "warning"
@@ -205,7 +204,7 @@ export default {
             }).catch(() => {
                 this.$message({
                     type: "info",
-                    message: "已取消操作",
+                    message: "已取消操作"
                 });
             });
         },
@@ -214,7 +213,7 @@ export default {
             this.multipleSelection.map(item => {
                 sel.push(item.id);
             });
-            this.$confirm("此操作将删除多条记录,提示", {
+            this.$confirm("此操作将删除多条记录，提示", {
                 confirmButtonText: "确定",
                 cancelButtonText: "取消",
                 type: "warning"
@@ -227,7 +226,7 @@ export default {
             }).catch(() => {
                 this.$message({
                     type: "info",
-                    message: "已取消操作",
+                    message: "已取消操作"
                 });
             });
         }
@@ -236,5 +235,4 @@ export default {
 </script>
 
 <style>
-
 </style>

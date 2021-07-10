@@ -25,7 +25,7 @@ import java.util.List;
 @Api(tags = "9.操作用户模块")
 @ApiSupport(order = 311)
 @RestController
-@RequestMapping("/system/admin")
+@RequestMapping("/api/system/admin")
 public class UserController {
 
     @Autowired

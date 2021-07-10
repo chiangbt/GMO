@@ -6,6 +6,7 @@ import cn.geoportal.gmo.server.entity.SysUser;
 import cn.geoportal.gmo.server.service.SysUserService;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.github.xiaoymin.knife4j.annotations.ApiSupport;
+import com.github.xiaoymin.knife4j.annotations.Ignore;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import io.swagger.annotations.Api;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
@@ -33,6 +35,7 @@ import java.io.IOException;
  * @Date: 2021/5/31 10:12
  */
 @Api(tags = "0.权限模块")
+@ApiIgnore
 @ApiSupport(order = 301)    // 分组排序
 @RestController
 @RequestMapping("/api/auth")

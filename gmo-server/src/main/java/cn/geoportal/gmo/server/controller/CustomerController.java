@@ -29,6 +29,7 @@ import java.util.Map;
  * @Date: 2021/5/31 11:55
  */
 @Api(tags = "1.客户模块")
+@ApiIgnore
 @ApiSupport(order = 302)    // 分组排序
 @RestController
 @RequestMapping("/api/person/customer")

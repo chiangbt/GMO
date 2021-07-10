@@ -79,16 +79,15 @@ export default {
                 orders: form.orders 
             }).then((resp) => {
                 if (resp.code == 200) {
-                    // this.init();
                     this.editDialogVisible = false;
                     this.$router.go(0);
                     this.$message({
-                      type: "success",
-                      message: "更新成功!",
+                        type: "success",
+                        message: "更新成功!"
                     });
                 }
             });
-        },
+        }
     }
 }
 </script>

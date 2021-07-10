@@ -1,7 +1,7 @@
 <template>
     <el-header class="homeHeader" style="padding-Left: 20px; padding-right:0px; height:60px;">
         <div class="title">
-            <div v-if="!this.$store.state.isCollapse">GeoMO&nbsp;&nbsp;<i style="font-size:34px;" class="fa fa-globe" ></i></div>
+            <div v-if="!this.$store.state.isCollapse">GeoMo&nbsp;&nbsp;<i style="font-size:34px;" class="fa fa-globe" ></i></div>
             <i v-else style="font-size:34px;" class="fa fa-globe" ></i>
         </div>
         <div class="toggleBtn" ref="toggleBtn" @click="collapseChage">
@@ -28,7 +28,7 @@ export default {
     name: 'Header',
     data() {
         return {
-            user: JSON.parse(window.sessionStorage.getItem("user")),
+            user: JSON.parse(window.sessionStorage.getItem("user"))
         };
     },
     methods:{
@@ -39,7 +39,7 @@ export default {
                 this.$refs.toggleBtn.style.left = '-130px';
             }else{
                 this.$store.state.aside_width = '200px';
-                this.$refs.toggleBtn.style.left = '0px'
+                this.$refs.toggleBtn.style.left = '0px';
             }
         },
         handleSelect(key, keyPath) {

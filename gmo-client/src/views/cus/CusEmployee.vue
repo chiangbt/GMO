@@ -3,8 +3,7 @@
         <div style="text-align: right; margin-top: 30px; margin-bottom:20px;">
             <el-row :gutter="20">
                 <el-col :sm="12" :md="12">
-                    <el-input
-                        Placeholder="Search..." clearable @clear="onClearSearch"
+                    <el-input Placeholder="Search..." clearable @clear="onClearSearch"
                         v-model="searchVal" @keyup.enter.native="onEnterSearch">
                         <i slot="prefix" class="el-input__icon el-icon-search"></i>
                     </el-input>
@@ -36,14 +35,14 @@
             </el-table>
             <div style="text-align: right; margin-top: 30px;">
                 <el-pagination
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page="queryInfo.pageNo"
-                :page-sizes="[15, 25, 50]"
-                :page-size="queryInfo.pageSize"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="total"
-                background
+                    @size-change="handleSizeChange"
+                    @current-change="handleCurrentChange"
+                    :current-page="queryInfo.pageNo"
+                    :page-sizes="[15, 25, 50]"
+                    :page-size="queryInfo.pageSize"
+                    layout="total, sizes, prev, pager, next, jumper"
+                    :total="total"
+                    background
                 >
                 </el-pagination>
             </div>
@@ -60,11 +59,12 @@ export default {
             employeeList:[],
             multipleSelection: [],
             total: 0,
+            searchVal: '',
             queryInfo: {
                 query: "",
                 pageNo: 1,
                 pageSize: 15
-            },
+            }
         }
     },
     mounted() {
@@ -99,6 +99,10 @@ export default {
                 return "";  
             }  
             return moment(date).format("YYYY-MM-DD"); 
+        },
+        onClearSearch(){
+            this.queryInfo.query = '';
+            this.getEmployeeList();
         }
     }
 }

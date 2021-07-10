@@ -7,9 +7,7 @@
                 <el-card>
                     <el-breadcrumb v-if="this.$router.currentRoute.path != '/home'" separator="/">
                         <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
-                        <el-breadcrumb-item>{{
-                          this.$router.currentRoute.name
-                        }}</el-breadcrumb-item>
+                        <el-breadcrumb-item>{{ this.$router.currentRoute.name }}</el-breadcrumb-item>
                     </el-breadcrumb>
                     <el-breadcrumb v-else>
                         <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>

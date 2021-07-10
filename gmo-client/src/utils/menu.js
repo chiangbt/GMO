@@ -20,7 +20,7 @@ export const formatRoutes = (routes) => {
     let fmtRoutes = [];
     routes.forEach(router => {
         let {
-            path, component, name, iconcls, children,
+            path, component, name, iconcls, children
         } = router;
         if (children && children instanceof Array) {
             //递归
@@ -52,6 +52,5 @@ export const formatRoutes = (routes) => {
         }
         fmtRoutes.push(fmtRoute)
     });
-    //console.log(fmtRoutes)
     return fmtRoutes
 }

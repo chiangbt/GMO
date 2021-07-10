@@ -3,7 +3,7 @@
         <el-form :model="loginForm" ref="form" :rules="loginRules" class="loginContainer" v-loading="loading"
           element-loading-text="正在登录..." element-loading-spinner="el-icon-loading" element-loading-background="rgba(0, 0, 0, 0.8)">
             <h3 class="loginTitle">
-                <i class="el-icon-discover"/>&nbsp;&nbsp;Geospatial管理
+                <i class="el-icon-discover"/>&nbsp;&nbsp;GeoManagement
             </h3>
             <el-form-item prop="username">
                 <el-input type="text" v-model="loginForm.username" placeholder="请输入用户名" clearable prefix-icon="fa fa-user" auto-complete="false"></el-input>
@@ -44,21 +44,19 @@ export default {
             loginForm: {
                 username: "admin",
                 password: "123",
-                verifycode: "",
+                verifycode: ""
             },
             loading: false,
             checked: true,
             loginRules: {
-                username: [
-                    { required: true, message: "请输入用户名", trigger: "blur" },
-                ],
+                username: [{ required: true, message: "请输入用户名", trigger: "blur" }],
                 password: [{ required: true, message: "请输入密码", trigger: "blur" }],
                 verifycode: [{ required: true, message: "请输入验证码", trigger: "blur" }],
-            },
+            }
         };
     },
     mounted() {
-        this.checkStatus()
+        this.checkStatus();
     },
     methods: {
       updateCaptcha() {
@@ -80,7 +78,7 @@ export default {
                     window.sessionStorage.setItem("tokenStr", tokenStr);
                     //跳转页面
                     let path = this.$route.query.redirect;
-                    this.$router.push(path=='/'||path==undefined?'/home':path).catch(err => { console.log(err) })
+                    this.$router.push(path=='/'||path==undefined?'/home':path);
                 }
               });
             } else {
@@ -88,13 +86,12 @@ export default {
                 return false;
             }
         });
-      //  this.updateCaptcha();
       },
       checkStatus() {
-          if (window.sessionStorage.getItem('tokenStr')) {
-              let path = this.$route.query.redirect;
-              this.$router.push(path=='/'||path==undefined?'/home':path)
-          } 
+            if (window.sessionStorage.getItem('tokenStr')) {
+                let path = this.$route.query.redirect;
+                this.$router.push(path=='/'||path==undefined?'/home':path)
+            } 
       }
     },
 };
