@@ -24,7 +24,6 @@ import java.util.List;
  * @Date: 2021/6/1 11:14
  */
 @Api(tags = "6.职称模块")
-@ApiIgnore
 @ApiSupport(order = 308)
 @RestController
 @RequestMapping(value = "/system/basic/joblevel")

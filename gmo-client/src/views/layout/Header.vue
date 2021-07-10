@@ -85,7 +85,7 @@ export default {
 .toggleBtn {
     color: white;
     position: absolute;
-    padding-left: 200px;
+    margin-left: 200px;
 }
 .el-dropdown-link img {
     width: 48px;

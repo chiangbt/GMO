@@ -63,7 +63,7 @@ export default {
                 type: "warning"
             })
             .then(() => {
-                this.deleteRequest("/system/basic/permission/role/" + r.id).then(
+                this.deleteRequest("/system/perm/role/" + r.id).then(
                     (resp) => {
                         if (resp) {
                             this.initRoles();
@@ -81,7 +81,7 @@ export default {
         doAddRole() {
             //console.log(this.role);
             if (this.role.name && this.role.namezh) {
-                this.postRequest("/system/basic/permission/role", this.role).then(
+                this.postRequest("/system/perm/role", this.role).then(
                     (resp) => {
                         if (resp) {
                             this.initRoles();
@@ -100,7 +100,7 @@ export default {
         doUpdate(rid, index) {
             let tree = this.$refs.tree[index];
             let selectedKeys = tree.getCheckedKeys();
-            let url = "/system/basic/permission/menuid/" + rid;
+            let url = "/system/perm/menuid/" + rid;
             var mids = [];
             selectedKeys.map(item => {
                 mids.push(item);
@@ -119,7 +119,7 @@ export default {
             });
         },
         initselectedMenus(rid) {
-            this.getRequest("/system/basic/permission/menuid/" + rid).then((resp) => {
+            this.getRequest("/system/perm/menuid/" + rid).then((resp) => {
                 if (resp) {
                     this.selectedMenus = resp;
                 }
@@ -132,14 +132,14 @@ export default {
             }
         },
         initAllMenus() {
-            this.getRequest("/system/basic/permission/menus").then((resp) => {
+            this.getRequest("/system/perm/menus").then((resp) => {
                 if (resp) {
                     this.allMenus = resp;
                 }
             });
         },
         initRoles() {
-            this.getRequest("/system/basic/permission/").then((resp) => {
+            this.getRequest("/system/perm/").then((resp) => {
                 if (resp) {
                     this.roles = resp;
                 }

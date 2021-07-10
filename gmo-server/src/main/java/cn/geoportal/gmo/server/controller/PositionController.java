@@ -20,7 +20,6 @@ import java.util.List;
  * @CreatedAt: 2021/6/1 9:17 上午
  **/
 @Api(tags = "5.职位模块")
-@ApiIgnore
 @ApiSupport(order = 307)
 @RestController
 @RequestMapping(value = "/system/basic/position")

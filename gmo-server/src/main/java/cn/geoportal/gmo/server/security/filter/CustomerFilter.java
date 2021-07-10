@@ -34,7 +34,6 @@ public class CustomerFilter implements FilterInvocationSecurityMetadataSource {
     public Collection<ConfigAttribute> getAttributes(Object o) throws IllegalArgumentException {
         // 获取请求的rul
         String requestUrl = ((FilterInvocation) o).getRequestUrl();
-        System.out.println("request url:" + requestUrl);
         // 获取所有的菜单-角色
         List<SysMenu> menus = menuService.getMenusWithRole();
         for (SysMenu menu : menus) {
@@ -42,7 +41,7 @@ public class CustomerFilter implements FilterInvocationSecurityMetadataSource {
             if(antPathMatcher.match(menu.getUrl(), requestUrl)){
                 // 将SysMenu对象的role取出名称进行匹配
                 String[] str = menu.getRoles().stream().map(SysRole::getName).toArray(String[]::new);
-                System.out.println("权限-------------" + SecurityConfig.createList(str));
+                System.out.println("url:" + requestUrl + " 权限 ------------- " + SecurityConfig.createList(str));
                 return SecurityConfig.createList(str);
             }
         }

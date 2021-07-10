@@ -62,7 +62,7 @@ export default {
     },
     methods:{
         init(){
-            this.getRequest("/api/menu/menu").then((resp) => {
+            this.getRequest("/api/system/menu/menu").then((resp) => {
                 if (resp) {
                     this.menuList = resp;
                 }
@@ -74,7 +74,7 @@ export default {
         },
         update(form){
             console.log(form)
-            this.patchRequest("/api/menu/" + form.id, { 
+            this.patchRequest("/api/system/menu/" + form.id, { 
                 name: form.name,
                 orders: form.orders 
             }).then((resp) => {

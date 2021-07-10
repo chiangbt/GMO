@@ -23,7 +23,7 @@ import java.util.List;
 @Api(tags = "4.菜单模块")
 @ApiSupport(order = 306)    // 分组排序
 @RestController
-@RequestMapping("/api/menu")
+@RequestMapping("/api/system/menu")
 public class MenuController {
 
     @Autowired

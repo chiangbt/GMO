@@ -10,7 +10,6 @@ import '@arcgis/core/assets/esri/themes/light/main.css';
 
 import { postRequest, patchRequest, deleteRequest, getRequest } from './utils/api'
 import { initMenu } from './utils/menu'
-
 Vue.config.productionTip = false
 Vue.use(ElementUI, { size: 'small' })
 
