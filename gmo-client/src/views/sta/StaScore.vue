@@ -1,5 +1,5 @@
 <template>
-  <div>StaScore</div>
+    <div>StaScore</div>
 </template>
 
 <script>

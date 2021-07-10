@@ -22,33 +22,33 @@ Vue.prototype.deleteRequest = deleteRequest;
 
 // 路由导航
 router.beforeEach((to, from, next) => {
-  // 获取登录用户token
-  if (window.sessionStorage.getItem('tokenStr')) {
-    initMenu(router, store);
-    if (!window.sessionStorage.getItem('user')) {
-      //判断用户信息是否存在
-      return getRequest('/api/auth/user/info').then(resp => {
-        if (resp) {
-          // console.log(resp);
-          //存入用户信息
-          window.sessionStorage.setItem('user', JSON.stringify(resp));
-          next();
+    // 获取登录用户token
+    if (window.sessionStorage.getItem('tokenStr')) {
+        initMenu(router, store);
+        if (!window.sessionStorage.getItem('user')) {
+            //判断用户信息是否存在
+            return getRequest('/api/auth/user/info').then(resp => {
+                if (resp) {
+                    // console.log(resp);
+                    //存入用户信息
+                    window.sessionStorage.setItem('user', JSON.stringify(resp));
+                    next();
+                }
+            })
         }
-      })
-    }
-    next();
-  } else {
-    if (to.path == '/') {
-      next();
+        next();
     } else {
-      //next('/')
-      next('/?redirect=' + to.path);
+        if (to.path == '/') {
+            next();
+        } else {
+            //next('/')
+            next('/?redirect=' + to.path);
+        }
     }
-  }
 })
 
 new Vue({
-  router,
-  store,
-  render: h => h(App)
+    router,
+    store,
+    render: h => h(App)
 }).$mount('#app')

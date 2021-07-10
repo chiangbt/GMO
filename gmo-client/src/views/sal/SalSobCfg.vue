@@ -1,5 +1,5 @@
 <template>
-  <div>SalSobCfg</div>
+    <div>SalSobCfg</div>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <div>SalMonth</div>
+    <div>SalMonth</div>
 </template>
 
 <script>

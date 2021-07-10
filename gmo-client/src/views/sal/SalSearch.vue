@@ -1,5 +1,5 @@
 <template>
-  <div>SalSearch</div>
+    <div>SalSearch</div>
 </template>
 
 <script>

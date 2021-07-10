@@ -1,10 +1,10 @@
 ## GMO系统介绍
 
-GMO是一款基于SpringBoot、Mybatis Plus、Security和Knife4j等组件打造的一款基于后台服务RBAC管理信息系统。
+GMO是基于SpringBoot、Mybatis Plus、Security和Knife4j等组件打造的一款管理信息系统。它采用了完整的RBAC技术和流程设计，使得整个系统的URI访问处于权限控制状态。
 
 - JDK: 11（JDK 8中的JJWT会出现异常）
 - SpringBoot 2.4.5
-- PostgreSQL 数据库
+- PostgreSQL 数据库（可存储空间和非空间数据）
 - Druid 作为数据源
 - Mybatis Plus 作为半自动ORM系统
 - Knife4j 作为API文档

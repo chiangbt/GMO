@@ -1,5 +1,5 @@
 <template>
-  <div>SysLog</div>
+    <div>SysLog</div>
 </template>
 
 <script>

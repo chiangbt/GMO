@@ -1,5 +1,5 @@
 <template>
-  <div>SysCfg</div>
+    <div>SysCfg</div>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <div>SDBPoi</div>
+    <div>SDBPoi</div>
 </template>
 
 <script>

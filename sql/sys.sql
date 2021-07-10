@@ -40,10 +40,9 @@ COMMENT ON COLUMN t_sys_role.id IS 'ID';
 COMMENT ON COLUMN t_sys_role.name IS '角色名称';
 COMMENT ON COLUMN t_sys_role.nameZh IS '角色中文名';
 -- SQLINES DEMO *** -----------
-INSERT INTO t_sys_role(name, nameZh) VALUES ('ROLE_manager', '行政经理');
-INSERT INTO t_sys_role(name, nameZh) VALUES ('ROLE_train', '培训主管');
 INSERT INTO t_sys_role(name, nameZh) VALUES ('ROLE_admin', '超级管理员');
-
+INSERT INTO t_sys_role(name, nameZh) VALUES ('ROLE_manager', '行政主管');
+INSERT INTO t_sys_role(name, nameZh) VALUES ('ROLE_train', '培训主管');
 
 /**
   3、用户角色表
@@ -59,9 +58,9 @@ COMMENT ON COLUMN t_sys_user_role.id IS 'ID';
 COMMENT ON COLUMN t_sys_user_role.user_id IS '用户id';
 COMMENT ON COLUMN t_sys_user_role.role_id IS '权限id';
 -- SQLINES DEMO *** -----------
-INSERT INTO t_sys_user_role(user_id, role_id) VALUES (1, 3);
-INSERT INTO t_sys_user_role(user_id, role_id) VALUES (2, 1);
-INSERT INTO t_sys_user_role(user_id, role_id) VALUES (3, 2);
+INSERT INTO t_sys_user_role(user_id, role_id) VALUES (1, 1);
+INSERT INTO t_sys_user_role(user_id, role_id) VALUES (2, 2);
+INSERT INTO t_sys_user_role(user_id, role_id) VALUES (3, 3);
 
 /**
   4、菜单表
@@ -117,7 +116,7 @@ INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,par
 INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/statistics/recored/**', '/sta/record', 'StaRecord', '人事记录统计', NULL, NULL, 1, 5, 1, 0);
 INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/system/basic/**', '/sys/basic', 'SysBasic', '基础信息', NULL, NULL, 1, 6, 1, 0);
 INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/system/cfg/**', '/sys/cfg', 'SysCfg', '系统管理', NULL, NULL, 1, 6, 1, 0);
-INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/system/admin/**', '/sys/admin', 'SysAdmin', '操作员管理', NULL, NULL, 1, 6, 1, 0);
+INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/system/admin/**', '/sys/admin', 'SysAdmin', '用户管理', NULL, NULL, 1, 6, 1, 0);
 INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/system/perm/**', '/sys/perm', 'SysPerm', '权限管理', NULL, NULL, 1, 6, 1, 0);
 INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/system/menu/**', '/sys/menu', 'SysMenu', '菜单管理', NULL, NULL, 1, 6, 1, 0);
 
@@ -136,36 +135,36 @@ COMMENT ON COLUMN t_sys_menu_role.id IS 'ID';
 COMMENT ON COLUMN t_sys_menu_role.menu_id IS '菜单id';
 COMMENT ON COLUMN t_sys_menu_role.role_id IS '权限id';
 -- SQLINES DEMO *** -----------
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (7, 3);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (8, 3);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (9, 3);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (7, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (8, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (9, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (10, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (11, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (12, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (13, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (14, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (15, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (16, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (17, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (18, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (19, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (20, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (21, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (22, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (23, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (24, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (25, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (26, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (27, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (28, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (7, 2);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (8, 2);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (9, 2);
 INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (10, 3);
 INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (11, 3);
 INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (12, 3);
 INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (13, 3);
 INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (14, 3);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (15, 3);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (16, 3);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (17, 3);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (18, 3);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (19, 3);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (20, 3);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (21, 3);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (22, 3);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (23, 3);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (24, 3);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (25, 3);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (26, 3);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (27, 3);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (28, 3);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (7, 1);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (8, 1);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (9, 1);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (10, 2);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (11, 2);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (12, 2);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (13, 2);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (14, 2);
 
 
 /**
@@ -521,50 +520,3 @@ INSERT INTO t_sys_employee VALUES (50, '宋阳', '女', '1993-05-17', '510921199
 INSERT INTO t_sys_employee VALUES (51, '毛玉', '男', '1995-05-24', '230901193512038662', '未婚', 1, '哈尔滨县', 10, 'tshao@yaoliu.cn', '13921802030', '广东省晶县房山郑州路t座 474776', 2, 1, 2, '劳务合同', '大专', '护理学', '北京大学', '2016-11-16', '在职', '00000051', 9.3, '2019-01-05', NULL, '2017-03-16', '2020-04-05', NULL);
 INSERT INTO t_sys_employee VALUES (52, '陈红梅', '男', '1993-01-15', '36078120010301542X', '未婚', 1, '明市', 9, 'ptian@guiying.cn', '15660538227', '澳门特别行政区淑珍县华龙田路s座 526080', 3, 2, 2, '劳务合同', '大专', '市场营销', '南京大学', '2016-03-14', '在职', '00000052', 7.99, '2018-11-16', NULL, '2016-08-13', '2020-04-15', NULL);
 INSERT INTO t_sys_employee VALUES (53, '萧春梅', '女', '1994-07-14', '130225193503290451', '未婚', 1, '华县', 7, 'guiyingzeng@gmail.com', '15280462787', '河北省昆明市长寿顾街o座 728886', 3, 3, 3, '劳务合同', '大专', '中国语言文学', '国防科技大学', '2017-07-25', '在职', '00000053', 8.1, '2017-04-08', NULL, '2017-06-16', '2020-04-05', NULL);
-INSERT INTO t_sys_employee VALUES (54, '蔡琳', '女', '2001-04-07', '230801197307256970', '未婚', 1, '雪县', 6, 'yongkong@gmail.com', '13658227544', '澳门特别行政区小红市西夏刘路v座 917143', 4, 4, 1, '劳务合同', '大专', '中国语言文学', '复旦大学', '2016-02-17', '在职', '00000054', 1.32, '2018-09-27', NULL, '2017-07-31', '2019-11-19', NULL);
-INSERT INTO t_sys_employee VALUES (55, '谢杰', '男', '1990-07-04', '532524199902246363', '未婚', 1, '晨市', 12, 'junjin@yahoo.com', '13637320900', '内蒙古自治区辽阳市淄川刘路w座 282976', 13, 4, 2, '劳务合同', '大专', '市场营销', '中国人民大学', '2016-03-23', '在职', '00000055', 4.3, '2016-07-16', NULL, '2017-03-09', '2019-11-05', NULL);
-INSERT INTO t_sys_employee VALUES (56, '都利', '男', '2001-12-03', '410601196110227963', '未婚', 1, '东莞市', 3, 'wzeng@yahoo.com', '13388584730', '湖北省西宁县沙湾沈阳街Y座 767974', 6, 4, 5, '劳务合同', '大专', '信息管理与信息系统', '北京大学', '2016-07-26', '在职', '00000056', 2.91, '2019-02-11', NULL, '2016-11-19', '2019-10-02', NULL);
-INSERT INTO t_sys_employee VALUES (57, '刘颖', '男', '1992-01-01', '130403198604090550', '未婚', 1, '六盘水县', 11, 'zhaofang@84.cn', '15110335073', '澳门特别行政区嘉禾市白云周路J座 881702', 4, 3, 1, '劳务合同', '大专', '中国语言文学', '中国科学技术大学', '2016-10-01', '在职', '00000057', 3.3, '2016-12-05', NULL, '2018-03-10', '2020-01-17', NULL);
-INSERT INTO t_sys_employee VALUES (58, '刁桂芳', '女', '2001-09-13', '150302197202283875', '未婚', 1, '六安县', 5, 'rdong@hotmail.com', '15357876400', '新疆维吾尔自治区佳县南溪宜都街R座 771673', 12, 8, 3, '劳务合同', '大专', '市场营销', '清华大学', '2017-10-29', '在职', '00000058', 4.85, '2018-08-12', NULL, '2015-05-03', '2019-06-22', NULL);
-INSERT INTO t_sys_employee VALUES (59, '许明', '女', '1996-02-01', '540121196305265449', '未婚', 1, '海口市', 2, 'dlu@yahoo.com', '15131877702', '贵州省香港市黄浦佛山街P座 941339', 3, 4, 2, '劳动合同', '大专', '无', '南京大学', '2016-04-15', '在职', '00000059', 4.3, '2019-02-08', NULL, '2017-04-02', '2019-10-09', NULL);
-INSERT INTO t_sys_employee VALUES (60, '张瑞', '男', '1997-11-07', '220104197208285134', '未婚', 1, '龙市', 5, 'yong72@36.net', '13034769245', '山西省桂荣县海陵洪街u座 729157', 8, 3, 1, '劳务合同', '大专', '室内装修设计', '浙江大学', '2015-05-30', '在职', '00000060', 5.37, '2018-03-25', NULL, '2015-12-25', '2020-04-07', NULL);
-INSERT INTO t_sys_employee VALUES (61, '周荣', '女', '1999-08-11', '450304196910099779', '未婚', 1, '天津县', 12, 'chao45@30.cn', '15278236594', '宁夏回族自治区娟县合川辛集街l座 407633', 7, 1, 2, '劳务合同', '大专', '无', '国防科技大学', '2015-05-17', '在职', '00000061', 9.96, '2018-06-02', NULL, '2015-09-18', '2020-03-28', NULL);
-INSERT INTO t_sys_employee VALUES (62, '徐飞', '女', '1993-03-27', '350600195104028506', '未婚', 1, '芳市', 5, 'chaoyuan@yahoo.com', '18975736884', '香港特别行政区合肥县翔安陈街s座 253286', 12, 3, 1, '劳动合同', '大专', '市场营销', '复旦大学', '2017-12-14', '在职', '00000062', 9.6, '2017-11-26', NULL, '2019-04-09', '2019-09-04', NULL);
-INSERT INTO t_sys_employee VALUES (63, '金健', '男', '1991-04-26', '610125197105094719', '未婚', 1, '呼和浩特市', 9, 'juan18@hotmail.com', '15328888611', '浙江省颖县涪城福州街Z座 270167', 9, 8, 4, '劳务合同', '大专', '信息管理与信息系统', '南京大学', '2017-09-02', '在职', '00000063', 8.84, '2018-01-08', NULL, '2018-05-09', '2019-12-15', NULL);
-INSERT INTO t_sys_employee VALUES (64, '刘红梅', '女', '1991-09-18', '653001195201108337', '未婚', 1, '柳州县', 2, 'pwei@yuan.cn', '13716052290', '贵州省济南县安次林路r座 659793', 11, 6, 2, '劳务合同', '大专', '电子工程', '中国人民大学', '2018-11-09', '在职', '00000064', 7.27, '2018-12-14', NULL, '2018-09-05', '2019-08-06', NULL);
-INSERT INTO t_sys_employee VALUES (65, '彭静', '女', '1994-03-14', '420105196211114116', '未婚', 1, '秀华县', 11, 'jinggu@yongzeng.net', '13342125691', '湖南省燕县友好阜新路Z座 892528', 1, 5, 5, '劳动合同', '大专', '无', '中国人民大学', '2017-12-17', '在职', '00000065', 7.48, '2018-09-08', NULL, '2017-09-01', '2019-10-10', NULL);
-INSERT INTO t_sys_employee VALUES (66, '朱燕', '男', '1998-12-25', '140724199512227964', '未婚', 1, '兰州县', 12, 'nguo@gmail.com', '14747652210', '贵州省呼和浩特市六枝特宗街k座 609064', 6, 2, 4, '劳动合同', '大专', '无', '中国人民大学', '2017-07-28', '在职', '00000066', 1.52, '2017-10-23', NULL, '2016-05-31', '2020-01-22', NULL);
-INSERT INTO t_sys_employee VALUES (67, '成健', '女', '1996-03-30', '230108200104147249', '未婚', 1, '武汉市', 7, 'nxiao@uu.cn', '13209643778', '香港特别行政区邯郸市浔阳呼和浩特路U座 929024', 7, 4, 2, '劳务合同', '大专', '中国语言文学', '中国人民大学', '2017-05-25', '在职', '00000067', 2.1, '2017-01-27', NULL, '2018-01-30', '2019-07-21', NULL);
-INSERT INTO t_sys_employee VALUES (68, '高成', '男', '1994-04-09', '410000198807233933', '离异', 1, '辽阳市', 10, 'baijun@gmail.com', '15061826099', '广西壮族自治区桂芳市沈河济南路Y座 175803', 13, 6, 1, '劳务合同', '大专', '信息管理与信息系统', '浙江大学', '2015-10-07', '在职', '00000068', 1.24, '2017-01-12', NULL, '2016-10-15', '2020-03-09', NULL);
-INSERT INTO t_sys_employee VALUES (69, '杜海燕', '男', '1992-02-29', '421127195707202229', '离异', 1, '台北市', 4, 'chaoyi@kd.cn', '13961620974', '青海省洁县沙湾罗街V座 370522', 8, 6, 4, '劳动合同', '高中', '无', '浙江大学', '2017-03-15', '在职', '00000069', 4.13, '2017-09-20', NULL, '2019-02-20', '2019-11-29', NULL);
-INSERT INTO t_sys_employee VALUES (70, '徐芳', '男', '1998-09-25', '621223197609010852', '离异', 1, '娜县', 11, 'dzou@yinsun.org', '13372235190', '云南省秀梅市东丽淮安街j座 774716', 3, 3, 1, '劳动合同', '高中', '室内装修设计', '中国人民大学', '2018-08-18', '在职', '00000070', 8.79, '2017-06-28', NULL, '2015-09-02', '2019-12-27', NULL);
-INSERT INTO t_sys_employee VALUES (71, '徐宇', '女', '1996-05-19', '62102519520401847X', '离异', 1, '红梅市', 7, 'na38@hotmail.com', '14754588063', '重庆市磊县花溪南京街Z座 323661', 11, 4, 2, '劳务合同', '高中', '市场营销', '中国科学技术大学', '2015-08-23', '在职', '00000071', 7.83, '2019-03-29', NULL, '2016-02-15', '2020-04-13', NULL);
-INSERT INTO t_sys_employee VALUES (72, '孟璐', '男', '1991-01-26', '220105195307205862', '离异', 1, '婷婷县', 11, 'yangtang@gmail.com', '13267664247', '四川省贵阳县闵行北京路y座 418617', 5, 8, 4, '劳动合同', '高中', '信息管理与信息系统', '复旦大学', '2017-11-01', '在职', '00000072', 5.18, '2018-02-26', NULL, '2019-01-22', '2019-10-25', NULL);
-INSERT INTO t_sys_employee VALUES (73, '王鹏', '女', '2000-06-06', '330281198803115744', '离异', 1, '桂英县', 6, 'gang62@pan.cn', '18660120065', '浙江省武汉市怀柔王路v座 294443', 6, 2, 5, '劳动合同', '高中', '电子工程', '复旦大学', '2018-05-13', '在职', '00000073', 6.85, '2017-02-05', NULL, '2018-04-10', '2019-04-22', NULL);
-INSERT INTO t_sys_employee VALUES (74, '刘金凤', '男', '2001-02-16', '330203194112083504', '离异', 1, '涛市', 2, 'bliang@gmail.com', '15159155928', '山东省峰市大兴潘路x座 917961', 3, 4, 2, '劳务合同', '高中', '市场营销', '浙江大学', '2015-11-05', '在职', '00000074', 1.78, '2018-12-17', NULL, '2016-09-20', '2020-03-23', NULL);
-INSERT INTO t_sys_employee VALUES (75, '苏琴', '男', '1994-12-21', '222404198310016558', '离异', 1, '桂花市', 4, 'xiangguiying@gmail.com', '18692275625', '四川省璐县永川邢街O座 973198', 5, 1, 4, '劳动合同', '高中', '护理学', '北京大学', '2015-06-30', '在职', '00000075', 5.3, '2018-05-05', NULL, '2017-04-08', '2020-03-29', NULL);
-INSERT INTO t_sys_employee VALUES (76, '毛帆', '男', '1998-09-07', '450903196006129649', '离异', 1, '佛山市', 13, 'juan48@xia.cn', '18652337157', '浙江省凤英市高明宜都路l座 164063', 10, 3, 4, '劳务合同', '高中', '无', '中国科学技术大学', '2016-04-15', '在职', '00000076', 4.11, '2016-08-27', NULL, '2018-05-15', '2019-10-01', NULL);
-INSERT INTO t_sys_employee VALUES (77, '张秀云', '男', '1998-10-26', '431123197807174937', '离异', 1, '重庆市', 5, 'vsu@haoliao.cn', '18029370756', '陕西省太原市朝阳王路X座 220974', 11, 6, 5, '劳务合同', '高中', '无', '浙江大学', '2017-03-10', '在职', '00000077', 5.17, '2018-01-08', NULL, '2017-08-27', '2020-03-31', NULL);
-INSERT INTO t_sys_employee VALUES (78, '高想', '女', '2000-11-30', '371723198203262056', '离异', 1, '哈尔滨市', 7, 'vxiang@hotmail.com', '15044991465', '西藏自治区辉市秀英张街T座 564316', 8, 2, 5, '劳务合同', '高中', '电子工程', '国防科技大学', '2016-06-01', '在职', '00000078', 1.13, '2017-06-06', NULL, '2017-11-07', '2019-09-13', NULL);
-INSERT INTO t_sys_employee VALUES (79, '朱宁', '女', '1992-05-05', '211322196507123213', '离异', 1, '呼和浩特县', 4, 'lei13@tao.cn', '15222017286', '四川省广州县南湖邹路U座 729670', 12, 1, 2, '劳务合同', '高中', '护理学', '北京大学', '2017-07-01', '在职', '00000079', 2.55, '2018-12-28', NULL, '2015-09-12', '2019-04-29', NULL);
-INSERT INTO t_sys_employee VALUES (80, '陈楠', '男', '1992-04-28', '230129196805237522', '离异', 1, '桂兰市', 13, 'gangkang@hotmail.com', '13406718891', '台湾省林市清浦周路k座 115493', 7, 2, 2, '劳动合同', '高中', '护理学', '中国科学院大学', '2015-08-15', '在职', '00000080', 8.88, '2016-11-22', NULL, '2018-09-28', '2019-12-28', NULL);
-INSERT INTO t_sys_employee VALUES (81, '方桂珍', '女', '1998-07-07', '230108194311177987', '离异', 1, '帅市', 6, 'nli@hotmail.com', '15127153492', '青海省春梅县璧山马鞍山路J座 120691', 7, 7, 1, '劳务合同', '高中', '市场营销', '国防科技大学', '2017-10-22', '在职', '00000081', 5.63, '2017-12-27', NULL, '2017-11-07', '2019-11-17', NULL);
-INSERT INTO t_sys_employee VALUES (82, '李佳', '女', '2001-06-21', '440606196708251869', '离异', 1, '萍市', 1, 'donglei@yahoo.com', '18989396343', '山东省娟县海陵孙街D座 339304', 3, 7, 3, '劳动合同', '高中', '中国语言文学', '中国科学院大学', '2016-10-30', '在职', '00000082', 0.89, '2017-05-20', NULL, '2018-09-24', '2019-09-02', NULL);
-INSERT INTO t_sys_employee VALUES (83, '朱丽华', '女', '1994-06-20', '230705193206128541', '离异', 1, '博县', 6, 'yinxiulan@fangsong.cn', '15767432260', '台湾省香港市东城杭州街L座 231062', 6, 6, 5, '劳动合同', '高中', '室内装修设计', '南京大学', '2018-05-07', '在职', '00000083', 7.35, '2018-06-24', NULL, '2017-05-05', '2019-08-31', NULL);
-INSERT INTO t_sys_employee VALUES (84, '丛婷婷', '男', '1990-07-15', '341323195608243637', '离异', 1, '六安市', 6, 'leisong@gmail.com', '15058065854', '黑龙江省昆明市崇文南昌街k座 929460', 3, 4, 4, '劳务合同', '高中', '中国语言文学', '国防科技大学', '2018-09-17', '在职', '00000084', 5.4, '2017-05-20', NULL, '2017-07-27', '2019-05-07', NULL);
-INSERT INTO t_sys_employee VALUES (85, '阙亮', '男', '1990-05-12', '542221195510068340', '离异', 1, '汕尾县', 2, 'minfang@gmail.com', '15728517177', '香港特别行政区永安县西峰王路n座 719026', 2, 1, 5, '劳务合同', '高中', '信息管理与信息系统', '南京大学', '2017-01-10', '在职', '00000085', 6.33, '2017-01-11', NULL, '2016-05-05', '2019-08-23', NULL);
-INSERT INTO t_sys_employee VALUES (86, '范红霞', '男', '1999-02-14', '440704198110164308', '离异', 1, '辽阳县', 3, 'iyuan@tao.cn', '18943020154', '贵州省秀兰市徐汇东莞街Z座 140503', 3, 1, 5, '劳务合同', '高中', '电子工程', '上海交通大学', '2018-05-03', '在职', '00000086', 5.91, '2018-08-23', NULL, '2017-12-18', '2019-04-29', NULL);
-INSERT INTO t_sys_employee VALUES (87, '曹娜', '男', '1993-08-04', '431321195103314793', '离异', 1, '秀荣县', 9, 'lei99@xiulanjiang.cn', '14535758888', '广东省娟县崇文彭街p座 303594', 6, 2, 5, '劳动合同', '高中', '护理学', '浙江大学', '2018-08-02', '在职', '00000087', 6.79, '2017-08-31', NULL, '2018-04-24', '2020-03-25', NULL);
-INSERT INTO t_sys_employee VALUES (88, '秦龙', '男', '1991-08-23', '420601199107076880', '离异', 1, '春梅县', 6, 'dingyong@hotmail.com', '13035350393', '北京市拉萨县西夏哈尔滨路l座 940104', 3, 5, 4, '劳动合同', '高中', '信息管理与信息系统', '南京大学', '2015-07-04', '在职', '00000088', 7.36, '2018-01-09', NULL, '2017-08-24', '2019-09-09', NULL);
-INSERT INTO t_sys_employee VALUES (89, '刘欢', '男', '2000-04-14', '360124197901038461', '离异', 1, '呼和浩特县', 4, 'leiluo@hotmail.com', '18650425363', '台湾省秀珍县门头沟张路k座 785416', 2, 3, 4, '劳务合同', '高中', '信息管理与信息系统', '中国科学技术大学', '2018-08-28', '在职', '00000089', 6.76, '2017-01-25', NULL, '2019-03-23', '2020-02-05', NULL);
-INSERT INTO t_sys_employee VALUES (90, '邵刚', '女', '1992-05-31', '450401194505080019', '离异', 1, '丽市', 7, 'junxiong@hotmail.com', '15138260125', '青海省建军市海陵戴街x座 562142', 4, 5, 1, '劳动合同', '高中', '市场营销', '中国人民大学', '2018-01-17', '在职', '00000090', 3.92, '2019-03-17', NULL, '2019-04-05', '2019-11-20', NULL);
-INSERT INTO t_sys_employee VALUES (91, '石坤', '男', '1991-12-06', '211301200012288558', '离异', 1, '超县', 9, 'jun14@yahoo.com', '13380161242', '江西省昆明市丰都苏路b座 863383', 8, 5, 1, '劳动合同', '高中', '市场营销', '上海交通大学', '2018-05-31', '在职', '00000091', 6.93, '2017-09-24', NULL, '2015-06-13', '2020-04-14', NULL);
-INSERT INTO t_sys_employee VALUES (92, '余建华', '女', '1992-07-17', '520302193402030347', '离异', 1, '阳市', 3, 'mingding@28.cn', '13435060183', '重庆市金凤市江北杭州路V座 700174', 6, 3, 3, '劳务合同', '高中', '市场营销', '清华大学', '2018-11-27', '在职', '00000092', 0.29, '2018-06-10', NULL, '2018-08-04', '2019-08-10', NULL);
-INSERT INTO t_sys_employee VALUES (93, '宋伟', '女', '1999-11-09', '330300198210308601', '离异', 1, '北京市', 11, 'juanliang@gmail.com', '18862667374', '吉林省亮市秀英拉萨路w座 463882', 5, 1, 2, '劳务合同', '高中', '市场营销', '复旦大学', '2018-09-23', '在职', '00000093', 2.57, '2018-01-01', NULL, '2018-02-01', '2020-03-14', NULL);
-INSERT INTO t_sys_employee VALUES (94, '韦成', '男', '1991-02-13', '130421198801238342', '离异', 1, '雷县', 10, 'zhaoxia@kt.cn', '14575813594', '青海省宁德县普陀淮安路W座 410428', 7, 6, 3, '劳务合同', '高中', '电子工程', '清华大学', '2018-07-14', '在职', '00000094', 2.27, '2017-03-04', NULL, '2016-01-26', '2019-12-06', NULL);
-INSERT INTO t_sys_employee VALUES (95, '陈鹏', '男', '2000-07-19', '620721197805215584', '离异', 1, '兴安盟市', 9, 'juan93@04.cn', '13709426633', '云南省桂英县沙湾黄路m座 314538', 5, 3, 4, '劳动合同', '高中', '信息管理与信息系统', '复旦大学', '2015-09-29', '在职', '00000095', 2.22, '2018-10-14', NULL, '2018-01-12', '2019-12-01', NULL);
-INSERT INTO t_sys_employee VALUES (96, '叶楠', '女', '1990-12-03', '532931197605230863', '离异', 1, '太原县', 9, 'ming60@yahoo.com', '14770621573', '陕西省辉市朝阳佛山街r座 140974', 5, 5, 5, '劳务合同', '高中', '信息管理与信息系统', '南京大学', '2018-01-10', '在职', '00000096', 9.78, '2016-09-29', NULL, '2016-11-21', '2019-12-25', NULL);
-INSERT INTO t_sys_employee VALUES (97, '原红霞', '男', '1997-04-07', '341701193905207661', '已婚', 1, '刚县', 5, 'yan03@ye.cn', '13243818433', '辽宁省桂荣市沙湾陈路E座 758823', 1, 7, 5, '劳务合同', '高中', '无', '浙江大学', '2016-11-18', '在职', '00000097', 2.3, '2017-06-03', NULL, '2016-09-26', '2020-01-16', NULL);
-INSERT INTO t_sys_employee VALUES (98, '王玉英', '女', '1998-03-12', '370282193508208316', '已婚', 1, '英县', 7, 'liaochao@gmail.com', '14798666739', '湖北省贵阳县花溪汕尾街e座 501635', 13, 5, 3, '劳动合同', '高中', '中国语言文学', '中国科学技术大学', '2017-12-19', '在职', '00000098', 2.23, '2017-11-02', NULL, '2018-05-08', '2019-10-21', NULL);
-INSERT INTO t_sys_employee VALUES (99, '张红梅', '女', '1991-07-18', '350923199911240828', '已婚', 1, '燕市', 2, 'yili@hotmail.com', '13506023869', '浙江省兰州县大兴侯路x座 732564', 2, 8, 4, '劳动合同', '高中', '电子工程', '上海交通大学', '2017-11-27', '在职', '00000099', 2.4, '2018-03-13', NULL, '2019-01-30', '2019-07-04', NULL);
-INSERT INTO t_sys_employee VALUES (100, '李强', '男', '1994-02-17', '330127200203300889', '已婚', 1, '淑兰县', 4, 'fang76@ds.cn', '15703517874', '重庆市凤兰市山亭马路l座 594007', 5, 2, 1, '劳务合同', '高中', '无', '上海交通大学', '2015-12-14', '在职', '00000100', 5.96, '2017-09-06', NULL, '2017-06-16', '2019-06-08', NULL);

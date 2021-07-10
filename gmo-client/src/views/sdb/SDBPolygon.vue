@@ -1,5 +1,5 @@
 <template>
-  <div>SDBPolygon</div>
+    <div>SDBPolygon</div>
 </template>
 
 <script>

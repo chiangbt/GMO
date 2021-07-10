@@ -1,5 +1,5 @@
 <template>
-  <div>SalSob</div>
+    <div>SalSob</div>
 </template>
 
 <script>

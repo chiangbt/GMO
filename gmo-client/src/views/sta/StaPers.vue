@@ -1,5 +1,5 @@
 <template>
-  <div>StaPers</div>
+    <div>StaPers</div>
 </template>
 
 <script>

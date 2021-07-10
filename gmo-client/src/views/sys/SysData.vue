@@ -1,5 +1,5 @@
 <template>
-  <div>SysData</div>
+    <div>SysData</div>
 </template>
 
 <script>

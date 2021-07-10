@@ -2,13 +2,11 @@ package cn.geoportal.gmo.server.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.*;
-
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AccessLevel;
@@ -19,7 +17,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**
- * SysUser实现UserDetails接口，可以实现基于自定义的DB架构的认证与授权
+ * SysUser实现UserDetails接口
+ * 可以实现基于自定义的DB架构的认证与授权
  * @TableName t_sys_user
  */
 @ApiModel(value = "系统用户")
@@ -27,7 +26,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Data
 public class SysUser implements Serializable, UserDetails {
     /**
-     * id值
+     * ID
      */
     @TableId(value = "id", type = IdType.AUTO)
     @JSONField(ordinal = 0)
@@ -35,7 +34,7 @@ public class SysUser implements Serializable, UserDetails {
     private Long id;
 
     /**
-     * 用户名
+     * 用户名称
      */
     @ApiModelProperty(value = "用户名")
     @JSONField(ordinal = 1)
@@ -77,7 +76,7 @@ public class SysUser implements Serializable, UserDetails {
     private String telephone;
 
     /**
-     * 地址
+     * 用户地址
      */
     @ApiModelProperty(value = "地址")
     @JSONField(ordinal = 7)

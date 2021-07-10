@@ -1,5 +1,5 @@
 <template>
-  <div>SysAdmin</div>
+    <div>SysAdmin</div>
 </template>
 
 <script>
