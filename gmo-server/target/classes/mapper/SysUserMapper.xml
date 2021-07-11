@@ -8,10 +8,11 @@
         <id property="id" column="id" jdbcType="BIGINT"/>
         <result property="username" column="username" jdbcType="VARCHAR"/>
         <result property="email" column="email" jdbcType="VARCHAR"/>
-        <result property="password" column="password" jdbcType="VARCHAR"/>
+<!--        <result property="password" column="password" jdbcType="VARCHAR"/>-->
         <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="nationid" column="nationid" jdbcType="INTEGER"/>
+        <result property="politicid" column="politicid" jdbcType="INTEGER"/>
         <result property="phone" column="phone" jdbcType="VARCHAR"/>
-        <result property="telephone" column="telephone" jdbcType="VARCHAR"/>
         <result property="address" column="address" jdbcType="VARCHAR"/>
         <result property="enabled" column="enabled" jdbcType="BOOLEAN"/>
         <result property="userface" column="userface" jdbcType="VARCHAR"/>
@@ -21,6 +22,14 @@
     </resultMap>
 
     <resultMap id="SysUserWithRole" type="cn.geoportal.gmo.server.entity.SysUser" extends="BaseResultMap">
+        <association property="nation" javaType="cn.geoportal.gmo.server.entity.SysNation">
+            <id column="nid" property="id"></id>
+            <result column="nname" property="name"></result>
+        </association>
+        <association property="politicsStatus" javaType="cn.geoportal.gmo.server.entity.SysPoliticsStatus">
+            <id column="pid" property="id"></id>
+            <result column="pname" property="name"></result>
+        </association>
         <collection property="roles" ofType="cn.geoportal.gmo.server.entity.SysRole">
             <id property="id" column="rid" jdbcType="BIGINT"/>
             <result property="name" column="rname" jdbcType="VARCHAR"/>
@@ -30,19 +39,21 @@
     
     <sql id="Base_Column_List">
         id,username,email,password,name,phone,
-        telephone,address,enabled,userface,remark,createdat,updatedat
+        nationid,politicid,address,enabled,userface,remark,createdat,updatedat
     </sql>
 
     <select id="getAllSysUser" resultMap="SysUserWithRole">
         SELECT
             a.*,
-            r.id AS rid,
-            r.name as rname,
-            r.namezh as rnamezh
+            r.id AS rid, r.name as rname, r.namezh as rnamezh,
+            n.id as nid, n.name as nname,
+            p.id as pid, p.name as pname
         FROM
             t_sys_user a
             LEFT JOIN t_sys_user_role ar ON a.id = ar.user_id
             LEFT JOIN t_sys_role r ON r.id = ar.role_id
+            LEFT JOIN t_sys_nation n ON n.id = a.nationid
+            LEFT JOIN t_sys_politics_status p ON p.id = a.politicid
         WHERE
             a.id != #{id}
             <if test="null!=keywords and '' !=keywords">

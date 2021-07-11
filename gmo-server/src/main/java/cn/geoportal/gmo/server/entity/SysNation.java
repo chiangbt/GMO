@@ -26,6 +26,9 @@ public class SysNation implements Serializable {
     @Excel(name = "民族")
     private String name;
 
+    /**
+     *
+     */
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 }

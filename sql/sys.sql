@@ -8,8 +8,9 @@ CREATE TABLE t_sys_user  (
   email      VARCHAR(255) NOT NULL UNIQUE,
   password   VARCHAR(255) NOT NULL,
   name       VARCHAR(32) NULL DEFAULT NULL,
+  nationId   INTEGER NULL DEFAULT 1,
+  politicId  INTEGER NULL DEFAULT 1,
   phone      VARCHAR(20) NULL DEFAULT NULL,
-  telephone  VARCHAR(16) NULL DEFAULT NULL,
   address    VARCHAR(64) NULL DEFAULT NULL,
   enabled    BOOLEAN NOT NULL DEFAULT TRUE,
   userFace   VARCHAR(255) NULL DEFAULT NULL,
@@ -22,9 +23,9 @@ COMMENT ON COLUMN t_sys_user.id IS 'ID';
 COMMENT ON COLUMN t_sys_user.name IS '用户名';
 COMMENT ON COLUMN t_sys_user.username IS '登录名';
 -- SQLINES DEMO *** -----------
-INSERT INTO t_sys_user(username,email,password) VALUES ('admin' , 'admin@sleeep.io','$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe');
-INSERT INTO t_sys_user(username,email,password) VALUES ('manager', 'xx@cn.cn', '$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe');
-INSERT INTO t_sys_user(username,email,password) VALUES ('guest', 'xx2@cn.cn', '$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe');
+INSERT INTO t_sys_user(username,email,password,name) VALUES ('admin' , 'admin@sleeep.io','$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe', 'admin');
+INSERT INTO t_sys_user(username,email,password,name) VALUES ('manager', 'xx@cn.cn', '$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe', 'manager');
+INSERT INTO t_sys_user(username,email,password,name) VALUES ('guest', 'xx2@cn.cn', '$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe', 'guest');
 
 /**
   2、角色表

@@ -37,7 +37,7 @@ export default {
         checkVue (name) {
             switch (name) {
                 case 'first' :
-                    //this.DepMana = DepMana
+                    this.DepMana = DepMana
                     break
                 case 'second' :
                     this.PosMana = PosMana

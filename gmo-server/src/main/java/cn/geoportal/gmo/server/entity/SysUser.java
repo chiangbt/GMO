@@ -1,5 +1,6 @@
 package cn.geoportal.gmo.server.entity;
 
+import cn.afterturn.easypoi.excel.annotation.ExcelEntity;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.*;
 import java.io.Serializable;
@@ -62,31 +63,55 @@ public class SysUser implements Serializable, UserDetails {
     private String name;
 
     /**
+     * 民族
+     */
+    @ApiModelProperty(value = "民族")
+    @JSONField(ordinal = 5)
+    private Integer nationid;
+
+    /**
+     *
+     */
+    @JSONField(ordinal = 6)
+    @ApiModelProperty(value = "民族")
+    @TableField(exist = false)
+    @ExcelEntity(name = "民族")
+    private SysNation nation;
+
+    /**
+     * 政治面貌
+     */
+    @ApiModelProperty(value = "政治面貌")
+    @JSONField(ordinal = 7)
+    private Integer politicid;
+
+    /**
+     *
+     */
+    @JSONField(ordinal = 8)
+    @ApiModelProperty(value = "政治面貌")
+    @TableField(exist = false)
+    private SysPoliticsStatus politicsStatus;
+
+    /**
      * 移动电话
      */
     @ApiModelProperty(value = "移动电话")
-    @JSONField(ordinal = 5)
+    @JSONField(ordinal = 9)
     private String phone;
-
-    /**
-     * 座机电话
-     */
-    @ApiModelProperty(value = "座机电话")
-    @JSONField(ordinal = 6)
-    private String telephone;
 
     /**
      * 用户地址
      */
     @ApiModelProperty(value = "地址")
-    @JSONField(ordinal = 7)
+    @JSONField(ordinal = 10)
     private String address;
 
     /**
      * 是否激活
      */
     @ApiModelProperty(value = "是否激活")
-    @JSONField(ordinal = 8)
+    @JSONField(ordinal = 11)
     @Getter(AccessLevel.NONE)
     private Boolean enabled;
 
@@ -94,21 +119,21 @@ public class SysUser implements Serializable, UserDetails {
      * 用户图标
      */
     @ApiModelProperty(value = "用户图像")
-    @JSONField(ordinal = 9)
+    @JSONField(ordinal = 12)
     private String userface;
 
     /**
      * 用户注记
      */
     @ApiModelProperty(value = "注记")
-    @JSONField(ordinal = 10)
+    @JSONField(ordinal = 13)
     private String remark;
 
     /**
      * 用户角色
      * 非数据表的字段
      */
-    @JSONField(ordinal = 11)
+    @JSONField(ordinal = 14)
     @ApiModelProperty(value = "角色")
     @TableField(exist = false)
     private List<SysRole> roles;
@@ -118,7 +143,7 @@ public class SysUser implements Serializable, UserDetails {
      */
     @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(value = "新建时间")
-    @JSONField(ordinal = 12)
+    @JSONField(ordinal = 15)
     private Date createdat;
 
     /**
@@ -126,13 +151,13 @@ public class SysUser implements Serializable, UserDetails {
      */
     @TableField(value = "updatedat", fill = FieldFill.INSERT_UPDATE)
     @ApiModelProperty(value = "更新时间")
-    @JSONField(ordinal = 13)
+    @JSONField(ordinal = 16)
     private Date updatedat;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
-    @JSONField(ordinal = 14)
+    @JSONField(ordinal = 17)
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> authorities = roles.stream()
@@ -141,19 +166,19 @@ public class SysUser implements Serializable, UserDetails {
         return authorities;
     }
 
-    @JSONField(ordinal = 15)
+    @JSONField(ordinal = 18)
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
-    @JSONField(ordinal = 16)
+    @JSONField(ordinal = 19)
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
-    @JSONField(ordinal = 17)
+    @JSONField(ordinal = 20)
     @Override
     public boolean isCredentialsNonExpired() {
         return true;

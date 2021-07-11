@@ -56,6 +56,7 @@ public class UserController {
         }
     }
 
+
     @ApiOperation(value = "删除指定id的操作员")
     @DeleteMapping(value = "/{id}", produces = "application/json")
     public RespBean deleteSysUserById(@PathVariable(value="id") Integer id){
@@ -67,12 +68,14 @@ public class UserController {
         }
     }
 
+
     @ApiOperationSupport(order = 2)
     @ApiOperation(value = "获取所有角色")
     @GetMapping(value = "/roles")
     public List<SysRole> getAllRoles(){
         return sysRoleService.list();
     }
+
 
     @ApiOperation(value = "更新操作员角色")
     @PatchMapping(value = "/role/{userId}")

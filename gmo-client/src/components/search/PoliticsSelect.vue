@@ -1,5 +1,5 @@
 <template>
-    <el-select v-model="value" filterable placeholder="请选择民族">
+    <el-select v-model="value" filterable placeholder="请选择政治面貌">
         <el-option
             v-for="item in nations"
             :key="item.id"
@@ -11,7 +11,7 @@
 
 <script>
 export default {
-    name: 'NationSelect',
+    name: 'PoliticsSelect',
     data() {
         return {
             nations: [],
@@ -23,7 +23,7 @@ export default {
     },
     methods: {
         loadMore() {
-            this.getRequest("/api/system/nation").then((resp) => {
+            this.getRequest("/api/system/politicstatus").then((resp) => {
                 console.log(resp)
                 if (resp) {
                     this.nations = resp.data;

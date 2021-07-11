@@ -25,6 +25,9 @@ public class SysPoliticsStatus implements Serializable {
      */
     private String name;
 
+    /**
+     *
+     */
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 }
