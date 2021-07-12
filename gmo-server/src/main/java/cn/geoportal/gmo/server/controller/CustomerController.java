@@ -8,8 +8,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
-import com.github.xiaoymin.knife4j.annotations.ApiSupport;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -28,8 +26,7 @@ import java.util.Map;
  * @Description: 客户API
  * @Date: 2021/5/31 11:55
  */
-@Api(tags = "1.客户模块")
-@ApiSupport(order = 302)    // 分组排序
+@ApiIgnore
 @RestController
 @RequestMapping("/api/person/customer")
 public class CustomerController {
@@ -76,7 +73,7 @@ public class CustomerController {
     }
 
     /**
-     *
+     * 客户信息列表(自定义字段)
      * @param pageNo
      * @param pageSize
      * @param name
@@ -106,7 +103,7 @@ public class CustomerController {
     }
 
     /**
-     *
+     * 按名称查询用户信息
      * @param name
      * @return
      */
@@ -123,7 +120,7 @@ public class CustomerController {
 
 
     /**
-     *
+     * 新建一个Customer
      * @param customer
      * @return
      */
@@ -141,7 +138,7 @@ public class CustomerController {
 
 
     /**
-     *
+     * 获取指定id的Customer
      * @param id
      * @return
      */
@@ -162,7 +159,7 @@ public class CustomerController {
 
 
     /**
-     *
+     * 更新一个Customer
      * @param customer
      * @param id
      * @return
@@ -184,7 +181,7 @@ public class CustomerController {
     }
 
     /**
-     *
+     * 删除指定id的Customer
      * @param id
      * @return
      */
@@ -202,6 +199,7 @@ public class CustomerController {
 
 
     /**
+     * 删除多条记录
      * http://127.0.0.1:3000/api/customer?ids=5,6,7,8,9,10,11,12
      * @param ids
      * @return

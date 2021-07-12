@@ -65,7 +65,7 @@ public class SysUser implements Serializable, UserDetails {
     /**
      * 民族
      */
-    @ApiModelProperty(value = "民族")
+    @ApiModelProperty(value = "民族", example = "1")
     @JSONField(ordinal = 5)
     private Integer nationid;
 
@@ -73,7 +73,7 @@ public class SysUser implements Serializable, UserDetails {
      *
      */
     @JSONField(ordinal = 6)
-    @ApiModelProperty(value = "民族")
+    @ApiModelProperty(value = "民族", hidden = true)
     @TableField(exist = false)
     @ExcelEntity(name = "民族")
     private SysNation nation;
@@ -81,7 +81,7 @@ public class SysUser implements Serializable, UserDetails {
     /**
      * 政治面貌
      */
-    @ApiModelProperty(value = "政治面貌")
+    @ApiModelProperty(value = "政治面貌", example = "1")
     @JSONField(ordinal = 7)
     private Integer politicid;
 
@@ -89,7 +89,7 @@ public class SysUser implements Serializable, UserDetails {
      *
      */
     @JSONField(ordinal = 8)
-    @ApiModelProperty(value = "政治面貌")
+    @ApiModelProperty(value = "政治面貌", hidden = true)
     @TableField(exist = false)
     private SysPoliticsStatus politicsStatus;
 
@@ -143,7 +143,7 @@ public class SysUser implements Serializable, UserDetails {
      */
     @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(value = "新建时间")
-    @JSONField(ordinal = 15)
+    @JSONField(ordinal = 15, serialize = false)
     private Date createdat;
 
     /**
@@ -151,7 +151,7 @@ public class SysUser implements Serializable, UserDetails {
      */
     @TableField(value = "updatedat", fill = FieldFill.INSERT_UPDATE)
     @ApiModelProperty(value = "更新时间")
-    @JSONField(ordinal = 16)
+    @JSONField(ordinal = 16, serialize = false)
     private Date updatedat;
 
     @TableField(exist = false)

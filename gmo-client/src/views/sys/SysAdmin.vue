@@ -2,11 +2,8 @@
     <div>
         <div style="text-align: right; margin-top: 30px; margin-bottom:20px;">
             <el-row :gutter="20">
-                <el-col :sm="12" :md="12" style="text-align:left;">
-                    <nation-select></nation-select>
-                    <politics-select></politics-select>
-                </el-col>
-                <el-col :sm="12" :md="12">
+                <el-col :sm="24" :md="24" style="text-align:right;">
+                    <el-button type="primary" icon="el-icon-plus" @click="dialogFormVisible = true">添加</el-button>
                 </el-col>
             </el-row>
         </div>
@@ -19,8 +16,6 @@
                 <el-table-column prop="nation.name" label="民族"></el-table-column>
                 <el-table-column prop="politicsStatus.name" label="政治面貌"></el-table-column>
                 <el-table-column prop="roles[0].namezh" label="角色"></el-table-column>
-                <el-table-column prop="roles[0].name" label="角色名"></el-table-column>
-                <el-table-column prop="updatedat" label="录入时间"></el-table-column>
                 <el-table-column label="操作" align="center" width="180">
                     <template slot-scope="scope">
                         <el-button size="mini" @click="handleEdit(scope.row)" class="el-icon-edit">编辑</el-button>
@@ -29,6 +24,29 @@
                 </el-table-column>
             </el-table>
         </el-card>
+        <el-dialog title="添加" :visible.sync="dialogFormVisible" width="30%">
+            <el-form :model="userForm" ref="userForm" :rules="rules" label-width="80px" label-position="right">
+                <el-form-item label="名称" prop="name">
+                    <el-input v-model="userForm.name"></el-input>
+                </el-form-item>
+                <el-form-item label="年龄" prop="age">
+                    <el-input v-model="userForm.age"></el-input>
+                </el-form-item>
+                <el-form-item label="地址" prop="address">
+                    <el-input v-model="userForm.address"></el-input>
+                </el-form-item>
+                <el-form-item label="民族" prop="nation">
+                    <NationSelect v-model="userForm.nation"></NationSelect>
+                </el-form-item>
+                <el-form-item label="政治面貌" prop="politicstatus">
+                    <PoliticsSelect v-model="userForm.politicstatus"></PoliticsSelect>
+                </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="clearAddForm('userForm')">取消</el-button>
+                <el-button type="primary" @click="add(userForm)">确定</el-button>
+            </div>
+        </el-dialog>
     </div>
 </template>
 
@@ -52,6 +70,16 @@ export default {
                 pageNo: 1,
                 pageSize: 15
             },
+            dialogFormVisible: false,
+            userForm: {
+                nation: 1,
+                politicstatus: 1
+            },
+            rules: {   //表单验证
+                name: [{ required: true, message: "请输入名称", trigger: "blur" }],
+                address: [{ required: true, message: "请选择地址", trigger: "blur" }]
+            },
+            
         }
     },
     mounted() {
@@ -60,8 +88,16 @@ export default {
     methods:{
         async getAdminUserList() {
             const data = await this.getRequest("/api/system/admin?keywords=" +  this.queryInfo.query);
-            console.log(data)
             this.adminusersList = data;
+        },
+        add(form) {
+            this.$refs.userForm.validate(valid => {
+                console.log(form);
+            });
+        },
+        clearAddForm(form){
+            this.$refs[form].resetFields();
+            this.dialogFormVisible = false;
         },
     }
 }

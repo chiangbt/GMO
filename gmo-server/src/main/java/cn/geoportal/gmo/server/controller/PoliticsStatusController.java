@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 
@@ -20,8 +21,7 @@ import java.util.List;
  * @Description: 政治面貌
  * @Date: 2021/7/11 22:54
  */
-@Api(tags = "13.Nation模块")
-@ApiSupport(order = 502)    // 分组排序
+@ApiIgnore
 @RestController
 @RequestMapping("/api/system/politicstatus")
 public class PoliticsStatusController {

@@ -191,7 +191,7 @@ export default {
         },
         handleDelete(key, data){
             console.log(data.id);
-            this.$confirm("此操作将删除[" + data.name + "]记录，提示", {
+            this.$confirm("此操作将删除[" + data.name + "]记录", {
                 confirmButtonText: "确定",
                 cancelButtonText: "取消",
                 type: "warning"
@@ -213,7 +213,7 @@ export default {
             this.multipleSelection.map(item => {
                 sel.push(item.id);
             });
-            this.$confirm("此操作将删除多条记录，提示", {
+            this.$confirm("此操作将删除多条记录", {
                 confirmButtonText: "确定",
                 cancelButtonText: "取消",
                 type: "warning"
