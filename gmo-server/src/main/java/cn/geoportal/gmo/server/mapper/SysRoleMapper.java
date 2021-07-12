@@ -19,7 +19,13 @@ public interface SysRoleMapper extends BaseMapper<SysRole> {
     List<SysRole> getRoles(Long userId);
 
     /**
-     * 2、添加角色
+     * 2、获取非Admin外的所有角色列表
+     * @return
+     */
+    List<SysRole> getRoleListNoAdmin();
+
+    /**
+     * 3、添加角色
      * @param name
      * @param namezh
      * @return

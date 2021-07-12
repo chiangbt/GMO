@@ -25,5 +25,15 @@
                 LEFT JOIN t_sys_user_role ar ON r.id = ar.role_id
         WHERE
             ar.user_id = #{userId}
-  </select>
+    </select>
+
+    <!-- 获取所有非ROLE_admin外的角色列表 -->
+    <select id="getRoleListNoAdmin" resultType="cn.geoportal.gmo.server.entity.SysRole">
+        SELECT
+            r.id, r.name, r.nameZh
+        FROM
+            t_sys_role r
+        WHERE
+            r.name != 'ROLE_admin'
+    </select>
 </mapper>

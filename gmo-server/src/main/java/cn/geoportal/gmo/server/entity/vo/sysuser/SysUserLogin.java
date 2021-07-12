@@ -1,4 +1,4 @@
-package cn.geoportal.gmo.server.entity.vo;
+package cn.geoportal.gmo.server.entity.vo.sysuser;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import io.swagger.annotations.ApiModel;
@@ -18,16 +18,16 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value = "UserLogin对象", description = "")
-public class UserLogin {
-    @ApiModelProperty(value = "用户名", required = true, example = "admin")
+public class SysUserLogin {
+    @ApiModelProperty(value = "用户名", required = true, example = "admin", position = 0)
     @JSONField(ordinal = 0)
     private String username;
 
-    @ApiModelProperty(value = "密码", required = true, example = "123")
+    @ApiModelProperty(value = "密码", required = true, example = "123", position = 1)
     @JSONField(ordinal = 1)
     private String password;
 
-    @ApiModelProperty(value = "验证码", required = true, example = "")
+    @ApiModelProperty(value = "验证码", required = true, example = "", position = 2)
     @JSONField(ordinal = 2)
     private String verifycode;
 }

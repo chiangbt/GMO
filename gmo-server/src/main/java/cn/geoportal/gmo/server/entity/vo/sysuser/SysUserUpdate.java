@@ -1,4 +1,4 @@
-package cn.geoportal.gmo.server.entity.vo;
+package cn.geoportal.gmo.server.entity.vo.sysuser;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -22,11 +22,11 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value = "雇员更新类", description = "")
+@ApiModel(value = "操作员更新类", description = "")
 public class SysUserUpdate {
 
     /**
-     *
+     * ID
      */
     @TableId(value = "id", type = IdType.AUTO)
     @JSONField(ordinal = 0)
@@ -50,36 +50,29 @@ public class SysUserUpdate {
     /**
      *
      */
-    @ApiModelProperty(value = "座机电话")
-    @JSONField(ordinal = 3)
-    private String telephone;
-
-    /**
-     *
-     */
     @ApiModelProperty(value = "地址")
-    @JSONField(ordinal = 4)
+    @JSONField(ordinal = 3)
     private String address;
 
     /**
      *
      */
     @ApiModelProperty(value = "是否激活")
-    @JSONField(ordinal = 5)
+    @JSONField(ordinal = 4)
     private Boolean enabled;
 
     /**
      *
      */
     @ApiModelProperty(value = "用户图像")
-    @JSONField(ordinal = 6)
+    @JSONField(ordinal = 5)
     private String userface;
 
     /**
      *
      */
     @ApiModelProperty(value = "注记")
-    @JSONField(ordinal = 7)
+    @JSONField(ordinal = 6)
     private String remark;
 
 }

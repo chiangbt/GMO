@@ -60,6 +60,29 @@
                 AND a.username LIKE concat('%', #{keywords},'%')
             </if>
         ORDER BY
-            a.id
+            r.id
+    </select>
+
+    <resultMap id="SysUserWithRole2" type="cn.geoportal.gmo.server.entity.SysUser" extends="BaseResultMap">
+        <collection property="roles" ofType="cn.geoportal.gmo.server.entity.SysRole">
+            <id property="id" column="rid" jdbcType="BIGINT"/>
+            <result property="name" column="rname" jdbcType="VARCHAR"/>
+            <result property="namezh" column="rnamezh" jdbcType="VARCHAR"/>
+        </collection>
+    </resultMap>
+
+    <select id="getSysUserList" resultType="java.util.Map">
+        SELECT
+            a.username, a.email, a.name, a.phone, a.enabled,
+            r.namezh as role_name,
+            n.name as nation_name,
+            p.name as politics
+        FROM
+            t_sys_user a
+            LEFT JOIN t_sys_user_role ar ON a.id = ar.user_id
+            LEFT JOIN t_sys_role r ON r.id = ar.role_id
+            LEFT JOIN t_sys_nation n ON n.id = a.nationid
+            LEFT JOIN t_sys_politics_status p ON p.id = a.politicid
+            ${ew.customSqlSegment} order by r.id desc
     </select>
 </mapper>

@@ -1,12 +1,11 @@
 package cn.geoportal.gmo.server.controller;
 
 import cn.geoportal.gmo.server.entity.common.RespBean;
-import cn.geoportal.gmo.server.entity.vo.UserLogin;
+import cn.geoportal.gmo.server.entity.vo.sysuser.SysUserLogin;
 import cn.geoportal.gmo.server.entity.SysUser;
 import cn.geoportal.gmo.server.service.SysUserService;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.github.xiaoymin.knife4j.annotations.ApiSupport;
-import com.github.xiaoymin.knife4j.annotations.Ignore;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import io.swagger.annotations.Api;
@@ -16,8 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.annotations.ApiIgnore;
-
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -39,7 +36,6 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
-
     @Autowired
     private SysUserService sysUserService;
     @Autowired
@@ -64,14 +60,13 @@ public class AuthController {
         HttpSession session = request.getSession();
         // 保存验证码到 session
         request.getSession().setAttribute(Constants.KAPTCHA_SESSION_KEY, text);
-        //创建验证码图片
+        // 创建验证码图片
         BufferedImage image = defaultKaptcha.createImage(text);
         ServletOutputStream os = response.getOutputStream();
         // 返回验证码图片
         ImageIO.write(image, "jpg", os);
         IOUtils.closeQuietly(os);
     }
-
 
     /**
      * 2、用户登录并返回token
@@ -81,14 +76,13 @@ public class AuthController {
      */
     @ApiOperation(value = "用户登录")
     @PostMapping(value = "/login", consumes = "application/json", produces = "application/json")
-    public RespBean login(@RequestBody UserLogin userLogin, HttpServletRequest request){
+    public RespBean login(@RequestBody SysUserLogin userLogin, HttpServletRequest request){
         // token在login函数中生成
         return sysUserService.login(userLogin.getUsername(),
                 userLogin.getPassword(),
                 userLogin.getVerifycode(),
                 request);
     }
-
 
     /**
      * 3、获取登录信息
@@ -112,7 +106,6 @@ public class AuthController {
         sysUser.setRoles(sysUserService.getRoles(sysUser.getId()));
         return sysUser;
     }
-
 
     /**
      * 4、返回成功即可，具体实现在前端进行，因为使用token，退出时在前端把tokenHead删除就行了

@@ -1,5 +1,6 @@
 package cn.geoportal.gmo.server.service.impl;
 
+import cn.geoportal.gmo.server.entity.vo.sysuser.SysUserReg;
 import cn.geoportal.gmo.server.utils.SysUserUtils;
 import cn.geoportal.gmo.server.config.security.JwtTokenUtil;
 import cn.geoportal.gmo.server.entity.SysRole;
@@ -9,6 +10,8 @@ import cn.geoportal.gmo.server.mapper.SysRoleMapper;
 import cn.geoportal.gmo.server.mapper.SysUserRoleMapper;
 import cn.geoportal.gmo.server.mapper.SysUserMapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.geoportal.gmo.server.entity.SysUser;
 import cn.geoportal.gmo.server.service.SysUserService;
@@ -33,7 +36,6 @@ import java.util.Map;
  */
 @Service
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService{
-
     @Autowired
     private SysUserMapper sysUserMapper;
     @Autowired
@@ -59,10 +61,10 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
      */
     @Override
     public RespBean login(String username, String password, String code, HttpServletRequest request) {
-        System.out.println(code);
+        //System.out.println(code);
         // 校验验证码
         String captcha = (String) request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
-        System.out.println(captcha);
+        //System.out.println(captcha);
         if ((code == null && code.length() == 0) || !code.equalsIgnoreCase(captcha)) {
             return RespBean.error("验证码输入错误，请重新输入！");
         }
@@ -118,6 +120,30 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
                 SysUserUtils.getCurrentSysUser().getId(),
                 keywords
         );
+    }
+
+    /**
+     * 获取操作员分页
+     * @param page
+     * @param wrapper
+     * @return
+     */
+    @Override
+    public IPage<Map> getSysUserList(Page<Map> page, QueryWrapper<SysUser> wrapper) {
+        return sysUserMapper.getSysUserList(page, wrapper);
+    }
+
+
+    /**
+     * 添加操作员
+     * @param sysUser
+     * @return
+     */
+    @Override
+    public int addSysUser(SysUserReg sysUser) {
+        return sysUserMapper.addSysUser(sysUser.getUsername(), sysUser.getEmail(),
+                passwordEncoder.encode(sysUser.getPassword()), sysUser.getName(), sysUser.getPhone(),
+                sysUser.getNationId(), sysUser.getPoliticId());
     }
 
     /**

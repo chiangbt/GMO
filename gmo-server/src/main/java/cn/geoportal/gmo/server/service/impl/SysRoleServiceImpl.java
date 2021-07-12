@@ -7,6 +7,8 @@ import cn.geoportal.gmo.server.service.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  *
  */
@@ -15,6 +17,11 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
 
     @Autowired
     private SysRoleMapper sysRoleMapper;
+
+    @Override
+    public List<SysRole> getRoleListNoAdmin() {
+        return sysRoleMapper.getRoleListNoAdmin();
+    }
 
     @Override
     public int addRole(SysRole sysRole) {

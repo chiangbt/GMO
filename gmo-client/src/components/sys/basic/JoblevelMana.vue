@@ -16,8 +16,8 @@
         <el-table-column prop="createdat" label="创建日期" width="150"/>
         <el-table-column prop="enabled" label="是否启用" width="150">
           <template slot-scope="scope">
-            <el-tag v-if="scope.row.enabled" type="success">已启用</el-tag>
-            <el-tag v-else type="danger">未启用</el-tag>
+            <el-tag v-if="scope.row.enabled" type="success">有效</el-tag>
+            <el-tag v-else type="danger">无效</el-tag>
           </template>
         </el-table-column>
         <el-table-column label="操作" align="center" width="180">
