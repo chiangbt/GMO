@@ -1,4 +1,4 @@
-package cn.geoportal.gmo.server.entity.vo;
+package cn.geoportal.gmo.server.entity.vo.sysmenu;
 
 import lombok.Data;
 

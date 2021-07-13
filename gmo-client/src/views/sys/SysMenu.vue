@@ -62,7 +62,7 @@ export default {
     },
     methods:{
         init(){
-            this.getRequest("/api/system/menu/menu").then((resp) => {
+            this.getRequest("/api/system/menu").then((resp) => {
                 if (resp) {
                     this.menuList = resp;
                 }

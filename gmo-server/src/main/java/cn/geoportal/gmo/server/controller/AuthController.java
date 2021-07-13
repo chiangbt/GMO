@@ -3,6 +3,8 @@ package cn.geoportal.gmo.server.controller;
 import cn.geoportal.gmo.server.entity.common.RespBean;
 import cn.geoportal.gmo.server.entity.vo.sysuser.SysUserLogin;
 import cn.geoportal.gmo.server.entity.SysUser;
+import cn.geoportal.gmo.server.service.SysNationService;
+import cn.geoportal.gmo.server.service.SysPoliticsStatusService;
 import cn.geoportal.gmo.server.service.SysUserService;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.github.xiaoymin.knife4j.annotations.ApiSupport;
@@ -38,6 +40,10 @@ import java.io.IOException;
 public class AuthController {
     @Autowired
     private SysUserService sysUserService;
+    @Autowired
+    private SysNationService sysNationService;
+    @Autowired
+    private SysPoliticsStatusService sysPoliticsStatusService;
     @Autowired
     private DefaultKaptcha defaultKaptcha;
 
@@ -103,6 +109,8 @@ public class AuthController {
         // 保护密码
         sysUser.setPassword(null);
         // 获取该用户的角色信息
+        sysUser.setNation(sysNationService.getById(sysUser.getNationid()));
+        sysUser.setPoliticsStatus(sysPoliticsStatusService.getById(sysUser.getPoliticid()));
         sysUser.setRoles(sysUserService.getRoles(sysUser.getId()));
         return sysUser;
     }

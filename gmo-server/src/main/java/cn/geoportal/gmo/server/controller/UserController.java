@@ -52,13 +52,12 @@ public class UserController {
      * @param name
      * @return
      */
-    @ApiOperationSupport(order = 0)
-    @ApiOperation(value = "操作员列表(自定义字段)")
+    @ApiOperationSupport(order = 1)
+    @ApiOperation(value = "操作员列表")
     @ApiImplicitParams({
             @ApiImplicitParam(name="pageNo", value = "当前页号", required = true, example = "1"),
             @ApiImplicitParam(name="pageSize", value = "批次数量", required = true, example = "15"),
             @ApiImplicitParam(name = "query",value = "名称", required = false, example = ""),
-            @ApiImplicitParam(name = "role",value = "角色类型", required = false, example = "")
     })
     @RequestMapping(value="", method = RequestMethod.GET)
     public RespBean getSysUserList(@RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,
@@ -66,7 +65,6 @@ public class UserController {
                                         @RequestParam(value="query", defaultValue = "") String query){
         QueryWrapper<SysUser> wrapper = new QueryWrapper<>();
         wrapper.like("username", query);
-//        wrapper.eq("r.name", "ROLE_manager");
         Page<Map> ipage = new Page<>(pageNo, pageSize);
         try{
             IPage<Map> dt = sysUserService.getSysUserList(ipage, wrapper);
@@ -75,18 +73,6 @@ public class UserController {
         }catch(Exception e){
             return RespBean.error("无数据");
         }
-    }
-
-    /**
-     * 2、获取操作员列表（非分页式）
-     * @param keywords
-     * @return
-     */
-    @ApiOperationSupport(order = 1)
-    @ApiOperation(value = "操作员列表(非分页式)")
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public List<SysUser> getAllSysUser(String keywords){
-        return sysUserService.getAllSysUser(keywords);
     }
 
     /**
@@ -124,7 +110,7 @@ public class UserController {
      * @param id
      * @return
      */
-    @ApiOperationSupport(order = 3)
+    @ApiOperationSupport(order = 8)
     @ApiOperation(value = "更新操作员")
     @PatchMapping(value = "/{id}", consumes = "application/json", produces = "application/json")
     public RespBean updateSysUser(@RequestBody SysUser sysUser, @PathVariable(value="id") Long id){
@@ -145,7 +131,7 @@ public class UserController {
      * @param id
      * @return
      */
-    @ApiOperationSupport(order = 4)
+    @ApiOperationSupport(order = 7)
     @ApiOperation(value = "删除指定id的操作员")
     @DeleteMapping(value = "/{id}", produces = "application/json")
     public RespBean deleteSysUserById(@PathVariable(value="id") Integer id){
@@ -161,7 +147,7 @@ public class UserController {
      * 6、获取角色
      * @return
      */
-    @ApiOperationSupport(order = 5)
+    @ApiOperationSupport(order = 6)
     @ApiOperation(value = "获取所有角色")
     @GetMapping(value = "/roles")
     public List<SysRole> getAllRoles(){
@@ -172,7 +158,7 @@ public class UserController {
      * 7、获取所有非admin角色
      * @return
      */
-    @ApiOperationSupport(order = 6)
+    @ApiOperationSupport(order = 5)
     @ApiOperation(value = "获取所有非Admin角色")
     @GetMapping(value = "/roles/noadmin")
     public List<SysRole> getAllRoleListNoAdmin(){
@@ -185,7 +171,7 @@ public class UserController {
      * @param rids
      * @return
      */
-    @ApiOperationSupport(order = 7)
+    @ApiOperationSupport(order = 4)
     @ApiOperation(value = "更新操作员角色")
     @PatchMapping(value = "/role/{userId}")
     public RespBean updateSysUserRole(@PathVariable(value="userId") Integer userId, Integer[] rids){

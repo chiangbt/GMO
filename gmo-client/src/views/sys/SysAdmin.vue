@@ -8,10 +8,7 @@
                         <i slot="prefix" class="el-input__icon el-icon-search"></i>
                     </el-input>
                 </el-col>
-                <el-col :sm="6" :md="6">
-                    <RoleSelect v-model="searchRole"></RoleSelect>
-                </el-col>
-                <el-col :sm="6" :md="6" style="text-align:right;">
+                <el-col :sm="12" :md="12" style="text-align:right;">
                     <el-button type="primary" icon="el-icon-plus" @click="dialogFormVisible = true">添加</el-button>
                 </el-col>
             </el-row>
@@ -22,9 +19,9 @@
                 <el-table-column prop="username" label="姓名"></el-table-column>
                 <el-table-column prop="email" label="邮件" ></el-table-column>
                 <el-table-column prop="phone" label="电话" width="100"></el-table-column>
-                <el-table-column prop="nation_name" label="民族"></el-table-column>
-                <el-table-column prop="politics" label="政治面貌" width="110"></el-table-column>
-                <el-table-column prop="role_name" label="角色"></el-table-column>
+                <el-table-column prop="nation.name" label="民族"></el-table-column>
+                <el-table-column prop="politicsStatus.name" label="政治面貌" width="110"></el-table-column>
+                <el-table-column prop="roles" :formatter="fmtRoles" label="角色"></el-table-column>
                 <el-table-column prop="enabled" label="是否有效" width="80">
                     <template slot-scope="scope">
                         <el-tag v-if="scope.row.enabled" type="success">已启用</el-tag>
@@ -44,7 +41,7 @@
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
                 :current-page="queryInfo.pageNo"
-                :page-sizes="[15, 25, 50]"
+                :page-sizes="[5, 15, 25, 50]"
                 :page-size="queryInfo.pageSize"
                 layout="total, sizes, prev, pager, next, jumper"
                 :total="total"
@@ -88,7 +85,6 @@
 </template>
 
 <script>
-import RoleSelect from './../../components/search/RoleSelect.vue';
 import RoleNoAdminSelect from './../../components/search/RoleNoAdminSelect.vue';
 import NationSelect from './../../components/search/NationSelect.vue';
 import PoliticsSelect from './../../components/search/PoliticsSelect.vue';
@@ -96,7 +92,6 @@ import PoliticsSelect from './../../components/search/PoliticsSelect.vue';
 export default {
     name: "SysAdmin",
     components:{
-        RoleSelect,
         RoleNoAdminSelect,
         NationSelect,
         PoliticsSelect
@@ -172,6 +167,15 @@ export default {
         onClearSearch(){
             this.queryInfo.query = '';
             this.getAdminUserList();
+        },
+        //---------------------------------------------------------------------------------------------
+        fmtRoles(row, column){
+            var rolename = ""
+            row.roles.forEach(function(role, index){
+                console.log(role.nnamezhame)
+                rolename = rolename + role.namezh + "  |  " 
+            });
+            return rolename.substring(0, rolename.length-3);
         },
         // ---------------------------------------------------------------------------------------------
         add(form) {

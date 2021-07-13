@@ -109,18 +109,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         return sysRoleMapper.getRoles(userId);
     }
 
-    /**
-     * 获取操作员用户
-     * @param keywords
-     * @return
-     */
-    @Override
-    public List<SysUser> getAllSysUser(String keywords) {
-        return sysUserMapper.getAllSysUser(
-                SysUserUtils.getCurrentSysUser().getId(),
-                keywords
-        );
-    }
 
     /**
      * 获取操作员分页

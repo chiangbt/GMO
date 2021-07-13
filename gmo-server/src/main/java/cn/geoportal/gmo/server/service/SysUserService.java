@@ -42,15 +42,9 @@ public interface SysUserService extends IService<SysUser> {
      */
     List<SysRole> getRoles(Long userId);
 
-    /**
-     * 4、获取操作员用户
-     * @param keywords
-     * @return
-     */
-    List<SysUser> getAllSysUser(String keywords);
 
     /**
-     * 5、获取操作员分页
+     * 4、获取操作员分页
      * @param page
      * @param wrapper
      * @return
@@ -58,28 +52,28 @@ public interface SysUserService extends IService<SysUser> {
     IPage<Map> getSysUserList(Page<Map> page, QueryWrapper<SysUser> wrapper);
 
     /**
-     * 6、添加操作员
+     * 5、添加操作员
      * @param sysUser
      * @return
      */
     int addSysUser(SysUserReg sysUser);
 
     /**
-     * 7、更新操作员用户
+     * 6、更新操作员用户
      * @param sysUser
      * @return
      */
     int updateSysUser(SysUser sysUser);
 
     /**
-     * 8、删除指定的操作员用户
+     * 7、删除指定的操作员用户
      * @param id
      * @return
      */
     int deleteCustomer(Integer id);
 
     /**
-     * 9、更新操作员角色
+     * 8、更新操作员角色
      * @param userId
      * @param rids
      * @return

@@ -66,7 +66,7 @@ public class SysUser implements Serializable, UserDetails {
      * 民族
      */
     @ApiModelProperty(value = "民族", example = "1")
-    @JSONField(ordinal = 5)
+    @JSONField(ordinal = 5, serialize = false)
     private Integer nationid;
 
     /**
@@ -82,7 +82,7 @@ public class SysUser implements Serializable, UserDetails {
      * 政治面貌
      */
     @ApiModelProperty(value = "政治面貌", example = "1")
-    @JSONField(ordinal = 7)
+    @JSONField(ordinal = 7, serialize = false)
     private Integer politicid;
 
     /**
@@ -166,19 +166,19 @@ public class SysUser implements Serializable, UserDetails {
         return authorities;
     }
 
-    @JSONField(ordinal = 18)
+    @JSONField(ordinal = 18, serialize = false)
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
-    @JSONField(ordinal = 19)
+    @JSONField(ordinal = 19, serialize = false)
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
-    @JSONField(ordinal = 20)
+    @JSONField(ordinal = 20, serialize = false)
     @Override
     public boolean isCredentialsNonExpired() {
         return true;

@@ -4,7 +4,7 @@ import cn.geoportal.gmo.server.entity.SysMenu;
 import cn.geoportal.gmo.server.entity.SysMenuRole;
 import cn.geoportal.gmo.server.entity.SysRole;
 import cn.geoportal.gmo.server.entity.common.RespBean;
-import cn.geoportal.gmo.server.entity.vo.MenuRoleUpdate;
+import cn.geoportal.gmo.server.entity.vo.sysmenu.MenuRoleUpdate;
 import cn.geoportal.gmo.server.service.SysMenuRoleService;
 import cn.geoportal.gmo.server.service.SysMenuService;
 import cn.geoportal.gmo.server.service.SysRoleService;

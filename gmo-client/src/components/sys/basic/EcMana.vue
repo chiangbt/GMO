@@ -2,7 +2,7 @@
 
 <script>
 export default {
-  name: "EcMana",
+    name: "EcMana",
 };
 </script>
 

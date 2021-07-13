@@ -5,8 +5,6 @@ import cn.geoportal.gmo.server.entity.common.RespBean;
 import cn.geoportal.gmo.server.service.SysJoblevelService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
-import com.github.xiaoymin.knife4j.annotations.ApiSupport;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +21,7 @@ import java.util.List;
  * @Description: 职称模块
  * @Date: 2021/6/1 11:14
  */
-@Api(tags = "6.职称模块")
-@ApiSupport(order = 308)
+@ApiIgnore
 @RestController
 @RequestMapping(value = "/system/basic/joblevel")
 public class JoblevelController {

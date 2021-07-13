@@ -23,9 +23,7 @@ COMMENT ON COLUMN t_sys_user.id IS 'ID';
 COMMENT ON COLUMN t_sys_user.name IS '用户名';
 COMMENT ON COLUMN t_sys_user.username IS '登录名';
 -- SQLINES DEMO *** -----------
-INSERT INTO t_sys_user(username,email,password,name) VALUES ('admin' , 'admin@sleeep.io','$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe', 'admin');
-INSERT INTO t_sys_user(username,email,password,name) VALUES ('manager', 'xx@cn.cn', '$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe', 'manager');
-INSERT INTO t_sys_user(username,email,password,name) VALUES ('guest', 'xx2@cn.cn', '$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe', 'guest');
+INSERT INTO t_sys_user(username,email,password,name,phone,nationid,politicid) VALUES ('admin' , 'admin@sleeep.io','$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe', 'admin','13819847814', 1, 1);
 
 /**
   2、角色表
@@ -60,8 +58,6 @@ COMMENT ON COLUMN t_sys_user_role.user_id IS '用户id';
 COMMENT ON COLUMN t_sys_user_role.role_id IS '权限id';
 -- SQLINES DEMO *** -----------
 INSERT INTO t_sys_user_role(user_id, role_id) VALUES (1, 1);
-INSERT INTO t_sys_user_role(user_id, role_id) VALUES (2, 2);
-INSERT INTO t_sys_user_role(user_id, role_id) VALUES (3, 3);
 
 /**
   4、菜单表

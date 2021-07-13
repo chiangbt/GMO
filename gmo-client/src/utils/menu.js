@@ -4,7 +4,7 @@ export const initMenu = (router, store) => {
     if (store.state.routers && store.state.routers.length > 0) {
         return;
     }
-    getRequest('/api/system/menu/menu').then(data => {
+    getRequest('/api/system/menu').then(data => {
         if (data) {
             //格式化Router
             let fmtRoutes = formatRoutes(data);

@@ -19,11 +19,8 @@ import java.util.List;
  */
 @Service
 public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> implements SysMenuService {
-
     @Autowired
     private SysMenuMapper sysMenuMapper;
-    @Autowired
-    private SysRoleMapper sysRoleMapper;
     @Autowired
     private RedisTemplate redisTemplate;
 
@@ -41,7 +38,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         // 如果为空，去数据库获取
         if (CollectionUtils.isEmpty(menus)) {
             menus = sysMenuMapper.getMenusByUserId(userId);
-            valueOperations.set("menu_"+userId, menus);
+            valueOperations.set("menu_" + userId, menus);
         }
         return menus;
     }

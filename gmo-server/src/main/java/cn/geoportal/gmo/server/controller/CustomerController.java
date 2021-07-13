@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
+import com.github.xiaoymin.knife4j.annotations.ApiSupport;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -30,19 +32,18 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/person/customer")
 public class CustomerController {
-
     @Autowired
     private CustomerService customerService;
 
     /**
-     * 客户信息
+     * 1、客户列表
      * @param pageNo
      * @param pageSize
      * @param query
      * @return
      */
     @ApiOperationSupport(order = 1)
-    @ApiOperation(value = "客户信息列表")
+    @ApiOperation(value = "客户列表")
     @ApiImplicitParams({
             @ApiImplicitParam(name="pageNo", value = "当前页号", required = true, example = "1"),
             @ApiImplicitParam(name="pageSize", value = "批次数量", required = true, example = "15"),
@@ -60,8 +61,7 @@ public class CustomerController {
         Page<Customer> ipage = new Page<>(pageNo, pageSize);
         try{
             IPage<Customer> users = customerService.selectPage(ipage, wrapper);
-            PageResult<?> pageResult = new PageResult<Customer>(
-                    users.getCurrent(),
+            PageResult<?> pageResult = new PageResult<Customer>(users.getCurrent(),
                     users.getSize(),
                     users.getTotal(),
                     users.getRecords());
@@ -73,25 +73,25 @@ public class CustomerController {
     }
 
     /**
-     * 客户信息列表(自定义字段)
+     * 2、客户列表(自定义字段)
      * @param pageNo
      * @param pageSize
-     * @param name
+     * @param query
      * @return
      */
     @ApiOperationSupport(order = 2)
-    @ApiOperation(value = "客户信息列表(自定义字段)")
+    @ApiOperation(value = "客户列表(自定义字段)")
     @ApiImplicitParams({
             @ApiImplicitParam(name="pageNo", value = "当前页号", required = true, example = "1"),
             @ApiImplicitParam(name="pageSize", value = "批次数量", required = true, example = "15"),
-            @ApiImplicitParam(name = "name",value = "名称", required = false, example = "")
+            @ApiImplicitParam(name = "query",value = "名称", required = false, example = "")
     })
     @RequestMapping(value="/compact", method = RequestMethod.GET)
     public RespBean compactCustomerList(@RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,
                                         @RequestParam(value = "pageSize", defaultValue = "3") Integer pageSize,
-                                        @RequestParam(value="name", defaultValue = "") String name){
+                                        @RequestParam(value="query", defaultValue = "") String query){
         QueryWrapper<Customer> wrapper = new QueryWrapper<>();
-        wrapper.like("name", name);
+        wrapper.like("name", query);
         Page<Map> ipage = new Page<>(pageNo, pageSize);
         try{
             IPage<Map> dt = customerService.customerCompactList(ipage, wrapper);
@@ -103,12 +103,12 @@ public class CustomerController {
     }
 
     /**
-     * 按名称查询用户信息
+     * 3、按名称查询用户信息
      * @param name
      * @return
      */
     @ApiOperationSupport(order = 3)
-    @ApiOperation(value = "按名称查询用户信息")
+    @ApiOperation(value = "按名称查询")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "name",value = "名称", required = true, example = "")
     })
@@ -120,16 +120,19 @@ public class CustomerController {
 
 
     /**
-     * 新建一个Customer
+     * 4、新建一个Customer
      * @param customer
      * @return
      */
     @ApiOperationSupport(order = 4)
-    @ApiOperation(value = "新建一个Customer")
+    @ApiOperation(value = "新建Customer")
     @PostMapping(value = "", consumes = "application/json", produces = "application/json")
     public RespBean addCustomer(@RequestBody Customer customer){
         try{
-            int result = customerService.addCustomer(customer.getName(), customer.getAge(), customer.getAddress());
+            int result = customerService.addCustomer(
+                    customer.getName(),
+                    customer.getAge(),
+                    customer.getAddress());
             return RespBean.success("添加成功", result);
         }catch (Exception exp){
             return RespBean.error("添加不成功");
@@ -138,7 +141,7 @@ public class CustomerController {
 
 
     /**
-     * 获取指定id的Customer
+     * 5、获取指定id的Customer
      * @param id
      * @return
      */
@@ -159,13 +162,13 @@ public class CustomerController {
 
 
     /**
-     * 更新一个Customer
+     * 6、更新一个Customer
      * @param customer
      * @param id
      * @return
      */
     @ApiOperationSupport(order = 6)
-    @ApiOperation(value = "更新一个Customer")
+    @ApiOperation(value = "更新Customer")
     @PatchMapping(value = "/{id}", produces = "application/json")
     public RespBean updateCustomer(@PathVariable(value="id") Integer id, @RequestBody Customer customer){
         try{
@@ -181,12 +184,12 @@ public class CustomerController {
     }
 
     /**
-     * 删除指定id的Customer
+     * 7、删除指定id的Customer
      * @param id
      * @return
      */
     @ApiOperationSupport(order = 7)
-    @ApiOperation(value = "删除指定id的Customer")
+    @ApiOperation(value = "删除Customer")
     @DeleteMapping(value = "/{id}", produces = "application/json")
     public RespBean deleteCustomerById(@PathVariable(value="id") Integer id){
         try{
@@ -199,13 +202,13 @@ public class CustomerController {
 
 
     /**
-     * 删除多条记录
+     * 8、删除多条记录
      * http://127.0.0.1:3000/api/customer?ids=5,6,7,8,9,10,11,12
      * @param ids
      * @return
      */
     @ApiOperationSupport(order = 8)
-    @ApiOperation(value = "删除多条记录")
+    @ApiOperation(value = "删除多个Customer")
     @DeleteMapping(value = "")
     public RespBean deleteManyCustomerByIds(Integer[] ids){
         if(customerService.removeByIds(Arrays.asList(ids))){

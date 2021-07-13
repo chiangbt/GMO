@@ -5,8 +5,6 @@ import cn.geoportal.gmo.server.entity.common.RespBean;
 import cn.geoportal.gmo.server.service.SysPositionService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
-import com.github.xiaoymin.knife4j.annotations.ApiSupport;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +17,7 @@ import java.util.List;
  * @author: chiangbt@geoportal.cn
  * @CreatedAt: 2021/6/1 9:17 上午
  **/
-@Api(tags = "5.职位模块")
-@ApiSupport(order = 307)
+@ApiIgnore
 @RestController
 @RequestMapping(value = "/system/basic/position")
 public class PositionController {

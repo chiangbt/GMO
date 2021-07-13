@@ -1,16 +1,16 @@
 <template>
     <el-tabs type="border-card" v-model="activeName" @tab-click="handleClick">
-        <el-tab-pane name="first">
+        <el-tab-pane name="first" :key="'first'">
             <span slot="label"><i class="el-icon-office-building"></i> 部门管理</span>
-            <DepMana></DepMana>
+            <DepMana v-if="isFirst"></DepMana>
         </el-tab-pane>
-        <el-tab-pane name="second">
+        <el-tab-pane name="second" :key="'second'">
             <span slot="label"><i class="el-icon-bangzhu"></i> 职位管理</span>
-            <component :detail='b' :is="PosMana"></component>
+            <PosMana v-if="isSecond"></PosMana>
         </el-tab-pane>
-        <el-tab-pane name="third">
+        <el-tab-pane name="third" :key="'third'">
             <span slot="label"><i class="el-icon-date"></i> 职称管理</span>
-            <component :detail='c' :is="JoblevelMana"></component>
+            <JoblevelMana  v-if="isThird"></JoblevelMana>
         </el-tab-pane>
     </el-tabs>
 </template>
@@ -22,30 +22,35 @@ const DepMana = resolve => require(['../../components/sys/basic/DepMana.vue'], r
 const JoblevelMana = resolve => require(['../../components/sys/basic/JoblevelMana.vue'], resolve);
 
 export default {
-    components: { DepMana },
     name: "SysBasic",
+    components: {
+        PosMana,
+        DepMana,
+        JoblevelMana
+    },
     data() {
         return {
-            activeName: 'first'
+            activeName: 'first',
+            isFirst: true,
+            isSecond: false,
+            isThird: false
         }
     },
     methods: {
         handleClick (tab, event) {
-            this.$store.commit('changeapplyTab', tab.name);
-            this.checkVue(tab.name);
-        },
-        checkVue (name) {
-            switch (name) {
-                case 'first' :
-                    this.DepMana = DepMana
-                    break
-                case 'second' :
-                    this.PosMana = PosMana
-                    break
-                case 'third' :
-                    this.JoblevelMana = JoblevelMana
-                    break
-                }
+            if (tab.name === 'first') {
+                this.isFirst = true;
+                this.isSecond = false;
+                this.isThird = false;
+            } else if (tab.name === 'second') {
+                this.isFirst = false;
+                this.isSecond = true;
+                this.isThird = false;
+            } else if (tab.name === 'third') {
+                this.isFirst = false;
+                this.isSecond = false;
+                this.isThird = true;
+            }
         }
     }
 }
