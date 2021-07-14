@@ -13,7 +13,6 @@
         <result property="nationid" column="nationid" jdbcType="INTEGER"/>
         <result property="politicid" column="politicid" jdbcType="INTEGER"/>
         <result property="phone" column="phone" jdbcType="VARCHAR"/>
-        <result property="address" column="address" jdbcType="VARCHAR"/>
         <result property="enabled" column="enabled" jdbcType="BOOLEAN"/>
         <result property="userface" column="userface" jdbcType="VARCHAR"/>
         <result property="remark" column="remark" jdbcType="VARCHAR"/>
@@ -23,7 +22,7 @@
     
     <sql id="Base_Column_List">
         id,username,email,password,name,phone,
-        nationid,politicid,address,enabled,userface,remark,createdat,updatedat
+        nationid,politicid,joblevelid,posid,address,enabled,userface,remark,createdat,updatedat
     </sql>
 
     <!-- 自定义分页式 -->
@@ -33,12 +32,13 @@
         <result property="email" column="email" jdbcType="VARCHAR"/>
         <result property="name" column="name" jdbcType="VARCHAR"/>
         <result property="phone" column="phone" jdbcType="VARCHAR"/>
-        <result property="address" column="address" jdbcType="VARCHAR"/>
         <result property="enabled" column="enabled" jdbcType="BOOLEAN"/>
         <result property="userface" column="userface" jdbcType="VARCHAR"/>
         <result property="remark" column="remark" jdbcType="VARCHAR"/>
         <result property="nationid" column="nationid" jdbcType="INTEGER"/>
         <result property="politicid" column="politicid" jdbcType="INTEGER"/>
+        <result property="joblevelid" column="joblevelid" jdbcType="INTEGER"/>
+        <result property="posid" column="posid" jdbcType="INTEGER"/>
         <association property="nation" javaType="cn.geoportal.gmo.server.entity.SysNation" >
             <id column="nid" property="id"></id>
             <result column="nname" property="name"></result>
@@ -46,6 +46,17 @@
         <association property="politicsStatus" javaType="cn.geoportal.gmo.server.entity.SysPoliticsStatus">
             <id column="pid" property="id"></id>
             <result column="pname" property="name"></result>
+        </association>
+        <association property="joblevel" javaType="cn.geoportal.gmo.server.entity.SysJoblevel">
+            <id column="jid" property="id"></id>
+            <result column="jname" property="name"></result>
+            <result column="jtitlelevel" property="titlelevel" jdbcType="VARCHAR"></result>
+            <result column="jenabled" property="enabled" jdbcType="BOOLEAN"></result>
+        </association>
+        <association property="position" javaType="cn.geoportal.gmo.server.entity.SysPosition">
+            <id column="posid" property="id"></id>
+            <result column="posname" property="name"></result>
+            <result column="posenabled" property="enabled" jdbcType="BOOLEAN"></result>
         </association>
         <collection property="roles" ofType="cn.geoportal.gmo.server.entity.SysRole" select="queryRole" column="id">
             <id property="id" column="rid" jdbcType="BIGINT"/>
@@ -57,11 +68,15 @@
         SELECT
                a.id, a.username, a.email, a.name, a.nationid, a.politicid, a.phone, a.enabled,
                n.id as nid, n.name as nname,
-               p.id as pid, p.name as pname
+               p.id as pid, p.name as pname,
+               j.id as jid, j.name as jname, j.titlelevel as jtitlelevel, j.enabled as jenabled,
+               pos.id as posid, pos.name as posname, pos.enabled as posenabled
         FROM
              t_sys_user a
              LEFT JOIN t_sys_nation n ON n.id = a.nationid
              LEFT JOIN t_sys_politics_status p ON p.id = a.politicid
+             LEFT JOIN t_sys_joblevel j ON j.id = a.joblevelid
+             LEFT JOIN t_sys_position pos ON pos.id = a.posid
              ${ew.customSqlSegment}
         ORDER BY a.id DESC
     </select>

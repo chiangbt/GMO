@@ -23,7 +23,7 @@ import java.util.List;
  */
 @ApiIgnore
 @RestController
-@RequestMapping(value = "/system/basic/joblevel")
+@RequestMapping(value = "/api/system/basic/joblevel")
 public class JoblevelController {
 
     @Autowired
@@ -33,7 +33,7 @@ public class JoblevelController {
     @ApiOperation(value = "获取所有职称")
     @GetMapping("")
     public List<SysJoblevel> getAlJoblevel(){
-        return sysJoblevelService.list(new QueryWrapper<SysJoblevel>().orderByDesc("titlelevel", "name"));
+        return sysJoblevelService.list(new QueryWrapper<SysJoblevel>().orderByAsc("id"));
     }
 
     @ApiOperationSupport(order = 2)

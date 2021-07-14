@@ -86,7 +86,7 @@ export default {
             }
         },
         doAddDep() {
-            this.postRequest("/system/basic/department/", this.dep).then((resp) => {
+            this.postRequest("/api/system/basic/department/", this.dep).then((resp) => {
                 if (resp) {
                     this.dep.id = resp.data;
                     this.addDep2Deps(this.deps, this.dep);
@@ -118,7 +118,7 @@ export default {
                     type: "warning",
                 })
                 .then(() => {
-                    this.deleteRequest("/system/basic/department/" + data.id).then((resp) => {
+                    this.deleteRequest("/api/system/basic/department/" + data.id).then((resp) => {
                         if (resp) {
                             if(resp.code === 500){
                                 this.$message({
@@ -144,7 +144,7 @@ export default {
             return data.name.indexOf(value) !== -1;
         },
         initDeps() {
-            this.getRequest("/system/basic/department").then((resp) => {
+            this.getRequest("/api/system/basic/department").then((resp) => {
                 if (resp) {
                     this.deps = resp;
                 }

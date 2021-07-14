@@ -3,27 +3,34 @@
  */
 DROP TABLE IF EXISTS t_sys_user;
 CREATE TABLE t_sys_user  (
-  id         BIGSERIAL PRIMARY KEY,
-  username   VARCHAR(255) NOT NULL UNIQUE,
-  email      VARCHAR(255) NOT NULL UNIQUE,
-  password   VARCHAR(255) NOT NULL,
-  name       VARCHAR(32) NULL DEFAULT NULL,
-  nationId   INTEGER NULL DEFAULT 1,
-  politicId  INTEGER NULL DEFAULT 1,
-  phone      VARCHAR(20) NULL DEFAULT NULL,
-  address    VARCHAR(64) NULL DEFAULT NULL,
-  enabled    BOOLEAN NOT NULL DEFAULT TRUE,
-  userFace   VARCHAR(255) NULL DEFAULT NULL,
-  remark     VARCHAR(255) NULL DEFAULT NULL,
-  createdAt  timestamp(3) NOT NULL DEFAULT (CURRENT_TIMESTAMP),
-  updatedAt  timestamp(3) NOT NULL DEFAULT (CURRENT_TIMESTAMP)
+  id            BIGSERIAL PRIMARY KEY,
+  username      VARCHAR(255) NOT NULL UNIQUE,
+  email         VARCHAR(255) NOT NULL UNIQUE,
+  password      VARCHAR(255) NOT NULL,
+  name          VARCHAR(32) NULL DEFAULT NULL,
+  phone         VARCHAR(20) NULL DEFAULT NULL,
+  nationId      INTEGER NULL DEFAULT 1,
+  politicId     INTEGER NULL DEFAULT 1,
+  jobLevelId    INTEGER NULL DEFAULT 1,
+  posId         INTEGER NULL DEFAULT 1,
+  enabled       BOOLEAN NOT NULL DEFAULT TRUE,
+  userFace      VARCHAR(255) NULL DEFAULT NULL,
+  remark        VARCHAR(255) NULL DEFAULT NULL,
+  createdAt     timestamp(3) NOT NULL DEFAULT (CURRENT_TIMESTAMP),
+  updatedAt     timestamp(3) NOT NULL DEFAULT (CURRENT_TIMESTAMP),
+  FOREIGN KEY (jobLevelId) REFERENCES t_sys_joblevel (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  FOREIGN KEY (posId) REFERENCES t_sys_position (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  FOREIGN KEY (nationId) REFERENCES t_sys_nation (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  FOREIGN KEY (politicId) REFERENCES t_sys_politics_status (id) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 COMMENT ON table  t_sys_user IS '角色表';
 COMMENT ON COLUMN t_sys_user.id IS 'ID';
-COMMENT ON COLUMN t_sys_user.name IS '用户名';
+COMMENT ON COLUMN t_sys_user.name IS '用户姓名';
+COMMENT ON COLUMN t_sys_user.email IS '电子邮件';
+COMMENT ON COLUMN t_sys_user.password IS '密码';
 COMMENT ON COLUMN t_sys_user.username IS '登录名';
 -- SQLINES DEMO *** -----------
-INSERT INTO t_sys_user(username,email,password,name,phone,nationid,politicid) VALUES ('admin' , 'admin@sleeep.io','$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe', 'admin','13819847814', 1, 1);
+INSERT INTO t_sys_user(username,email,password,name,phone,nationid,politicid,joblevelid,posid) VALUES ('admin' , 'admin@sleeep.io','$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe', 'admin','13819847814', 1, 1, 1, 1);
 
 /**
   2、角色表
@@ -308,7 +315,7 @@ INSERT INTO t_sys_joblevel(name, titleLevel) VALUES ('讲师','中级');
 INSERT INTO t_sys_joblevel(name, titleLevel) VALUES ('中级工程师','中级');
 INSERT INTO t_sys_joblevel(name, titleLevel) VALUES ('初级工程师','初级');
 INSERT INTO t_sys_joblevel(name, titleLevel) VALUES ('助教','初级');
-
+INSERT INTO t_sys_joblevel(name, titleLevel) VALUES ('未定级','未定级');
 
 /**
   11、部门表

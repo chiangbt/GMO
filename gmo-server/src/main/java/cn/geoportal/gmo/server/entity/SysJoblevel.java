@@ -51,7 +51,7 @@ public class SysJoblevel implements Serializable {
      * 
      */
     @TableField(fill = FieldFill.INSERT)
-    @JSONField(ordinal = 4)
+    @JSONField(ordinal = 4, serialize = false)
     @ApiModelProperty(value = "创建时间", required = false, hidden = true)
     private Date createdat;
 

@@ -23,7 +23,7 @@ import java.util.List;
 @Api(tags = "8.部门模块")
 @ApiSupport(order = 310)
 @RestController
-@RequestMapping(value = "/system/basic/department")
+@RequestMapping(value = "/api/system/basic/department")
 public class DepartmentController {
 
     @Autowired

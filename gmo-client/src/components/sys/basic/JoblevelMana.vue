@@ -92,7 +92,7 @@ export default {
                 this.multipleSelection.forEach((item) => {
                     ids += item.id + ",";
                 });
-                this.deleteRequest("/system/basic/joblevel" + ids).then((resp) => {
+                this.deleteRequest("/api/system/basic/joblevel" + ids).then((resp) => {
                     if (resp) {
                         this.initJls();
                     }
@@ -114,7 +114,7 @@ export default {
                 cancelButtonText: "取消",
                 type: "warning"
             }).then(() => {
-                this.deleteRequest("/system/basic/joblevel/" + data.id).then((resp) => {
+                this.deleteRequest("/api/system/basic/joblevel/" + data.id).then((resp) => {
                     if (resp) {
                         this.initJls();
                     }
@@ -129,7 +129,7 @@ export default {
         },
         // 更新指定id的jobLevel
         doUpdate() {
-            this.patchRequest("/system/basic/joblevel/" + this.updatejl.id , this.updatejl).then((resp) => {
+            this.patchRequest("/api/system/basic/joblevel/" + this.updatejl.id , this.updatejl).then((resp) => {
                 if (resp) {
                     this.initJls();
                     this.dialogVisible = false;
@@ -143,7 +143,7 @@ export default {
         // 添加jobLevel
         addJobLevel() {
             if (this.jl.name && this.jl.titlelevel) {
-                this.postRequest("/system/basic/joblevel", this.jl).then((resp) => {
+                this.postRequest("/api/system/basic/joblevel", this.jl).then((resp) => {
                     if (resp) {
                         this.initJls();
                     }
@@ -154,7 +154,7 @@ export default {
         },
         // 初始化jobLevel数据
         initJls() {
-            this.getRequest("/system/basic/joblevel").then((resp) => {
+            this.getRequest("/api/system/basic/joblevel").then((resp) => {
                 if (resp) {
                     this.jls = resp;
                     this.jl.name = "";

@@ -56,4 +56,12 @@ public class SysUserReg {
     @ApiModelProperty(value = "政治面貌", required = true, example = "1", position = 7)
     @JSONField(ordinal = 7)
     private Integer politicId;
+
+    @ApiModelProperty(value = "职称", required = true, example = "1", position = 8)
+    @JSONField(ordinal = 8)
+    private Integer joblevelId;
+
+    @ApiModelProperty(value = "职务", required = true, example = "1", position = 9)
+    @JSONField(ordinal = 9)
+    private Integer positionId;
 }

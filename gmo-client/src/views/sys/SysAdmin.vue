@@ -18,9 +18,12 @@
                 <el-table-column type='index' label="编号" align="center" width="50" :index='(index)=>{return (index+1)}'/>
                 <el-table-column prop="username" label="姓名"></el-table-column>
                 <el-table-column prop="email" label="邮件" ></el-table-column>
-                <el-table-column prop="phone" label="电话" width="100"></el-table-column>
+                <el-table-column prop="phone" label="电话"></el-table-column>
                 <el-table-column prop="nation.name" label="民族"></el-table-column>
                 <el-table-column prop="politicsStatus.name" label="政治面貌" width="110"></el-table-column>
+                <el-table-column prop="position.name" label="职位"></el-table-column>
+                <el-table-column prop="joblevel.name" label="职称"></el-table-column>
+                <el-table-column prop="joblevel.titlelevel" label="职称级别"></el-table-column>
                 <el-table-column prop="roles" :formatter="fmtRoles" label="角色"></el-table-column>
                 <el-table-column prop="enabled" label="是否有效" width="80">
                     <template slot-scope="scope">
@@ -37,17 +40,9 @@
             </el-table>
         </el-card>
         <div style="text-align: right; margin-top: 30px;">
-            <el-pagination
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page="queryInfo.pageNo"
-                :page-sizes="[5, 15, 25, 50]"
-                :page-size="queryInfo.pageSize"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="total"
-                background
-            >
-            </el-pagination>
+            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="queryInfo.pageNo"
+                :page-sizes="[5, 15, 25, 50]" :page-size="queryInfo.pageSize" layout="total, sizes, prev, pager, next, jumper"
+                :total="total" background />
         </div>
         <el-dialog title="添加" :visible.sync="dialogFormVisible" width="30%">
             <el-form :model="userForm" ref="userForm" :rules="rules" label-width="80px" label-position="right">
@@ -69,12 +64,30 @@
                 <el-form-item label="角色" prop="roleIds">
                     <RoleNoAdminSelect v-model="userForm.roleIds"></RoleNoAdminSelect>
                 </el-form-item>
-                <el-form-item label="民族" prop="nationId">
-                    <NationSelect v-model="userForm.nationId"></NationSelect>
-                </el-form-item>
-                <el-form-item label="政治面貌" prop="politicId">
-                    <PoliticsSelect v-model="userForm.politicId"></PoliticsSelect>
-                </el-form-item>
+                <el-row :gutter="10">
+                    <el-col :sm="12" :md="12">
+                        <el-form-item label="民族" prop="nationId">
+                            <NationSelect v-model="userForm.nationId"></NationSelect>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :sm="12" :md="12">
+                        <el-form-item label="政治面貌" prop="politicId">
+                            <PoliticsSelect v-model="userForm.politicId"></PoliticsSelect>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row :gutter="10">
+                    <el-col :sm="12" :md="12">
+                        <el-form-item label="职称" prop="joblevelId">
+                            <JobLevelSelect v-model="userForm.joblevelId"></JobLevelSelect>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :sm="12" :md="12">
+                        <el-form-item label="职称" prop="positionId">
+                            <PositionSelect v-model="userForm.positionId"></PositionSelect>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
             </el-form>
             <div slot="footer" class="dialog-footer">
                 <el-button @click="clearAddForm('userForm')">取消</el-button>
@@ -88,13 +101,17 @@
 import RoleNoAdminSelect from './../../components/search/RoleNoAdminSelect.vue';
 import NationSelect from './../../components/search/NationSelect.vue';
 import PoliticsSelect from './../../components/search/PoliticsSelect.vue';
+import JobLevelSelect from './../../components/search/JobLevelSelect.vue';
+import PositionSelect from './../../components/search/PositionSelect.vue';
 
 export default {
     name: "SysAdmin",
     components:{
         RoleNoAdminSelect,
         NationSelect,
-        PoliticsSelect
+        PoliticsSelect,
+        JobLevelSelect,
+        PositionSelect
     },
     data() {
         var checkEmail = (rule, value, callback) => {
@@ -125,7 +142,9 @@ export default {
             userForm: {
                 roleIds: [2],
                 nationId: 1,
-                politicId: 1
+                politicId: 1,
+                joblevelId: 1,
+                positionId: 1
             },
             rules: {   //表单验证
                 username: [{ required: true, message: "请输入用户名", trigger: "blur" }],
@@ -188,7 +207,9 @@ export default {
                             this.userForm = {
                                 roleIds: [2],
                                 nationId: 1,
-                                politicId: 1
+                                politicId: 1,
+                                joblevelId: 1,
+                                positionId: 1
                             };
                             this.dialogFormVisible = false;
                         }

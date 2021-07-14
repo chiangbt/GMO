@@ -45,7 +45,7 @@ public class SysPosition implements Serializable {
      * 
      */
     @TableField(fill = FieldFill.INSERT)
-    @JSONField(ordinal = 3)
+    @JSONField(ordinal = 3, serialize = false)
     @ApiModelProperty(value = "创建时间", required = false, hidden = true)
     private Date createdat;
 

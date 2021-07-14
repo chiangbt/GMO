@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
 @Api(tags = "7.权限组模块")
 @ApiSupport(order = 309)
 @RestController
-@RequestMapping(value = "/system/perm")
+@RequestMapping(value = "/api/system/perm")
 public class PermissionController {
 
     @Autowired

@@ -3,6 +3,7 @@ package cn.geoportal.gmo.server.controller;
 import cn.geoportal.gmo.server.entity.common.RespBean;
 import cn.geoportal.gmo.server.entity.vo.sysuser.SysUserLogin;
 import cn.geoportal.gmo.server.entity.SysUser;
+import cn.geoportal.gmo.server.service.SysDepartmentService;
 import cn.geoportal.gmo.server.service.SysNationService;
 import cn.geoportal.gmo.server.service.SysPoliticsStatusService;
 import cn.geoportal.gmo.server.service.SysUserService;
@@ -44,6 +45,8 @@ public class AuthController {
     private SysNationService sysNationService;
     @Autowired
     private SysPoliticsStatusService sysPoliticsStatusService;
+    @Autowired
+    private SysDepartmentService sysDepartmentService;
     @Autowired
     private DefaultKaptcha defaultKaptcha;
 
@@ -108,10 +111,17 @@ public class AuthController {
         SysUser sysUser = sysUserService.getUserByUserName(username);
         // 保护密码
         sysUser.setPassword(null);
-        // 获取该用户的角色信息
+        // 获取该用户的民族信息
         sysUser.setNation(sysNationService.getById(sysUser.getNationid()));
+        // 设置用户的政治面貌
         sysUser.setPoliticsStatus(sysPoliticsStatusService.getById(sysUser.getPoliticid()));
+        // 设置用户角色信息
         sysUser.setRoles(sysUserService.getRoles(sysUser.getId()));
+        // 设置单位
+//        Department department = new Department();
+//        department.setId(sysDepartmentService.getById(sysUser.getDepartmentid()).getId());
+//        department.setName(sysDepartmentService.getById(sysUser.getDepartmentid()).getName());
+//        sysUser.setDepartment(department);
         return sysUser;
     }
 

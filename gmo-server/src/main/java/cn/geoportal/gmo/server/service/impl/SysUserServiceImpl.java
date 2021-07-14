@@ -131,7 +131,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     public int addSysUser(SysUserReg sysUser) {
         return sysUserMapper.addSysUser(sysUser.getUsername(), sysUser.getEmail(),
                 passwordEncoder.encode(sysUser.getPassword()), sysUser.getName(), sysUser.getPhone(),
-                sysUser.getNationId(), sysUser.getPoliticId());
+                sysUser.getNationId(), sysUser.getPoliticId(), sysUser.getJoblevelId(), sysUser.getPositionId());
     }
 
     /**

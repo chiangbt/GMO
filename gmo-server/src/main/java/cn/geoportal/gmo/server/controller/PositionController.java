@@ -19,7 +19,7 @@ import java.util.List;
  **/
 @ApiIgnore
 @RestController
-@RequestMapping(value = "/system/basic/position")
+@RequestMapping(value = "/api/system/basic/position")
 public class PositionController {
 
     @Autowired
