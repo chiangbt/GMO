@@ -13,7 +13,6 @@
                 <el-table-column type='index' label="编号" align="center" width="50" :index='(index)=>{return (index+1)}'/>
                 <el-table-column prop="name" label="职称"/>
                 <el-table-column prop="titlelevel" label="职称等级" width="130"/>
-                <el-table-column prop="createdat" label="创建日期" width="150"/>
                 <el-table-column prop="enabled" label="是否启用" width="150">
                     <template slot-scope="scope">
                         <el-tag v-if="scope.row.enabled" type="success">有效</el-tag>

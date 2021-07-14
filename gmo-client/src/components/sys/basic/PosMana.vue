@@ -16,7 +16,6 @@
                         <el-tag v-else type="danger">未启用</el-tag>
                     </template>
                 </el-table-column>
-                <el-table-column prop="createdat" label="创建时间" width="200"></el-table-column>
                 <el-table-column label="操作" align="center" width="180">
                     <template slot-scope="scope">
                         <el-button size="mini" @click="showEditView(scope.$index, scope.row)">编辑</el-button>

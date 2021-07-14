@@ -101,16 +101,31 @@ public class SysUser implements Serializable, UserDetails {
     private String phone;
 
     /**
+     *
+     */
+    @ApiModelProperty(value = "部门", example = "1")
+    @JSONField(ordinal = 10, serialize = false)
+    private Integer departmentid;
+
+    /**
+     *
+     */
+    @JSONField(ordinal = 11)
+    @ApiModelProperty(value = "部门", hidden = true)
+    @TableField(exist = false)
+    private SysDepartment department;
+
+    /**
      * 
      */
     @ApiModelProperty(value = "职称", example = "1")
-    @JSONField(ordinal = 10, serialize = false)
+    @JSONField(ordinal = 12, serialize = false)
     private Integer joblevelid;
 
     /**
      * 
      */
-    @JSONField(ordinal = 11)
+    @JSONField(ordinal = 13)
     @ApiModelProperty(value = "职称", hidden = true)
     @TableField(exist = false)
     private SysJoblevel joblevel;
@@ -119,13 +134,13 @@ public class SysUser implements Serializable, UserDetails {
      * 
      */
     @ApiModelProperty(value = "职称", example = "1")
-    @JSONField(ordinal = 12, serialize = false)
+    @JSONField(ordinal = 14, serialize = false)
     private Integer posid;
 
     /**
      * 
      */
-    @JSONField(ordinal = 13)
+    @JSONField(ordinal = 15)
     @ApiModelProperty(value = "职称", hidden = true)
     @TableField(exist = false)
     private SysPosition position;
@@ -134,7 +149,7 @@ public class SysUser implements Serializable, UserDetails {
      * 是否激活
      */
     @ApiModelProperty(value = "是否激活")
-    @JSONField(ordinal = 14)
+    @JSONField(ordinal = 16)
     @Getter(AccessLevel.NONE)
     private Boolean enabled;
 
@@ -142,21 +157,21 @@ public class SysUser implements Serializable, UserDetails {
      * 用户图标
      */
     @ApiModelProperty(value = "用户图像")
-    @JSONField(ordinal = 15)
+    @JSONField(ordinal = 17)
     private String userface;
 
     /**
      * 用户注记
      */
     @ApiModelProperty(value = "注记")
-    @JSONField(ordinal = 16)
+    @JSONField(ordinal = 18)
     private String remark;
 
     /**
      * 用户角色
      * 非数据表的字段
      */
-    @JSONField(ordinal = 17)
+    @JSONField(ordinal = 19)
     @ApiModelProperty(value = "角色")
     @TableField(exist = false)
     private List<SysRole> roles;
@@ -166,7 +181,7 @@ public class SysUser implements Serializable, UserDetails {
      */
     @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(value = "新建时间")
-    @JSONField(ordinal = 18, serialize = false)
+    @JSONField(ordinal = 20, serialize = false)
     private Date createdat;
 
     /**
@@ -174,13 +189,13 @@ public class SysUser implements Serializable, UserDetails {
      */
     @TableField(value = "updatedat", fill = FieldFill.INSERT_UPDATE)
     @ApiModelProperty(value = "更新时间")
-    @JSONField(ordinal = 19, serialize = false)
+    @JSONField(ordinal = 21, serialize = false)
     private Date updatedat;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
-    @JSONField(ordinal = 20)
+    @JSONField(ordinal = 22)
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> authorities = roles.stream()
@@ -189,19 +204,19 @@ public class SysUser implements Serializable, UserDetails {
         return authorities;
     }
 
-    @JSONField(ordinal = 21, serialize = false)
+    @JSONField(ordinal = 23, serialize = false)
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
-    @JSONField(ordinal = 22, serialize = false)
+    @JSONField(ordinal = 24, serialize = false)
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
-    @JSONField(ordinal = 23, serialize = false)
+    @JSONField(ordinal = 25, serialize = false)
     @Override
     public boolean isCredentialsNonExpired() {
         return true;

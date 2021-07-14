@@ -12,6 +12,7 @@
         <result property="name" column="name" jdbcType="VARCHAR"/>
         <result property="nationid" column="nationid" jdbcType="INTEGER"/>
         <result property="politicid" column="politicid" jdbcType="INTEGER"/>
+        <result property="departmentid" column="departmentid" jdbcType="INTEGER"/>
         <result property="phone" column="phone" jdbcType="VARCHAR"/>
         <result property="enabled" column="enabled" jdbcType="BOOLEAN"/>
         <result property="userface" column="userface" jdbcType="VARCHAR"/>
@@ -22,7 +23,7 @@
     
     <sql id="Base_Column_List">
         id,username,email,password,name,phone,
-        nationid,politicid,joblevelid,posid,address,enabled,userface,remark,createdat,updatedat
+        nationid,politicid,joblevelid,posid,departmentid,address,enabled,userface,remark,createdat,updatedat
     </sql>
 
     <!-- 自定义分页式 -->
@@ -39,6 +40,7 @@
         <result property="politicid" column="politicid" jdbcType="INTEGER"/>
         <result property="joblevelid" column="joblevelid" jdbcType="INTEGER"/>
         <result property="posid" column="posid" jdbcType="INTEGER"/>
+        <result property="departmentid" column="departmentid" jdbcType="INTEGER"/>
         <association property="nation" javaType="cn.geoportal.gmo.server.entity.SysNation" >
             <id column="nid" property="id"></id>
             <result column="nname" property="name"></result>
@@ -58,6 +60,10 @@
             <result column="posname" property="name"></result>
             <result column="posenabled" property="enabled" jdbcType="BOOLEAN"></result>
         </association>
+        <association property="department" javaType="cn.geoportal.gmo.server.entity.SysDepartment">
+            <id column="did" property="id"></id>
+            <result column="dname" property="name"></result>
+        </association>
         <collection property="roles" ofType="cn.geoportal.gmo.server.entity.SysRole" select="queryRole" column="id">
             <id property="id" column="rid" jdbcType="BIGINT"/>
             <result property="name" column="rname" jdbcType="VARCHAR"/>
@@ -69,16 +75,18 @@
                a.id, a.username, a.email, a.name, a.nationid, a.politicid, a.phone, a.enabled,
                n.id as nid, n.name as nname,
                p.id as pid, p.name as pname,
+               d.id as did, d.name as dname,
                j.id as jid, j.name as jname, j.titlelevel as jtitlelevel, j.enabled as jenabled,
                pos.id as posid, pos.name as posname, pos.enabled as posenabled
         FROM
              t_sys_user a
              LEFT JOIN t_sys_nation n ON n.id = a.nationid
              LEFT JOIN t_sys_politics_status p ON p.id = a.politicid
+             LEFT JOIN t_sys_department d ON d.id = a.departmentid
              LEFT JOIN t_sys_joblevel j ON j.id = a.joblevelid
              LEFT JOIN t_sys_position pos ON pos.id = a.posid
              ${ew.customSqlSegment}
-        ORDER BY a.id DESC
+        ORDER BY d.id DESC
     </select>
     <select id="queryRole" resultType="cn.geoportal.gmo.server.entity.SysRole">
         SELECT

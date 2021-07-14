@@ -3,10 +3,7 @@ package cn.geoportal.gmo.server.controller;
 import cn.geoportal.gmo.server.entity.common.RespBean;
 import cn.geoportal.gmo.server.entity.vo.sysuser.SysUserLogin;
 import cn.geoportal.gmo.server.entity.SysUser;
-import cn.geoportal.gmo.server.service.SysDepartmentService;
-import cn.geoportal.gmo.server.service.SysNationService;
-import cn.geoportal.gmo.server.service.SysPoliticsStatusService;
-import cn.geoportal.gmo.server.service.SysUserService;
+import cn.geoportal.gmo.server.service.*;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import com.google.code.kaptcha.Constants;
@@ -47,6 +44,10 @@ public class AuthController {
     private SysPoliticsStatusService sysPoliticsStatusService;
     @Autowired
     private SysDepartmentService sysDepartmentService;
+    @Autowired
+    private SysJoblevelService sysJoblevelService;
+    @Autowired
+    private SysPositionService sysPositionService;
     @Autowired
     private DefaultKaptcha defaultKaptcha;
 
@@ -117,11 +118,10 @@ public class AuthController {
         sysUser.setPoliticsStatus(sysPoliticsStatusService.getById(sysUser.getPoliticid()));
         // 设置用户角色信息
         sysUser.setRoles(sysUserService.getRoles(sysUser.getId()));
-        // 设置单位
-//        Department department = new Department();
-//        department.setId(sysDepartmentService.getById(sysUser.getDepartmentid()).getId());
-//        department.setName(sysDepartmentService.getById(sysUser.getDepartmentid()).getName());
-//        sysUser.setDepartment(department);
+        sysUser.setPosition(sysPositionService.getById(sysUser.getPosid()));
+        sysUser.setJoblevel(sysJoblevelService.getById(sysUser.getJoblevelid()));
+        sysUser.setDepartment(sysDepartmentService.getById(sysUser.getDepartmentid()));
+
         return sysUser;
     }
 

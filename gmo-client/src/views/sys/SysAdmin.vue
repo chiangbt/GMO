@@ -17,13 +17,30 @@
             <el-table :data="adminusersList" stripe border style="width: 100%">
                 <el-table-column type='index' label="编号" align="center" width="50" :index='(index)=>{return (index+1)}'/>
                 <el-table-column prop="username" label="姓名"></el-table-column>
-                <el-table-column prop="email" label="邮件" ></el-table-column>
-                <el-table-column prop="phone" label="电话"></el-table-column>
-                <el-table-column prop="nation.name" label="民族"></el-table-column>
+                <el-table-column label="邮件" >
+                    <template slot-scope="scope">
+                        <el-popover trigger="hover" placement="top">
+                            <p>Phone:{{ scope.row.phone }}</p>
+                            <div slot="reference" class="name-wrapper">
+                                <el-tag size="medium">{{ scope.row.email }}</el-tag>
+                            </div>
+                        </el-popover>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="nation.name" label="民族" width="100px"></el-table-column>
                 <el-table-column prop="politicsStatus.name" label="政治面貌" width="110"></el-table-column>
-                <el-table-column prop="position.name" label="职位"></el-table-column>
-                <el-table-column prop="joblevel.name" label="职称"></el-table-column>
-                <el-table-column prop="joblevel.titlelevel" label="职称级别"></el-table-column>
+                <el-table-column prop="department.name" label="部门"></el-table-column>
+                <el-table-column label="职位">
+                    <template slot-scope="scope">
+                        <el-popover trigger="hover" placement="top">
+                            <p>职称: {{ scope.row.joblevel.name }}</p>
+                            <p>级别: {{ scope.row.joblevel.titlelevel }}</p>
+                            <div slot="reference" class="name-wrapper">
+                                <el-tag size="medium">{{ scope.row.position.name }}</el-tag>
+                            </div>
+                        </el-popover>
+                    </template>
+                </el-table-column>
                 <el-table-column prop="roles" :formatter="fmtRoles" label="角色"></el-table-column>
                 <el-table-column prop="enabled" label="是否有效" width="80">
                     <template slot-scope="scope">
@@ -64,6 +81,9 @@
                 <el-form-item label="角色" prop="roleIds">
                     <RoleNoAdminSelect v-model="userForm.roleIds"></RoleNoAdminSelect>
                 </el-form-item>
+                <el-form-item label="部门" role="departmentId">
+                    <DepartmentSelect v-model="userForm.departmentId"></DepartmentSelect>
+                </el-form-item>
                 <el-row :gutter="10">
                     <el-col :sm="12" :md="12">
                         <el-form-item label="民族" prop="nationId">
@@ -103,6 +123,7 @@ import NationSelect from './../../components/search/NationSelect.vue';
 import PoliticsSelect from './../../components/search/PoliticsSelect.vue';
 import JobLevelSelect from './../../components/search/JobLevelSelect.vue';
 import PositionSelect from './../../components/search/PositionSelect.vue';
+import DepartmentSelect from './../../components/search/DepartmentSelect.vue';
 
 export default {
     name: "SysAdmin",
@@ -111,7 +132,8 @@ export default {
         NationSelect,
         PoliticsSelect,
         JobLevelSelect,
-        PositionSelect
+        PositionSelect,
+        DepartmentSelect
     },
     data() {
         var checkEmail = (rule, value, callback) => {
@@ -144,7 +166,8 @@ export default {
                 nationId: 1,
                 politicId: 1,
                 joblevelId: 1,
-                positionId: 1
+                positionId: 1,
+                departmentId: 1
             },
             rules: {   //表单验证
                 username: [{ required: true, message: "请输入用户名", trigger: "blur" }],
@@ -191,7 +214,6 @@ export default {
         fmtRoles(row, column){
             var rolename = ""
             row.roles.forEach(function(role, index){
-                console.log(role.nnamezhame)
                 rolename = rolename + role.namezh + "  |  " 
             });
             return rolename.substring(0, rolename.length-3);
@@ -209,7 +231,8 @@ export default {
                                 nationId: 1,
                                 politicId: 1,
                                 joblevelId: 1,
-                                positionId: 1
+                                positionId: 1,
+                                departmentId: 1
                             };
                             this.dialogFormVisible = false;
                         }

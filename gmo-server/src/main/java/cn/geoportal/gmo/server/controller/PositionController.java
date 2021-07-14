@@ -29,7 +29,7 @@ public class PositionController {
     @ApiOperation(value = "获取所有职位")
     @GetMapping("")
     public List<SysPosition> getAllPostion(){
-        return sysPositionService.list(new QueryWrapper<SysPosition>().orderByDesc("id"));
+        return sysPositionService.list(new QueryWrapper<SysPosition>().orderByDesc("name"));
     }
 
     @ApiOperationSupport(order = 2)

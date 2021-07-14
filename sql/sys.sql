@@ -1,178 +1,5 @@
 /**
-  1、用户表
- */
-DROP TABLE IF EXISTS t_sys_user;
-CREATE TABLE t_sys_user  (
-  id            BIGSERIAL PRIMARY KEY,
-  username      VARCHAR(255) NOT NULL UNIQUE,
-  email         VARCHAR(255) NOT NULL UNIQUE,
-  password      VARCHAR(255) NOT NULL,
-  name          VARCHAR(32) NULL DEFAULT NULL,
-  phone         VARCHAR(20) NULL DEFAULT NULL,
-  nationId      INTEGER NULL DEFAULT 1,
-  politicId     INTEGER NULL DEFAULT 1,
-  jobLevelId    INTEGER NULL DEFAULT 1,
-  posId         INTEGER NULL DEFAULT 1,
-  enabled       BOOLEAN NOT NULL DEFAULT TRUE,
-  userFace      VARCHAR(255) NULL DEFAULT NULL,
-  remark        VARCHAR(255) NULL DEFAULT NULL,
-  createdAt     timestamp(3) NOT NULL DEFAULT (CURRENT_TIMESTAMP),
-  updatedAt     timestamp(3) NOT NULL DEFAULT (CURRENT_TIMESTAMP),
-  FOREIGN KEY (jobLevelId) REFERENCES t_sys_joblevel (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  FOREIGN KEY (posId) REFERENCES t_sys_position (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  FOREIGN KEY (nationId) REFERENCES t_sys_nation (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  FOREIGN KEY (politicId) REFERENCES t_sys_politics_status (id) ON DELETE RESTRICT ON UPDATE RESTRICT
-);
-COMMENT ON table  t_sys_user IS '角色表';
-COMMENT ON COLUMN t_sys_user.id IS 'ID';
-COMMENT ON COLUMN t_sys_user.name IS '用户姓名';
-COMMENT ON COLUMN t_sys_user.email IS '电子邮件';
-COMMENT ON COLUMN t_sys_user.password IS '密码';
-COMMENT ON COLUMN t_sys_user.username IS '登录名';
--- SQLINES DEMO *** -----------
-INSERT INTO t_sys_user(username,email,password,name,phone,nationid,politicid,joblevelid,posid) VALUES ('admin' , 'admin@sleeep.io','$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe', 'admin','13819847814', 1, 1, 1, 1);
-
-/**
-  2、角色表
- */
-DROP TABLE IF EXISTS t_sys_role;
-CREATE TABLE t_sys_role(
-  id     BIGSERIAL PRIMARY KEY,
-  name   VARCHAR(50) NULL DEFAULT NULL,
-  nameZh VARCHAR(50) NULL DEFAULT NULL
-);
-COMMENT ON TABLE  t_sys_role IS '角色表';
-COMMENT ON COLUMN t_sys_role.id IS 'ID';
-COMMENT ON COLUMN t_sys_role.name IS '角色名称';
-COMMENT ON COLUMN t_sys_role.nameZh IS '角色中文名';
--- SQLINES DEMO *** -----------
-INSERT INTO t_sys_role(name, nameZh) VALUES ('ROLE_admin', '超级管理员');
-INSERT INTO t_sys_role(name, nameZh) VALUES ('ROLE_manager', '行政主管');
-INSERT INTO t_sys_role(name, nameZh) VALUES ('ROLE_train', '培训主管');
-
-/**
-  3、用户角色表
- */
-DROP TABLE IF EXISTS t_sys_user_role;
-CREATE TABLE t_sys_user_role(
-  id       BIGSERIAL PRIMARY KEY,
-  user_id  BIGINT NULL,
-  role_id  BIGINT NULL
-);
-COMMENT ON TABLE  t_sys_user_role IS '用户权限表';
-COMMENT ON COLUMN t_sys_user_role.id IS 'ID';
-COMMENT ON COLUMN t_sys_user_role.user_id IS '用户id';
-COMMENT ON COLUMN t_sys_user_role.role_id IS '权限id';
--- SQLINES DEMO *** -----------
-INSERT INTO t_sys_user_role(user_id, role_id) VALUES (1, 1);
-
-/**
-  4、菜单表
- */
-DROP TABLE IF EXISTS t_sys_menu;
-CREATE TABLE t_sys_menu(
-    id          BIGSERIAL PRIMARY KEY,
-    url         varchar(64) NULL DEFAULT NULL,
-    path        varchar(64) NULL DEFAULT NULL,
-    component   varchar(64) NULL DEFAULT NULL,
-    name        varchar(64) NULL DEFAULT NULL,
-    iconCls     varchar(64) NULL DEFAULT NULL,
-    keepAlive   BIGINT DEFAULT 0,
-    requireAuth BIGINT DEFAULT 0,
-    parentId    BIGINT NULL DEFAULT NULL,
-    enabled     BIGINT DEFAULT 0,
-    orders       BIGINT DEFAULT 0
-);
-COMMENT ON TABLE  t_sys_menu IS '菜单表';
-COMMENT ON COLUMN t_sys_menu.url IS 'url';
-COMMENT ON COLUMN t_sys_menu.path IS 'path';
-COMMENT ON COLUMN t_sys_menu.component IS '组件';
-COMMENT ON COLUMN t_sys_menu.name IS '菜单名';
-COMMENT ON COLUMN t_sys_menu.iconCls IS '菜单图标';
-COMMENT ON COLUMN t_sys_menu.keepAlive IS '是否保持激活';
-COMMENT ON COLUMN t_sys_menu.requireAuth IS '是否要求权限';
-COMMENT ON COLUMN t_sys_menu.parentId IS '父id';
-COMMENT ON COLUMN t_sys_menu.enabled IS '是否启用';
-COMMENT ON COLUMN t_sys_menu.orders IS '顺序';
--- SQLINES DEMO *** -----------
-INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/', NULL, NULL, '首页', NULL, NULL, NULL, NULL, 1, 0);
-INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/', '/home', 'Home', '客户资料', 'fa fa-user-circle-o', NULL, 1, 1, 1, 0);
-INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/', '/home', 'Home', '空间数据', 'fa fa-address-card-o', NULL, 1, 1, 1, 0);
-INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/', '/home', 'Home', '内容管理', 'fa fa-globe', NULL, 1, 1, 1, 0);
-INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/', '/home', 'Home', '统计信息', 'fa fa-bar-chart', NULL, 1, 1, 1, 0);
-INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/', '/home', 'Home', '系统管理', 'fa fa-windows', NULL, 1, 1, 1, 0);
-INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/person/customer/**', '/cus/info', 'CusInfo', '客户信息', NULL, NULL, 1, 2, 1, 0);
-INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/person/mail/**', '/cus/mail', 'CusMail', '客户邮件', NULL, NULL, 1, 2, 1, 0);
-INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/person/employee/**', '/cus/employee', 'CusEmployee', '雇员信息', NULL, NULL, 1, 2, 1, 0);
-INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/spatial/emp/**', '/sdb/poi', 'SDBPoi', 'POI数据', NULL, NULL, 1, 3, 1, 0);
-INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/spatial/ec/**', '/sdb/raod', 'SDBRoad', '道路数据', NULL, NULL, 1, 3, 1, 0);
-INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/spatial/salary/**', '/sdb/polygon', 'SDBPolygon', '地块数据', NULL, NULL, 1, 3, 1, 0);
-INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/spatial/train/**', '/sdb/2d', 'SDB2D', 'ArcGIS二维', NULL, NULL, 1, 3, 1, 0);
-INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/spatial/remove/**', '/sdb/3d', 'SDB3d', 'ArcGIS三维', NULL, NULL, 1, 3, 1, 0);
-INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/salary/sob/**', '/sal/sob', 'SalSob', '工资账套管理', NULL, NULL, 1, 4, 1, 0);
-INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/salary/sobcfg/**', '/sal/sobcfg', 'SalSobCfg', '员工账套设置', NULL, NULL, 1, 4, 1, 0);
-INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/salary/table/**', '/sal/table', 'SalTable', '工资表管理', NULL, NULL, 1, 4, 1, 0);
-INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/salary/month/**', '/sal/month', 'SalMonth', '月末处理', NULL, NULL, 1, 4, 1, 0);
-INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/salary/search/**', '/sal/search', 'SalSearch', '工资表查询', NULL, NULL, 1, 4, 1, 0);
-INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/statistics/all/**', '/sta/all', 'StaAll', '综合信息统计', NULL, NULL, 1, 5, 1, 0);
-INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/statistics/score/**', '/sta/score', 'StaScore', '员工积分统计', NULL, NULL, 1, 5, 1, 0);
-INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/statistics/personnel/**', '/sta/pers', 'StaPers', '人事信息统计', NULL, NULL, 1, 5, 1, 0);
-INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/statistics/recored/**', '/sta/record', 'StaRecord', '人事记录统计', NULL, NULL, 1, 5, 1, 0);
-INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/system/basic/**', '/sys/basic', 'SysBasic', '基础信息设置', NULL, NULL, 1, 6, 1, 1);
-INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/system/cfg/**', '/sys/cfg', 'SysCfg', '系统管理', NULL, NULL, 1, 6, 1, 2);
-INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/system/admin/**', '/sys/admin', 'SysAdmin', '用户管理', NULL, NULL, 1, 6, 1, 0);
-INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/system/perm/**', '/sys/perm', 'SysPerm', '权限管理', NULL, NULL, 1, 6, 1, 3);
-INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/system/menu/**', '/sys/menu', 'SysMenu', '菜单管理', NULL, NULL, 1, 6, 1, 4);
-
-
-/**
-  5、菜单角色表
- */
-DROP TABLE IF EXISTS t_sys_menu_role;
-CREATE TABLE t_sys_menu_role(
-    id       BIGSERIAL PRIMARY KEY,
-    menu_id  BIGINT NULL,
-    role_id  BIGINT NULL
-);
-COMMENT ON TABLE  t_sys_menu_role IS '菜单权限表';
-COMMENT ON COLUMN t_sys_menu_role.id IS 'ID';
-COMMENT ON COLUMN t_sys_menu_role.menu_id IS '菜单id';
-COMMENT ON COLUMN t_sys_menu_role.role_id IS '权限id';
--- SQLINES DEMO *** -----------
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (7, 1);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (8, 1);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (9, 1);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (10, 1);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (11, 1);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (12, 1);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (13, 1);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (14, 1);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (15, 1);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (16, 1);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (17, 1);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (18, 1);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (19, 1);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (20, 1);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (21, 1);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (22, 1);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (23, 1);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (24, 1);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (25, 1);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (26, 1);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (27, 1);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (28, 1);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (7, 2);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (8, 2);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (9, 2);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (10, 3);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (11, 3);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (12, 3);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (13, 3);
-INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (14, 3);
-
-
-/**
-  6、职位表
+  1、职位表
  */
 DROP TABLE IF EXISTS t_sys_position;
 CREATE TABLE t_sys_position  (
@@ -194,7 +21,7 @@ INSERT INTO t_sys_position(name) VALUES ('运维工程师');
 
 
 /**
-  7、民族表
+  2、民族表
  */
 DROP TABLE IF EXISTS t_sys_nation;
 CREATE TABLE t_sys_nation  (
@@ -264,12 +91,12 @@ INSERT INTO t_sys_nation(name) VALUES ('基诺族');
 
 
 /**
-  8、政治面貌表
+  3、政治面貌表
  */
 DROP TABLE IF EXISTS t_sys_politics_status;
 CREATE TABLE t_sys_politics_status  (
-    id         BIGSERIAL PRIMARY KEY,
-    name       VARCHAR(32) NULL DEFAULT NULL
+     id         BIGSERIAL PRIMARY KEY,
+     name       VARCHAR(32) NULL DEFAULT NULL
 );
 COMMENT ON TABLE  t_sys_politics_status IS '政治面貌表';
 COMMENT ON COLUMN t_sys_politics_status.id IS 'ID';
@@ -290,7 +117,7 @@ INSERT INTO t_sys_politics_status(name) VALUES ('无党派民主人士');
 INSERT INTO t_sys_politics_status(name) VALUES ('普通公民');
 
 /**
-  9、职称表
+  4、职称表
  */
 DROP TABLE IF EXISTS t_sys_joblevel;
 CREATE TABLE t_sys_joblevel  (
@@ -318,7 +145,7 @@ INSERT INTO t_sys_joblevel(name, titleLevel) VALUES ('助教','初级');
 INSERT INTO t_sys_joblevel(name, titleLevel) VALUES ('未定级','未定级');
 
 /**
-  11、部门表
+  5、部门表
  */
 DROP TABLE IF EXISTS t_sys_department;
 CREATE TABLE t_sys_department  (
@@ -342,6 +169,180 @@ INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('�
 INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('乌当区市场', 10, '.1.2.3.5.9.10.11', true, false);
 INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('技术部', 3, '.1.2.3.12', true, false);
 INSERT INTO t_sys_department(name,parentid,deppath,enabled,isparent) VALUES ('运维部', 3, '.1.2.3.13', true, false);
+
+/**
+  6、用户表
+ */
+DROP TABLE IF EXISTS t_sys_user;
+CREATE TABLE t_sys_user  (
+  id            BIGSERIAL PRIMARY KEY,
+  username      VARCHAR(255) NOT NULL UNIQUE,
+  email         VARCHAR(255) NOT NULL UNIQUE,
+  password      VARCHAR(255) NOT NULL,
+  name          VARCHAR(32) NULL DEFAULT NULL,
+  phone         VARCHAR(20) NULL DEFAULT NULL,
+  nationId      INTEGER NULL DEFAULT 1,
+  politicId     INTEGER NULL DEFAULT 1,
+  departmentId  INTEGER NULL DEFAULT NULL,
+  jobLevelId    INTEGER NULL DEFAULT 1,
+  posId         INTEGER NULL DEFAULT 1,
+  enabled       BOOLEAN NOT NULL DEFAULT TRUE,
+  userFace      VARCHAR(255) NULL DEFAULT NULL,
+  remark        VARCHAR(255) NULL DEFAULT NULL,
+  createdAt     timestamp(3) NOT NULL DEFAULT (CURRENT_TIMESTAMP),
+  updatedAt     timestamp(3) NOT NULL DEFAULT (CURRENT_TIMESTAMP),
+  FOREIGN KEY (jobLevelId) REFERENCES t_sys_joblevel (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  FOREIGN KEY (posId) REFERENCES t_sys_position (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  FOREIGN KEY (nationId) REFERENCES t_sys_nation (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  FOREIGN KEY (politicId) REFERENCES t_sys_politics_status (id) ON DELETE RESTRICT ON UPDATE RESTRICT
+);
+COMMENT ON table  t_sys_user IS '角色表';
+COMMENT ON COLUMN t_sys_user.id IS 'ID';
+COMMENT ON COLUMN t_sys_user.name IS '用户姓名';
+COMMENT ON COLUMN t_sys_user.email IS '电子邮件';
+COMMENT ON COLUMN t_sys_user.password IS '密码';
+COMMENT ON COLUMN t_sys_user.username IS '登录名';
+-- SQLINES DEMO *** -----------
+INSERT INTO t_sys_user(username,email,password,name,phone,nationid,politicid,joblevelid,posid,departmentId) VALUES ('admin' , 'admin@sleeep.io','$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe', 'admin','13819847814', 1, 1, 1, 1, 3);
+
+/**
+  7、角色表
+ */
+DROP TABLE IF EXISTS t_sys_role;
+CREATE TABLE t_sys_role(
+  id     BIGSERIAL PRIMARY KEY,
+  name   VARCHAR(50) NULL DEFAULT NULL,
+  nameZh VARCHAR(50) NULL DEFAULT NULL
+);
+COMMENT ON TABLE  t_sys_role IS '角色表';
+COMMENT ON COLUMN t_sys_role.id IS 'ID';
+COMMENT ON COLUMN t_sys_role.name IS '角色名称';
+COMMENT ON COLUMN t_sys_role.nameZh IS '角色中文名';
+-- SQLINES DEMO *** -----------
+INSERT INTO t_sys_role(name, nameZh) VALUES ('ROLE_admin', '超级管理员');
+INSERT INTO t_sys_role(name, nameZh) VALUES ('ROLE_manager', '行政主管');
+INSERT INTO t_sys_role(name, nameZh) VALUES ('ROLE_train', '培训主管');
+
+/**
+  8、用户角色表
+ */
+DROP TABLE IF EXISTS t_sys_user_role;
+CREATE TABLE t_sys_user_role(
+  id       BIGSERIAL PRIMARY KEY,
+  user_id  BIGINT NULL,
+  role_id  BIGINT NULL
+);
+COMMENT ON TABLE  t_sys_user_role IS '用户权限表';
+COMMENT ON COLUMN t_sys_user_role.id IS 'ID';
+COMMENT ON COLUMN t_sys_user_role.user_id IS '用户id';
+COMMENT ON COLUMN t_sys_user_role.role_id IS '权限id';
+-- SQLINES DEMO *** -----------
+INSERT INTO t_sys_user_role(user_id, role_id) VALUES (1, 1);
+
+/**
+  9、菜单表
+ */
+DROP TABLE IF EXISTS t_sys_menu;
+CREATE TABLE t_sys_menu(
+    id          BIGSERIAL PRIMARY KEY,
+    url         varchar(64) NULL DEFAULT NULL,
+    path        varchar(64) NULL DEFAULT NULL,
+    component   varchar(64) NULL DEFAULT NULL,
+    name        varchar(64) NULL DEFAULT NULL,
+    iconCls     varchar(64) NULL DEFAULT NULL,
+    keepAlive   BIGINT DEFAULT 0,
+    requireAuth BIGINT DEFAULT 0,
+    parentId    BIGINT NULL DEFAULT NULL,
+    enabled     BIGINT DEFAULT 0,
+    orders       BIGINT DEFAULT 0
+);
+COMMENT ON TABLE  t_sys_menu IS '菜单表';
+COMMENT ON COLUMN t_sys_menu.url IS 'url';
+COMMENT ON COLUMN t_sys_menu.path IS 'path';
+COMMENT ON COLUMN t_sys_menu.component IS '组件';
+COMMENT ON COLUMN t_sys_menu.name IS '菜单名';
+COMMENT ON COLUMN t_sys_menu.iconCls IS '菜单图标';
+COMMENT ON COLUMN t_sys_menu.keepAlive IS '是否保持激活';
+COMMENT ON COLUMN t_sys_menu.requireAuth IS '是否要求权限';
+COMMENT ON COLUMN t_sys_menu.parentId IS '父id';
+COMMENT ON COLUMN t_sys_menu.enabled IS '是否启用';
+COMMENT ON COLUMN t_sys_menu.orders IS '顺序';
+-- SQLINES DEMO *** -----------
+INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/', NULL, NULL, '首页', NULL, NULL, NULL, NULL, 1, 0);
+INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/', '/home', 'Home', '客户资料', 'fa fa-user-circle-o', NULL, 1, 1, 1, 0);
+INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/', '/home', 'Home', '空间数据', 'fa fa-address-card-o', NULL, 1, 1, 1, 0);
+INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/', '/home', 'Home', '内容管理', 'fa fa-globe', NULL, 1, 1, 1, 0);
+INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/', '/home', 'Home', '统计信息', 'fa fa-bar-chart', NULL, 1, 1, 1, 0);
+INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/', '/home', 'Home', '系统管理', 'fa fa-windows', NULL, 1, 1, 1, 0);
+INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/person/customer/**', '/cus/info', 'CusInfo', '客户信息', NULL, NULL, 1, 2, 1, 0);
+INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/person/mail/**', '/cus/mail', 'CusMail', '客户邮件', NULL, NULL, 1, 2, 1, 0);
+INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/person/employee/**', '/cus/employee', 'CusEmployee', '雇员信息', NULL, NULL, 1, 2, 1, 0);
+INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/spatial/emp/**', '/sdb/poi', 'SDBPoi', 'POI数据', NULL, NULL, 1, 3, 1, 0);
+INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/spatial/ec/**', '/sdb/raod', 'SDBRoad', '道路数据', NULL, NULL, 1, 3, 1, 0);
+INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/spatial/salary/**', '/sdb/polygon', 'SDBPolygon', '地块数据', NULL, NULL, 1, 3, 1, 0);
+INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/spatial/train/**', '/sdb/2d', 'SDB2D', 'ArcGIS二维', NULL, NULL, 1, 3, 1, 0);
+INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/spatial/remove/**', '/sdb/3d', 'SDB3d', 'ArcGIS三维', NULL, NULL, 1, 3, 1, 0);
+INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/salary/sob/**', '/sal/sob', 'SalSob', '工资账套管理', NULL, NULL, 1, 4, 1, 0);
+INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/salary/sobcfg/**', '/sal/sobcfg', 'SalSobCfg', '员工账套设置', NULL, NULL, 1, 4, 1, 0);
+INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/salary/table/**', '/sal/table', 'SalTable', '工资表管理', NULL, NULL, 1, 4, 1, 0);
+INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/salary/month/**', '/sal/month', 'SalMonth', '月末处理', NULL, NULL, 1, 4, 1, 0);
+INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/salary/search/**', '/sal/search', 'SalSearch', '工资表查询', NULL, NULL, 1, 4, 1, 0);
+INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/statistics/all/**', '/sta/all', 'StaAll', '综合信息统计', NULL, NULL, 1, 5, 1, 0);
+INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/statistics/score/**', '/sta/score', 'StaScore', '员工积分统计', NULL, NULL, 1, 5, 1, 0);
+INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/statistics/personnel/**', '/sta/pers', 'StaPers', '人事信息统计', NULL, NULL, 1, 5, 1, 0);
+INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/statistics/recored/**', '/sta/record', 'StaRecord', '人事记录统计', NULL, NULL, 1, 5, 1, 0);
+INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/system/basic/**', '/sys/basic', 'SysBasic', '基础信息设置', NULL, NULL, 1, 6, 1, 1);
+INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/system/cfg/**', '/sys/cfg', 'SysCfg', '系统管理', NULL, NULL, 1, 6, 1, 2);
+INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/system/admin/**', '/sys/admin', 'SysAdmin', '用户管理', NULL, NULL, 1, 6, 1, 0);
+INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/system/perm/**', '/sys/perm', 'SysPerm', '权限管理', NULL, NULL, 1, 6, 1, 3);
+INSERT INTO t_sys_menu(url,path,component,name,iconCls,keepAlive,requireAuth,parentId,enabled,orders) VALUES ('/system/menu/**', '/sys/menu', 'SysMenu', '菜单管理', NULL, NULL, 1, 6, 1, 4);
+
+
+/**
+  10、菜单角色表
+ */
+DROP TABLE IF EXISTS t_sys_menu_role;
+CREATE TABLE t_sys_menu_role(
+    id       BIGSERIAL PRIMARY KEY,
+    menu_id  BIGINT NULL,
+    role_id  BIGINT NULL
+);
+COMMENT ON TABLE  t_sys_menu_role IS '菜单权限表';
+COMMENT ON COLUMN t_sys_menu_role.id IS 'ID';
+COMMENT ON COLUMN t_sys_menu_role.menu_id IS '菜单id';
+COMMENT ON COLUMN t_sys_menu_role.role_id IS '权限id';
+-- SQLINES DEMO *** -----------
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (7, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (8, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (9, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (10, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (11, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (12, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (13, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (14, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (15, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (16, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (17, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (18, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (19, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (20, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (21, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (22, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (23, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (24, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (25, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (26, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (27, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (28, 1);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (7, 2);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (8, 2);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (9, 2);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (10, 3);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (11, 3);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (12, 3);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (13, 3);
+INSERT INTO t_sys_menu_role(menu_id, role_id) VALUES (14, 3);
+
 
 /**
   添加department对象需要自行多条SQL语句
@@ -379,7 +380,7 @@ begin
     if a=0 then
         result=-2;
     else
-        select count(*) into ecount from t_sys_employee where departmentId=did;
+        select count(*) into ecount from t_sys_user where departmentId=did;
         if ecount>0 then
             result=-1;
         else
@@ -505,22 +506,3 @@ INSERT INTO t_sys_employee VALUES (31, '邹平', '男', '1995-07-18', '469023197
 INSERT INTO t_sys_employee VALUES (32, '蒋桂兰', '男', '2002-01-03', '451000198103141393', '已婚', 1, '通辽县', 2, 'xuli@yahoo.com', '14747861689', '台湾省斌县大兴潮州街Q座 620273', 5, 6, 1, '劳务合同', '本科', '电子工程', '浙江大学', '2019-01-30', '在职', '00000032', 4.11, '2018-09-26', NULL, '2015-05-16', '2019-05-13', NULL);
 INSERT INTO t_sys_employee VALUES (33, '何燕', '女', '1995-10-03', '211081194006172759', '已婚', 1, '伟市', 9, 'pqin@yahoo.com', '14510585247', '宁夏回族自治区健市和平蔡街X座 666462', 9, 6, 1, '劳动合同', '本科', '护理学', '复旦大学', '2018-05-08', '在职', '00000033', 9.4, '2017-03-17', NULL, '2017-07-12', '2019-10-22', NULL);
 INSERT INTO t_sys_employee VALUES (34, '马淑珍', '女', '2001-07-07', '130604198910150088', '已婚', 1, '成县', 7, 'leizou@yahoo.com', '13164981755', '湖北省太原县魏都安街c座 530374', 9, 8, 3, '劳动合同', '本科', '市场营销', '中国科学院大学', '2019-03-12', '在职', '00000034', 2.67, '2018-10-18', NULL, '2018-12-22', '2020-04-04', NULL);
-INSERT INTO t_sys_employee VALUES (35, '杨秀芳', '女', '1994-04-13', '130581196312068381', '已婚', 1, '合肥县', 11, 'pqian@jiena.cn', '13873572680', '重庆市璐县大东孙街P座 155477', 1, 4, 3, '劳动合同', '本科', '信息管理与信息系统', '中国科学院大学', '2017-07-21', '在职', '00000035', 4.4, '2017-08-12', NULL, '2016-01-07', '2019-07-22', NULL);
-INSERT INTO t_sys_employee VALUES (36, '邱洁', '女', '2000-09-29', '130101194910161225', '已婚', 1, '婷婷县', 8, 'czhou@yongluo.cn', '13841978850', '安徽省磊县南溪刘街U座 968626', 7, 5, 3, '劳务合同', '本科', '市场营销', '复旦大学', '2016-06-01', '在职', '00000036', 1.63, '2018-04-25', NULL, '2015-05-18', '2019-12-12', NULL);
-INSERT INTO t_sys_employee VALUES (37, '王桂花', '女', '1992-05-08', '140723194212128260', '已婚', 1, '呼和浩特市', 8, 'ping62@yahoo.com', '18029671014', '内蒙古自治区英县魏都台北街h座 836168', 8, 6, 1, '劳动合同', '本科', '中国语言文学', '浙江大学', '2015-09-26', '在职', '00000037', 9.93, '2017-10-24', NULL, '2017-06-27', '2019-07-13', NULL);
-INSERT INTO t_sys_employee VALUES (38, '刘畅', '女', '1995-12-27', '511000193311215215', '已婚', 1, '兴安盟县', 1, 'naxiong@yahoo.com', '13377530628', '河北省呼和浩特县大东王街A座 556099', 12, 1, 4, '劳动合同', '本科', '信息管理与信息系统', '中国科学技术大学', '2017-12-11', '在职', '00000038', 6.5, '2018-10-09', NULL, '2018-05-08', '2019-04-20', NULL);
-INSERT INTO t_sys_employee VALUES (39, '蒋欣', '男', '1994-04-02', '450225195711013399', '已婚', 1, '南宁市', 7, 'chenli@75.cn', '13808748993', '福建省杭州市南长天津街m座 127451', 4, 3, 5, '劳务合同', '本科', '无', '北京大学', '2016-04-15', '在职', '00000039', 7.55, '2016-10-15', NULL, '2018-10-04', '2020-03-28', NULL);
-INSERT INTO t_sys_employee VALUES (40, '王超', '男', '1991-03-18', '652901197112045159', '已婚', 1, '重庆市', 5, 'mengyong@xiongyu.cn', '18159666889', '广东省秀华县浔阳高街Q座 723731', 7, 5, 3, '劳务合同', '本科', '无', '中国人民大学', '2016-10-09', '在职', '00000040', 9.67, '2017-05-01', NULL, '2015-06-11', '2019-04-19', NULL);
-INSERT INTO t_sys_employee VALUES (41, '龚东', '女', '1993-04-15', '140107193503215615', '已婚', 1, '成都市', 5, 'guiying04@leilai.cn', '13611631710', '台湾省东莞县龙潭潜江路d座 593600', 11, 4, 1, '劳动合同', '本科', '室内装修设计', '南京大学', '2016-05-09', '在职', '00000041', 8.68, '2016-05-05', NULL, '2017-08-22', '2020-01-21', NULL);
-INSERT INTO t_sys_employee VALUES (42, '侯欢', '女', '1990-08-09', '341824193311150186', '已婚', 1, '龙县', 8, 'yangsu@fangpeng.net', '13821459885', '河南省哈尔滨县东丽呼和浩特路C座 743024', 7, 8, 1, '劳动合同', '本科', '中国语言文学', '复旦大学', '2015-11-18', '在职', '00000042', 2.62, '2018-11-17', NULL, '2017-04-15', '2020-01-26', NULL);
-INSERT INTO t_sys_employee VALUES (43, '赵玉华', '女', '1998-01-09', '341525197108234630', '未婚', 1, '博县', 2, 'xiuying33@dt.cn', '18682469543', '香港特别行政区晨县上街刘街e座 463619', 3, 1, 1, '劳动合同', '本科', '护理学', '南京大学', '2016-02-11', '在职', '00000043', 2.66, '2016-07-21', NULL, '2016-03-11', '2019-07-04', NULL);
-INSERT INTO t_sys_employee VALUES (44, '刘杨', '男', '1993-05-06', '610404193406165281', '未婚', 1, '玉兰县', 11, 'fangren@xg.cn', '15750031625', '台湾省玉兰市门头沟海门街p座 470818', 5, 2, 2, '劳动合同', '本科', '无', '上海交通大学', '2015-10-21', '在职', '00000044', 1.63, '2016-07-16', NULL, '2018-07-14', '2020-04-08', NULL);
-INSERT INTO t_sys_employee VALUES (45, '谢秀兰', '女', '1993-10-29', '450203200203284294', '未婚', 1, '六安县', 6, 'yangmo@59.cn', '15970698995', '澳门特别行政区秀芳市安次张路l座 926668', 11, 8, 2, '劳动合同', '本科', '室内装修设计', '国防科技大学', '2019-02-09', '在职', '00000045', 7.66, '2016-11-15', NULL, '2016-04-25', '2019-12-25', NULL);
-INSERT INTO t_sys_employee VALUES (46, '徐秀云', '男', '1997-07-22', '520621193005292541', '未婚', 1, '六盘水市', 8, 'zhengyan@yahoo.com', '15017588555', '山西省太原县滨城潜江路a座 670289', 10, 2, 5, '劳务合同', '大专', '护理学', '国防科技大学', '2015-10-26', '在职', '00000046', 2.41, '2017-01-17', NULL, '2016-02-23', '2019-10-04', NULL);
-INSERT INTO t_sys_employee VALUES (47, '秦艳', '男', '1993-11-26', '420581194004273164', '未婚', 1, '兵县', 3, 'guiying60@shikang.cn', '15048749906', '北京市建军县沈北新齐齐哈尔路a座 711455', 5, 5, 5, '劳动合同', '大专', '电子工程', '复旦大学', '2018-10-20', '在职', '00000047', 9.55, '2018-01-13', NULL, '2019-01-11', '2020-02-18', NULL);
-INSERT INTO t_sys_employee VALUES (48, '李瑞', '男', '1990-06-27', '231085198709305690', '未婚', 1, '建军县', 2, 'mindong@yahoo.com', '13974711811', '贵州省马鞍山市龙潭朱街L座 375799', 6, 8, 4, '劳务合同', '大专', '信息管理与信息系统', '国防科技大学', '2017-08-11', '在职', '00000048', 7.61, '2016-09-08', NULL, '2018-06-16', '2019-08-18', NULL);
-INSERT INTO t_sys_employee VALUES (49, '周倩', '男', '2001-01-10', '140926195508093145', '未婚', 1, '巢湖县', 10, 'qianjuan@yan.cn', '18792735131', '西藏自治区重庆市江北石家庄路G座 574433', 12, 1, 5, '劳动合同', '大专', '信息管理与信息系统', '复旦大学', '2018-11-09', '在职', '00000049', 7.79, '2018-10-07', NULL, '2018-06-25', '2019-08-10', NULL);
-INSERT INTO t_sys_employee VALUES (50, '宋阳', '女', '1993-05-17', '510921199204091277', '未婚', 1, '昆明市', 3, 'mwen@minyu.cn', '18826244663', '湖南省丽丽县清城李路P座 172795', 10, 8, 2, '劳动合同', '大专', '无', '国防科技大学', '2015-08-20', '在职', '00000050', 6.69, '2019-02-23', NULL, '2017-08-18', '2019-11-12', NULL);
-INSERT INTO t_sys_employee VALUES (51, '毛玉', '男', '1995-05-24', '230901193512038662', '未婚', 1, '哈尔滨县', 10, 'tshao@yaoliu.cn', '13921802030', '广东省晶县房山郑州路t座 474776', 2, 1, 2, '劳务合同', '大专', '护理学', '北京大学', '2016-11-16', '在职', '00000051', 9.3, '2019-01-05', NULL, '2017-03-16', '2020-04-05', NULL);
-INSERT INTO t_sys_employee VALUES (52, '陈红梅', '男', '1993-01-15', '36078120010301542X', '未婚', 1, '明市', 9, 'ptian@guiying.cn', '15660538227', '澳门特别行政区淑珍县华龙田路s座 526080', 3, 2, 2, '劳务合同', '大专', '市场营销', '南京大学', '2016-03-14', '在职', '00000052', 7.99, '2018-11-16', NULL, '2016-08-13', '2020-04-15', NULL);
-INSERT INTO t_sys_employee VALUES (53, '萧春梅', '女', '1994-07-14', '130225193503290451', '未婚', 1, '华县', 7, 'guiyingzeng@gmail.com', '15280462787', '河北省昆明市长寿顾街o座 728886', 3, 3, 3, '劳务合同', '大专', '中国语言文学', '国防科技大学', '2017-07-25', '在职', '00000053', 8.1, '2017-04-08', NULL, '2017-06-16', '2020-04-05', NULL);

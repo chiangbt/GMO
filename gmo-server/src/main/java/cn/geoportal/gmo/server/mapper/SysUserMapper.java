@@ -37,10 +37,10 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
      * @param politicId
      * @return
      */
-    @Select("INSERT INTO t_sys_user(username,email,password,name,phone,nationId,politicId,joblevelId,posId) values(#{username},#{email},#{password},#{name},#{phone},#{nationId},#{politicId},#{joblevelId},#{posId}) RETURNING id")
+    @Select("INSERT INTO t_sys_user(username,email,password,name,phone,nationId,politicId,joblevelId,posId,departmentId) values(#{username},#{email},#{password},#{name},#{phone},#{nationId},#{politicId},#{joblevelId},#{posId},#{departmentId}) RETURNING id")
     @Options(flushCache = Options.FlushCachePolicy.TRUE)
     int addSysUser(String username, String email, String password, String name, String phone,
-                   Integer nationId, Integer politicId, Integer joblevelId, Integer posId);
+                   Integer nationId, Integer politicId, Integer joblevelId, Integer posId, Integer departmentId);
 
     /**
      * 3、
