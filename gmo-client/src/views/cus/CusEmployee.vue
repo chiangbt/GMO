@@ -65,7 +65,7 @@ export default {
         }
     },
     mounted() {
-        this.getEmployeeList();
+        //this.getEmployeeList();
     },
     methods:{
         async getEmployeeList() {

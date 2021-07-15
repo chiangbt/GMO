@@ -86,7 +86,7 @@
              LEFT JOIN t_sys_joblevel j ON j.id = a.joblevelid
              LEFT JOIN t_sys_position pos ON pos.id = a.posid
              ${ew.customSqlSegment}
-        ORDER BY d.id DESC
+        ORDER BY d.id DESC, a.id DESC
     </select>
     <select id="queryRole" resultType="cn.geoportal.gmo.server.entity.SysRole">
         SELECT

@@ -20,8 +20,8 @@
                 <el-table-column label="邮件" >
                     <template slot-scope="scope">
                         <el-popover trigger="hover" placement="top">
-                            <p>Phone:{{ scope.row.phone }}</p>
-                            <div slot="reference" class="name-wrapper">
+                            <p>{{ scope.row.phone }}</p>
+                            <div slot="reference">
                                 <el-tag size="medium">{{ scope.row.email }}</el-tag>
                             </div>
                         </el-popover>
@@ -35,7 +35,7 @@
                         <el-popover trigger="hover" placement="top">
                             <p>职称: {{ scope.row.joblevel.name }}</p>
                             <p>级别: {{ scope.row.joblevel.titlelevel }}</p>
-                            <div slot="reference" class="name-wrapper">
+                            <div slot="reference">
                                 <el-tag size="medium">{{ scope.row.position.name }}</el-tag>
                             </div>
                         </el-popover>
@@ -61,7 +61,7 @@
                 :page-sizes="[5, 15, 25, 50]" :page-size="queryInfo.pageSize" layout="total, sizes, prev, pager, next, jumper"
                 :total="total" background />
         </div>
-        <el-dialog title="添加" :visible.sync="dialogFormVisible" width="30%">
+        <el-dialog title="添加" :visible.sync="dialogFormVisible" width="600px">
             <el-form :model="userForm" ref="userForm" :rules="rules" label-width="80px" label-position="right">
                 <el-form-item label="用户名" prop="username">
                     <el-input v-model="userForm.username"></el-input>
@@ -78,12 +78,18 @@
                 <el-form-item label="电话" prop="phone">
                     <el-input v-model="userForm.phone"></el-input>
                 </el-form-item>
-                <el-form-item label="角色" prop="roleIds">
-                    <RoleNoAdminSelect v-model="userForm.roleIds"></RoleNoAdminSelect>
-                </el-form-item>
-                <el-form-item label="部门" role="departmentId">
-                    <DepartmentSelect v-model="userForm.departmentId"></DepartmentSelect>
-                </el-form-item>
+                <el-row :gutter="10">
+                    <el-col :sm="12" :md="12">
+                        <el-form-item label="角色" prop="roleIds">
+                            <RoleNoAdminSelect v-model="userForm.roleIds"></RoleNoAdminSelect>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :sm="12" :md="12">
+                        <el-form-item label="部门" role="departmentId">
+                            <DepartmentSelect v-model="userForm.departmentId"></DepartmentSelect>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
                 <el-row :gutter="10">
                     <el-col :sm="12" :md="12">
                         <el-form-item label="民族" prop="nationId">
@@ -227,7 +233,7 @@ export default {
                         if (resp.code == 200) {
                             this.getAdminUserList();
                             this.userForm = {
-                                roleIds: [2],
+                                roleIds: [],
                                 nationId: 1,
                                 politicId: 1,
                                 joblevelId: 1,

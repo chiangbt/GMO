@@ -1,10 +1,6 @@
 <template>
     <el-select v-model="svalue" multiple placeholder="请选择用户角色" style="width:100%;">
-        <el-option
-            v-for="item in roles"
-            :key="item.id"
-            :label="item.namezh"
-            :value="item.id">
+        <el-option v-for="item in roles" :key="item.id" :label="item.namezh" :value="item.id">
         </el-option>
     </el-select>
 </template>

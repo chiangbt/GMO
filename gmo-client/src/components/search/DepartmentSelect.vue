@@ -40,7 +40,7 @@ export default {
             defaultExpandAll: false,
             multiple: false,
             disabled: false,
-            checkStrictly: false,
+            checkStrictly: true,
         }
     },
     watch: {
