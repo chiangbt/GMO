@@ -21,10 +21,7 @@
                 <el-table-column prop="name" label="姓名"></el-table-column>
                 <el-table-column prop="gender" label="性别" width="45"></el-table-column>
                 <el-table-column prop="birthday" label="生日" width="90" :formatter="dateFormat"></el-table-column>
-                <el-table-column prop="nation.name" label="民族" width="50"></el-table-column>
-                <el-table-column prop="politicsStatus.name" label="政治面貌"></el-table-column>
                 <el-table-column prop="engageform" label="劳动合同" width="100"></el-table-column>
-                <el-table-column prop="department.name" label="部门"></el-table-column>
                 <el-table-column prop="address" label="地址"></el-table-column>
                 <el-table-column label="操作" align="center" width="180">
                 <template slot-scope="scope">
