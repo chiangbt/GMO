@@ -39,7 +39,7 @@ export default {
     },
     methods: {
         loadMore() {
-            this.getRequest("/api/system/basic/position").then((resp) => {
+            this.getRequest("/api/system/basic/position/valid").then((resp) => {
                 if (resp) {
                     this.positions = resp;
                 }

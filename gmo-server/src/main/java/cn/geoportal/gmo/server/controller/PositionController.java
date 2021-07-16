@@ -33,6 +33,13 @@ public class PositionController {
     }
 
     @ApiOperationSupport(order = 2)
+    @ApiOperation(value = "获取所有有效职位")
+    @GetMapping("/valid")
+    public List<SysPosition> getAllValidPostion(){
+        return sysPositionService.list(new QueryWrapper<SysPosition>().eq("enabled", true).orderByDesc("name"));
+    }
+
+    @ApiOperationSupport(order = 3)
     @ApiOperation(value = "添加职位")
     @PostMapping(value = "", consumes = "application/json", produces = "application/json")
     public RespBean addPosition(@RequestBody SysPosition sysPosition){
@@ -44,14 +51,14 @@ public class PositionController {
         }
     }
 
-    @ApiOperationSupport(order = 3)
+    @ApiOperationSupport(order = 4)
     @ApiOperation(value = "获取职位")
     @GetMapping(value = "/{id}", produces = "application/json")
     public SysPosition getPositionById(@PathVariable(value="id") Integer id){
         return sysPositionService.findPositionById(id);
     }
 
-    @ApiOperationSupport(order = 4)
+    @ApiOperationSupport(order = 5)
     @ApiOperation(value = "更新职位")
     @PatchMapping(value = "/{id}", consumes = "application/json", produces = "application/json")
     public RespBean updatePostion(@RequestBody SysPosition sysPosition, @PathVariable(value="id") Long id){
@@ -67,7 +74,7 @@ public class PositionController {
         }
     }
 
-    @ApiOperationSupport(order = 5)
+    @ApiOperationSupport(order = 6)
     @ApiOperation(value = "删除职位")
     @DeleteMapping(value = "/{id}", produces = "application/json")
     public RespBean deletePositionById(@PathVariable(value="id") Integer id){
@@ -82,7 +89,7 @@ public class PositionController {
         }
     }
 
-    @ApiOperationSupport(order = 6)
+    @ApiOperationSupport(order = 7)
     @ApiOperation(value = "批量删除职位")
     @DeleteMapping(value = "")
     public RespBean deletePostionsByIds(Integer[] ids){

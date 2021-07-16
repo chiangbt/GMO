@@ -4,7 +4,6 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex);
 
-
 export default new Vuex.Store({
     state: {
         routes: [],
@@ -13,7 +12,7 @@ export default new Vuex.Store({
     },
     mutations: {
         initRoutes(state, data) {
-            state.routes = data
+            state.routes = data;
         }
     }
 })

@@ -5,25 +5,24 @@ import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
-
 const routes = [
-  {
-    path: '/',
-    name: 'Login',
-    component: Login,
-    hidden: true
-  },{
-    path: '/home',
-    name: '导航一',
-    component: Home,
-    children:[
+    {
+        path: '/',
+        name: 'Login',
+        component: Login,
+        hidden: true
+    },{
+        path: '/home',
+        name: '导航一',
+        component: Home,
+        children:[
 
-    ]
-  }
+        ]
+    }
 ]
 
 const router = new VueRouter({
-  routes
+    routes
 })
 
 export default router

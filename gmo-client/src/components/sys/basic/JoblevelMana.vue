@@ -27,7 +27,8 @@
                 </el-table-column>
             </el-table>
         </div>
-        <el-button type="danger" size="small" style="margin-top: 10px" :disabled="this.multipleSelection.length == 0" @click="deleteMany">批量删除</el-button>
+        <el-button type="danger" size="small" style="margin-top: 10px" 
+            :disabled="this.multipleSelection.length == 0" @click="deleteMany">批量删除</el-button>
         <el-dialog title="更新" :visible.sync="dialogVisible" width="30%">
             <el-form :model="updatejl" ref="updatejl" label-width="80px" label-position="right">
                 <el-form-item label="名称" prop="name">
@@ -39,18 +40,12 @@
                     </el-select>
                 </el-form-item>
                 <el-form-item label="是否启用" prop="enabled">
-                    <el-switch
-                        v-model="updatejl.enabled"
-                        active-color="#13ce66"
-                        inactive-color="#ff4949"
-                        active-text="启用"
-                        inactive-text="不启用"
-                    />
+                    <el-switch v-model="updatejl.enabled" active-color="#13ce66" inactive-color="#ff4949"/>
                 </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
                 <el-button @click="dialogVisible = false">取消</el-button>
-                <el-button type="primary" @click="doUpdate">确定</el-button>
+                <el-button type="primary" @click="updateJobLevel">确定</el-button>
             </span>
         </el-dialog>
     </div>
@@ -80,6 +75,60 @@ export default {
         this.initJls();
     },
     methods: {
+        // 初始化jobLevel数据
+        initJls() {
+            this.getRequest("/api/system/basic/joblevel").then((resp) => {
+                if (resp) {
+                    this.jls = resp;
+                    this.jl.name = "";
+                    this.jl.titlelevel = "";
+                }
+            });
+        },
+        // 添加jobLevel
+        addJobLevel() {
+            if (this.jl.name && this.jl.titlelevel) {
+                this.postRequest("/api/system/basic/joblevel", this.jl).then((resp) => {
+                    if (resp) {
+                        this.initJls();
+                    }
+                });
+            } else {
+                this.$message.console.error("字段不能为空!");
+            }
+        },
+        // 更新指定id的jobLevel
+        updateJobLevel() {
+            this.patchRequest("/api/system/basic/joblevel/" + this.updatejl.id , this.updatejl).then((resp) => {
+                if (resp) {
+                    this.initJls();
+                    this.dialogVisible = false;
+                }
+            });
+        },
+        // 删除指定id的jobLevel
+        handleDelete(index, data) {
+            this.$confirm("此操作将删除[" + data.name + "]职称", {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warning"
+            }).then(() => {
+                this.deleteRequest("/api/system/basic/joblevel/" + data.id).then((resp) => {
+                    if (resp) {
+                        this.initJls();
+                    }
+                });
+            })
+            .catch(() => {
+                this.$message({
+                    type: "info",
+                    message: "已取消操作"
+                });
+            });
+        },
+        handleSelectionChange(val) {
+            this.multipleSelection = val;
+        },
         // 删除多条数据
         deleteMany() {
             this.$confirm("此操作将删除[" + this.multipleSelection.length + "]条记录",{
@@ -103,72 +152,21 @@ export default {
                 });
             });
         },
-        handleSelectionChange(val) {
-            this.multipleSelection = val;
-        },
-        // 删除指定id的jobLevel
-        handleDelete(index, data) {
-            this.$confirm("此操作将删除[" + data.name + "]职称", {
-                confirmButtonText: "确定",
-                cancelButtonText: "取消",
-                type: "warning"
-            }).then(() => {
-                this.deleteRequest("/api/system/basic/joblevel/" + data.id).then((resp) => {
-                    if (resp) {
-                        this.initJls();
-                    }
-                });
-            })
-            .catch(() => {
-                this.$message({
-                    type: "info",
-                    message: "已取消操作"
-                });
-            });
-        },
-        // 更新指定id的jobLevel
-        doUpdate() {
-            this.patchRequest("/api/system/basic/joblevel/" + this.updatejl.id , this.updatejl).then((resp) => {
-                if (resp) {
-                    this.initJls();
-                    this.dialogVisible = false;
-                }
-            });
-        },
         showEditView(index, data) {
             Object.assign(this.updatejl, data);
             this.dialogVisible = true;
-        },
-        // 添加jobLevel
-        addJobLevel() {
-            if (this.jl.name && this.jl.titlelevel) {
-                this.postRequest("/api/system/basic/joblevel", this.jl).then((resp) => {
-                    if (resp) {
-                        this.initJls();
-                    }
-                });
-            } else {
-                this.$message.console.error("字段不能为空!");
-            }
-        },
-        // 初始化jobLevel数据
-        initJls() {
-            this.getRequest("/api/system/basic/joblevel").then((resp) => {
-                if (resp) {
-                    this.jls = resp;
-                    this.jl.name = "";
-                    this.jl.titlelevel = "";
-                }
-            });
-        },
+        }
     },
 };
 </script>
 
-<style>
+<style scoped lang="less" >
 .joblevel {
     width: 220px;
     margin-right: 10px;
     margin-bottom: 10px;
+}
+/deep/ .el-switch__core {
+    margin-top: 10px;
 }
 </style>

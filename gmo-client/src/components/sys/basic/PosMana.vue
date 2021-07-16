@@ -32,15 +32,12 @@
                     <el-input v-model="updatePos.name"/>
                 </el-form-item>
                 <el-form-item label="是否启用" prop="enabled">
-                    <el-switch v-model="updatePos.enabled"
-                        active-color="#13ce66"
-                        inactive-color="#ff4949"
-                    />
+                    <el-switch v-model="updatePos.enabled" active-color="#13ce66" inactive-color="#ff4949"/>
                 </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
                 <el-button @click="dialogVisible = false" size="small">取消</el-button>
-                <el-button type="primary" @click="doUpdate" size="small">确定</el-button>
+                <el-button type="primary" @click="updatePosition" size="small">确定</el-button>
             </span>
         </el-dialog>
     </div>
@@ -63,10 +60,11 @@ export default {
             multipleSelection: []
         };
     },
-    mounted() {
+    async mounted() {
         this.initPositions();
     },
     methods: {
+        // 初始化
         initPositions() {
             this.getRequest("/api/system/basic/position").then((resp) => {
                 if (resp) {
@@ -78,6 +76,29 @@ export default {
             Object.assign(this.updatePos, data);
             this.dialogVisible = true;
         },
+        // 添加职位
+        addPosition() {
+            if (this.pos.name) {
+                this.postRequest("/api/system/basic/position", this.pos).then((resp) => {
+                    if (resp) {
+                        this.initPositions();
+                        this.pos.name = "";
+                    }
+                });
+            } else {
+                this.$message.error("职位名称不能为空!");
+            }
+        },
+        // 更新指定职位
+        updatePosition() {
+            this.patchRequest("/api/system/basic/position/" + this.updatePos.id, this.updatePos).then((resp) => {
+                if (resp) {
+                    this.initPositions();
+                    this.dialogVisible = false;
+                }
+            });
+        },
+        // 删除记录
         handleDelete(index, data) {
             this.$confirm("此操作将删除[" + data.name + "]职位", {
                 confirmButtonText: "确定",
@@ -97,29 +118,11 @@ export default {
                 });
             });
         },
-        addPosition() {
-            if (this.pos.name) {
-                this.postRequest("/api/system/basic/position", this.pos).then((resp) => {
-                    if (resp) {
-                        this.initPositions();
-                        this.pos.name = "";
-                    }
-                });
-            } else {
-                this.$message.error("职位名称不能为空!");
-            }
-        },
-        doUpdate() {
-            this.patchRequest("/api/system/basic/position/" + this.updatePos.id, this.updatePos).then((resp) => {
-                if (resp) {
-                    this.initPositions();
-                    this.dialogVisible = false;
-                }
-            });
-        },
+        // 多项选择
         handleSelectionChange(val) {
             this.multipleSelection = val;
         },
+        // 删除多条记录
         deleteMany() {
             this.$confirm("此操作将删除[" + this.multipleSelection.length + "]条记录",{
                 confirmButtonText: "确定",
@@ -143,12 +146,12 @@ export default {
                     message: "已取消操作"
                 });
             });
-        },
+        }
     },
 };
 </script>
 
-<style scoped>
+<style scoped lang="less" >
 .addPosInput {
     width: 300px;
     margin-right: 8px;
@@ -159,5 +162,8 @@ export default {
 .updatePos {
     width: 200px;
     margin-left: 30px;
+}
+/deep/ .el-switch__core {
+    margin-top: 10px;
 }
 </style>

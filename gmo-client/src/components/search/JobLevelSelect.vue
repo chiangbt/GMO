@@ -39,7 +39,7 @@ export default {
     },
     methods: {
         loadMore() {
-            this.getRequest("/api/system/basic/joblevel").then((resp) => {
+            this.getRequest("/api/system/basic/joblevel/valid").then((resp) => {
                 if (resp) {
                     this.joblevels = resp;
                 }

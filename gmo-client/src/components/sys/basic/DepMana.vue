@@ -1,7 +1,7 @@
 <template>
     <div style="width: 500px">
         <div>
-            <el-input placeholder="输入部门名称进行搜索" v-model="filterText"></el-input>
+            <el-input placeholder="输入部门名称进行搜索..." v-model="filterText"></el-input>
             <br/>
             <el-tree :data="deps" :props="defaultProps" :filter-node-method="filterNode" ref="tree" :expand-on-click-node="false" default-expand-all>
                 <span class="custom-tree-node" slot-scope="{ node, data }" style="display: flex; justify-content: space-between; width: 100%">

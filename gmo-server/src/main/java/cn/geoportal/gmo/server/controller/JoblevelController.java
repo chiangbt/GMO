@@ -37,6 +37,13 @@ public class JoblevelController {
     }
 
     @ApiOperationSupport(order = 2)
+    @ApiOperation(value = "获取所有有效职称")
+    @GetMapping("/valid")
+    public List<SysJoblevel> getAllValidJoblevel(){
+        return sysJoblevelService.list(new QueryWrapper<SysJoblevel>().eq("enabled", true).orderByAsc("id"));
+    }
+
+    @ApiOperationSupport(order = 3)
     @ApiOperation(value = "添加职称")
     @PostMapping(value = "", consumes = "application/json", produces = "application/json")
     public RespBean addJoblevel(@RequestBody SysJoblevel sysJoblevel){
@@ -48,14 +55,14 @@ public class JoblevelController {
         }
     }
 
-    @ApiOperationSupport(order = 3)
+    @ApiOperationSupport(order = 4)
     @ApiOperation(value = "获取职称")
     @GetMapping(value = "/{id}", produces = "application/json")
     public SysJoblevel getJoblevelById(@PathVariable(value="id") Integer id){
         return sysJoblevelService.findJoblevelById(id);
     }
 
-    @ApiOperationSupport(order = 4)
+    @ApiOperationSupport(order = 5)
     @ApiOperation(value = "更新职称")
     @PatchMapping(value = "/{id}", consumes = "application/json", produces = "application/json")
     public RespBean updateJoblevel(@RequestBody SysJoblevel sysJoblevel, @PathVariable(value="id") Long id){
@@ -71,7 +78,7 @@ public class JoblevelController {
         }
     }
 
-    @ApiOperationSupport(order = 5)
+    @ApiOperationSupport(order = 6)
     @ApiOperation(value = "删除职称")
     @DeleteMapping(value = "/{id}", produces = "application/json")
     public RespBean deleteJoblevelById(@PathVariable(value="id") Integer id){
@@ -86,7 +93,7 @@ public class JoblevelController {
         }
     }
 
-    @ApiOperationSupport(order = 6)
+    @ApiOperationSupport(order = 7)
     @ApiOperation(value = "批量删除职称")
     @DeleteMapping(value = "")
     public RespBean deleteJoblevelByIds(Integer[] ids){
