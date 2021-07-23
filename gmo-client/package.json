@@ -13,7 +13,7 @@
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "el-select-tree": "^1.1.3",
-    "element-ui": "^2.15.1",
+    "element-ui": "^2.15.3",
     "font-awesome": "^4.7.0",
     "js-file-download": "^0.4.12",
     "lodash": "^4.17.21",
